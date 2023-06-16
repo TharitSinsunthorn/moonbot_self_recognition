@@ -1,0 +1,174 @@
+phantomx:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  
+  # Position Controllers ---------------------------------------
+
+
+  # HEAD
+  j_c1_lf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_c1_lf
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_c1_rf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_c1_rf
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_c1_lm_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_c1_lm
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_c1_rm_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_c1_rm
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_c1_lr_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_c1_lr
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_c1_rr_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_c1_rr
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_thigh_lf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_thigh_lf
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_thigh_rf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_thigh_rf
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_thigh_lm_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_thigh_lm
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_thigh_rm_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_thigh_rm
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_thigh_lr_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_thigh_lr
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_thigh_rr_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_thigh_rr
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_tibia_lf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_tibia_lf
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_tibia_rf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_tibia_rf
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_tibia_lm_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_tibia_lm
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_tibia_rm_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_tibia_rm
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_tibia_lr_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_tibia_lr
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  j_tibia_rr_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_tibia_rr
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+    
+    
+
+  j_pan_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_pan
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  j_tilt_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_tilt
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+  # ARMS
+
+  j_shoulder_l_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_shoulder_l
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  j_high_arm_l_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_high_arm_l
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  j_low_arm_l_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_low_arm_l
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  j_wrist_l_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_wrist_l
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  j_gripper_l_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: j_gripper_l
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+

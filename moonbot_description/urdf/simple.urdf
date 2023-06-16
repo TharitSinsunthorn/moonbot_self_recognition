@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot name="box_bot">
+        
+  <link name="base_link">
+  </link>
+
+  <link name="chassis">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="base_link_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="base_link" />
+    <child link="chassis" />
+  </joint>
+  
+</robot>
+
+ <!-- ros2 topic pub -1 /set_joint_trajectory trajectory_msgs/msg/JointTrajectory '{header: {frame_id: world}, joint_names: [j_thigh_lf], points: [{positions: {-2}}]}' -->
