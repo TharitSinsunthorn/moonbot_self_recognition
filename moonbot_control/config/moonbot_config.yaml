@@ -11,7 +11,7 @@ controller_manager:
     # forward_position_controller:
     #   type: position_controllers/JointGroupPositionController
 
-    forward_position_controller:
+    effort_controller:
       type: forward_command_controller/ForwardCommandController
 
     position_trajectory_controller:
@@ -41,7 +41,7 @@ forward_position_controller:
       - j_tibia_rm
       - j_tibia_lr
       - j_tibia_rr
-    interface_name: position
+    interface_name: effort  ## position
 
 position_trajectory_controller:
   ros__parameters:

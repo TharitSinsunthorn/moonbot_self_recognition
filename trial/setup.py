@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "dynamixel_control = trial.dynamixel_control:main"
+            "dynamixel_control = trial.dynamixel_control:main",
+            "walk = trial.standup:main"
         ],
     },
 )
