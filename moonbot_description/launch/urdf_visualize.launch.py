@@ -11,7 +11,7 @@ import xacro
 def generate_launch_description():
 
     ####### DATA INPUT ##########
-    urdf_file = 'phantom.urdf'
+    urdf_file = 'moonbot.urdf'
     package_description = "moonbot_description"
 
     ####### DATA INPUT END ##########
@@ -40,8 +40,8 @@ def generate_launch_description():
 
     # Joint State Publisher
     joint_state_publisher_node = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
         output='screen'
     )
 
@@ -68,6 +68,6 @@ def generate_launch_description():
         [            
             robot_state_publisher_node,
             rviz_node,
-            # joint_state_publisher_node
+            joint_state_publisher_node
         ]
     )

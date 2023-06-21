@@ -1,57 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
-     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
-     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<robot
-  name="Moonbot_1_urdf">
-  <link
-    name="base_link">
+<?xml version="1.0" ?>
+<robot name="Moonbot1" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <link name="base_link">
+  </link>
+
+  <joint name="moonbot_attachment" type="fixed">
+    <parent link="base_link"/>
+    <child link="BODY"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  
+  <link name="BODY">
     <inertial>
-      <origin
-        xyz="4.4525E-06 -1.372E-05 0.015651"
-        rpy="0 0 0" />
-      <mass
-        value="1.7613" />
-      <inertia
-        ixx="0.0022157"
-        ixy="1.9729E-07"
-        ixz="6.2687E-11"
-        iyy="0.0022117"
-        iyz="-1.9316E-10"
+      <!-- <origin xyz="4.4525E-06 -1.372E-05 0.015651" rpy="0 0 0" /> -->
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="1.7613" />
+      <inertia 
+        ixx="0.0022157" 
+        ixy="1.9729E-07" 
+        ixz="6.2687E-11" 
+        iyy="0.0022117" 
+        iyz="-1.9316E-10" 
         izz="0.0037074" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://Moonbot_1_urdf/meshes/base_link.STL" />
+        <mesh filename="package://moonbot_description/meshes/base_link.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.64706 0.61961 0.58431 1" />
+      <material name="Grey">
+        <color rgba="0.64706 0.61961 0.58431 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://Moonbot_1_urdf/meshes/base_link.STL" />
+        <mesh filename="package://moonbot_description/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
-  <link
-    name="Leg1_Link1">
+
+  <link name="Leg1_Link1">
     <inertial>
-      <origin
-        xyz="-0.16164 -0.16206 0.0078727"
-        rpy="0 0 0" />
-      <mass
-        value="0.19524" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.19524" />
       <inertia
         ixx="0.00013212"
         ixy="-2.569E-05"
@@ -61,55 +53,39 @@
         izz="0.00012874" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="-0.181 0 0" rpy="0 0 2.356" />
       <geometry>
-        <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg1_Link1.STL" />
+        <mesh filename="package://moonbot_description/meshes/Leg1_Link1.STL" />
       </geometry>
       <material
-        name="">
-        <color
-          rgba="0.64706 0.61961 0.58431 1" />
+        name="Grey">
+        <color rgba="0.64706 0.61961 0.58431 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 2 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg1_Link1.STL" />
+        <mesh filename="package://moonbot_description/meshes/Leg1_Link1.STL" />
       </geometry>
     </collision>
   </link>
-  <joint
-    name="Leg1_Joint1"
-    type="revolute">
-    <origin
-      xyz="0 0 0"
-      rpy="0 0 0" />
-    <parent
-      link="base_link" />
-    <child
-      link="Leg1_Link1" />
-    <axis
-      xyz="0 0 -1" />
+
+  <joint name="Leg1_Joint1" type="revolute">
+    <origin xyz="-0.128 -0.128 0" rpy="0 0 -2.356" />
+    <parent link="BODY" />
+    <child link="Leg1_Link1" />
+    <axis xyz="0 0 -1" />
     <limit
       lower="-1.57"
       upper="1.57"
       effort="200"
       velocity="3" />
   </joint>
-  <link
-    name="Leg1_Link2">
+
+  <link name="Leg1_Link2">
     <inertial>
-      <origin
-        xyz="-0.20029 -0.19993 -0.0487"
-        rpy="0 0 0" />
-      <mass
-        value="0.2225" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.2225" />
       <inertia
         ixx="0.00024185"
         ixy="1.6469E-05"
@@ -119,12 +95,9 @@
         izz="0.00016006" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 " />
       <geometry>
-        <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg1_Link2.STL" />
+        <mesh filename="package://moonbot_description/meshes/Leg1_Link2.STL" />
       </geometry>
       <material
         name="">
@@ -133,33 +106,25 @@
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg1_Link2.STL" />
+        <mesh filename="package://moonbot_description/meshes/Leg1_Link2.STL" />
       </geometry>
     </collision>
   </link>
-  <joint
-    name="Leg1_Joint2"
-    type="revolute">
-    <origin
-      xyz="0 0 0"
-      rpy="0 0 0" />
-    <parent
-      link="Leg1_Link1" />
-    <child
-      link="Leg1_Link2" />
-    <axis
-      xyz="0.70711 -0.70711 0" />
+
+  <joint name="Leg1_Joint2" type="revolute">
+    <origin xyz="0.1 0 0" rpy="0 3.14 3.14" />
+    <parent link="Leg1_Link1" />
+    <child link="Leg1_Link2" />
+    <axis xyz="0.70711 -0.70711 0" />
     <limit
       lower="-1.57"
       upper="1.57"
       effort="200"
       velocity="3" />
   </joint>
+
   <link
     name="Leg1_Link3">
     <inertial>
@@ -182,7 +147,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg1_Link3.STL" />
+          filename="package://moonbot_description/meshes/Leg1_Link3.STL" />
       </geometry>
       <material
         name="">
@@ -196,7 +161,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg1_Link3.STL" />
+          filename="package://moonbot_description/meshes/Leg1_Link3.STL" />
       </geometry>
     </collision>
   </link>
@@ -240,7 +205,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg2_Link1.STL" />
+          filename="package://moonbot_description/meshes/Leg2_Link1.STL" />
       </geometry>
       <material
         name="">
@@ -254,7 +219,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg2_Link1.STL" />
+          filename="package://moonbot_description/meshes/Leg2_Link1.STL" />
       </geometry>
     </collision>
   </link>
@@ -265,7 +230,7 @@
       xyz="0 0 0"
       rpy="0 0 0" />
     <parent
-      link="base_link" />
+      link="BODY" />
     <child
       link="Leg2_Link1" />
     <axis
@@ -298,7 +263,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg2_Link2.STL" />
+          filename="package://moonbot_description/meshes/Leg2_Link2.STL" />
       </geometry>
       <material
         name="">
@@ -312,7 +277,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg2_Link2.STL" />
+          filename="package://moonbot_description/meshes/Leg2_Link2.STL" />
       </geometry>
     </collision>
   </link>
@@ -356,7 +321,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg2_Link3.STL" />
+          filename="package://moonbot_description/meshes/Leg2_Link3.STL" />
       </geometry>
       <material
         name="">
@@ -370,7 +335,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg2_Link3.STL" />
+          filename="package://moonbot_description/meshes/Leg2_Link3.STL" />
       </geometry>
     </collision>
   </link>
@@ -414,7 +379,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg3_Link1.STL" />
+          filename="package://moonbot_description/meshes/Leg3_Link1.STL" />
       </geometry>
       <material
         name="">
@@ -428,7 +393,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg3_Link1.STL" />
+          filename="package://moonbot_description/meshes/Leg3_Link1.STL" />
       </geometry>
     </collision>
   </link>
@@ -439,7 +404,7 @@
       xyz="0 0 0"
       rpy="0 0 0" />
     <parent
-      link="base_link" />
+      link="BODY" />
     <child
       link="Leg3_Link1" />
     <axis
@@ -472,7 +437,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg3_Link2.STL" />
+          filename="package://moonbot_description/meshes/Leg3_Link2.STL" />
       </geometry>
       <material
         name="">
@@ -486,7 +451,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg3_Link2.STL" />
+          filename="package://moonbot_description/meshes/Leg3_Link2.STL" />
       </geometry>
     </collision>
   </link>
@@ -530,7 +495,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg3_Link3.STL" />
+          filename="package://moonbot_description/meshes/Leg3_Link3.STL" />
       </geometry>
       <material
         name="">
@@ -544,7 +509,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg3_Link3.STL" />
+          filename="package://moonbot_description/meshes/Leg3_Link3.STL" />
       </geometry>
     </collision>
   </link>
@@ -588,7 +553,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg4_Link1.STL" />
+          filename="package://moonbot_description/meshes/Leg4_Link1.STL" />
       </geometry>
       <material
         name="">
@@ -602,7 +567,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg4_Link1.STL" />
+          filename="package://moonbot_description/meshes/Leg4_Link1.STL" />
       </geometry>
     </collision>
   </link>
@@ -613,7 +578,7 @@
       xyz="0 0 0"
       rpy="0 0 0" />
     <parent
-      link="base_link" />
+      link="BODY" />
     <child
       link="Leg4_Link1" />
     <axis
@@ -646,7 +611,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg4_Link2.STL" />
+          filename="package://moonbot_description/meshes/Leg4_Link2.STL" />
       </geometry>
       <material
         name="">
@@ -660,7 +625,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg4_Link2.STL" />
+          filename="package://moonbot_description/meshes/Leg4_Link2.STL" />
       </geometry>
     </collision>
   </link>
@@ -704,7 +669,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg4_Link3.STL" />
+          filename="package://moonbot_description/meshes/Leg4_Link3.STL" />
       </geometry>
       <material
         name="">
@@ -718,7 +683,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Moonbot_1_urdf/meshes/Leg4_Link3.STL" />
+          filename="package://moonbot_description/meshes/Leg4_Link3.STL" />
       </geometry>
     </collision>
   </link>

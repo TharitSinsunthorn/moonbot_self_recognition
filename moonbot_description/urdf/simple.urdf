@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="box_bot">
         
-  <link name="base_link">
+  <link name="base_link" xmlns:xacro="http://www.ros.org/wiki/xacro">
   </link>
 
   <link name="chassis">

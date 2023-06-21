@@ -24,16 +24,16 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.102 0.109 0.106" /-->
-        <mesh filename="package://moonbot_description/meshes/body.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/body.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
-        <color rgba="0.20 0.20 0.20 1.0"/>
+        <color rgba="0.20 0.20 0.2 1.0"/>
       </material>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/body_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/body_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -52,7 +52,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -61,7 +61,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -76,7 +76,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -85,7 +85,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -100,7 +100,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/thigh_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -109,7 +109,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/thigh_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -124,7 +124,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/tibia_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -133,7 +133,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -223,7 +223,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -232,7 +232,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -247,7 +247,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -256,7 +256,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -271,7 +271,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/thigh_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -280,7 +280,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/thigh_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -295,7 +295,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/tibia_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -304,7 +304,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -394,7 +394,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -403,7 +403,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -418,7 +418,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -427,7 +427,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -441,7 +441,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/thigh_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -450,7 +450,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/thigh_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -464,7 +464,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/tibia_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -473,7 +473,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -556,7 +556,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -565,7 +565,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -579,7 +579,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -588,7 +588,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -602,7 +602,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/thigh_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -611,7 +611,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/thigh_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -625,7 +625,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/tibia_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -634,7 +634,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -718,7 +718,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -727,7 +727,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -741,7 +741,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -750,7 +750,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -764,7 +764,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/thigh_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -773,7 +773,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/thigh_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -787,7 +787,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/tibia_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -796,7 +796,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -880,7 +880,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -889,7 +889,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -903,7 +903,7 @@
       <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/connect.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -912,7 +912,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/connect_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -926,7 +926,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/thigh_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -935,7 +935,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/thigh_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -949,7 +949,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
-        <mesh filename="package://moonbot_description/meshes/tibia_l.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
         <color rgba="0.20 0.20 0.20 1.0"/>
@@ -958,7 +958,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://moonbot_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
