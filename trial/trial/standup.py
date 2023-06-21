@@ -10,39 +10,48 @@ import time
 class SimplePublisher(Node):
 
     def __init__(self):
-        # Here you have the class constructor
-        # call super() in the constructor to initialize the Node object
-        # the parameter you pass is the node name
+        
         super().__init__('simple_publisher')
-        # create the publisher object
-        # in this case, the publisher will publish on /cmd_vel Topic with a queue size of 10 messages.
-        # use the Twist module for /cmd_vel Topic
+        
         self.publisher_ = self.create_publisher(SetPosition, 'set_position', 10)
         # define the timer period for 0.5 seconds
-        # timer_period = 0.5
-        # # create a timer sending two parameters:
-        # # - the duration between 2 callbacks (0.5 seconds)
-        # # - the timer function (timer_callback)
-        # self.timer = self.create_timer(timer_period, self.timer_callback)
+        timer_period = 0.5
+        self.timer = self.create_timer(timer_period, self.move_dynamixels)
+        self.t = 50
 
     def move_dynamixels(self):
         rate = self.create_rate(10)  # Adjust the rate as needed
 
-        while rclpy.ok():
-            msg = SetPosition()
-            msg.id = 3
-            msg.position = 0
-            # Publish the message to the Topic
-            self.publisher_.publish(msg)
-            time.sleep(1)
+        # while rclpy.ok():
+        #     msg = SetPosition()
+        #     msg.id = 3
+        #     msg.position = 0
+        #     # Publish the message to the Topic
+        #     self.publisher_.publish(msg)
+        #     time.sleep(1)
 
 
-            msg.id = 3
-            msg.position = 500
-            self.publisher_.publish(msg)
-            time.sleep(1)
+        #     msg.id = 3
+        #     msg.position = 500
+        #     self.publisher_.publish(msg)
+        #     time.sleep(1)
+        if self.t >= 4096:
+            self.t -= 4096
+        elif self.t < 0:
+            self.t += 4097
 
-        
+
+        # Publish the desired positions to the /dynamixel/command topic
+        msg = SetPosition()
+        msg.id = 3
+        msg.position = self.t
+            
+        self.publisher_.publish(msg)
+            
+        self.t -= 50  # Increment the time variable
+
+    
+            
         
 
     

@@ -1033,7 +1033,7 @@
     <material>Gazebo/Grey</material>
   </gazebo>
 
-  <ros2_control name="MyRobotSystem" type="system">
+  <!-- <ros2_control name="MyRobotSystem" type="system">
     <hardware>
       <plugin>gazebo_ros2_control/GazeboSystem</plugin>
     </hardware>
@@ -1218,20 +1218,20 @@
       <state_interface name="effort"/>
     </joint>
 
-  </ros2_control>
+  </ros2_control> -->
 
   <!-- Gazebo's ros2_control plugin  -->
-  <gazebo>
+  <!-- <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <!-- <robotNamespace>/phantomx</robotNamespace> -->
+      <robotNamespace>/phantomx</robotNamespace>
       <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
       <robot_param>robot_description</robot_param>
       <robot_param_node>robot_state_publisher_node</robot_param_node>
       <parameters>$(find moonbot_control)/config/moonbot_config.yaml</parameters>
     </plugin>
-  </gazebo> 
+  </gazebo>  -->
 
-  <!-- <gazebo>
+  <gazebo>
     <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
       <update_rate>20</update_rate>
       <joint_name>j_c1_lf</joint_name>
@@ -1255,15 +1255,15 @@
       <joint_name>j_tibia_lr</joint_name>
       <joint_name>j_tibia_rr</joint_name>
     </plugin>
-  </gazebo>  -->
+  </gazebo> 
 
  
-  <!-- <gazebo>
+  <gazebo>
     <plugin name="gazebo_ros_joint_pose_trajectory"
       filename="libgazebo_ros_joint_pose_trajectory.so">
       <update_rate>2</update_rate>
     </plugin>
-  </gazebo> -->
+  </gazebo>
 
 
 </robot>
