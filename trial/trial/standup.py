@@ -16,13 +16,19 @@ class SimplePublisher(Node):
         self.publisher_ = self.create_publisher(SetPosition, 'set_position', 10)
         # define the timer period for 0.5 seconds
         timer_period = 0.5
-        self.timer = self.create_timer(timer_period, self.move_dynamixels)
-        self.t = 50
+        # self.timer = self.create_timer(timer_period, self.move_dynamixels)
+        self.t1 = 2000
+        self.t2 = 3000
+        self.v1 = 100
+        self.v2 = 100
+
 
     def move_dynamixels(self):
         rate = self.create_rate(10)  # Adjust the rate as needed
 
-        # while rclpy.ok():
+        while rclpy.ok():
+            self.t1 += self.v1
+            self.t2 += self.v2
         #     msg = SetPosition()
         #     msg.id = 3
         #     msg.position = 0
@@ -34,21 +40,40 @@ class SimplePublisher(Node):
         #     msg.id = 3
         #     msg.position = 500
         #     self.publisher_.publish(msg)
-        #     time.sleep(1)
-        if self.t >= 4096:
-            self.t -= 4096
-        elif self.t < 0:
-            self.t += 4097
+
+            if self.t1 >= 2500:
+                self.v1 = -self.v1
+            elif self.t1 < 1500:
+                self.v1 = -self.v1
+
+            if self.t2 >= 3500:
+                self.v2 = -self.v2
+            elif self.t2 < 2500:
+                self.v2 = -self.v2
 
 
-        # Publish the desired positions to the /dynamixel/command topic
-        msg = SetPosition()
-        msg.id = 3
-        msg.position = self.t
+            # Publish the desired positions to the /dynamixel/command topic
+            msg = SetPosition()
+            msg.id = 3
+            msg.position = self.t1
+            self.publisher_.publish(msg)
             
-        self.publisher_.publish(msg)
+            msg = SetPosition()
+            msg.id = 2
+            msg.position = self.t2
+            self.publisher_.publish(msg)
+
+            msg = SetPosition()
+            msg.id = 1
+            msg.position = self.t1
+            self.publisher_.publish(msg)
+            # rate.sleep()
+            time.sleep(0.5)
+        #     
+        #     
+
             
-        self.t -= 50  # Increment the time variable
+        
 
     
             

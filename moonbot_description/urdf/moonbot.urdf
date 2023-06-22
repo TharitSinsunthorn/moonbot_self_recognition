@@ -74,7 +74,7 @@
     <origin xyz="-0.128 -0.128 0" rpy="0 0 -2.356" />
     <parent link="BODY" />
     <child link="Leg1_Link1" />
-    <axis xyz="0 0 -1" />
+    <axis xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
@@ -95,7 +95,7 @@
         izz="0.00016006" />
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 " />
+      <origin xyz="-0.2 0 0.2" rpy="0 0 0" />
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg1_Link2.STL" />
       </geometry>
@@ -114,10 +114,10 @@
   </link>
 
   <joint name="Leg1_Joint2" type="revolute">
-    <origin xyz="0.1 0 0" rpy="0 3.14 3.14" />
+    <origin xyz="0.1 0 0" rpy="1.571 0 0" />
     <parent link="Leg1_Link1" />
     <child link="Leg1_Link2" />
-    <axis xyz="0.70711 -0.70711 0" />
+    <axis xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
