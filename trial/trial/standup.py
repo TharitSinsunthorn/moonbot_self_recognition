@@ -73,13 +73,6 @@ class SimplePublisher(Node):
         #     
 
             
-        
-
-    
-            
-        
-
-    
             
 def main(args=None):
     # initialize the ROS communication

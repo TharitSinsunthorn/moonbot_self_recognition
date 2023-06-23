@@ -1,0 +1,16 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/tharit/moonbot_ws/build/trial",
+        "/home/tharit/moonbot_ws/install/trial/lib/python3.8/site-packages",
+        "/home/tharit/moonbot_ws/install/dynamixel_sdk_custom_interfaces/lib/python3.8/site-packages",
+        "/home/tharit/moonbot_ws/install/dynamixel_custom_interfaces/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/tharit/moonbot_ws/build/trial",
+        "/home/tharit/moonbot_ws/install/trial/lib/python3.8/site-packages",
+        "/home/tharit/moonbot_ws/install/dynamixel_sdk_custom_interfaces/lib/python3.8/site-packages",
+        "/home/tharit/moonbot_ws/install/dynamixel_custom_interfaces/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ]
+}
