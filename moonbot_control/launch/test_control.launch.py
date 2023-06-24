@@ -16,11 +16,11 @@ def generate_launch_description():
 
     # Position and orientation
     # [X, Y, Z]
-    position = [0.0, 0.0, 0.2]
+    position = [0.0, 0.0, 1]
     # [Roll, Pitch, Yaw]
     orientation = [0.0, 0.0, 0.0]
     # Base Name or robot
-    robot_base_name = "Phantomx"
+    robot_base_name = "Moonbot"
 
 
     entity_name = robot_base_name+"-"+str(int(random.random()*100000))

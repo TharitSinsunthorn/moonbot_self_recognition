@@ -1,5 +1,13 @@
 <?xml version="1.0" ?>
 <robot name="Moonbot1" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+
+  <material name="Grey">
+      <color rgba="0.9 0.9 0.98 1" />
+  </material>
+  <material name="Black">
+      <color rgba="0.15 0.15 0.15 1" />
+  </material>
 
   <link name="base_link">
   </link>
@@ -27,10 +35,8 @@
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <mesh filename="package://moonbot_description/meshes/base_link.STL" />
-      </geometry> 
-      <material name="Grey">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      </geometry>
+      <material name="Black" />
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -57,9 +63,7 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg1_Link1.STL" />
       </geometry>
-      <material name="Grey">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Grey" />
     </visual>
     <collision>
       <origin xyz="-0.181 0 0" rpy="0 0 2.356" />
@@ -77,7 +81,7 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
 
@@ -98,9 +102,7 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg1_Link2.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Black" />
     </visual>
     <collision>
       <origin xyz="0.1051 0.283 0" rpy="1.571 0.785 1.571" />
@@ -118,7 +120,7 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
 
@@ -139,9 +141,7 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg1_Link3.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Black" />
     </visual>
     <collision>
       <origin xyz="-0.1095 -0.28 0.0023" rpy="1.55 0.785 -1.6" />
@@ -159,7 +159,7 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
 
@@ -180,9 +180,7 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg2_Link1.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Grey" />
     </visual>
     <collision>
       <origin xyz="-0.181 0 0" rpy="0 0 -2.356" />
@@ -200,7 +198,7 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
 
@@ -221,9 +219,7 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg2_Link2.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Black" />
     </visual>
     <collision>
       <origin xyz="0.1051 -0.283 0" rpy="1.571 2.356 1.571" />
@@ -241,13 +237,13 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
 
   <link name="Leg2_Link3">
     <inertial>
-      <origin xyz="-0.1031 -0.28398 0.0046" rpy="-1.6 -2.356 1.6" />
+      <origin xyz="-0.1031 -0.28398 0.0027" rpy="-1.6 -2.356 1.6" />
       <mass value="0.14207" />
       <inertia
         ixx="4.5915E-05"
@@ -262,19 +258,17 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg2_Link3.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Black" />
     </visual>
     <collision>
-      <origin xyz="-0.1031 -0.28398 0.0046" rpy="-1.6 -2.356 1.6" />
+      <origin xyz="-0.1031 -0.28398 0.0027" rpy="-1.6 -2.356 1.6" />
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg2_Link3.STL" />
       </geometry>
     </collision>
   </link>
 
-  <joint name="Leg2_joint3" type="revolute">
+  <joint name="Leg2_Joint3" type="revolute">
     <origin xyz="0.113 0 0" rpy="0 0 0" />
     <parent link="Leg2_Link2" />
     <child link="Leg2_Link3" />
@@ -282,7 +276,7 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
 
@@ -303,9 +297,7 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg3_Link1.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Grey" />
     </visual>
     <collision>
       <origin xyz="-0.181 0 0" rpy="0 0 0.785" />
@@ -323,13 +315,13 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
 
   <link name="Leg3_Link2">
     <inertial>
-      <origin xyz="0.20046 -0.19976 -0.0487" rpy="0 0 0" />
+      <origin xyz="0.1051 -0.283 0" rpy="1.571 -0.785 1.571" />
       <mass value="0.2225" />
       <inertia
         ixx="0.00024185"
@@ -344,12 +336,10 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg3_Link2.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Black" />
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0.1051 -0.283 0" rpy="1.571 -0.785 1.571" />
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg3_Link2.STL" />
       </geometry>
@@ -364,13 +354,13 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
 
   <link name="Leg3_Link3">
     <inertial>
-      <origin xyz="0.2009 -0.19932 -0.14553" rpy="0 0 0" />
+      <origin xyz="-0.1095 -0.283 0.00425" rpy="1.6 2.356 -1.55" />
       <mass value="0.14207" />
       <inertia
         ixx="4.5915E-05"
@@ -385,12 +375,10 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg3_Link3.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Black" />
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="-0.1095 -0.283 0.00425" rpy="1.6 2.356 -1.55" />
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg3_Link3.STL" />
       </geometry>
@@ -405,7 +393,7 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
   
@@ -426,9 +414,7 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg4_Link1.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Grey" />
     </visual>
     <collision>
       <origin xyz="-0.181 0 0" rpy="0 0 -0.785" />
@@ -446,7 +432,7 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
   
@@ -467,9 +453,7 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg4_Link2.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Black" />
     </visual>
     <collision>
       <origin xyz="0.1051 -0.283 0" rpy="1.571 0.785 1.571" />
@@ -487,7 +471,7 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
 
@@ -508,9 +492,7 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes/Leg4_Link3.STL" />
       </geometry>
-      <material name="">
-        <color rgba="0.64706 0.61961 0.58431 1" />
-      </material>
+      <material name="Black" />
     </visual>
     <collision>
       <origin xyz="-0.1031 -0.2835 0.0018" rpy="-1.55 -0.785 1.558" />
@@ -528,7 +510,173 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="200"
+      effort="2"
       velocity="3" />
   </joint>
+
+  <!-- <gazebo>
+    <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <update_rate>20</update_rate>
+      <joint_name>Leg1_Joint1</joint_name>
+      <joint_name>Leg1_Joint2</joint_name>
+      <joint_name>Leg1_Joint3</joint_name>
+      <joint_name>Leg2_Joint1</joint_name>
+      <joint_name>Leg2_Joint2</joint_name>
+      <joint_name>Leg2_Joint3</joint_name>
+      <joint_name>Leg3_Joint1</joint_name>
+      <joint_name>Leg3_Joint2</joint_name>
+      <joint_name>Leg3_Joint3</joint_name>
+      <joint_name>Leg4_Joint1</joint_name>
+      <joint_name>Leg4_Joint2</joint_name>
+      <joint_name>Leg4_Joint3</joint_name>
+    </plugin>
+  </gazebo>  -->
+
+ 
+  <!-- <gazebo>
+    <plugin name="gazebo_ros_joint_pose_trajectory"
+      filename="libgazebo_ros_joint_pose_trajectory.so">
+      <update_rate>2</update_rate>
+    </plugin>
+  <gazebo> -->
+
+  <ros2_control name="MyRobotSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    
+    <joint name="Leg1_Joint1">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg1_Joint2">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg1_Joint3">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg2_Joint1">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg2_Joint2">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg2_Joint3">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg3_Joint1">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg3_Joint2">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg3_Joint3">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg4_Joint1">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg4_Joint2">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="Leg4_Joint3">
+      <command_interface name="effort">
+        <param name="min">-1000</param>
+        <param name="max">1000</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+  </ros2_control>
+
+  <!-- Gazebo's ros2_control plugin  -->
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher_node</robot_param_node>
+      <parameters>$(find moonbot_control)/config/moonbot_config.yaml</parameters>
+    </plugin>
+  </gazebo> 
+
+
+
 </robot>
