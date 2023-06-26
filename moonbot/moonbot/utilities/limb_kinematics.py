@@ -1,4 +1,7 @@
-import moonbot.utilities.params as params
+try:
+    import moonbot.utilities.params as params
+except:
+    import params as params
 import numpy as np
 import math
 
@@ -45,10 +48,12 @@ def inverse_kinematics(position, leg_num):
 
     LL = np.hypot(x, y)
     D = np.sqrt(z**2 + (LL-L1)**2)
-
-    th1 = np.arctan2(y, x)
-    th2 = np.arctan2(z, (LL-L1)) - np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
-    th3 = math.pi - np.arccos((D**2 - L2**2 - L3**2)/(-2*L2*L3))
+    
+    print(x, y, z, LL, D)
+    
+    th1 = np.arctan2(y,x)
+    th2 = math.pi/2 - np.arctan2((LL-L1), z)- np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
+    th3 = np.arccos((D**2 - L2**2 - L3**2)/(2*L2*L3))
 
     return [th1, th2, th3]
 
@@ -65,17 +70,9 @@ def forward_kinematics(joint_angles, leg_num):
 
     ### Forward Kinematics
 
-    x1 = L1*math.cos(Th1)
-    y1 = L1*math.sin(Th1)
-    z1 = 0.0
-
-    x2 = x1 + L2*math.cos(Th2)*math.cos(Th1)
-    y2 = y1 + L2*math.cos(Th2)*math.sin(Th1)
-    z2 = z1 + L2*math.sin(Th2)
-
-    x3 = x2 + L3*math.cos(Th2+Th3)*math.cos(Th1)
-    y3 = y2 + L3*math.cos(Th2+Th3)*math.sin(Th1)
-    z3 = z2 + L3*math.sin(Th2+Th3)
+    x = math.cos(Th1)* (L1 + L2*math.cos(Th2) + L3*math.cos(Th2+Th3))
+    y = math.sin(Th1)* (L1 + L2*math.cos(Th2) + L3*math.cos(Th2+Th3))
+    z = L2*math.sin(Th2) + L3*math.sin(Th2+Th3)
 
     '''
     Coordinate Transformation: Joint 1 to Base Frame
@@ -84,15 +81,15 @@ def forward_kinematics(joint_angles, leg_num):
 
     ### Rotation
     
-    x = x3 * math.cos(theta) - y3 * math.sin(theta)
-    y = x3 * math.sin(theta) + y3 * math.cos(theta)
-    z = z3
+    xb = x * math.cos(theta) - y * math.sin(theta)
+    yb = x * math.sin(theta) + y * math.cos(theta)
+    zb = z
 
     #### Translation ####
-    x = x + params.D1 * math.cos(theta)
-    y = y + params.D1 * math.sin(theta)
+    xb = xb + params.D1 * math.cos(theta)
+    yb = yb + params.D1 * math.sin(theta)
 
-    return [x, y, z]
+    return [xb, yb, zb]
 
 
 
