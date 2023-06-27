@@ -1,0 +1,33 @@
+[0.713s] Invoking command in '/home/leibton/ros2_ws/src/moonbot': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces PYTHONPATH=/home/leibton/ros2_ws/src/build/moonbot/prefix_override:/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages /usr/bin/python3 setup.py egg_info --egg-base ../build/moonbot build --build-base /home/leibton/ros2_ws/src/build/moonbot/build install --record /home/leibton/ros2_ws/src/build/moonbot/install.log --install-scripts $base/lib/moonbot --single-version-externally-managed
+[0.857s] running egg_info
+[0.857s] writing ../build/moonbot/moonbot.egg-info/PKG-INFO
+[0.857s] writing dependency_links to ../build/moonbot/moonbot.egg-info/dependency_links.txt
+[0.857s] writing entry points to ../build/moonbot/moonbot.egg-info/entry_points.txt
+[0.858s] writing requirements to ../build/moonbot/moonbot.egg-info/requires.txt
+[0.858s] writing top-level names to ../build/moonbot/moonbot.egg-info/top_level.txt
+[0.891s] reading manifest file '../build/moonbot/moonbot.egg-info/SOURCES.txt'
+[0.892s] writing manifest file '../build/moonbot/moonbot.egg-info/SOURCES.txt'
+[0.892s] running build
+[0.892s] running build_py
+[0.892s] copying moonbot/joint_interface.py -> /home/leibton/ros2_ws/src/build/moonbot/build/lib/moonbot
+[0.892s] copying moonbot/joint_controller.py -> /home/leibton/ros2_ws/src/build/moonbot/build/lib/moonbot
+[0.892s] copying moonbot/utilities/params.py -> /home/leibton/ros2_ws/src/build/moonbot/build/lib/moonbot/utilities
+[0.893s] running install
+[0.893s] running install_lib
+[0.894s] copying /home/leibton/ros2_ws/src/build/moonbot/build/lib/moonbot/joint_interface.py -> /home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot
+[0.894s] copying /home/leibton/ros2_ws/src/build/moonbot/build/lib/moonbot/joint_controller.py -> /home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot
+[0.894s] copying /home/leibton/ros2_ws/src/build/moonbot/build/lib/moonbot/utilities/params.py -> /home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot/utilities
+[0.895s] byte-compiling /home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot/joint_interface.py to joint_interface.cpython-38.pyc
+[0.896s] byte-compiling /home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot/joint_controller.py to joint_controller.cpython-38.pyc
+[0.896s] byte-compiling /home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot/utilities/params.py to params.cpython-38.pyc
+[0.897s] running install_data
+[0.897s] running install_egg_info
+[0.898s] removing '/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot-0.0.0-py3.8.egg-info' (and everything under it)
+[0.898s] Copying ../build/moonbot/moonbot.egg-info to /home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot-0.0.0-py3.8.egg-info
+[0.899s] running install_scripts
+[0.913s] Installing body_controller script to /home/leibton/ros2_ws/src/install/moonbot/lib/moonbot
+[0.913s] Installing dynamixel_control script to /home/leibton/ros2_ws/src/install/moonbot/lib/moonbot
+[0.914s] Installing joint_controller script to /home/leibton/ros2_ws/src/install/moonbot/lib/moonbot
+[0.914s] Installing joint_interface script to /home/leibton/ros2_ws/src/install/moonbot/lib/moonbot
+[0.914s] writing list of installed files to '/home/leibton/ros2_ws/src/build/moonbot/install.log'
+[0.945s] Invoked command in '/home/leibton/ros2_ws/src/moonbot' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces PYTHONPATH=/home/leibton/ros2_ws/src/build/moonbot/prefix_override:/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages /usr/bin/python3 setup.py egg_info --egg-base ../build/moonbot build --build-base /home/leibton/ros2_ws/src/build/moonbot/build install --record /home/leibton/ros2_ws/src/build/moonbot/install.log --install-scripts $base/lib/moonbot --single-version-externally-managed

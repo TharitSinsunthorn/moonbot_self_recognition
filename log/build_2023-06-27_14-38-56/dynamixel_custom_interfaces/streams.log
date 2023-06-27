@@ -1,0 +1,272 @@
+[0.018s] Invoking command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/dynamixel_custom_interfaces -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces
+[0.121s] -- The C compiler identification is GNU 9.4.0
+[0.197s] -- The CXX compiler identification is GNU 9.4.0
+[0.203s] -- Check for working C compiler: /usr/bin/cc
+[0.252s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.253s] -- Detecting C compiler ABI info
+[0.299s] -- Detecting C compiler ABI info - done
+[0.306s] -- Detecting C compile features
+[0.307s] -- Detecting C compile features - done
+[0.309s] -- Check for working CXX compiler: /usr/bin/c++
+[0.365s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.365s] -- Detecting CXX compiler ABI info
+[0.423s] -- Detecting CXX compiler ABI info - done
+[0.431s] -- Detecting CXX compile features
+[0.431s] -- Detecting CXX compile features - done
+[0.435s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.458s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.458s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.603s] -- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)
+[0.640s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.645s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.701s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.723s] -- Found FastRTPS: /opt/ros/foxy/include  
+[0.782s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.828s] -- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[0.829s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.830s] -- Looking for pthread.h
+[0.882s] -- Looking for pthread.h - found
+[0.882s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.931s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[0.931s] -- Looking for pthread_create in pthreads
+[0.970s] -- Looking for pthread_create in pthreads - not found
+[0.970s] -- Looking for pthread_create in pthread
+[1.014s] -- Looking for pthread_create in pthread - found
+[1.015s] -- Found Threads: TRUE  
+[1.132s] -- Found rosidl_default_generators: 1.0.1 (/opt/ros/foxy/share/rosidl_default_generators/cmake)
+[1.141s] -- Found ament_lint_auto: 0.9.8 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[1.210s] -- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+[1.261s] -- Found ament_cmake_ros: 0.9.2 (/opt/ros/foxy/share/ament_cmake_ros/cmake)
+[1.334s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.340s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.356s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") 
+[1.358s] -- Found python_cmake_module: 0.8.1 (/opt/ros/foxy/share/python_cmake_module/cmake)
+[1.379s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") 
+[1.379s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.379s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8
+[1.379s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+[1.394s] -- Found PythonExtra: .so  
+[1.425s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.427s] -- Added test 'lint_cmake' to check CMake code style
+[1.427s] -- Added test 'xmllint' to check XML markup files
+[1.434s] -- Configuring done
+[1.455s] -- Generating done
+[1.457s] -- Build files have been written to: /home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces
+[1.463s] Invoked command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/dynamixel_custom_interfaces -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces
+[1.466s] Invoking command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces -- -j12 -l12
+[1.496s] [  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[1.496s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__cpp[0m
+[1.504s] [  5%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[1.723s] [  5%] Built target dynamixel_custom_interfaces__cpp
+[1.732s] [ 12%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[1.732s] [ 12%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[1.732s] [ 12%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[1.759s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_generator_c[0m
+[1.767s] [ 17%] [32mBuilding C object CMakeFiles/dynamixel_custom_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamixel_custom_interfaces/msg/detail/set_position__functions.c.o[0m
+[1.768s] [ 17%] [32mBuilding C object CMakeFiles/dynamixel_custom_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamixel_custom_interfaces/srv/detail/get_position__functions.c.o[0m
+[1.818s] [ 20%] [32m[1mLinking C shared library libdynamixel_custom_interfaces__rosidl_generator_c.so[0m
+[1.844s] [ 20%] Built target dynamixel_custom_interfaces__rosidl_generator_c
+[1.851s] [ 25%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[1.851s] [ 25%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[1.943s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_cpp[0m
+[1.960s] [ 30%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/dynamixel_custom_interfaces/msg/detail/dds_fastrtps/set_position__type_support.cpp.o[0m
+[1.960s] [ 30%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/dynamixel_custom_interfaces/srv/detail/dds_fastrtps/get_position__type_support.cpp.o[0m
+[1.975s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_typesupport_cpp[0m
+[1.984s] [ 35%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/dynamixel_custom_interfaces/srv/get_position__type_support.cpp.o[0m
+[1.984s] [ 35%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/dynamixel_custom_interfaces/msg/set_position__type_support.cpp.o[0m
+[1.984s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_typesupport_introspection_cpp[0m
+[1.997s] [ 38%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/dynamixel_custom_interfaces/srv/detail/get_position__type_support.cpp.o[0m
+[1.997s] [ 41%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/dynamixel_custom_interfaces/msg/detail/set_position__type_support.cpp.o[0m
+[2.044s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_typesupport_c[0m
+[2.054s] [ 46%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/dynamixel_custom_interfaces/srv/get_position__type_support.cpp.o[0m
+[2.054s] [ 46%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/dynamixel_custom_interfaces/msg/set_position__type_support.cpp.o[0m
+[2.084s] [ 48%] [32m[1mLinking CXX shared library libdynamixel_custom_interfaces__rosidl_typesupport_c.so[0m
+[2.090s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_typesupport_introspection_c[0m
+[2.102s] [ 53%] [32mBuilding C object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/dynamixel_custom_interfaces/msg/detail/set_position__type_support.c.o[0m
+[2.102s] [ 53%] [32mBuilding C object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/dynamixel_custom_interfaces/srv/detail/get_position__type_support.c.o[0m
+[2.116s] [ 53%] Built target dynamixel_custom_interfaces__rosidl_typesupport_c
+[2.132s] [ 56%] [32m[1mLinking C shared library libdynamixel_custom_interfaces__rosidl_typesupport_introspection_c.so[0m
+[2.156s] [ 56%] Built target dynamixel_custom_interfaces__rosidl_typesupport_introspection_c
+[2.257s] [ 58%] [32m[1mLinking CXX shared library libdynamixel_custom_interfaces__rosidl_typesupport_cpp.so[0m
+[2.286s] [ 58%] Built target dynamixel_custom_interfaces__rosidl_typesupport_cpp
+[2.327s] [ 61%] [32m[1mLinking CXX shared library libdynamixel_custom_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[2.356s] [ 61%] Built target dynamixel_custom_interfaces__rosidl_typesupport_introspection_cpp
+[2.405s] [ 64%] [32m[1mLinking CXX shared library libdynamixel_custom_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[2.464s] [ 64%] Built target dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_cpp
+[2.470s] [ 66%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[2.663s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c[0m
+[2.677s] [ 71%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/dynamixel_custom_interfaces/srv/detail/get_position__type_support_c.cpp.o[0m
+[2.677s] [ 71%] [32mBuilding CXX object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/dynamixel_custom_interfaces/msg/detail/set_position__type_support_c.cpp.o[0m
+[2.931s] [ 74%] [32m[1mLinking CXX shared library libdynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[2.986s] [ 74%] Built target dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c
+[2.993s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces[0m
+[2.999s] [ 74%] Built target dynamixel_custom_interfaces
+[3.005s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__py[0m
+[3.013s] [ 76%] [34m[1mGenerating Python code for ROS interfaces[0m
+[3.402s] [ 76%] Built target dynamixel_custom_interfaces__py
+[3.410s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__python[0m
+[3.440s] [ 82%] [32mBuilding C object CMakeFiles/dynamixel_custom_interfaces__python.dir/rosidl_generator_py/dynamixel_custom_interfaces/msg/_set_position_s.c.o[0m
+[3.440s] [ 82%] [32mBuilding C object CMakeFiles/dynamixel_custom_interfaces__python.dir/rosidl_generator_py/dynamixel_custom_interfaces/srv/_get_position_s.c.o[0m
+[3.505s] [ 84%] [32m[1mLinking C shared library rosidl_generator_py/dynamixel_custom_interfaces/libdynamixel_custom_interfaces__python.so[0m
+[3.532s] [ 84%] Built target dynamixel_custom_interfaces__python
+[3.539s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_typesupport_introspection_c__pyext[0m
+[3.539s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_typesupport_c__pyext[0m
+[3.540s] [35m[1mScanning dependencies of target dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c__pyext[0m
+[3.551s] [ 89%] [32mBuilding C object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/dynamixel_custom_interfaces/_dynamixel_custom_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[3.551s] [ 89%] [32mBuilding C object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/dynamixel_custom_interfaces/_dynamixel_custom_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[3.552s] [ 92%] [32mBuilding C object CMakeFiles/dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/dynamixel_custom_interfaces/_dynamixel_custom_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[3.612s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/dynamixel_custom_interfaces/dynamixel_custom_interfaces_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so[0m
+[3.612s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/dynamixel_custom_interfaces/dynamixel_custom_interfaces_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so[0m
+[3.614s] [100%] [32m[1mLinking CXX shared library rosidl_generator_py/dynamixel_custom_interfaces/dynamixel_custom_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so[0m
+[3.636s] [100%] Built target dynamixel_custom_interfaces__rosidl_typesupport_c__pyext
+[3.637s] [100%] Built target dynamixel_custom_interfaces__rosidl_typesupport_introspection_c__pyext
+[3.659s] [100%] Built target dynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[3.668s] Invoked command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces -- -j12 -l12
+[3.716s] Invoking command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces
+[3.723s] -- Install configuration: ""
+[3.723s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/ament_index/resource_index/rosidl_interfaces/dynamixel_custom_interfaces
+[3.723s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces
+[3.723s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg
+[3.723s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/set_position.h
+[3.723s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail
+[3.723s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__functions.c
+[3.723s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__struct.h
+[3.723s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__type_support.h
+[3.723s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__functions.h
+[3.723s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/rosidl_generator_c__visibility_control.h
+[3.723s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv
+[3.723s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/get_position.h
+[3.724s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__type_support.h
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__functions.c
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__functions.h
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__struct.h
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/environment/library_path.sh
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/environment/library_path.dsv
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_generator_c.so
+[3.724s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_generator_c.so" to ""
+[3.724s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces
+[3.724s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg
+[3.724s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__rosidl_typesupport_fastrtps_c.h
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[3.724s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv
+[3.724s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__rosidl_typesupport_fastrtps_c.h
+[3.724s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c.so
+[3.725s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[3.725s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces
+[3.725s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg
+[3.725s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[3.725s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail
+[3.725s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__rosidl_typesupport_fastrtps_cpp.hpp
+[3.725s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/dds_fastrtps
+[3.725s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv
+[3.725s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail
+[3.725s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__rosidl_typesupport_fastrtps_cpp.hpp
+[3.725s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/dds_fastrtps
+[3.725s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[3.726s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[3.726s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces
+[3.726s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg
+[3.726s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[3.726s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail
+[3.726s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__rosidl_typesupport_introspection_c.h
+[3.726s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__type_support.c
+[3.726s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv
+[3.726s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail
+[3.726s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__rosidl_typesupport_introspection_c.h
+[3.726s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__type_support.c
+[3.726s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_introspection_c.so
+[3.726s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[3.726s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_c.so
+[3.726s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_c.so" to ""
+[3.726s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces
+[3.727s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/set_position.hpp
+[3.727s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__type_support.hpp
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__traits.hpp
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__struct.hpp
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__builder.hpp
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[3.727s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/get_position.hpp
+[3.727s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__builder.hpp
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__struct.hpp
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__type_support.hpp
+[3.727s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__traits.hpp
+[3.727s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces
+[3.727s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg
+[3.727s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail
+[3.728s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__rosidl_typesupport_introspection_cpp.hpp
+[3.728s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/msg/detail/set_position__type_support.cpp
+[3.728s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv
+[3.728s] -- Up-to-date: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail
+[3.728s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__rosidl_typesupport_introspection_cpp.hpp
+[3.728s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/include/dynamixel_custom_interfaces/srv/detail/get_position__type_support.cpp
+[3.728s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_introspection_cpp.so
+[3.728s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[3.728s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_cpp.so
+[3.728s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__rosidl_typesupport_cpp.so" to ""
+[3.728s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/environment/pythonpath.sh
+[3.728s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/environment/pythonpath.dsv
+[3.728s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/__init__.py
+[3.750s] Compiling '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/__init__.py'...
+[3.752s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/msg
+[3.752s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/msg/_set_position_s.c
+[3.753s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/msg/__init__.py
+[3.753s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/msg/_set_position.py
+[3.753s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/srv
+[3.753s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/srv/__init__.py
+[3.753s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/srv/_get_position_s.c
+[3.753s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/srv/_get_position.py
+[3.753s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/dynamixel_custom_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so
+[3.753s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/dynamixel_custom_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so" to ""
+[3.754s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/dynamixel_custom_interfaces_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so
+[3.754s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/dynamixel_custom_interfaces_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so" to ""
+[3.755s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/dynamixel_custom_interfaces_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so
+[3.755s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages/dynamixel_custom_interfaces/dynamixel_custom_interfaces_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so" to ""
+[3.755s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__python.so
+[3.755s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/libdynamixel_custom_interfaces__python.so" to ""
+[3.755s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/msg/SetPosition.idl
+[3.755s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/srv/GetPosition.idl
+[3.756s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/msg/SetPosition.msg
+[3.756s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/srv/GetPosition.srv
+[3.756s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/srv/GetPosition_Request.msg
+[3.756s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/srv/GetPosition_Response.msg
+[3.756s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/ament_index/resource_index/package_run_dependencies/dynamixel_custom_interfaces
+[3.756s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/ament_index/resource_index/parent_prefix_path/dynamixel_custom_interfaces
+[3.756s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/environment/ament_prefix_path.sh
+[3.756s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/environment/ament_prefix_path.dsv
+[3.756s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/environment/path.sh
+[3.757s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/environment/path.dsv
+[3.757s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/local_setup.bash
+[3.757s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/local_setup.sh
+[3.757s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/local_setup.zsh
+[3.757s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/local_setup.dsv
+[3.757s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.dsv
+[3.757s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/ament_index/resource_index/packages/dynamixel_custom_interfaces
+[3.757s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_generator_cExport.cmake
+[3.758s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_generator_cExport-noconfig.cmake
+[3.758s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[3.758s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[3.758s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_typesupport_cExport.cmake
+[3.758s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[3.758s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_generator_cppExport.cmake
+[3.758s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[3.759s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[3.759s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_typesupport_cppExport.cmake
+[3.759s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[3.759s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/rosidl_cmake-extras.cmake
+[3.759s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[3.759s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[3.759s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[3.759s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[3.759s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[3.760s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[3.760s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfacesConfig.cmake
+[3.760s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/cmake/dynamixel_custom_interfacesConfig-version.cmake
+[3.760s] -- Installing: /home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.xml
+[3.763s] Invoked command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces

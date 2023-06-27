@@ -1,0 +1,22 @@
+[0.714s] Invoking command in '/home/leibton/ros2_ws/src/trial': AMENT_PREFIX_PATH=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces LD_LIBRARY_PATH=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/leibton/ros2_ws/src/build/trial/prefix_override:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/trial build --build-base /home/leibton/ros2_ws/src/build/trial/build install --record /home/leibton/ros2_ws/src/build/trial/install.log --single-version-externally-managed
+[0.849s] running egg_info
+[0.850s] writing ../build/trial/trial.egg-info/PKG-INFO
+[0.857s] writing dependency_links to ../build/trial/trial.egg-info/dependency_links.txt
+[0.857s] writing entry points to ../build/trial/trial.egg-info/entry_points.txt
+[0.858s] writing requirements to ../build/trial/trial.egg-info/requires.txt
+[0.858s] writing top-level names to ../build/trial/trial.egg-info/top_level.txt
+[0.888s] reading manifest file '../build/trial/trial.egg-info/SOURCES.txt'
+[0.888s] writing manifest file '../build/trial/trial.egg-info/SOURCES.txt'
+[0.888s] running build
+[0.889s] running build_py
+[0.889s] running install
+[0.889s] running install_lib
+[0.891s] running install_data
+[0.891s] running install_egg_info
+[0.892s] removing '/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial-0.0.0-py3.8.egg-info' (and everything under it)
+[0.892s] Copying ../build/trial/trial.egg-info to /home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial-0.0.0-py3.8.egg-info
+[0.893s] running install_scripts
+[0.904s] Installing dynamixel_control script to /home/leibton/ros2_ws/src/install/trial/lib/trial
+[0.904s] Installing walk script to /home/leibton/ros2_ws/src/install/trial/lib/trial
+[0.905s] writing list of installed files to '/home/leibton/ros2_ws/src/build/trial/install.log'
+[0.923s] Invoked command in '/home/leibton/ros2_ws/src/trial' returned '0': AMENT_PREFIX_PATH=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces LD_LIBRARY_PATH=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/leibton/ros2_ws/src/build/trial/prefix_override:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/trial build --build-base /home/leibton/ros2_ws/src/build/trial/build install --record /home/leibton/ros2_ws/src/build/trial/install.log --single-version-externally-managed

@@ -1,0 +1,7 @@
+{
+  "package_name": "dynamixel_custom_interfaces",
+  "non_idl_tuples": [
+    "/home/leibton/ros2_ws/src/dynamixel_custom_interfaces:msg/SetPosition.msg",
+    "/home/leibton/ros2_ws/src/dynamixel_custom_interfaces:srv/GetPosition.srv"
+  ]
+}

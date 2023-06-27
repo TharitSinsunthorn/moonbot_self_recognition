@@ -1,0 +1,8 @@
+{
+  "package_name": "moonbot_custom_interfaces",
+  "non_idl_tuples": [
+    "/home/leibton/ros2_ws/src/moonbot_custom_interfaces:msg/SetPosition.msg",
+    "/home/leibton/ros2_ws/src/moonbot_custom_interfaces:msg/JointAngles.msg",
+    "/home/leibton/ros2_ws/src/moonbot_custom_interfaces:srv/GetPosition.srv"
+  ]
+}

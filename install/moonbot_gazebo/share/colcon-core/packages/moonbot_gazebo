@@ -1,0 +1,1 @@
+controller_manager:gazebo_ros:gazebo_ros2_control:geometry_msgs:moonbot_control:moonbot_description:rclpy:sensor_msgs:std_msgs

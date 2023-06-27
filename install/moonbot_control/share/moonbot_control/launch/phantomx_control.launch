@@ -1,0 +1,15 @@
+<launch>
+
+  <rosparam file="$(find moonbot_control)/config/phantomx_control.yaml" command="load"/>
+
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/phantomx" args=" j_c1_lf_position_controller j_c1_rf_position_controller j_c1_lm_position_controller j_c1_rm_position_controller j_c1_lr_position_controller j_c1_rr_position_controller j_thigh_lf_position_controller j_thigh_rf_position_controller j_thigh_lm_position_controller j_thigh_rm_position_controller j_thigh_lr_position_controller j_thigh_rr_position_controller j_tibia_lf_position_controller j_tibia_rf_position_controller j_tibia_lm_position_controller j_tibia_rm_position_controller j_tibia_lr_position_controller j_tibia_rr_position_controller joint_state_controller"/>
+    
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/phantomx/joint_states" />
+  </node>
+
+</launch>

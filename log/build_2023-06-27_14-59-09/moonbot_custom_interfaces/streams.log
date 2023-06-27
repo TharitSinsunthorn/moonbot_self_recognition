@@ -1,0 +1,300 @@
+[0.028s] Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_custom_interfaces -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces
+[0.089s] -- The C compiler identification is GNU 9.4.0
+[0.160s] -- The CXX compiler identification is GNU 9.4.0
+[0.161s] -- Check for working C compiler: /usr/bin/cc
+[0.230s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.230s] -- Detecting C compiler ABI info
+[0.305s] -- Detecting C compiler ABI info - done
+[0.314s] -- Detecting C compile features
+[0.314s] -- Detecting C compile features - done
+[0.315s] -- Check for working CXX compiler: /usr/bin/c++
+[0.390s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.392s] -- Detecting CXX compiler ABI info
+[0.475s] -- Detecting CXX compiler ABI info - done
+[0.488s] -- Detecting CXX compile features
+[0.488s] -- Detecting CXX compile features - done
+[0.490s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.525s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.526s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.691s] -- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)
+[0.723s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.731s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.781s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.803s] -- Found FastRTPS: /opt/ros/foxy/include  
+[0.857s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.894s] -- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[0.895s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.895s] -- Looking for pthread.h
+[0.953s] -- Looking for pthread.h - found
+[0.953s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.012s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[1.012s] -- Looking for pthread_create in pthreads
+[1.059s] -- Looking for pthread_create in pthreads - not found
+[1.059s] -- Looking for pthread_create in pthread
+[1.113s] -- Looking for pthread_create in pthread - found
+[1.114s] -- Found Threads: TRUE  
+[1.245s] -- Found rosidl_default_generators: 1.0.1 (/opt/ros/foxy/share/rosidl_default_generators/cmake)
+[1.253s] -- Found ament_lint_auto: 0.9.8 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[1.323s] -- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+[1.379s] -- Found ament_cmake_ros: 0.9.2 (/opt/ros/foxy/share/ament_cmake_ros/cmake)
+[1.459s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.464s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.482s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") 
+[1.484s] -- Found python_cmake_module: 0.8.1 (/opt/ros/foxy/share/python_cmake_module/cmake)
+[1.505s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") 
+[1.505s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.505s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8
+[1.505s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+[1.522s] -- Found PythonExtra: .so  
+[1.561s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.562s] -- Added test 'lint_cmake' to check CMake code style
+[1.563s] -- Added test 'xmllint' to check XML markup files
+[1.572s] -- Configuring done
+[1.613s] -- Generating done
+[1.616s] -- Build files have been written to: /home/leibton/ros2_ws/src/build/moonbot_custom_interfaces
+[1.633s] Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_custom_interfaces -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces
+[1.636s] Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_custom_interfaces -- -j12 -l12
+[1.671s] [  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[1.671s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__cpp[0m
+[1.680s] [  4%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[1.949s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_generator_c[0m
+[1.963s] [  6%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__rosidl_generator_c.dir/rosidl_generator_c/moonbot_custom_interfaces/msg/detail/set_position__functions.c.o[0m
+[1.963s] [  8%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__rosidl_generator_c.dir/rosidl_generator_c/moonbot_custom_interfaces/msg/detail/joint_angles__functions.c.o[0m
+[1.964s] [ 10%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__rosidl_generator_c.dir/rosidl_generator_c/moonbot_custom_interfaces/srv/detail/get_position__functions.c.o[0m
+[1.983s] [ 10%] Built target moonbot_custom_interfaces__cpp
+[1.993s] [ 17%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[1.993s] [ 17%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[1.993s] [ 17%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[2.010s] [ 19%] [32m[1mLinking C shared library libmoonbot_custom_interfaces__rosidl_generator_c.so[0m
+[2.041s] [ 19%] Built target moonbot_custom_interfaces__rosidl_generator_c
+[2.050s] [ 23%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[2.050s] [ 23%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[2.234s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_typesupport_cpp[0m
+[2.245s] [ 29%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/moonbot_custom_interfaces/msg/set_position__type_support.cpp.o[0m
+[2.245s] [ 29%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/moonbot_custom_interfaces/srv/get_position__type_support.cpp.o[0m
+[2.245s] [ 29%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/moonbot_custom_interfaces/msg/joint_angles__type_support.cpp.o[0m
+[2.310s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_typesupport_introspection_c[0m
+[2.322s] [ 31%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/moonbot_custom_interfaces/msg/detail/joint_angles__type_support.c.o[0m
+[2.330s] [ 34%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/moonbot_custom_interfaces/msg/detail/set_position__type_support.c.o[0m
+[2.331s] [ 36%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/moonbot_custom_interfaces/srv/detail/get_position__type_support.c.o[0m
+[2.343s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_typesupport_introspection_cpp[0m
+[2.359s] [ 42%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/moonbot_custom_interfaces/srv/detail/get_position__type_support.cpp.o[0m
+[2.359s] [ 42%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/moonbot_custom_interfaces/msg/detail/joint_angles__type_support.cpp.o[0m
+[2.359s] [ 42%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/moonbot_custom_interfaces/msg/detail/set_position__type_support.cpp.o[0m
+[2.365s] [ 44%] [32m[1mLinking C shared library libmoonbot_custom_interfaces__rosidl_typesupport_introspection_c.so[0m
+[2.382s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_typesupport_c[0m
+[2.392s] [ 46%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/moonbot_custom_interfaces/msg/set_position__type_support.cpp.o[0m
+[2.393s] [ 48%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/moonbot_custom_interfaces/srv/get_position__type_support.cpp.o[0m
+[2.394s] [ 51%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/moonbot_custom_interfaces/msg/joint_angles__type_support.cpp.o[0m
+[2.394s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_typesupport_fastrtps_cpp[0m
+[2.419s] [ 51%] Built target moonbot_custom_interfaces__rosidl_typesupport_introspection_c
+[2.429s] [ 53%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/moonbot_custom_interfaces/msg/detail/dds_fastrtps/set_position__type_support.cpp.o[0m
+[2.429s] [ 55%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/moonbot_custom_interfaces/msg/detail/dds_fastrtps/joint_angles__type_support.cpp.o[0m
+[2.434s] [ 59%] [32m[1mLinking CXX shared library libmoonbot_custom_interfaces__rosidl_typesupport_c.so[0m
+[2.434s] [ 59%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/moonbot_custom_interfaces/srv/detail/dds_fastrtps/get_position__type_support.cpp.o[0m
+[2.483s] [ 59%] Built target moonbot_custom_interfaces__rosidl_typesupport_c
+[2.589s] [ 61%] [32m[1mLinking CXX shared library libmoonbot_custom_interfaces__rosidl_typesupport_cpp.so[0m
+[2.621s] [ 61%] Built target moonbot_custom_interfaces__rosidl_typesupport_cpp
+[2.698s] [ 63%] [32m[1mLinking CXX shared library libmoonbot_custom_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[2.730s] [ 63%] Built target moonbot_custom_interfaces__rosidl_typesupport_introspection_cpp
+[2.841s] [ 65%] [32m[1mLinking CXX shared library libmoonbot_custom_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[2.909s] [ 65%] Built target moonbot_custom_interfaces__rosidl_typesupport_fastrtps_cpp
+[2.922s] [ 68%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[3.137s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_typesupport_fastrtps_c[0m
+[3.148s] [ 74%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/moonbot_custom_interfaces/msg/detail/joint_angles__type_support_c.cpp.o[0m
+[3.149s] [ 74%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/moonbot_custom_interfaces/srv/detail/get_position__type_support_c.cpp.o[0m
+[3.149s] [ 74%] [32mBuilding CXX object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/moonbot_custom_interfaces/msg/detail/set_position__type_support_c.cpp.o[0m
+[3.406s] [ 76%] [32m[1mLinking CXX shared library libmoonbot_custom_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[3.476s] [ 76%] Built target moonbot_custom_interfaces__rosidl_typesupport_fastrtps_c
+[3.491s] [35m[1mScanning dependencies of target moonbot_custom_interfaces[0m
+[3.500s] [ 76%] Built target moonbot_custom_interfaces
+[3.512s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__py[0m
+[3.524s] [ 78%] [34m[1mGenerating Python code for ROS interfaces[0m
+[3.948s] [ 78%] Built target moonbot_custom_interfaces__py
+[3.954s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__python[0m
+[3.974s] [ 80%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__python.dir/rosidl_generator_py/moonbot_custom_interfaces/msg/_set_position_s.c.o[0m
+[3.974s] [ 82%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__python.dir/rosidl_generator_py/moonbot_custom_interfaces/msg/_joint_angles_s.c.o[0m
+[3.974s] [ 85%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__python.dir/rosidl_generator_py/moonbot_custom_interfaces/srv/_get_position_s.c.o[0m
+[4.037s] [ 87%] [32m[1mLinking C shared library rosidl_generator_py/moonbot_custom_interfaces/libmoonbot_custom_interfaces__python.so[0m
+[4.077s] [ 87%] Built target moonbot_custom_interfaces__python
+[4.085s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_typesupport_introspection_c__pyext[0m
+[4.085s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_typesupport_c__pyext[0m
+[4.085s] [35m[1mScanning dependencies of target moonbot_custom_interfaces__rosidl_typesupport_fastrtps_c__pyext[0m
+[4.096s] [ 89%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/moonbot_custom_interfaces/_moonbot_custom_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[4.097s] [ 91%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/moonbot_custom_interfaces/_moonbot_custom_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[4.097s] [ 93%] [32mBuilding C object CMakeFiles/moonbot_custom_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/moonbot_custom_interfaces/_moonbot_custom_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[4.156s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/moonbot_custom_interfaces/moonbot_custom_interfaces_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so[0m
+[4.156s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/moonbot_custom_interfaces/moonbot_custom_interfaces_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so[0m
+[4.158s] [100%] [32m[1mLinking CXX shared library rosidl_generator_py/moonbot_custom_interfaces/moonbot_custom_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so[0m
+[4.180s] [100%] Built target moonbot_custom_interfaces__rosidl_typesupport_c__pyext
+[4.180s] [100%] Built target moonbot_custom_interfaces__rosidl_typesupport_introspection_c__pyext
+[4.204s] [100%] Built target moonbot_custom_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[4.212s] Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_custom_interfaces -- -j12 -l12
+[4.261s] Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_custom_interfaces
+[4.268s] -- Install configuration: ""
+[4.268s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/ament_index/resource_index/rosidl_interfaces/moonbot_custom_interfaces
+[4.268s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces
+[4.268s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg
+[4.268s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/joint_angles.h
+[4.269s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/set_position.h
+[4.269s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail
+[4.269s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__functions.c
+[4.269s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__functions.h
+[4.269s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__functions.c
+[4.269s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__struct.h
+[4.269s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__struct.h
+[4.269s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__type_support.h
+[4.269s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__functions.h
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__type_support.h
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/rosidl_generator_c__visibility_control.h
+[4.270s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/get_position.h
+[4.270s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__type_support.h
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__functions.c
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__functions.h
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__struct.h
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/environment/library_path.sh
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/environment/library_path.dsv
+[4.270s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_generator_c.so
+[4.271s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_generator_c.so" to ""
+[4.271s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces
+[4.271s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg
+[4.271s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail
+[4.271s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__rosidl_typesupport_fastrtps_c.h
+[4.271s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__rosidl_typesupport_fastrtps_c.h
+[4.271s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[4.271s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv
+[4.271s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail
+[4.272s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__rosidl_typesupport_fastrtps_c.h
+[4.272s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_fastrtps_c.so
+[4.272s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[4.272s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces
+[4.272s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg
+[4.272s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[4.272s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail
+[4.272s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__rosidl_typesupport_fastrtps_cpp.hpp
+[4.272s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__rosidl_typesupport_fastrtps_cpp.hpp
+[4.272s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/dds_fastrtps
+[4.272s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv
+[4.273s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail
+[4.273s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__rosidl_typesupport_fastrtps_cpp.hpp
+[4.273s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/dds_fastrtps
+[4.273s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[4.273s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[4.273s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces
+[4.273s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg
+[4.273s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[4.273s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail
+[4.273s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__rosidl_typesupport_introspection_c.h
+[4.273s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__rosidl_typesupport_introspection_c.h
+[4.274s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__type_support.c
+[4.274s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__type_support.c
+[4.274s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv
+[4.274s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail
+[4.274s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__rosidl_typesupport_introspection_c.h
+[4.274s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__type_support.c
+[4.274s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_introspection_c.so
+[4.274s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[4.274s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_c.so
+[4.275s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_c.so" to ""
+[4.275s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces
+[4.275s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg
+[4.275s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/joint_angles.hpp
+[4.275s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/set_position.hpp
+[4.275s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail
+[4.275s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__type_support.hpp
+[4.275s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__traits.hpp
+[4.275s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__struct.hpp
+[4.275s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__traits.hpp
+[4.275s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__builder.hpp
+[4.275s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__builder.hpp
+[4.276s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__struct.hpp
+[4.276s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__type_support.hpp
+[4.276s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[4.276s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv
+[4.276s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/get_position.hpp
+[4.276s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail
+[4.276s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__builder.hpp
+[4.276s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__struct.hpp
+[4.276s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__type_support.hpp
+[4.276s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__traits.hpp
+[4.276s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces
+[4.276s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg
+[4.277s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail
+[4.277s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__rosidl_typesupport_introspection_cpp.hpp
+[4.277s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/joint_angles__type_support.cpp
+[4.277s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__rosidl_typesupport_introspection_cpp.hpp
+[4.277s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/msg/detail/set_position__type_support.cpp
+[4.277s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv
+[4.277s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail
+[4.277s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__rosidl_typesupport_introspection_cpp.hpp
+[4.277s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/include/moonbot_custom_interfaces/srv/detail/get_position__type_support.cpp
+[4.277s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_introspection_cpp.so
+[4.277s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[4.277s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_cpp.so
+[4.277s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__rosidl_typesupport_cpp.so" to ""
+[4.278s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/environment/pythonpath.sh
+[4.278s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/environment/pythonpath.dsv
+[4.278s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/__init__.py
+[4.298s] Compiling '/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/__init__.py'...
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/msg
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/msg/_set_position_s.c
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/msg/__init__.py
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/msg/_set_position.py
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/msg/_joint_angles.py
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/msg/_joint_angles_s.c
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/srv
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/srv/__init__.py
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/srv/_get_position_s.c
+[4.301s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/srv/_get_position.py
+[4.302s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/moonbot_custom_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so
+[4.302s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/moonbot_custom_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so" to ""
+[4.303s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/moonbot_custom_interfaces_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so
+[4.303s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/moonbot_custom_interfaces_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so" to ""
+[4.303s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/moonbot_custom_interfaces_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so
+[4.304s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages/moonbot_custom_interfaces/moonbot_custom_interfaces_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so" to ""
+[4.304s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__python.so
+[4.304s] -- Set runtime path of "/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/libmoonbot_custom_interfaces__python.so" to ""
+[4.304s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/msg/SetPosition.idl
+[4.304s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/msg/JointAngles.idl
+[4.304s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/srv/GetPosition.idl
+[4.305s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/msg/SetPosition.msg
+[4.305s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/msg/JointAngles.msg
+[4.305s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/srv/GetPosition.srv
+[4.305s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/srv/GetPosition_Request.msg
+[4.305s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/srv/GetPosition_Response.msg
+[4.305s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/ament_index/resource_index/package_run_dependencies/moonbot_custom_interfaces
+[4.305s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/ament_index/resource_index/parent_prefix_path/moonbot_custom_interfaces
+[4.305s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/environment/ament_prefix_path.sh
+[4.306s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/environment/ament_prefix_path.dsv
+[4.306s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/environment/path.sh
+[4.306s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/environment/path.dsv
+[4.306s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/local_setup.bash
+[4.306s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/local_setup.sh
+[4.306s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/local_setup.zsh
+[4.306s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/local_setup.dsv
+[4.307s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/package.dsv
+[4.307s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/ament_index/resource_index/packages/moonbot_custom_interfaces
+[4.307s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_generator_cExport.cmake
+[4.307s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_generator_cExport-noconfig.cmake
+[4.307s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[4.307s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[4.308s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_typesupport_cExport.cmake
+[4.308s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[4.308s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_generator_cppExport.cmake
+[4.308s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[4.308s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[4.308s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_typesupport_cppExport.cmake
+[4.308s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[4.309s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/rosidl_cmake-extras.cmake
+[4.309s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[4.309s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[4.309s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[4.309s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[4.309s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[4.309s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[4.310s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfacesConfig.cmake
+[4.310s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/cmake/moonbot_custom_interfacesConfig-version.cmake
+[4.310s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/share/moonbot_custom_interfaces/package.xml
+[4.313s] Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_custom_interfaces

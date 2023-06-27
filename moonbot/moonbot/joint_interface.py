@@ -8,7 +8,9 @@ from moonbot_custom_interfaces.msg import SetPosition
 
 '''
 This Node acts as interface between joint_angle topic and dynamixel control code.
+Note that joint angle must be within the range of -90 to 90 degs
 '''
+DIFF_ANGLE = params.DIFF_ANGLE
 
 class JointInterface(Node):
     def __init__(self):
@@ -20,20 +22,23 @@ class JointInterface(Node):
         self.subcriber_angles = self.create_subscription(JointAngles, f'target_joint_angles_l{self.limb_num}', self.subscriber_callback, 10)
 
 
-    def subscriber_callback(self, msg):
+    def subscriber_callback(self, joint_msg):
         msg = SetPosition()
-        msg.id = self.servo_id[0]
-        msg.position = int(msg.joint1)
+        msg.id = self.servo_id[0][0]
+        INIT_POS = self.servo_id[0][1]
+        msg.position = int(INIT_POS - DIFF_ANGLE/(math.pi/2) * joint_msg.joint1)
         self.publisher_servo.publish(msg)
 
         msg = SetPosition()
-        msg.id = self.servo_id[1]
-        msg.position = int(msg.joint2)
+        msg.id = self.servo_id[1][0]
+        INIT_POS = self.servo_id[1][1]
+        msg.position = int(INIT_POS - DIFF_ANGLE/(math.pi/2) * joint_msg.joint2)
         self.publisher_servo.publish(msg)
 
         msg = SetPosition()
-        msg.id = self.servo_id[2]
-        msg.position = int(msg.joint2)
+        msg.id = self.servo_id[2][0]
+        INIT_POS = self.servo_id[2][1]
+        msg.position = int(INIT_POS - DIFF_ANGLE/(math.pi/2) * joint_msg.joint3)
         self.publisher_servo.publish(msg)
 
 def main(args = None):

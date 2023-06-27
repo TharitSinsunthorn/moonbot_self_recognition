@@ -1,0 +1,40 @@
+running egg_info
+creating ../build/trial/trial.egg-info
+writing ../build/trial/trial.egg-info/PKG-INFO
+writing dependency_links to ../build/trial/trial.egg-info/dependency_links.txt
+writing entry points to ../build/trial/trial.egg-info/entry_points.txt
+writing requirements to ../build/trial/trial.egg-info/requires.txt
+writing top-level names to ../build/trial/trial.egg-info/top_level.txt
+writing manifest file '../build/trial/trial.egg-info/SOURCES.txt'
+reading manifest file '../build/trial/trial.egg-info/SOURCES.txt'
+writing manifest file '../build/trial/trial.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/leibton/ros2_ws/src/build/trial/build
+creating /home/leibton/ros2_ws/src/build/trial/build/lib
+creating /home/leibton/ros2_ws/src/build/trial/build/lib/trial
+copying trial/__init__.py -> /home/leibton/ros2_ws/src/build/trial/build/lib/trial
+copying trial/standup.py -> /home/leibton/ros2_ws/src/build/trial/build/lib/trial
+copying trial/dynamixel_control.py -> /home/leibton/ros2_ws/src/build/trial/build/lib/trial
+running install
+running install_lib
+creating /home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial
+copying /home/leibton/ros2_ws/src/build/trial/build/lib/trial/__init__.py -> /home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial
+copying /home/leibton/ros2_ws/src/build/trial/build/lib/trial/standup.py -> /home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial
+copying /home/leibton/ros2_ws/src/build/trial/build/lib/trial/dynamixel_control.py -> /home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial
+byte-compiling /home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial/__init__.py to __init__.cpython-38.pyc
+byte-compiling /home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial/standup.py to standup.cpython-38.pyc
+byte-compiling /home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial/dynamixel_control.py to dynamixel_control.cpython-38.pyc
+running install_data
+creating /home/leibton/ros2_ws/src/install/trial/share/ament_index
+creating /home/leibton/ros2_ws/src/install/trial/share/ament_index/resource_index
+creating /home/leibton/ros2_ws/src/install/trial/share/ament_index/resource_index/packages
+copying resource/trial -> /home/leibton/ros2_ws/src/install/trial/share/ament_index/resource_index/packages
+copying package.xml -> /home/leibton/ros2_ws/src/install/trial/share/trial
+copying launch/move.launch.py -> /home/leibton/ros2_ws/src/install/trial/share/trial
+running install_egg_info
+Copying ../build/trial/trial.egg-info to /home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages/trial-0.0.0-py3.8.egg-info
+running install_scripts
+Installing dynamixel_control script to /home/leibton/ros2_ws/src/install/trial/lib/trial
+Installing walk script to /home/leibton/ros2_ws/src/install/trial/lib/trial
+writing list of installed files to '/home/leibton/ros2_ws/src/build/trial/install.log'

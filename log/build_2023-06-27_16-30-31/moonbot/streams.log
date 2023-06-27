@@ -1,0 +1,25 @@
+[0.476s] Invoking command in '/home/leibton/ros2_ws/src/moonbot': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces PYTHONPATH=/home/leibton/ros2_ws/src/build/moonbot/prefix_override:/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages /usr/bin/python3 setup.py egg_info --egg-base ../build/moonbot build --build-base /home/leibton/ros2_ws/src/build/moonbot/build install --record /home/leibton/ros2_ws/src/build/moonbot/install.log --install-scripts $base/lib/moonbot --single-version-externally-managed
+[0.631s] running egg_info
+[0.631s] writing ../build/moonbot/moonbot.egg-info/PKG-INFO
+[0.631s] writing dependency_links to ../build/moonbot/moonbot.egg-info/dependency_links.txt
+[0.632s] writing entry points to ../build/moonbot/moonbot.egg-info/entry_points.txt
+[0.632s] writing requirements to ../build/moonbot/moonbot.egg-info/requires.txt
+[0.632s] writing top-level names to ../build/moonbot/moonbot.egg-info/top_level.txt
+[0.659s] reading manifest file '../build/moonbot/moonbot.egg-info/SOURCES.txt'
+[0.660s] writing manifest file '../build/moonbot/moonbot.egg-info/SOURCES.txt'
+[0.660s] running build
+[0.660s] running build_py
+[0.661s] running install
+[0.662s] running install_lib
+[0.664s] running install_data
+[0.664s] copying launch/moonbot_launch.py -> /home/leibton/ros2_ws/src/install/moonbot/share/moonbot/launch
+[0.665s] running install_egg_info
+[0.666s] removing '/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot-0.0.0-py3.8.egg-info' (and everything under it)
+[0.666s] Copying ../build/moonbot/moonbot.egg-info to /home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages/moonbot-0.0.0-py3.8.egg-info
+[0.667s] running install_scripts
+[0.678s] Installing body_controller script to /home/leibton/ros2_ws/src/install/moonbot/lib/moonbot
+[0.678s] Installing dynamixel_control script to /home/leibton/ros2_ws/src/install/moonbot/lib/moonbot
+[0.678s] Installing joint_controller script to /home/leibton/ros2_ws/src/install/moonbot/lib/moonbot
+[0.679s] Installing joint_interface script to /home/leibton/ros2_ws/src/install/moonbot/lib/moonbot
+[0.679s] writing list of installed files to '/home/leibton/ros2_ws/src/build/moonbot/install.log'
+[0.703s] Invoked command in '/home/leibton/ros2_ws/src/moonbot' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces PYTHONPATH=/home/leibton/ros2_ws/src/build/moonbot/prefix_override:/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/moonbot/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages /usr/bin/python3 setup.py egg_info --egg-base ../build/moonbot build --build-base /home/leibton/ros2_ws/src/build/moonbot/build install --record /home/leibton/ros2_ws/src/build/moonbot/install.log --install-scripts $base/lib/moonbot --single-version-externally-managed

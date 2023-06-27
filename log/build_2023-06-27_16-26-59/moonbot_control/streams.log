@@ -1,0 +1,29 @@
+[0.034s] Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_control': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/home/leibton/ros2_ws/src/install/moonbot:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_control -- -j12 -l12
+[0.072s] Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_control' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/home/leibton/ros2_ws/src/install/moonbot:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_control -- -j12 -l12
+[0.092s] Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_control': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/home/leibton/ros2_ws/src/install/moonbot:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_control
+[0.116s] -- Install configuration: ""
+[0.116s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//launch
+[0.116s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//launch/phantomx_control.launch
+[0.116s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//launch/test_control.launch.py
+[0.117s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//launch/bringup_moonbot.py
+[0.117s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config
+[0.117s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config/phantom_config.yaml
+[0.117s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config/phantomx_control.yaml
+[0.117s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config/moonbot_config.yaml
+[0.117s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config/controller_configuration.yaml
+[0.117s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/ament_index/resource_index/package_run_dependencies/moonbot_control
+[0.117s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/ament_index/resource_index/parent_prefix_path/moonbot_control
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/environment/ament_prefix_path.sh
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/environment/ament_prefix_path.dsv
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/environment/path.sh
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/environment/path.dsv
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/local_setup.bash
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/local_setup.sh
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/local_setup.zsh
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/local_setup.dsv
+[0.118s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.dsv
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/ament_index/resource_index/packages/moonbot_control
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/cmake/moonbot_controlConfig.cmake
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/cmake/moonbot_controlConfig-version.cmake
+[0.118s] -- Up-to-date: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.xml
+[0.118s] Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_control' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_custom_interfaces:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/home/leibton/ros2_ws/src/install/moonbot:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_control

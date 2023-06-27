@@ -1,0 +1,4 @@
+source;share/moonbot_control/local_setup.bash
+source;share/moonbot_control/local_setup.dsv
+source;share/moonbot_control/local_setup.sh
+source;share/moonbot_control/local_setup.zsh

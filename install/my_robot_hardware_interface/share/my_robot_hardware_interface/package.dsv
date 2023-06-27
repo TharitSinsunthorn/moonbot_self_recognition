@@ -1,0 +1,8 @@
+source;share/my_robot_hardware_interface/hook/cmake_prefix_path.ps1
+source;share/my_robot_hardware_interface/hook/cmake_prefix_path.dsv
+source;share/my_robot_hardware_interface/hook/cmake_prefix_path.sh
+source;share/my_robot_hardware_interface/local_setup.bash
+source;share/my_robot_hardware_interface/local_setup.dsv
+source;share/my_robot_hardware_interface/local_setup.ps1
+source;share/my_robot_hardware_interface/local_setup.sh
+source;share/my_robot_hardware_interface/local_setup.zsh

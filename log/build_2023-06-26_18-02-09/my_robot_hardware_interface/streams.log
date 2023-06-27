@@ -1,0 +1,72 @@
+[0.016s] Invoking command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/my_robot_hardware_interface -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/my_robot_hardware_interface
+[0.054s] -- The C compiler identification is GNU 9.4.0
+[0.092s] -- The CXX compiler identification is GNU 9.4.0
+[0.096s] -- Check for working C compiler: /usr/bin/cc
+[0.141s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.142s] -- Detecting C compiler ABI info
+[0.187s] -- Detecting C compiler ABI info - done
+[0.195s] -- Detecting C compile features
+[0.195s] -- Detecting C compile features - done
+[0.197s] -- Check for working CXX compiler: /usr/bin/c++
+[0.255s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.256s] -- Detecting CXX compiler ABI info
+[0.317s] -- Detecting CXX compiler ABI info - done
+[0.326s] -- Detecting CXX compile features
+[0.326s] -- Detecting CXX compile features - done
+[0.328s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.346s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.346s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.479s] -- Found hardware_interface: 0.11.0 (/opt/ros/foxy/share/hardware_interface/cmake)
+[0.500s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.504s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.554s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.575s] -- Found FastRTPS: /opt/ros/foxy/include  
+[0.628s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.992s] -- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)
+[1.022s] -- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[1.023s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.023s] -- Looking for pthread.h
+[1.072s] -- Looking for pthread.h - found
+[1.072s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.126s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[1.126s] -- Looking for pthread_create in pthreads
+[1.168s] -- Looking for pthread_create in pthreads - not found
+[1.168s] -- Looking for pthread_create in pthread
+[1.218s] -- Looking for pthread_create in pthread - found
+[1.219s] -- Found Threads: TRUE  
+[1.347s] -- Found rclcpp_lifecycle: 2.4.3 (/opt/ros/foxy/share/rclcpp_lifecycle/cmake)
+[1.368s] -- Found ament_lint_auto: 0.9.8 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[1.425s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.425s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.425s] -- Configured cppcheck include dirs: 
+[1.425s] -- Configured cppcheck exclude dirs and/or files: 
+[1.426s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.426s] -- Configured cpplint exclude dirs and/or files: 
+[1.426s] -- Added test 'lint_cmake' to check CMake code style
+[1.427s] -- Added test 'uncrustify' to check C / C++ code style
+[1.427s] -- Configured uncrustify additional arguments: 
+[1.427s] -- Added test 'xmllint' to check XML markup files
+[1.430s] -- Configuring done
+[1.431s] -- Generating done
+[1.432s] -- Build files have been written to: /home/leibton/ros2_ws/src/build/my_robot_hardware_interface
+[1.442s] Invoked command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/my_robot_hardware_interface -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/my_robot_hardware_interface
+[1.444s] Invoking command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/my_robot_hardware_interface -- -j12 -l12
+[1.480s] Invoked command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/my_robot_hardware_interface -- -j12 -l12
+[1.495s] Invoking command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/my_robot_hardware_interface
+[1.503s] -- Install configuration: ""
+[1.503s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/ament_index/resource_index/package_run_dependencies/my_robot_hardware_interface
+[1.503s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/ament_index/resource_index/parent_prefix_path/my_robot_hardware_interface
+[1.503s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/environment/ament_prefix_path.sh
+[1.503s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/environment/ament_prefix_path.dsv
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/environment/path.sh
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/environment/path.dsv
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/local_setup.bash
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/local_setup.sh
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/local_setup.zsh
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/local_setup.dsv
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.dsv
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/ament_index/resource_index/packages/my_robot_hardware_interface
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/cmake/my_robot_hardware_interfaceConfig.cmake
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/cmake/my_robot_hardware_interfaceConfig-version.cmake
+[1.504s] -- Installing: /home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.xml
+[1.508s] Invoked command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/my_robot_hardware_interface

@@ -1,0 +1,4 @@
+Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_custom_interfaces -- -j12 -l12
+Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_custom_interfaces -- -j12 -l12
+Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_custom_interfaces
+Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_custom_interfaces

@@ -1,0 +1,149 @@
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Found rclpy: 1.0.13 (/opt/ros/foxy/share/rclpy/cmake)
+-- Found gazebo_ros: 3.5.3 (/opt/ros/foxy/share/gazebo_ros/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+-- Found FastRTPS: /opt/ros/foxy/include  
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.1") 
+-- Checking for module 'bullet>=2.82'
+--   Found bullet, version 2.88
+-- Found ccd: /usr/include (found suitable version "2.0", minimum required is "2.0") 
+-- Found fcl: /usr/include (found suitable version "0.5.0", minimum required is "0.3.2") 
+-- Found assimp: /usr/include (found version "5.0.0") 
+-- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found suitable version "1.71.0", minimum required is "1.40.0") found components: thread system filesystem program_options regex iostreams date_time 
+-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so;-lpthread (found version "3.6.1") 
+-- Looking for ignition-math6 -- found version 6.13.0
+-- Searching for dependencies of ignition-math6
+-- Looking for OGRE...
+-- OGRE_PREFIX_WATCH changed.
+-- Checking for module 'OGRE'
+--   Found OGRE, version 1.9.0
+-- Found Ogre Ghadamon (1.9.0)
+-- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+-- Looking for OGRE_Paging...
+-- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+-- Looking for OGRE_Terrain...
+-- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+-- Looking for OGRE_Property...
+-- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+-- Looking for OGRE_RTShaderSystem...
+-- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+-- Looking for OGRE_Volume...
+-- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+-- Looking for OGRE_Overlay...
+-- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+-- Looking for ignition-math6 -- found version 6.13.0
+-- Looking for ignition-transport8 -- found version 8.3.0
+-- Searching for dependencies of ignition-transport8
+-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so;-lpthread (found suitable version "3.6.1", minimum required is "3") 
+-- Config-file not installed for ZeroMQ -- checking for pkg-config
+-- Checking for module 'libzmq >= 4'
+--   Found libzmq , version 4.3.2
+-- Found ZeroMQ: TRUE (Required is at least version "4") 
+-- Checking for module 'uuid'
+--   Found uuid, version 2.34.0
+-- Found UUID: TRUE  
+-- Looking for ignition-msgs5 -- found version 5.10.0
+-- Searching for dependencies of ignition-msgs5
+-- Looking for ignition-math6 -- found version 6.13.0
+-- Checking for module 'tinyxml2'
+--   Found tinyxml2, version 6.2.0
+-- Looking for ignition-msgs5 -- found version 5.10.0
+-- Looking for ignition-common3 -- found version 3.14.2
+-- Searching for dependencies of ignition-common3
+-- Looking for dlfcn.h - found
+-- Looking for libdl - found
+-- Found DL: TRUE  
+-- Searching for <ignition-common3> component [graphics]
+-- Looking for ignition-common3-graphics -- found version 3.14.2
+-- Searching for dependencies of ignition-common3-graphics
+-- Looking for ignition-math6 -- found version 6.13.0
+-- Looking for ignition-fuel_tools4 -- found version 4.6.0
+-- Searching for dependencies of ignition-fuel_tools4
+-- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "7.68.0")  
+-- Checking for module 'jsoncpp'
+--   Found jsoncpp, version 1.7.4
+-- Found JSONCPP: TRUE  
+-- Checking for module 'libzip'
+--   Found libzip, version 1.5.1
+-- Found ZIP: TRUE  
+-- Looking for ignition-common3 -- found version 3.14.2
+-- Looking for ignition-math6 -- found version 6.13.0
+-- Looking for ignition-msgs5 -- found version 5.10.0
+-- Gazebo version: 11.11
+-- Found controller_manager: 0.11.0 (/opt/ros/foxy/share/controller_manager/cmake)
+-- Found moonbot_description: 0.0.0 (/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/cmake)
+-- Found moonbot_control: 0.0.0 (/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/cmake)
+-- Found gazebo_ros2_control: 0.1.1 (/opt/ros/foxy/share/gazebo_ros2_control/cmake)
+-- Found rosidl_default_generators: 1.0.1 (/opt/ros/foxy/share/rosidl_default_generators/cmake)
+-- Found ament_lint_auto: 0.9.8 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+-- Added test 'copyright' to check source files copyright and LICENSE
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the style conventions in PEP 257
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/leibton/ros2_ws/src/build/moonbot_gazebo
+-- Install configuration: ""
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//launch
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//launch/start_world.launch.py
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//launch/phantom_launch.launch.py
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//launch/spawn_robot_description.launch.py
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//launch/spawn_robot_ros2.launch.xml
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//worlds
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//worlds/box_bot_empty.world
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//models
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//models/box_room
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//models/box_room/meshes
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//models/box_room/meshes/chambre.png
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//models/box_room/meshes/box_room.dae
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//models/box_room/model.config
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo//models/box_room/model.sdf
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/lib/moonbot_gazebo/walk_demo.py
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/lib/moonbot_gazebo/walker.py
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/ament_index/resource_index/package_run_dependencies/moonbot_gazebo
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/ament_index/resource_index/parent_prefix_path/moonbot_gazebo
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/environment/ament_prefix_path.sh
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/environment/ament_prefix_path.dsv
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/environment/path.sh
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/environment/path.dsv
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/local_setup.bash
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/local_setup.sh
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/local_setup.zsh
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/local_setup.dsv
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.dsv
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/ament_index/resource_index/packages/moonbot_gazebo
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/cmake/moonbot_gazeboConfig.cmake
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/cmake/moonbot_gazeboConfig-version.cmake
+-- Installing: /home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.xml

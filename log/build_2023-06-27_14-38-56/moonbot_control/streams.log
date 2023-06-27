@@ -1,0 +1,149 @@
+[0.008s] Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_control': AMENT_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_control -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_control
+[0.047s] -- The C compiler identification is GNU 9.4.0
+[0.087s] -- The CXX compiler identification is GNU 9.4.0
+[0.091s] -- Check for working C compiler: /usr/bin/cc
+[0.139s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.140s] -- Detecting C compiler ABI info
+[0.185s] -- Detecting C compiler ABI info - done
+[0.200s] -- Detecting C compile features
+[0.200s] -- Detecting C compile features - done
+[0.203s] -- Check for working CXX compiler: /usr/bin/c++
+[0.269s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.269s] -- Detecting CXX compiler ABI info
+[0.339s] -- Detecting CXX compiler ABI info - done
+[0.346s] -- Detecting CXX compile features
+[0.347s] -- Detecting CXX compile features - done
+[0.348s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.368s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.368s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.509s] -- Found urdf: 2.4.0 (/opt/ros/foxy/share/urdf/cmake)
+[0.529s] -- Found xacro: 2.0.7 (/opt/ros/foxy/share/xacro/cmake)
+[0.530s] -- Found robot_state_publisher: 2.4.5 (/opt/ros/foxy/share/robot_state_publisher/cmake)
+[0.545s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.549s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.600s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.622s] -- Found FastRTPS: /opt/ros/foxy/include  
+[0.676s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.697s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/foxy/share/eigen3_cmake_module/cmake)
+[0.699s] -- Found Eigen3: TRUE (found version "3.3.7") 
+[0.732s] -- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[0.733s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.734s] -- Looking for pthread.h
+[0.783s] -- Looking for pthread.h - found
+[0.783s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.834s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[0.834s] -- Looking for pthread_create in pthreads
+[0.877s] -- Looking for pthread_create in pthreads - not found
+[0.877s] -- Looking for pthread_create in pthread
+[0.933s] -- Looking for pthread_create in pthread - found
+[0.934s] -- Found Threads: TRUE  
+[1.406s] -- Found moonbot_description: 0.0.0 (/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/cmake)
+[1.407s] -- Found gazebo_ros: 3.5.3 (/opt/ros/foxy/share/gazebo_ros/cmake)
+[1.416s] -- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.1") 
+[1.417s] -- Checking for module 'bullet>=2.82'
+[1.426s] --   Found bullet, version 2.88
+[1.500s] -- Found ccd: /usr/include (found suitable version "2.0", minimum required is "2.0") 
+[1.535s] -- Found fcl: /usr/include (found suitable version "0.5.0", minimum required is "0.3.2") 
+[1.570s] -- Found assimp: /usr/include (found version "5.0.0") 
+[1.590s] -- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+[1.611s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found suitable version "1.71.0", minimum required is "1.40.0") found components: thread system filesystem program_options regex iostreams date_time 
+[1.629s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so;-lpthread (found version "3.6.1") 
+[1.634s] -- Looking for ignition-math6 -- found version 6.13.0
+[1.642s] -- Searching for dependencies of ignition-math6
+[1.644s] -- Looking for OGRE...
+[1.644s] -- OGRE_PREFIX_WATCH changed.
+[1.647s] -- Checking for module 'OGRE'
+[1.656s] --   Found OGRE, version 1.9.0
+[1.686s] -- Found Ogre Ghadamon (1.9.0)
+[1.693s] -- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+[1.701s] -- Looking for OGRE_Paging...
+[1.705s] -- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+[1.705s] -- Looking for OGRE_Terrain...
+[1.709s] -- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+[1.709s] -- Looking for OGRE_Property...
+[1.713s] -- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+[1.713s] -- Looking for OGRE_RTShaderSystem...
+[1.717s] -- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+[1.718s] -- Looking for OGRE_Volume...
+[1.722s] -- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+[1.722s] -- Looking for OGRE_Overlay...
+[1.726s] -- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+[1.811s] -- Looking for ignition-math6 -- found version 6.13.0
+[1.812s] -- Looking for ignition-transport8 -- found version 8.3.0
+[1.812s] -- Searching for dependencies of ignition-transport8
+[1.826s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so;-lpthread (found suitable version "3.6.1", minimum required is "3") 
+[1.834s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[1.838s] -- Checking for module 'libzmq >= 4'
+[1.850s] --   Found libzmq , version 4.3.2
+[1.876s] -- Found ZeroMQ: TRUE (Required is at least version "4") 
+[1.881s] -- Checking for module 'uuid'
+[1.894s] --   Found uuid, version 2.34.0
+[1.928s] -- Found UUID: TRUE  
+[1.930s] -- Looking for ignition-msgs5 -- found version 5.10.0
+[1.930s] -- Searching for dependencies of ignition-msgs5
+[1.944s] -- Looking for ignition-math6 -- found version 6.13.0
+[1.949s] -- Checking for module 'tinyxml2'
+[1.957s] --   Found tinyxml2, version 6.2.0
+[1.983s] -- Looking for ignition-msgs5 -- found version 5.10.0
+[1.985s] -- Looking for ignition-common3 -- found version 3.14.2
+[1.986s] -- Searching for dependencies of ignition-common3
+[1.986s] -- Looking for dlfcn.h - found
+[1.987s] -- Looking for libdl - found
+[1.988s] -- Found DL: TRUE  
+[1.997s] -- Searching for <ignition-common3> component [graphics]
+[1.999s] -- Looking for ignition-common3-graphics -- found version 3.14.2
+[1.999s] -- Searching for dependencies of ignition-common3-graphics
+[1.999s] -- Looking for ignition-math6 -- found version 6.13.0
+[2.001s] -- Looking for ignition-fuel_tools4 -- found version 4.6.0
+[2.001s] -- Searching for dependencies of ignition-fuel_tools4
+[2.057s] -- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "7.68.0")  
+[2.063s] -- Checking for module 'jsoncpp'
+[2.072s] --   Found jsoncpp, version 1.7.4
+[2.099s] -- Found JSONCPP: TRUE  
+[2.102s] -- Checking for module 'libzip'
+[2.112s] --   Found libzip, version 1.5.1
+[2.135s] -- Found ZIP: TRUE  
+[2.135s] -- Looking for ignition-common3 -- found version 3.14.2
+[2.135s] -- Looking for ignition-math6 -- found version 6.13.0
+[2.135s] -- Looking for ignition-msgs5 -- found version 5.10.0
+[2.137s] -- Gazebo version: 11.11
+[2.142s] -- Found controller_manager: 0.11.0 (/opt/ros/foxy/share/controller_manager/cmake)
+[2.507s] -- Found ament_lint_auto: 0.9.8 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[2.566s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.567s] -- Added test 'flake8' to check Python code syntax and style conventions
+[2.567s] -- Added test 'lint_cmake' to check CMake code style
+[2.567s] -- Added test 'pep257' to check Python code against some of the style conventions in PEP 257
+[2.568s] -- Added test 'xmllint' to check XML markup files
+[2.570s] -- Configuring done
+[2.573s] -- Generating done
+[2.574s] -- Build files have been written to: /home/leibton/ros2_ws/src/build/moonbot_control
+[2.583s] Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_control' returned '0': AMENT_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_control -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_control
+[2.585s] Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_control': AMENT_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_control -- -j12 -l12
+[2.621s] Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_control' returned '0': AMENT_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_control -- -j12 -l12
+[2.638s] Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_control': AMENT_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_control
+[2.644s] -- Install configuration: ""
+[2.644s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//launch
+[2.644s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//launch/phantomx_control.launch
+[2.644s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//launch/test_control.launch.py
+[2.644s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//launch/bringup_moonbot.py
+[2.644s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config
+[2.644s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config/phantom_config.yaml
+[2.644s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config/phantomx_control.yaml
+[2.644s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config/moonbot_config.yaml
+[2.645s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control//config/controller_configuration.yaml
+[2.645s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/ament_index/resource_index/package_run_dependencies/moonbot_control
+[2.645s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/ament_index/resource_index/parent_prefix_path/moonbot_control
+[2.645s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/environment/ament_prefix_path.sh
+[2.645s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/environment/ament_prefix_path.dsv
+[2.645s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/environment/path.sh
+[2.645s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/environment/path.dsv
+[2.645s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/local_setup.bash
+[2.645s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/local_setup.sh
+[2.646s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/local_setup.zsh
+[2.646s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/local_setup.dsv
+[2.646s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.dsv
+[2.646s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/ament_index/resource_index/packages/moonbot_control
+[2.646s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/cmake/moonbot_controlConfig.cmake
+[2.646s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/cmake/moonbot_controlConfig-version.cmake
+[2.646s] -- Installing: /home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.xml
+[2.649s] Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_control' returned '0': AMENT_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_control

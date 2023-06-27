@@ -23,7 +23,7 @@ def inverse_kinematics(position, leg_num):
         position: an array containing the x,y,z position (in m) of the limb tip in frame of reference of Base
         leg_num: leg number between 1 to 4
     Returns:
-        an array containing the joint angle value (in rad) at each joint.
+        an array containing the joint angle value (in deg) at each joint.
     '''
 
     xb, yb, zb = position
@@ -55,18 +55,22 @@ def inverse_kinematics(position, leg_num):
     th2 = math.pi/2 - np.arctan2((LL-L1), z)- np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
     th3 = np.arccos((D**2 - L2**2 - L3**2)/(2*L2*L3))
 
-    return [th1, th2, th3]
+    return [math.degrees(th1), math.degrees(th2), math.degrees(th3)]
 
 def forward_kinematics(joint_angles, leg_num):
     ''' Returns the Forward Kinematics of the Limb
 
     Args:
-        joint_angles: an array containing the joint angle value (in rad) at each joint
+        joint_angles: an array containing the joint angle value (in deg) at each joint
         leg_num: leg number between 1 to 4
     Returns:
         an array containing the x,y,z position (in m) of the limp tip in frame of reference of Base
     '''
     Th1, Th2, Th3 = joint_angles
+
+    Th1 = math.radians(Th1)
+    Th2 = math.radians(Th2)
+    Th3 = math.radians(Th3)
 
     ### Forward Kinematics
 

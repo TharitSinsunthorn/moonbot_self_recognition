@@ -1,0 +1,554 @@
+[0.214s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.214s] DEBUG:colcon:Parsed command line arguments: Namespace(allow_overriding=[], ament_cmake_args=None, base_paths=['.'], build_base='build', catkin_cmake_args=None, catkin_skip_building_tests=False, cmake_args=None, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, cmake_target=None, cmake_target_skip_unavailable=False, continue_on_error=False, event_handlers=None, executor='parallel', ignore_user_meta=False, install_base='install', log_base=None, log_level=None, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f4d82c4cd90>>, merge_install=False, metas=['./colcon.meta'], packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=None, packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, parallel_workers=12, paths=None, symlink_install=False, test_result_base=None, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f4d82c4cd90>, verb_name='build', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f4d82bd6340>)
+[0.232s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.232s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.232s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.232s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.232s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.232s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.232s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/leibton/ros2_ws/src'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.232s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extensions ['ignore', 'ignore_ament_install']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extension 'ignore'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extension 'ignore_ament_install'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extensions ['colcon_pkg']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extension 'colcon_pkg'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extensions ['colcon_meta']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extension 'colcon_meta'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extensions ['ros']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extension 'ros'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extensions ['cmake', 'python']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extension 'cmake'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extension 'python'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extensions ['python_setup_py']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(DynamixelSDK) by extension 'python_setup_py'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extensions ['ignore', 'ignore_ament_install']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extension 'ignore'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extension 'ignore_ament_install'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extensions ['colcon_pkg']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extension 'colcon_pkg'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extensions ['colcon_meta']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extension 'colcon_meta'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extensions ['ros']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extension 'ros'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extensions ['cmake', 'python']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extension 'cmake'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extension 'python'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extensions ['python_setup_py']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel-workbench) by extension 'python_setup_py'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_custom_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_custom_interfaces) by extension 'ignore'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_custom_interfaces) by extension 'ignore_ament_install'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_custom_interfaces) by extensions ['colcon_pkg']
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_custom_interfaces) by extension 'colcon_pkg'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_custom_interfaces) by extensions ['colcon_meta']
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_custom_interfaces) by extension 'colcon_meta'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_custom_interfaces) by extensions ['ros']
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_custom_interfaces) by extension 'ros'
+[0.250s] DEBUG:colcon.colcon_core.package_identification:Package 'dynamixel_custom_interfaces' with type 'ros.ament_cmake' and name 'dynamixel_custom_interfaces'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extensions ['ignore', 'ignore_ament_install']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extension 'ignore'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extension 'ignore_ament_install'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extensions ['colcon_pkg']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extension 'colcon_pkg'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extensions ['colcon_meta']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extension 'colcon_meta'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extensions ['ros']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(dynamixel_hardware_interface) by extension 'ros'
+[0.251s] DEBUG:colcon.colcon_core.package_identification:Package 'dynamixel_hardware_interface' with type 'ros.ament_cmake' and name 'dynamixel_hardware_interface'
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_control) by extensions ['ignore', 'ignore_ament_install']
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_control) by extension 'ignore'
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_control) by extension 'ignore_ament_install'
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_control) by extensions ['colcon_pkg']
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_control) by extension 'colcon_pkg'
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_control) by extensions ['colcon_meta']
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_control) by extension 'colcon_meta'
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_control) by extensions ['ros']
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_control) by extension 'ros'
+[0.253s] DEBUG:colcon.colcon_core.package_identification:Package 'moonbot_control' with type 'ros.ament_cmake' and name 'moonbot_control'
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_description) by extensions ['ignore', 'ignore_ament_install']
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_description) by extension 'ignore'
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_description) by extension 'ignore_ament_install'
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_description) by extensions ['colcon_pkg']
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_description) by extension 'colcon_pkg'
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_description) by extensions ['colcon_meta']
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_description) by extension 'colcon_meta'
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_description) by extensions ['ros']
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_description) by extension 'ros'
+[0.254s] DEBUG:colcon.colcon_core.package_identification:Package 'moonbot_description' with type 'ros.ament_cmake' and name 'moonbot_description'
+[0.254s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_gazebo) by extensions ['ignore', 'ignore_ament_install']
+[0.254s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_gazebo) by extension 'ignore'
+[0.254s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_gazebo) by extension 'ignore_ament_install'
+[0.254s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_gazebo) by extensions ['colcon_pkg']
+[0.254s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_gazebo) by extension 'colcon_pkg'
+[0.254s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_gazebo) by extensions ['colcon_meta']
+[0.254s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_gazebo) by extension 'colcon_meta'
+[0.254s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_gazebo) by extensions ['ros']
+[0.254s] Level 1:colcon.colcon_core.package_identification:_identify(moonbot_gazebo) by extension 'ros'
+[0.255s] DEBUG:colcon.colcon_core.package_identification:Package 'moonbot_gazebo' with type 'ros.ament_cmake' and name 'moonbot_gazebo'
+[0.255s] Level 1:colcon.colcon_core.package_identification:_identify(my_robot_hardware_interface) by extensions ['ignore', 'ignore_ament_install']
+[0.255s] Level 1:colcon.colcon_core.package_identification:_identify(my_robot_hardware_interface) by extension 'ignore'
+[0.255s] Level 1:colcon.colcon_core.package_identification:_identify(my_robot_hardware_interface) by extension 'ignore_ament_install'
+[0.255s] Level 1:colcon.colcon_core.package_identification:_identify(my_robot_hardware_interface) by extensions ['colcon_pkg']
+[0.255s] Level 1:colcon.colcon_core.package_identification:_identify(my_robot_hardware_interface) by extension 'colcon_pkg'
+[0.255s] Level 1:colcon.colcon_core.package_identification:_identify(my_robot_hardware_interface) by extensions ['colcon_meta']
+[0.255s] Level 1:colcon.colcon_core.package_identification:_identify(my_robot_hardware_interface) by extension 'colcon_meta'
+[0.255s] Level 1:colcon.colcon_core.package_identification:_identify(my_robot_hardware_interface) by extensions ['ros']
+[0.255s] Level 1:colcon.colcon_core.package_identification:_identify(my_robot_hardware_interface) by extension 'ros'
+[0.256s] DEBUG:colcon.colcon_core.package_identification:Package 'my_robot_hardware_interface' with type 'ros.ament_cmake' and name 'my_robot_hardware_interface'
+[0.256s] Level 1:colcon.colcon_core.package_identification:_identify(trial) by extensions ['ignore', 'ignore_ament_install']
+[0.256s] Level 1:colcon.colcon_core.package_identification:_identify(trial) by extension 'ignore'
+[0.256s] Level 1:colcon.colcon_core.package_identification:_identify(trial) by extension 'ignore_ament_install'
+[0.256s] Level 1:colcon.colcon_core.package_identification:_identify(trial) by extensions ['colcon_pkg']
+[0.256s] Level 1:colcon.colcon_core.package_identification:_identify(trial) by extension 'colcon_pkg'
+[0.256s] Level 1:colcon.colcon_core.package_identification:_identify(trial) by extensions ['colcon_meta']
+[0.256s] Level 1:colcon.colcon_core.package_identification:_identify(trial) by extension 'colcon_meta'
+[0.256s] Level 1:colcon.colcon_core.package_identification:_identify(trial) by extensions ['ros']
+[0.256s] Level 1:colcon.colcon_core.package_identification:_identify(trial) by extension 'ros'
+[0.257s] DEBUG:colcon.colcon_core.package_identification:Package 'trial' with type 'ros.ament_python' and name 'trial'
+[0.257s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.257s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.257s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.257s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.257s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.287s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.287s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.288s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/leibton/ros2_ws/src/install/trial' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.288s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.288s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/leibton/ros2_ws/src/install/moonbot_control' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.288s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/leibton/ros2_ws/src/install/moonbot_description' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.288s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.288s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.288s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/leibton/ros2_ws/src/install/moonbot_control' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.288s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/leibton/ros2_ws/src/install/moonbot_description' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.288s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.289s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 0 installed packages in /home/leibton/ros2_ws/src/install
+[0.290s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 273 installed packages in /opt/ros/foxy
+[0.291s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.339s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_custom_interfaces' build argument 'cmake_args' from command line to 'None'
+[0.339s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_custom_interfaces' build argument 'cmake_target' from command line to 'None'
+[0.339s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_custom_interfaces' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.339s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_custom_interfaces' build argument 'cmake_clean_cache' from command line to 'False'
+[0.339s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_custom_interfaces' build argument 'cmake_clean_first' from command line to 'False'
+[0.339s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_custom_interfaces' build argument 'cmake_force_configure' from command line to 'False'
+[0.339s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_custom_interfaces' build argument 'ament_cmake_args' from command line to 'None'
+[0.339s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_custom_interfaces' build argument 'catkin_cmake_args' from command line to 'None'
+[0.339s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_custom_interfaces' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.339s] DEBUG:colcon.colcon_core.verb:Building package 'dynamixel_custom_interfaces' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces', 'merge_install': False, 'path': '/home/leibton/ros2_ws/src/dynamixel_custom_interfaces', 'symlink_install': False, 'test_result_base': None}
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_hardware_interface' build argument 'cmake_args' from command line to 'None'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_hardware_interface' build argument 'cmake_target' from command line to 'None'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_hardware_interface' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_hardware_interface' build argument 'cmake_clean_cache' from command line to 'False'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_hardware_interface' build argument 'cmake_clean_first' from command line to 'False'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_hardware_interface' build argument 'cmake_force_configure' from command line to 'False'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_hardware_interface' build argument 'ament_cmake_args' from command line to 'None'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_hardware_interface' build argument 'catkin_cmake_args' from command line to 'None'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'dynamixel_hardware_interface' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.340s] DEBUG:colcon.colcon_core.verb:Building package 'dynamixel_hardware_interface' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/leibton/ros2_ws/src/build/dynamixel_hardware_interface', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface', 'merge_install': False, 'path': '/home/leibton/ros2_ws/src/dynamixel_hardware_interface', 'symlink_install': False, 'test_result_base': None}
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'moonbot_description' build argument 'cmake_args' from command line to 'None'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'moonbot_description' build argument 'cmake_target' from command line to 'None'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'moonbot_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'moonbot_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'moonbot_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'moonbot_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'moonbot_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'moonbot_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.340s] Level 5:colcon.colcon_core.verb:set package 'moonbot_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.341s] DEBUG:colcon.colcon_core.verb:Building package 'moonbot_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/leibton/ros2_ws/src/build/moonbot_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/leibton/ros2_ws/src/install/moonbot_description', 'merge_install': False, 'path': '/home/leibton/ros2_ws/src/moonbot_description', 'symlink_install': False, 'test_result_base': None}
+[0.341s] Level 5:colcon.colcon_core.verb:set package 'my_robot_hardware_interface' build argument 'cmake_args' from command line to 'None'
+[0.341s] Level 5:colcon.colcon_core.verb:set package 'my_robot_hardware_interface' build argument 'cmake_target' from command line to 'None'
+[0.341s] Level 5:colcon.colcon_core.verb:set package 'my_robot_hardware_interface' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.341s] Level 5:colcon.colcon_core.verb:set package 'my_robot_hardware_interface' build argument 'cmake_clean_cache' from command line to 'False'
+[0.341s] Level 5:colcon.colcon_core.verb:set package 'my_robot_hardware_interface' build argument 'cmake_clean_first' from command line to 'False'
+[0.341s] Level 5:colcon.colcon_core.verb:set package 'my_robot_hardware_interface' build argument 'cmake_force_configure' from command line to 'False'
+[0.341s] Level 5:colcon.colcon_core.verb:set package 'my_robot_hardware_interface' build argument 'ament_cmake_args' from command line to 'None'
+[0.341s] Level 5:colcon.colcon_core.verb:set package 'my_robot_hardware_interface' build argument 'catkin_cmake_args' from command line to 'None'
+[0.341s] Level 5:colcon.colcon_core.verb:set package 'my_robot_hardware_interface' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.341s] DEBUG:colcon.colcon_core.verb:Building package 'my_robot_hardware_interface' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface', 'merge_install': False, 'path': '/home/leibton/ros2_ws/src/my_robot_hardware_interface', 'symlink_install': False, 'test_result_base': None}
+[0.342s] Level 5:colcon.colcon_core.verb:set package 'moonbot_control' build argument 'cmake_args' from command line to 'None'
+[0.342s] Level 5:colcon.colcon_core.verb:set package 'moonbot_control' build argument 'cmake_target' from command line to 'None'
+[0.342s] Level 5:colcon.colcon_core.verb:set package 'moonbot_control' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.342s] Level 5:colcon.colcon_core.verb:set package 'moonbot_control' build argument 'cmake_clean_cache' from command line to 'False'
+[0.342s] Level 5:colcon.colcon_core.verb:set package 'moonbot_control' build argument 'cmake_clean_first' from command line to 'False'
+[0.342s] Level 5:colcon.colcon_core.verb:set package 'moonbot_control' build argument 'cmake_force_configure' from command line to 'False'
+[0.342s] Level 5:colcon.colcon_core.verb:set package 'moonbot_control' build argument 'ament_cmake_args' from command line to 'None'
+[0.342s] Level 5:colcon.colcon_core.verb:set package 'moonbot_control' build argument 'catkin_cmake_args' from command line to 'None'
+[0.342s] Level 5:colcon.colcon_core.verb:set package 'moonbot_control' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.342s] DEBUG:colcon.colcon_core.verb:Building package 'moonbot_control' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/leibton/ros2_ws/src/build/moonbot_control', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/leibton/ros2_ws/src/install/moonbot_control', 'merge_install': False, 'path': '/home/leibton/ros2_ws/src/moonbot_control', 'symlink_install': False, 'test_result_base': None}
+[0.343s] Level 5:colcon.colcon_core.verb:set package 'trial' build argument 'cmake_args' from command line to 'None'
+[0.343s] Level 5:colcon.colcon_core.verb:set package 'trial' build argument 'cmake_target' from command line to 'None'
+[0.343s] Level 5:colcon.colcon_core.verb:set package 'trial' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.343s] Level 5:colcon.colcon_core.verb:set package 'trial' build argument 'cmake_clean_cache' from command line to 'False'
+[0.343s] Level 5:colcon.colcon_core.verb:set package 'trial' build argument 'cmake_clean_first' from command line to 'False'
+[0.343s] Level 5:colcon.colcon_core.verb:set package 'trial' build argument 'cmake_force_configure' from command line to 'False'
+[0.343s] Level 5:colcon.colcon_core.verb:set package 'trial' build argument 'ament_cmake_args' from command line to 'None'
+[0.343s] Level 5:colcon.colcon_core.verb:set package 'trial' build argument 'catkin_cmake_args' from command line to 'None'
+[0.343s] Level 5:colcon.colcon_core.verb:set package 'trial' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.343s] DEBUG:colcon.colcon_core.verb:Building package 'trial' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/leibton/ros2_ws/src/build/trial', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/leibton/ros2_ws/src/install/trial', 'merge_install': False, 'path': '/home/leibton/ros2_ws/src/trial', 'symlink_install': False, 'test_result_base': None}
+[0.344s] Level 5:colcon.colcon_core.verb:set package 'moonbot_gazebo' build argument 'cmake_args' from command line to 'None'
+[0.344s] Level 5:colcon.colcon_core.verb:set package 'moonbot_gazebo' build argument 'cmake_target' from command line to 'None'
+[0.345s] Level 5:colcon.colcon_core.verb:set package 'moonbot_gazebo' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.345s] Level 5:colcon.colcon_core.verb:set package 'moonbot_gazebo' build argument 'cmake_clean_cache' from command line to 'False'
+[0.345s] Level 5:colcon.colcon_core.verb:set package 'moonbot_gazebo' build argument 'cmake_clean_first' from command line to 'False'
+[0.345s] Level 5:colcon.colcon_core.verb:set package 'moonbot_gazebo' build argument 'cmake_force_configure' from command line to 'False'
+[0.345s] Level 5:colcon.colcon_core.verb:set package 'moonbot_gazebo' build argument 'ament_cmake_args' from command line to 'None'
+[0.345s] Level 5:colcon.colcon_core.verb:set package 'moonbot_gazebo' build argument 'catkin_cmake_args' from command line to 'None'
+[0.345s] Level 5:colcon.colcon_core.verb:set package 'moonbot_gazebo' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.345s] DEBUG:colcon.colcon_core.verb:Building package 'moonbot_gazebo' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/leibton/ros2_ws/src/build/moonbot_gazebo', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/leibton/ros2_ws/src/install/moonbot_gazebo', 'merge_install': False, 'path': '/home/leibton/ros2_ws/src/moonbot_gazebo', 'symlink_install': False, 'test_result_base': None}
+[0.347s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.350s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.350s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/leibton/ros2_ws/src/moonbot_description' with build type 'ament_cmake'
+[0.350s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/leibton/ros2_ws/src/moonbot_description'
+[0.353s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.353s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.353s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.357s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/leibton/ros2_ws/src/dynamixel_custom_interfaces' with build type 'ament_cmake'
+[0.357s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/leibton/ros2_ws/src/dynamixel_custom_interfaces'
+[0.358s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.358s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.362s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/leibton/ros2_ws/src/dynamixel_hardware_interface' with build type 'ament_cmake'
+[0.362s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/leibton/ros2_ws/src/dynamixel_hardware_interface'
+[0.363s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.363s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.367s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/leibton/ros2_ws/src/my_robot_hardware_interface' with build type 'ament_cmake'
+[0.367s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/leibton/ros2_ws/src/my_robot_hardware_interface'
+[0.368s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.369s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.376s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_description -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_description
+[0.380s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/dynamixel_custom_interfaces -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces
+[0.383s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/dynamixel_hardware_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/dynamixel_hardware_interface -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface
+[0.387s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/my_robot_hardware_interface -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/my_robot_hardware_interface
+[1.735s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/dynamixel_custom_interfaces -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces
+[1.738s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces -- -j12 -l12
+[1.852s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/dynamixel_hardware_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/dynamixel_hardware_interface -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface
+[1.854s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/dynamixel_hardware_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/dynamixel_hardware_interface -- -j12 -l12
+[1.875s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_description -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_description
+[1.877s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_description -- -j12 -l12
+[1.885s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/my_robot_hardware_interface -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/my_robot_hardware_interface
+[1.887s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/my_robot_hardware_interface -- -j12 -l12
+[1.889s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/dynamixel_hardware_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/dynamixel_hardware_interface -- -j12 -l12
+[1.910s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/dynamixel_hardware_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/dynamixel_hardware_interface
+[1.912s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_description -- -j12 -l12
+[1.915s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/my_robot_hardware_interface -- -j12 -l12
+[1.918s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(dynamixel_hardware_interface)
+[1.919s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/dynamixel_hardware_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/dynamixel_hardware_interface
+[1.924s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface' for CMake module files
+[1.925s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface' for CMake config files
+[1.925s] Level 1:colcon.colcon_core.shell:create_environment_hook('dynamixel_hardware_interface', 'cmake_prefix_path')
+[1.927s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/hook/cmake_prefix_path.ps1'
+[1.927s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/hook/cmake_prefix_path.dsv'
+[1.928s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/hook/cmake_prefix_path.sh'
+[1.928s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/bin'
+[1.929s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/lib/pkgconfig/dynamixel_hardware_interface.pc'
+[1.929s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/lib/python3.8/site-packages'
+[1.929s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/bin'
+[1.930s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.ps1'
+[1.931s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.dsv'
+[1.932s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.sh'
+[1.932s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.bash'
+[1.933s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.zsh'
+[1.934s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/colcon-core/packages/dynamixel_hardware_interface)
+[1.939s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_description
+[1.942s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/my_robot_hardware_interface
+[1.949s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(my_robot_hardware_interface)
+[1.952s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface' for CMake module files
+[1.953s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/my_robot_hardware_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/my_robot_hardware_interface
+[1.954s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface' for CMake config files
+[1.954s] Level 1:colcon.colcon_core.shell:create_environment_hook('my_robot_hardware_interface', 'cmake_prefix_path')
+[1.956s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/hook/cmake_prefix_path.ps1'
+[1.956s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/hook/cmake_prefix_path.dsv'
+[1.957s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/hook/cmake_prefix_path.sh'
+[1.957s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/bin'
+[1.957s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/lib/pkgconfig/my_robot_hardware_interface.pc'
+[1.958s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/lib/python3.8/site-packages'
+[1.958s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/bin'
+[1.960s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.ps1'
+[1.960s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.dsv'
+[1.961s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.sh'
+[1.961s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.bash'
+[1.961s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.zsh'
+[1.962s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/colcon-core/packages/my_robot_hardware_interface)
+[1.967s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(dynamixel_hardware_interface)
+[1.969s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface' for CMake module files
+[1.969s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface' for CMake config files
+[1.970s] Level 1:colcon.colcon_core.shell:create_environment_hook('dynamixel_hardware_interface', 'cmake_prefix_path')
+[1.971s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/hook/cmake_prefix_path.ps1'
+[1.972s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/hook/cmake_prefix_path.dsv'
+[1.972s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/hook/cmake_prefix_path.sh'
+[1.973s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/bin'
+[1.973s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/lib/pkgconfig/dynamixel_hardware_interface.pc'
+[1.973s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/lib/python3.8/site-packages'
+[1.974s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/bin'
+[1.975s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.ps1'
+[1.976s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.dsv'
+[1.976s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.sh'
+[1.977s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.bash'
+[1.978s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/dynamixel_hardware_interface/package.zsh'
+[1.979s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface/share/colcon-core/packages/dynamixel_hardware_interface)
+[1.981s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(moonbot_description)
+[1.983s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description' for CMake module files
+[1.984s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_description
+[1.985s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description' for CMake config files
+[1.985s] Level 1:colcon.colcon_core.shell:create_environment_hook('moonbot_description', 'cmake_prefix_path')
+[1.987s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/hook/cmake_prefix_path.ps1'
+[1.987s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/hook/cmake_prefix_path.dsv'
+[1.988s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/hook/cmake_prefix_path.sh'
+[1.988s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description/bin'
+[1.988s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description/lib/pkgconfig/moonbot_description.pc'
+[1.988s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description/lib/python3.8/site-packages'
+[1.988s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description/bin'
+[1.989s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.ps1'
+[1.990s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.dsv'
+[1.990s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.sh'
+[1.990s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.bash'
+[1.990s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.zsh'
+[1.990s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/moonbot_description/share/colcon-core/packages/moonbot_description)
+[1.994s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(my_robot_hardware_interface)
+[1.995s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface' for CMake module files
+[1.996s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface' for CMake config files
+[1.996s] Level 1:colcon.colcon_core.shell:create_environment_hook('my_robot_hardware_interface', 'cmake_prefix_path')
+[1.997s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/hook/cmake_prefix_path.ps1'
+[1.998s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/hook/cmake_prefix_path.dsv'
+[1.998s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/hook/cmake_prefix_path.sh'
+[1.999s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/bin'
+[1.999s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/lib/pkgconfig/my_robot_hardware_interface.pc'
+[1.999s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/lib/python3.8/site-packages'
+[1.999s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/bin'
+[2.001s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.ps1'
+[2.002s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.dsv'
+[2.002s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.sh'
+[2.003s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.bash'
+[2.003s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/my_robot_hardware_interface/package.zsh'
+[2.003s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/my_robot_hardware_interface/share/colcon-core/packages/my_robot_hardware_interface)
+[2.008s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(moonbot_description)
+[2.011s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description' for CMake module files
+[2.011s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description' for CMake config files
+[2.012s] Level 1:colcon.colcon_core.shell:create_environment_hook('moonbot_description', 'cmake_prefix_path')
+[2.013s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/hook/cmake_prefix_path.ps1'
+[2.014s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/hook/cmake_prefix_path.dsv'
+[2.014s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/hook/cmake_prefix_path.sh'
+[2.015s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description/bin'
+[2.015s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description/lib/pkgconfig/moonbot_description.pc'
+[2.015s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description/lib/python3.8/site-packages'
+[2.015s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_description/bin'
+[2.017s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.ps1'
+[2.018s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.dsv'
+[2.018s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.sh'
+[2.019s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.bash'
+[2.019s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_description/share/moonbot_description/package.zsh'
+[2.019s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/moonbot_description/share/colcon-core/packages/moonbot_description)
+[2.020s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/leibton/ros2_ws/src/moonbot_control' with build type 'ament_cmake'
+[2.020s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/leibton/ros2_ws/src/moonbot_control'
+[2.021s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.021s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.032s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_control': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_control -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_control
+[3.881s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces -- -j12 -l12
+[3.918s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces
+[3.968s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(dynamixel_custom_interfaces)
+[3.970s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces' for CMake module files
+[3.970s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/dynamixel_custom_interfaces
+[3.971s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces' for CMake config files
+[3.971s] Level 1:colcon.colcon_core.shell:create_environment_hook('dynamixel_custom_interfaces', 'cmake_prefix_path')
+[3.972s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/cmake_prefix_path.ps1'
+[3.973s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/cmake_prefix_path.dsv'
+[3.973s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/cmake_prefix_path.sh'
+[3.973s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib'
+[3.974s] Level 1:colcon.colcon_core.shell:create_environment_hook('dynamixel_custom_interfaces', 'ld_library_path_lib')
+[3.975s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/ld_library_path_lib.ps1'
+[3.975s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/ld_library_path_lib.dsv'
+[3.975s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/ld_library_path_lib.sh'
+[3.975s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/bin'
+[3.975s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/pkgconfig/dynamixel_custom_interfaces.pc'
+[3.976s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages'
+[3.976s] Level 1:colcon.colcon_core.shell:create_environment_hook('dynamixel_custom_interfaces', 'pythonpath')
+[3.978s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/pythonpath.ps1'
+[3.978s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/pythonpath.dsv'
+[3.978s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/pythonpath.sh'
+[3.979s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/bin'
+[3.980s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.ps1'
+[3.981s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.dsv'
+[3.981s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.sh'
+[3.981s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.bash'
+[3.981s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.zsh'
+[3.982s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/colcon-core/packages/dynamixel_custom_interfaces)
+[4.023s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(dynamixel_custom_interfaces)
+[4.026s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces' for CMake module files
+[4.027s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces' for CMake config files
+[4.027s] Level 1:colcon.colcon_core.shell:create_environment_hook('dynamixel_custom_interfaces', 'cmake_prefix_path')
+[4.028s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/cmake_prefix_path.ps1'
+[4.029s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/cmake_prefix_path.dsv'
+[4.029s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/cmake_prefix_path.sh'
+[4.029s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib'
+[4.029s] Level 1:colcon.colcon_core.shell:create_environment_hook('dynamixel_custom_interfaces', 'ld_library_path_lib')
+[4.031s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/ld_library_path_lib.ps1'
+[4.031s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/ld_library_path_lib.dsv'
+[4.031s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/ld_library_path_lib.sh'
+[4.032s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/bin'
+[4.032s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/pkgconfig/dynamixel_custom_interfaces.pc'
+[4.032s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages'
+[4.032s] Level 1:colcon.colcon_core.shell:create_environment_hook('dynamixel_custom_interfaces', 'pythonpath')
+[4.033s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/pythonpath.ps1'
+[4.033s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/pythonpath.dsv'
+[4.034s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/hook/pythonpath.sh'
+[4.034s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/bin'
+[4.035s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.ps1'
+[4.036s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.dsv'
+[4.036s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.sh'
+[4.037s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.bash'
+[4.037s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/dynamixel_custom_interfaces/package.zsh'
+[4.037s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/share/colcon-core/packages/dynamixel_custom_interfaces)
+[4.038s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/leibton/ros2_ws/src/trial' with build type 'ament_python'
+[4.038s] Level 1:colcon.colcon_core.shell:create_environment_hook('trial', 'ament_prefix_path')
+[4.039s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/trial/share/trial/hook/ament_prefix_path.ps1'
+[4.040s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/trial/share/trial/hook/ament_prefix_path.dsv'
+[4.040s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/trial/share/trial/hook/ament_prefix_path.sh'
+[4.041s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.042s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.203s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/leibton/ros2_ws/src/trial'
+[4.205s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.205s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.501s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/trial': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface PYTHONPATH=/home/leibton/ros2_ws/src/build/trial/prefix_override:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages /usr/bin/python3 setup.py egg_info --egg-base ../build/trial build --build-base /home/leibton/ros2_ws/src/build/trial/build install --record /home/leibton/ros2_ws/src/build/trial/install.log --single-version-externally-managed
+[4.685s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_control' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_control -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_control
+[4.688s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_control': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_control -- -j12 -l12
+[4.708s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/trial' for CMake module files
+[4.709s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/trial' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface PYTHONPATH=/home/leibton/ros2_ws/src/build/trial/prefix_override:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces/lib/python3.8/site-packages:/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages /usr/bin/python3 setup.py egg_info --egg-base ../build/trial build --build-base /home/leibton/ros2_ws/src/build/trial/build install --record /home/leibton/ros2_ws/src/build/trial/install.log --single-version-externally-managed
+[4.709s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/trial' for CMake config files
+[4.710s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/trial/lib'
+[4.710s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/trial/bin'
+[4.710s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/trial/lib/pkgconfig/trial.pc'
+[4.710s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/trial/lib/python3.8/site-packages'
+[4.710s] Level 1:colcon.colcon_core.shell:create_environment_hook('trial', 'pythonpath')
+[4.711s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/trial/share/trial/hook/pythonpath.ps1'
+[4.712s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/trial/share/trial/hook/pythonpath.dsv'
+[4.712s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/trial/share/trial/hook/pythonpath.sh'
+[4.712s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/trial/bin'
+[4.712s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(trial)
+[4.713s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/trial/share/trial/package.ps1'
+[4.714s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/trial/share/trial/package.dsv'
+[4.714s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/trial/share/trial/package.sh'
+[4.714s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/trial/share/trial/package.bash'
+[4.715s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/trial/share/trial/package.zsh'
+[4.715s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/trial/share/colcon-core/packages/trial)
+[4.721s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_control' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_control -- -j12 -l12
+[4.749s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_control': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_control
+[4.763s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(moonbot_control)
+[4.766s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control' for CMake module files
+[4.767s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_control' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_control
+[4.768s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control' for CMake config files
+[4.768s] Level 1:colcon.colcon_core.shell:create_environment_hook('moonbot_control', 'cmake_prefix_path')
+[4.769s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/hook/cmake_prefix_path.ps1'
+[4.769s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/hook/cmake_prefix_path.dsv'
+[4.770s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/hook/cmake_prefix_path.sh'
+[4.771s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control/bin'
+[4.771s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control/lib/pkgconfig/moonbot_control.pc'
+[4.772s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control/lib/python3.8/site-packages'
+[4.772s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control/bin'
+[4.773s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.ps1'
+[4.773s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.dsv'
+[4.773s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.sh'
+[4.774s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.bash'
+[4.774s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.zsh'
+[4.774s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/moonbot_control/share/colcon-core/packages/moonbot_control)
+[4.803s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(moonbot_control)
+[4.806s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control' for CMake module files
+[4.807s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control' for CMake config files
+[4.808s] Level 1:colcon.colcon_core.shell:create_environment_hook('moonbot_control', 'cmake_prefix_path')
+[4.809s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/hook/cmake_prefix_path.ps1'
+[4.809s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/hook/cmake_prefix_path.dsv'
+[4.809s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/hook/cmake_prefix_path.sh'
+[4.810s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control/bin'
+[4.810s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control/lib/pkgconfig/moonbot_control.pc'
+[4.810s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control/lib/python3.8/site-packages'
+[4.810s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_control/bin'
+[4.811s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.ps1'
+[4.811s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.dsv'
+[4.811s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.sh'
+[4.812s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.bash'
+[4.812s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_control/share/moonbot_control/package.zsh'
+[4.812s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/moonbot_control/share/colcon-core/packages/moonbot_control)
+[4.812s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/leibton/ros2_ws/src/moonbot_gazebo' with build type 'ament_cmake'
+[4.813s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/leibton/ros2_ws/src/moonbot_gazebo'
+[4.813s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.813s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.822s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_gazebo': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_gazebo -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_gazebo
+[7.394s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_gazebo' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake /home/leibton/ros2_ws/src/moonbot_gazebo -DCMAKE_INSTALL_PREFIX=/home/leibton/ros2_ws/src/install/moonbot_gazebo
+[7.396s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_gazebo': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_gazebo -- -j12 -l12
+[7.441s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_gazebo' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --build /home/leibton/ros2_ws/src/build/moonbot_gazebo -- -j12 -l12
+[7.466s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/leibton/ros2_ws/src/build/moonbot_gazebo': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_gazebo
+[7.481s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(moonbot_gazebo)
+[7.484s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo' for CMake module files
+[7.484s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/leibton/ros2_ws/src/build/moonbot_gazebo' returned '0': CMAKE_PREFIX_PATH=/home/leibton/ros2_ws/src/install/moonbot_control:/home/leibton/ros2_ws/src/install/moonbot_description:/home/leibton/ros2_ws/src/install/my_robot_hardware_interface:/home/leibton/ros2_ws/src/install/moonbot_gazebo:/home/leibton/ros2_ws/src/install/dynamixel_hardware_interface:/home/leibton/ros2_ws/src/install/dynamixel_custom_interfaces:/home/leibton/ros2_ws/src/install/trial:/opt/ros/foxy /usr/bin/cmake --install /home/leibton/ros2_ws/src/build/moonbot_gazebo
+[7.484s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo' for CMake config files
+[7.484s] Level 1:colcon.colcon_core.shell:create_environment_hook('moonbot_gazebo', 'cmake_prefix_path')
+[7.486s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/hook/cmake_prefix_path.ps1'
+[7.487s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/hook/cmake_prefix_path.dsv'
+[7.487s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/hook/cmake_prefix_path.sh'
+[7.488s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/lib'
+[7.488s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/bin'
+[7.488s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/lib/pkgconfig/moonbot_gazebo.pc'
+[7.488s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/lib/python3.8/site-packages'
+[7.489s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/bin'
+[7.490s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.ps1'
+[7.491s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.dsv'
+[7.491s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.sh'
+[7.492s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.bash'
+[7.492s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.zsh'
+[7.492s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/colcon-core/packages/moonbot_gazebo)
+[7.518s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(moonbot_gazebo)
+[7.522s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo' for CMake module files
+[7.523s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo' for CMake config files
+[7.523s] Level 1:colcon.colcon_core.shell:create_environment_hook('moonbot_gazebo', 'cmake_prefix_path')
+[7.526s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/hook/cmake_prefix_path.ps1'
+[7.527s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/hook/cmake_prefix_path.dsv'
+[7.527s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/hook/cmake_prefix_path.sh'
+[7.528s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/lib'
+[7.528s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/bin'
+[7.528s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/lib/pkgconfig/moonbot_gazebo.pc'
+[7.528s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/lib/python3.8/site-packages'
+[7.528s] Level 1:colcon.colcon_core.environment:checking '/home/leibton/ros2_ws/src/install/moonbot_gazebo/bin'
+[7.529s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.ps1'
+[7.530s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.dsv'
+[7.530s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.sh'
+[7.530s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.bash'
+[7.530s] INFO:colcon.colcon_core.shell:Creating package script '/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/moonbot_gazebo/package.zsh'
+[7.531s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/leibton/ros2_ws/src/install/moonbot_gazebo/share/colcon-core/packages/moonbot_gazebo)
+[7.531s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[7.531s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[7.531s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[7.531s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[7.538s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[7.538s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[7.538s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[7.553s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[7.555s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/leibton/ros2_ws/src/install/local_setup.ps1'
+[7.555s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/leibton/ros2_ws/src/install/_local_setup_util_ps1.py'
+[7.556s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/leibton/ros2_ws/src/install/setup.ps1'
+[7.558s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/leibton/ros2_ws/src/install/local_setup.sh'
+[7.558s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/leibton/ros2_ws/src/install/_local_setup_util_sh.py'
+[7.559s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/leibton/ros2_ws/src/install/setup.sh'
+[7.560s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/leibton/ros2_ws/src/install/local_setup.bash'
+[7.561s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/leibton/ros2_ws/src/install/setup.bash'
+[7.562s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/leibton/ros2_ws/src/install/local_setup.zsh'
+[7.563s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/leibton/ros2_ws/src/install/setup.zsh'
