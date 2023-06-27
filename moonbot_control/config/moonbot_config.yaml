@@ -13,7 +13,7 @@ controller_manager:
 
     forward_position_controller:
       type: forward_command_controller/ForwardCommandController
-
+      
     position_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
@@ -77,13 +77,13 @@ position_trajectory_controller:
       stopped_velocity_tolerance: 0.01 # Defaults to 0.01
       goal_time: 0.0 # Defaults to 0.0 (start immediately)
 
-robot_dynamics:
-  ros__parameters:
-    frequency: 20.0
-    model_state_frequency: 10.0
-    self_manage: true
-    leg_support_distance: 0.2
-    joint_states: joint_states
-    odometry: /odom_raw
-    joint_controller: position_trajectory_controller
-    effort_controller: /effort_controller/commands
+# robot_dynamics:
+#   ros__parameters:
+#     frequency: 20.0
+#     model_state_frequency: 10.0
+#     self_manage: true
+#     leg_support_distance: 0.2
+#     joint_states: joint_states
+#     odometry: /odom_raw
+#     joint_controller: position_trajectory_controller
+#     effort_controller: /effort_controller/commands

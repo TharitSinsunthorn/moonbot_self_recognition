@@ -1,18 +1,18 @@
 # Controller manager configuration
 controller_manager:
   ros__parameters:
-    update_rate: 10  # Hz
+    update_rate: 50  # Hz
     use_sim_true: true
 
     ### Controllers available
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    # forward_position_controller:
-    #   type: position_controllers/JointGroupPositionController
+    forward_position_controller:
+      type: position_controllers/JointGroupPositionController
 
-    effort_controller:
-      type: forward_command_controller/ForwardCommandController
+    # forward_position_controller:
+    #   type: forward_command_controller/ForwardCommandController
 
     position_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -25,43 +25,32 @@ forward_position_controller:
     joints:
       - j_c1_lf
       - j_c1_rf
-      - j_c1_lm
-      - j_c1_rm
       - j_c1_lr
       - j_c1_rr
       - j_thigh_lf
       - j_thigh_rf
-      - j_thigh_lm
-      - j_thigh_rm
       - j_thigh_lr
       - j_thigh_rr
       - j_tibia_lf
       - j_tibia_rf
-      - j_tibia_lm
-      - j_tibia_rm
       - j_tibia_lr
       - j_tibia_rr
-    interface_name: effort  ## position
+
+    interface_name: position
 
 position_trajectory_controller:
   ros__parameters:
     joints:
       - j_c1_lf
       - j_c1_rf
-      - j_c1_lm
-      - j_c1_rm
       - j_c1_lr
       - j_c1_rr
       - j_thigh_lf
       - j_thigh_rf
-      - j_thigh_lm
-      - j_thigh_rm
       - j_thigh_lr
       - j_thigh_rr
       - j_tibia_lf
       - j_tibia_rf
-      - j_tibia_lm
-      - j_tibia_rm
       - j_tibia_lr
       - j_tibia_rr
 
