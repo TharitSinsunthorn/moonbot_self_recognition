@@ -5,11 +5,6 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-        package='moonbot',
-        executable='dynamixel_control',
-        name='dynamixel_control'
-        ),
-        Node(
         package="moonbot",
         executable="joint_interface",
         name = "joint_interface_l1",
@@ -25,5 +20,10 @@ def generate_launch_description():
         package="moonbot",
         executable="body_controller",
         name = "body_controller"
+        ),
+        Node(
+        package='moonbot',
+        executable='dynamixel_control',
+        name='dynamixel_control'
         )
     ])

@@ -1,3 +1,4 @@
+README.md
 package.xml
 setup.cfg
 setup.py
@@ -14,6 +15,7 @@ moonbot/body_controller.py
 moonbot/dynamixel_control.py
 moonbot/joint_controller.py
 moonbot/joint_interface.py
+moonbot/test_joint_controller.py
 moonbot/utilities/__init__.py
 moonbot/utilities/limb_kinematics.py
 moonbot/utilities/params.py

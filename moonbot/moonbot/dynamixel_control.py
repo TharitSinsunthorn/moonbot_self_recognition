@@ -7,8 +7,16 @@ from moonbot_custom_interfaces.srv import GetPosition
 import sys, tty, termios
 
 # For Linux OS
-fd = sys.stdin.fileno()
-old_settings = termios.tcgetattr(fd)
+
+'''
+This exception rule is because when using launch file, the node was dieing 
+because of some termios error.
+'''
+try:
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+except:
+    print("Some Linux OS setting might not be working")
 def getch():
     try:
         tty.setraw(sys.stdin.fileno())

@@ -1,6 +1,6 @@
-# Moonbot software
+## moonbot (ROS package)
 
-This repository includes packages for moonbot control and simulation development. Moonbot is the first model modular robot of the Moonshot project. The targets of this robot are self-reconfigurable and self-assembly abilities. We also aims to perform a simulation of moonbot tasks on the lunar surface simulation in Isaac sim. Please look into the repository and give us various recommendations for the furthur development.
+This is the ros package designed to control the limbs of modular robot.
 
 ## Prerequisties
 * Ubuntu 20.04
@@ -25,28 +25,20 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
-## Usage of Dynamixel control
-* "trial" package   
-This package is a package for simple control of Dynamixel servo usinng python with ros2. Please refer to this URL [https://emanual.robotis.com/docs/en/dxl/dxl-quick-start-insert]() for how to connect Dynamixel to the PC.
 
-After connecting the 
-```bash
-## terminal 1
-ros2 run trial dynacmixel_control.py
+## Usage of moonbot package
+
+There are 4 node executable in this package:
+- body\_controller: To control the body of the robot.
+- joint\_controller: 4 nodes based on this executable is created. This does the inverse kinematics to give the angles based on the tip position.
+- joint\_interface: 4 nodes based on this executable is create. This acts as as intermediate between joint\_controller node and dynamixel\_control.
+- dynamixel\_control: Acts as interface between ros and servos. 
+
+The launch file launched all the nodes considering all the limbs:
 ```
-to set position
-```bash
-## terminal 2 
-ros2 topic pub 1 /set_position dynamixel_custom_interfaces/msg/SetPosition "{id: 1, position: 1000}"
-```
-to ask the current position
-```bash
-## terminal 2 
-ros2 service call /get_position dynamixel_custom_interfaces/srv/GetPosition "id: 1"
+ros2 launch moonbot moonbot_launch.py
 ```
 
-## Usage of Moonbot simulation and control
-TBD
 
 ## Contributing
 

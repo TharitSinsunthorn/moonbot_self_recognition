@@ -15,7 +15,7 @@ servo_id contains the dynamixel id along with the position of zero angle in the 
 '''
 
 servo_id = {
-    "1": [(3, 2060), (2, 3103), (1, 2027)],
+    "1": [(3, 2060), (2, 3103), (1, 2052)],
     "2": [1, 2, 4],
     "3": [1, 2, 3],
     "4": [1, 2, 3]

@@ -26,7 +26,8 @@ setup(
             "dynamixel_control = moonbot.dynamixel_control:main",
             "joint_controller = moonbot.joint_controller:main",
             "joint_interface = moonbot.joint_interface:main",
-            "body_controller = moonbot.body_controller:main"
+            "body_controller = moonbot.body_controller:main",
+            "test_joint_controller = moonbot.test_joint_controller:main"
         ],
     },
 )
