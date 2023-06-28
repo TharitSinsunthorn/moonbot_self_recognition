@@ -1,4 +1,0 @@
-[console_scripts]
-dynamixel_control = trial.dynamixel_control:main
-walk = trial.standup:main
-

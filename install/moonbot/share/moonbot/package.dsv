@@ -1,6 +1,0 @@
-source;share/moonbot/hook/pythonpath.ps1
-source;share/moonbot/hook/pythonpath.dsv
-source;share/moonbot/hook/pythonpath.sh
-source;share/moonbot/hook/ament_prefix_path.ps1
-source;share/moonbot/hook/ament_prefix_path.dsv
-source;share/moonbot/hook/ament_prefix_path.sh

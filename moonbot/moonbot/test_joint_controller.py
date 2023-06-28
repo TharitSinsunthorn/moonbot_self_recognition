@@ -10,8 +10,8 @@ class TestJointController(Node):
     def __init__(self):
         super().__init__('test_joint_controller')
         self.publisher_angles1 = self.create_publisher(JointAngles, f'target_joint_angles_l1', 10)
-        self.timer = self.create_timer(0.5, self.timer_clbk)
-        self.dt = 10
+        self.timer = self.create_timer(0.15, self.timer_clbk)
+        self.dt = 5
         self.angles = 0
     
     def timer_clbk(self):

@@ -51,8 +51,8 @@ def inverse_kinematics(position, leg_num):
     
     print(x, y, z, LL, D)
     
-    th1 = np.arctan2(y,x)
-    th2 = math.pi/2 - np.arctan2((LL-L1), z)- np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
+    th1 = math.atan2(y,x)
+    th2 = math.pi/2 - math.atan2((LL-L1), z)- math.acos((L3**2 - L2**2 - D**2)/(-2*D*L2))
     th3 = np.arccos((D**2 - L2**2 - L3**2)/(2*L2*L3))
 
     return [math.degrees(th1), math.degrees(th2), math.degrees(th3)]

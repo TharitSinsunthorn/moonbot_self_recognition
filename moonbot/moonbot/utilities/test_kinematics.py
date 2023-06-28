@@ -9,4 +9,3 @@ print([angle1, angle2, angle3])
 
 position = forward_kinematics([angle1, angle2, angle3], 1)
 print(inverse_kinematics(position, 1))
-

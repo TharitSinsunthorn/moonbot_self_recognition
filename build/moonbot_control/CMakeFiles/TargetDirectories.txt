@@ -1,9 +1,0 @@
-/home/leibton/ros2_ws/src/build/moonbot_control/CMakeFiles/install/strip.dir
-/home/leibton/ros2_ws/src/build/moonbot_control/CMakeFiles/install/local.dir
-/home/leibton/ros2_ws/src/build/moonbot_control/CMakeFiles/install.dir
-/home/leibton/ros2_ws/src/build/moonbot_control/CMakeFiles/list_install_components.dir
-/home/leibton/ros2_ws/src/build/moonbot_control/CMakeFiles/rebuild_cache.dir
-/home/leibton/ros2_ws/src/build/moonbot_control/CMakeFiles/edit_cache.dir
-/home/leibton/ros2_ws/src/build/moonbot_control/CMakeFiles/test.dir
-/home/leibton/ros2_ws/src/build/moonbot_control/CMakeFiles/moonbot_control_uninstall.dir
-/home/leibton/ros2_ws/src/build/moonbot_control/CMakeFiles/uninstall.dir

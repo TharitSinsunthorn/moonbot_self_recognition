@@ -27,3 +27,9 @@ DIFF_ANGLE = 1023 # The difference between 0 deg and 90 deg
 limp_pos contains the angle of the orientation of the limb w.r.t. base frame
 '''
 limb_angle = [0, 135, -135, -45]
+
+'''
+These values are for smoothly controlling the servos
+'''
+MAX_ANGLE_CHANGE = 5 # (in deg) maximum movement in servo at once.
+SLEEP_TIME_SERVO = 0.2 # Time delay between servo commands in seconds.
