@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from moonbot_custom_interfaces.msg import JointAngles
-from moonbot_custom_interfaces.srv import GetJointAngles
+from moonbot_custom_interfaces.srv import GetPosition
 import moonbot.utilities.params as params
 import time
 import numpy as np
@@ -15,8 +15,9 @@ class ExecuteSequence(Node):
         self.limb_num = self.get_parameter('limb_num').get_parameter_value().integer_value
         self.get_logger().info(f"Execute Seqiemce Node Launched for Limb {self.limb_num}")
         self.publisher_angles = self.create_publisher(JointAngles, f'target_joint_angles_l{self.limb_num}', 10)
-        self.sequence = [(0.0,0.0,0.0), (45.0, 45.0, 0.0), (0.0,0.0,0.0)]
-        self.client_ = self.create_client(GetJointAngles, f'get_joint_angles_{self.limb_num}')
+        self.sequence = [(0.0,0.0,0.0), (45.0, 45.0, 0.0), (0.0,0.0,0.0), (-45.0,90.0,45.0), (0.0,0.0,0.0)]
+        self.client_ = self.create_client(GetPosition, f'get_position')
+        self.servo_id = params.servo_id[str(self.limb_num)]
     
     def compute_angle_steps(self, curr_angles, target_angles):
         self.get_logger().info(f'Current Joint Angles for Limb {str(self.limb_num)}: {str(curr_angles)}')
@@ -42,12 +43,17 @@ class ExecuteSequence(Node):
         while not self.client_.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('Service not available, waiting ...')
 
+        curr_angles = np.array([0,0,0])
         for item in self.sequence:
-            request = GetJointAngles.Request()
-            future = self.client_.call_async(request)
-            rclpy.spin_until_future_complete(self, future)
-            response = future.result()
-            curr_angles = np.array([response.joint1, response.joint2, response.joint3])
+            for i in range(3):
+                request = GetPosition.Request()
+                request.id = self.servo_id[i][0]
+                INIT_POS = self.servo_id[i][1]
+                future = self.client_.call_async(request)
+                rclpy.spin_until_future_complete(self, future)
+                response = future.result()
+                position = response.position
+                curr_angles[i] = (INIT_POS - position) * 90 / params.DIFF_ANGLE
             target_angles = np.array(item)
             self.compute_angle_steps(curr_angles, target_angles)
 

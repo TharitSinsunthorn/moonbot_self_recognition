@@ -5,8 +5,6 @@ import moonbot.utilities.params as params
 import time
 from moonbot_custom_interfaces.msg import JointAngles
 from moonbot_custom_interfaces.msg import SetPosition
-from moonbot_custom_interfaces.msg import DynamixelPosition
-from moonbot_custom_interfaces.srv import GetJointAngles
 
 '''
 This Node acts as interface between joint_angle topic and dynamixel control code.
@@ -23,32 +21,8 @@ class JointInterface(Node):
         self.servo_id = params.servo_id[str(self.limb_num)]
         self.publisher_servo = self.create_publisher(SetPosition, f'set_position', 10)
         self.subscriber_angles = self.create_subscription(JointAngles, f'target_joint_angles_l{self.limb_num}', self.subscriber_callback, 10)
-        self.subscriber_J1 = self.create_subscription(DynamixelPosition, f'get_position_{self.servo_id[0][0]}', self.subscriber_clbk_J1, 10)
-        self.subscriber_J2 = self.create_subscription(DynamixelPosition, f'get_position_{self.servo_id[1][0]}', self.subscriber_clbk_J2, 10)
-        self.subscriber_J3 = self.create_subscription(DynamixelPosition, f'get_position_{self.servo_id[2][0]}', self.subscriber_clbk_J3, 10)
-        self.joint_angles_srv = self.create_service(GetJointAngles, f'get_joint_angles_{self.limb_num}', self.joint_srv_clbk)
         self.curr_angles = [0,0,0] # To store current joint angles in deg
         
-    def joint_srv_clbk(self, request, response):
-        response.joint1 = self.curr_angles[0]
-        response.joint2 = self.curr_angles[1]
-        response.joint3 = self.curr_angles[2]
-        self.get_logger().info(f"Incoming request for joint angles for limb: {self.limb_num}")
-        return response
-    
-    def subscriber_clbk_J1(self, msg):
-        INIT_POS = self.servo_id[0][1]
-        position = msg.position
-        self.curr_angles[0] = (INIT_POS - position) * 90 / DIFF_ANGLE
-    def subscriber_clbk_J2(self, msg):
-        INIT_POS = self.servo_id[1][1]
-        position = msg.position
-        self.curr_angles[1] = (INIT_POS - position) * 90 / DIFF_ANGLE
-    def subscriber_clbk_J3(self, msg):
-        INIT_POS = self.servo_id[2][1]
-        position = msg.position
-        self.curr_angles[2] = (INIT_POS - position) * 90 / DIFF_ANGLE
- 
     def publish_angles(self, joint_angles):
         for i in range(3):
             msg = SetPosition()

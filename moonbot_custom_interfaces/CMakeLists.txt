@@ -38,8 +38,9 @@ endif()
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/JointAngles.msg"
   "msg/SetPosition.msg"
-  "srv/GetJointAngles.srv"
   "msg/DynamixelPosition.msg"
+  "srv/GetPosition.srv"
+  "srv/GetJointAngles.srv"
 )
 
 ament_package()
