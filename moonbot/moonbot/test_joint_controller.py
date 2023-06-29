@@ -11,13 +11,13 @@ class TestJointController(Node):
         super().__init__('test_joint_controller')
         self.publisher_angles1 = self.create_publisher(JointAngles, f'target_joint_angles_l1', 10)
         self.publisher_angles2 = self.create_publisher(JointAngles, f'target_joint_angles_l2', 10)
-        self.timer = self.create_timer(2, self.timer_clbk)
+        self.timer = self.create_timer(0.5, self.timer_clbk)
     
     def timer_clbk(self):
         angles1 = JointAngles()
-        angles1.joint1 = float(random.randint(-90, 90))
-        angles1.joint2 = float(random.randint(-90, 80))
-        angles1.joint3 = float(random.randint(-90, 90))
+        angles1.joint1 = float(random.randint(0, 30))
+        angles1.joint2 = float(random.randint(0, 80))
+        angles1.joint3 = float(random.randint(0, 30))
 
         angles2 = JointAngles()
         angles2.joint1 = angles1.joint1
