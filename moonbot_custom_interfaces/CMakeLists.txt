@@ -36,9 +36,10 @@ if(BUILD_TESTING)
 endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/SetPosition.msg"
   "msg/JointAngles.msg"
-  "srv/GetPosition.srv"
+  "msg/SetPosition.msg"
+  "srv/GetJointAngles.srv"
+  "msg/DynamixelPosition.msg"
 )
 
 ament_package()

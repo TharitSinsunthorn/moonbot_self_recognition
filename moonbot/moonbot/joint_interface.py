@@ -1,12 +1,11 @@
 import rclpy
-import math
 import numpy as np
 from rclpy.node import Node
 import moonbot.utilities.params as params
 import time
 from moonbot_custom_interfaces.msg import JointAngles
 from moonbot_custom_interfaces.msg import SetPosition
-from moonbot_custom_interfaces.srv import GetPosition
+from moonbot_custom_interfaces.msg import DynamixelPosition
 from moonbot_custom_interfaces.srv import GetJointAngles
 
 '''
@@ -23,41 +22,33 @@ class JointInterface(Node):
         self.get_logger().info(f"Joint Interface Node Launched for Limb {self.limb_num}")
         self.servo_id = params.servo_id[str(self.limb_num)]
         self.publisher_servo = self.create_publisher(SetPosition, f'set_position', 10)
-        self.subcriber_angles = self.create_subscription(JointAngles, f'target_joint_angles_l{self.limb_num}', self.subscriber_callback, 10)
-        self.client_ = self.create_client(GetPosition, 'get_position')
-        self.curr_angles = [0,0,0]
-        self.target_angles = [0,0,0]
-        self.completed_requests = 0
-        self.rate = self.create_rate(1/params.SLEEP_TIME_SERVO)
-
-    
-    def update_values(self, joint_num):
-        if not self.client_ .wait_for_service(timeout_sec=1.0):
-            self.get_logger.warn('Service not available')
-            return
-        request = GetPosition.Request()
-        request.id = self.servo_id[joint_num][0]
-        future = self.client_.call_async(request)
-        clbk_function = lambda f: self.handle_response(f, joint_num)
-        future.add_done_callback(clbk_function)
-    
-    def handle_response(self, future, joint_num):
-        try:
-            response = future.result()
-            position = response.position
-            INIT_POS = self.servo_id[joint_num][1]
-            self.curr_angles[joint_num] = (INIT_POS - position) * 90 / DIFF_ANGLE
-            self.completed_requests += 1
-
-        except Exception as e:
-            self.get_logger().info('Additional data: %s'%str(e))
-            self.update_values(joint_num)
+        self.subscriber_angles = self.create_subscription(JointAngles, f'target_joint_angles_l{self.limb_num}', self.subscriber_callback, 10)
+        self.subscriber_J1 = self.create_subscription(DynamixelPosition, f'get_position_{self.servo_id[0][0]}', self.subscriber_clbk_J1, 10)
+        self.subscriber_J2 = self.create_subscription(DynamixelPosition, f'get_position_{self.servo_id[1][0]}', self.subscriber_clbk_J2, 10)
+        self.subscriber_J3 = self.create_subscription(DynamixelPosition, f'get_position_{self.servo_id[2][0]}', self.subscriber_clbk_J3, 10)
+        self.joint_angles_srv = self.create_service(GetJointAngles, f'get_joint_angles_{self.limb_num}', self.joint_srv_clbk)
+        self.curr_angles = [0,0,0] # To store current joint angles in deg
         
-        if self.completed_requests == 3:
-            self.completed_requests = 0
-            self.get_logger().info(f"Current Joint Angles for Limb {str(self.limb_num)}: {str(self.curr_angles)}")
-            self.compute_angle_steps()
+    def joint_srv_clbk(self, request, response):
+        response.joint1 = self.curr_angles[0]
+        response.joint2 = self.curr_angles[1]
+        response.joint3 = self.curr_angles[2]
+        self.get_logger().info(f"Incoming request for joint angles for limb: {self.limb_num}")
+        return response
     
+    def subscriber_clbk_J1(self, msg):
+        INIT_POS = self.servo_id[0][1]
+        position = msg.position
+        self.curr_angles[0] = (INIT_POS - position) * 90 / DIFF_ANGLE
+    def subscriber_clbk_J2(self, msg):
+        INIT_POS = self.servo_id[1][1]
+        position = msg.position
+        self.curr_angles[1] = (INIT_POS - position) * 90 / DIFF_ANGLE
+    def subscriber_clbk_J3(self, msg):
+        INIT_POS = self.servo_id[2][1]
+        position = msg.position
+        self.curr_angles[2] = (INIT_POS - position) * 90 / DIFF_ANGLE
+ 
     def publish_angles(self, joint_angles):
         for i in range(3):
             msg = SetPosition()
@@ -67,25 +58,22 @@ class JointInterface(Node):
             self.publisher_servo.publish(msg)
         
     def compute_angle_steps(self):
-        curr_angles = np.array(self.curr_angles)
+        # curr_angles = np.array(self.curr_angles)
         target_angles = np.array(self.target_angles)
-
-        max_diff = np.max(np.abs(target_angles - curr_angles))
-        n_step = int(max_diff/params.MAX_ANGLE_CHANGE)
-        angle_steps = np.linspace(curr_angles, target_angles, n_step)
-        for i in range(n_step):
-            self.publish_angles(angle_steps[i])
-            self.get_logger().info(f'Target Joint Angles for Limb {str(self.limb_num)}: {str(angle_steps[i])}')
-            time.sleep(params.SLEEP_TIME_SERVO)
+        # max_diff = np.max(np.abs(target_angles - curr_angles))
+        # n_step = int(max_diff/params.MAX_ANGLE_CHANGE)
+        # angle_steps = np.linspace(curr_angles, target_angles, n_step)
+        # for i in range(n_step):
+        #     self.publish_angles(angle_steps[i])
+        #     self.get_logger().info(f'Target Joint Angles for Limb {str(self.limb_num)}: {str(angle_steps[i])}')
+        #     time.sleep(params.SLEEP_TIME_SERVO)
         self.publish_angles(target_angles)
-        self.get_logger().info(f'Target Joint Angles for Limb {str(self.limb_num)}: {str(target_angles)}')
+        # self.get_logger().info(f'Target Joint Angles for Limb {str(self.limb_num)}: {str(target_angles)}')
 
 
     def subscriber_callback(self, joint_msg):
-        self.requestType = 'publish'
         self.target_angles = [joint_msg.joint1, joint_msg.joint2, joint_msg.joint3]
-        for i in range(3):
-            self.update_values(i)
+        self.compute_angle_steps()
 
 def main(args = None):
     rclpy.init(args = args)

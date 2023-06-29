@@ -2,8 +2,8 @@ import rclpy
 from rclpy.node import Node
 from dynamixel_sdk import *
 # from std_msgs.msg import Float64
+from moonbot_custom_interfaces.msg import DynamixelPosition
 from moonbot_custom_interfaces.msg import SetPosition
-from moonbot_custom_interfaces.srv import GetPosition
 import sys, tty, termios
 
 # For Linux OS
@@ -127,13 +127,24 @@ class DynamixelControl(Node):
             QOS_RKL1OV)
         self.set_position_subscriber  # prevent unused variable warning
 
-        self.get_position_server_ = self.create_service(
-            GetPosition,
-            'get_position',
-            self.get_present_position_callback
-        )
+        self.get_position_publishers = [self.create_publisher(
+            DynamixelPosition,
+            f'get_position_{i + 1}', QOS_RKL1OV
+        ) for i in range(12)]
 
-        # self.__del__()
+        self.create_timers = self.create_timer(0.1, self.timer_clbk)
+
+    def timer_clbk(self):
+        for i in range(12):
+            present_position, dxl_comm_result, dxl_error = self.packetHandler.read4ByteTxRx(
+            self.portHandler,
+            i+1,
+            ADDR_PRESENT_POSITION,
+            )
+            msg = DynamixelPosition()
+            msg.position = present_position
+            self.get_position_publishers[i].publish(msg)
+
 
     def set_torque_enable(self, enable):
         dxl_comm_result, dxl_error = self.packetHandler.write1ByteTxRx(

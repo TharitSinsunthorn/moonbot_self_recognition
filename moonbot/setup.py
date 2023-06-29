@@ -27,7 +27,8 @@ setup(
             "joint_controller = moonbot.joint_controller:main",
             "joint_interface = moonbot.joint_interface:main",
             "body_controller = moonbot.body_controller:main",
-            "test_joint_controller = moonbot.test_joint_controller:main"
+            "test_joint_controller = moonbot.test_joint_controller:main",
+            "execute_sequence = moonbot.execute_sequence:main"
         ],
     },
 )
