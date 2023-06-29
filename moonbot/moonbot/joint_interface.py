@@ -7,6 +7,7 @@ import time
 from moonbot_custom_interfaces.msg import JointAngles
 from moonbot_custom_interfaces.msg import SetPosition
 from moonbot_custom_interfaces.srv import GetPosition
+from moonbot_custom_interfaces.srv import GetJointAngles
 
 '''
 This Node acts as interface between joint_angle topic and dynamixel control code.
@@ -17,8 +18,9 @@ DIFF_ANGLE = params.DIFF_ANGLE
 class JointInterface(Node):
     def __init__(self):
         super().__init__('joint_interface')
-        self.declare_parameter('limb_num', 1)
+        self.declare_parameter('limb_num', None)
         self.limb_num = self.get_parameter('limb_num').get_parameter_value().integer_value
+        self.get_logger().info(f"Joint Interface Node Launched for Limb {self.limb_num}")
         self.servo_id = params.servo_id[str(self.limb_num)]
         self.publisher_servo = self.create_publisher(SetPosition, f'set_position', 10)
         self.subcriber_angles = self.create_subscription(JointAngles, f'target_joint_angles_l{self.limb_num}', self.subscriber_callback, 10)
@@ -27,6 +29,7 @@ class JointInterface(Node):
         self.target_angles = [0,0,0]
         self.completed_requests = 0
         self.rate = self.create_rate(1/params.SLEEP_TIME_SERVO)
+
     
     def update_values(self, joint_num):
         if not self.client_ .wait_for_service(timeout_sec=1.0):
@@ -79,6 +82,7 @@ class JointInterface(Node):
 
 
     def subscriber_callback(self, joint_msg):
+        self.requestType = 'publish'
         self.target_angles = [joint_msg.joint1, joint_msg.joint2, joint_msg.joint3]
         for i in range(3):
             self.update_values(i)

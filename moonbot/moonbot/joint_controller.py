@@ -12,8 +12,9 @@ This Node reads the leg tip position, perform the inverse kinematics and them pu
 class JointController(Node):
     def __init__(self):
         super().__init__('joint_controller')
-        self.declare_parameter('limb_num', 1)
+        self.declare_parameter('limb_num', None)
         self.limb_num = self.get_parameter('limb_num').get_parameter_value().integer_value
+        self.get_logger().info(f"Joint Controller Node Launched for Limb {self.limb_num}")
         self.publisher_angles = self.create_publisher(JointAngles, f'target_joint_angles_l{self.limb_num}', 10)
         self.subcriber_positions = self.create_subscription(Point, f'target_tip_position_l{self.limb_num}', self.subscriber_callback, 10)
     

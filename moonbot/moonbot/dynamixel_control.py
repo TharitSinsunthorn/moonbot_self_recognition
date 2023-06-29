@@ -175,8 +175,8 @@ class DynamixelControl(Node):
             self.get_logger().info(self.packetHandler.getTxRxResult(dxl_comm_result))
         elif dxl_error != 0:
             self.get_logger().info(self.packetHandler.getRxPacketError(dxl_error))
-        # else:
-            # self.get_logger().info('Set [ID: %d] [Goal Position: %d]' % (msg.id, msg.position))
+        else:
+            self.get_logger().info('Set [ID: %d] [Goal Position: %d]' % (msg.id, msg.position))
         
 
     def get_present_position_callback(self, request, response):
