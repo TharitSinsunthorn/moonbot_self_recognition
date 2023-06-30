@@ -43,7 +43,7 @@
     </physics>
 
     <model name='unit_box'>
-      <pose>0 0 0 0 -0 0</pose>
+      <pose>0.180332 1.4103 0.5 0 -0 0</pose>
       <link name='link'>
         <inertial>
           <mass>1</mass>

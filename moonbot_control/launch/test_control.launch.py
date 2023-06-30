@@ -16,7 +16,7 @@ def generate_launch_description():
 
     # Position and orientation
     # [X, Y, Z]
-    position = [0.0, 0.0, 0.5]
+    position = [0.0, 0.0, 0.25]
     # [Roll, Pitch, Yaw]
     orientation = [0.0, 0.0, 0.0]
     # Base Name or robot
@@ -51,7 +51,7 @@ def generate_launch_description():
     robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
-        arguments=["forward_position_controller", "-c", "/controller_manager"],
+        arguments=["position_trajectory_controller", "-c", "/controller_manager"],
     )
 
     # robot_controller = Node(

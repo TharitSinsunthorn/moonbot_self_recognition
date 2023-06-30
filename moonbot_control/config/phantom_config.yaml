@@ -8,8 +8,8 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    forward_position_controller:
-      type: position_controllers/JointGroupPositionController
+    # forward_position_controller:
+    #   type: position_controllers/JointGroupPositionController
 
     # forward_position_controller:
     #   type: forward_command_controller/ForwardCommandController
@@ -20,23 +20,23 @@ controller_manager:
 
 
 ### Properties of the controllers that we will use and definition of joints to use ###
-forward_position_controller:
-  ros__parameters:
-    joints:
-      - j_c1_lf
-      - j_c1_rf
-      - j_c1_lr
-      - j_c1_rr
-      - j_thigh_lf
-      - j_thigh_rf
-      - j_thigh_lr
-      - j_thigh_rr
-      - j_tibia_lf
-      - j_tibia_rf
-      - j_tibia_lr
-      - j_tibia_rr
+# forward_position_controller:
+#   ros__parameters:
+#     joints:
+#       - j_c1_lf
+#       - j_c1_rf
+#       - j_c1_lr
+#       - j_c1_rr
+#       - j_thigh_lf
+#       - j_thigh_rf
+#       - j_thigh_lr
+#       - j_thigh_rr
+#       - j_tibia_lf
+#       - j_tibia_rf
+#       - j_tibia_lr
+#       - j_tibia_rr
 
-    interface_name: position
+#     interface_name: position
 
 position_trajectory_controller:
   ros__parameters:
@@ -59,6 +59,7 @@ position_trajectory_controller:
 
     state_interfaces:
       - position
+      - velocity
 
     state_publish_rate: 200.0 # Hz, Defaults to 50
     action_monitor_rate: 20.0 # Hz, Defaults to 20
