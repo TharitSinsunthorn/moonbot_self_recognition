@@ -16,6 +16,14 @@ L1 = params.L1
 L2 = params.L2
 L3 = params.L3
 
+def bound_range(angle):
+    angle = angle%360
+    angle = (angle + 360) % 360
+    if (angle > 180):
+        angle-=360
+    return angle
+
+
 def inverse_kinematics(position, leg_num):
     ''' Returns the Inverse Kinematics of the Limb
 
@@ -49,13 +57,12 @@ def inverse_kinematics(position, leg_num):
     LL = np.hypot(x, y)
     D = np.sqrt(z**2 + (LL-L1)**2)
     
-    print(x, y, z, LL, D)
-    
     th1 = math.atan2(y,x)
+    print((L3**2 - L2**2 - D**2)/(-2*D*L2))
     th2 = math.pi/2 - math.atan2((LL-L1), z)- math.acos((L3**2 - L2**2 - D**2)/(-2*D*L2))
     th3 = np.arccos((D**2 - L2**2 - L3**2)/(2*L2*L3))
 
-    return [math.degrees(th1), math.degrees(th2), math.degrees(th3)]
+    return [bound_range(math.degrees(th1)), bound_range(math.degrees(th2)), bound_range(math.degrees(th3))]
 
 def forward_kinematics(joint_angles, leg_num):
     ''' Returns the Forward Kinematics of the Limb
