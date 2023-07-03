@@ -7,6 +7,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(gazebo_ros REQUIRED)
 find_package(controller_manager REQUIRED)
@@ -21,6 +22,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
+  find_package(ament_cmake_pytest REQUIRED)
   ament_lint_auto_find_test_dependencies()
 endif()
 
@@ -34,13 +36,15 @@ install(
     share/${PROJECT_NAME}/
 )
 
+
 install(
   PROGRAMS
     scripts/walk_demo.py
     scripts/walker.py
+    scripts/joint_trajectory_test.py
 
   DESTINATION
-    lib/${PROJECT_NAME}/
+    lib/${PROJECT_NAME}
 )
 
 

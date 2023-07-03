@@ -11,8 +11,8 @@ controller_manager:
     # forward_position_controller:
     #   type: position_controllers/JointGroupPositionController
 
-    # forward_position_controller:
-    #   type: forward_command_controller/ForwardCommandController
+    forward_position_controller:
+      type: forward_command_controller/ForwardCommandController
 
     position_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -20,23 +20,23 @@ controller_manager:
 
 
 ### Properties of the controllers that we will use and definition of joints to use ###
-# forward_position_controller:
-#   ros__parameters:
-#     joints:
-#       - j_c1_lf
-#       - j_c1_rf
-#       - j_c1_lr
-#       - j_c1_rr
-#       - j_thigh_lf
-#       - j_thigh_rf
-#       - j_thigh_lr
-#       - j_thigh_rr
-#       - j_tibia_lf
-#       - j_tibia_rf
-#       - j_tibia_lr
-#       - j_tibia_rr
+forward_position_controller:
+  ros__parameters:
+    joints:
+      - j_c1_lf
+      - j_c1_rf
+      - j_c1_lr
+      - j_c1_rr
+      - j_thigh_lf
+      - j_thigh_rf
+      - j_thigh_lr
+      - j_thigh_rr
+      - j_tibia_lf
+      - j_tibia_rf
+      - j_tibia_lr
+      - j_tibia_rr
 
-#     interface_name: position
+    interface_name: position
 
 position_trajectory_controller:
   ros__parameters:
