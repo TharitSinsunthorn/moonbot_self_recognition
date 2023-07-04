@@ -8,9 +8,6 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    # forward_position_controller:
-    #   type: position_controllers/JointGroupPositionController
-
     forward_position_controller:
       type: forward_command_controller/ForwardCommandController
 

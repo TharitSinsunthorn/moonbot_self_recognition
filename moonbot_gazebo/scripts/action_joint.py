@@ -26,41 +26,21 @@ class LimbActionClient(Node):
         goal_msg = FollowJointTrajectory.Goal()
 
         # Fill in data for trajectory
-        # joint_names = ["j_c1_lf", "j_c1_rf", "j_c1_lr", "j_c1_rr",
-        #                "j_thigh_lf", "j_thigh_rf", "j_thigh_lr", "j_thigh_rr",
-        #                "j_tibia_lf", "j_tibia_rf", "j_tibia_lr", "j_tibia_rr"]
-        joint_names = ["j_c1_lf", "j_c1_rf"]
+        joint_names = ["j_c1_lf", "j_c1_rf", "j_c1_lr", "j_c1_rr",
+                       "j_thigh_lf", "j_thigh_rf", "j_thigh_lr", "j_thigh_rr",
+                       "j_tibia_lf", "j_tibia_rf", "j_tibia_lr", "j_tibia_rr"]
+        # joint_names = ["j_c1_lf", "j_c1_rf"]
 
 
         points = []
         point1 = JointTrajectoryPoint()
-        point1.positions = [0.0, 0.0]
+        point1.positions = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
         point2 = JointTrajectoryPoint()
         point2.time_from_start = Duration(seconds=1, nanoseconds=0).to_msg()
-        point2.positions = [0.5, 0.5]
+        point2.positions = [0.0, 0.0, -0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
-        point3 = JointTrajectoryPoint()
-        point3.positions = [0.0, 0.0]
-        point4 = JointTrajectoryPoint()
-        point4.positions = [0.0, 0.0]
-        point5 = JointTrajectoryPoint()
-        point5.positions = [0.0, 0.0]
-        point6 = JointTrajectoryPoint()
-        point6.positions = [0.0, 0.0]
-        point7 = JointTrajectoryPoint()
-        point7.positions = [0.0, 0.0]
-        point8 = JointTrajectoryPoint()
-        point8.positions = [0.0, 0.0]
-        point9 = JointTrajectoryPoint()
-        point9.positions = [0.0, 0.0]
-        point10 = JointTrajectoryPoint()
-        point10.positions = [0.0, 0.0]
-        point11 = JointTrajectoryPoint()
-        point11.positions = [0.0, 0.0]
-        point12 = JointTrajectoryPoint()
-        point12.positions = [0.0, 0.0]
-
+        
         # points.append(point1)
         # points.append(point2)
         for i in range(2):
