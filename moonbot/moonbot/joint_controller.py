@@ -19,9 +19,11 @@ class JointController(Node):
         self.subcriber_positions = self.create_subscription(Point, f'target_tip_position_l{self.limb_num}', self.subscriber_callback, 10)
     
     def subscriber_callback(self, msg):
+        self.get_logger().info(f"New Position for Limb: {self.limb_num}: {[msg.x, msg.y, msg.z]}")
         position = [msg.x, msg.y, msg.z]
         angles = JointAngles()
-        angles.joint1, angles.joint2, angles.joint3 = inverse_kinematics(position)
+        angles.joint1, angles.joint2, angles.joint3 = inverse_kinematics(position, self.limb_num)
+        self.get_logger().info(f"New Joint Angles for Limb: {self.limb_num}: {[angles.joint1, angles.joint2, angles.joint3]}")
         self.publisher_angles.publish(angles)
 
 def main(args = None):

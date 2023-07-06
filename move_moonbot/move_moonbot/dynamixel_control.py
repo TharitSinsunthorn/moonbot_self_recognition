@@ -4,6 +4,10 @@ from dynamixel_sdk import *
 # from std_msgs.msg import Float64
 from moonbot_custom_interfaces.msg import SetPosition
 from moonbot_custom_interfaces.srv import GetPosition
+from rclpy.executors import MultiThreadedExecutor
+from rclpy.callback_groups import MutuallyExclusiveCallbackGroup, ReentrantCallbackGroup
+import threading
+from functools import partial
 import sys, tty, termios
 
 # For Linux OS
@@ -105,7 +109,6 @@ class DynamixelControl(Node):
                 return
 
         # Enable Dynamixel Torque
-        self.set_torque_enable(TORQUE_ENABLE)
 
 
         # Set QOS
@@ -118,33 +121,100 @@ class DynamixelControl(Node):
             reliability=rclpy.qos.QoSReliabilityPolicy.RELIABLE,
             durability=rclpy.qos.QoSDurabilityPolicy.VOLATILE
         )
+        
+        self.timer_cb_group_port1 = MutuallyExclusiveCallbackGroup()
+        self.timer_cb_group_port2 = MutuallyExclusiveCallbackGroup()
+        self.subscriber_cb_group = MutuallyExclusiveCallbackGroup()
+
+        self.subscriber_requests = [[], []]
+        self.current_motor_position = [0] * 12
 
         # Subscribe to the topic to receive the desired position
         self.set_position_subscriber = self.create_subscription(
             SetPosition,
             f'set_position',
             self.set_position_callback,
-            QOS_RKL1OV)
+            QOS_RKL1OV, callback_group= self.subscriber_cb_group)
         self.set_position_subscriber  # prevent unused variable warning
 
         self.get_position_server_ = self.create_service(
             GetPosition,
             f'get_position',
-            self.get_present_position_callback
+            self.get_present_position_callback, callback_group= self.subscriber_cb_group, 
         )
-
-        # self.__del__()
-
-    def set_torque_enable(self, enable):
+        self.JOINT_STATUS = [True] * 12
+        self.LIMB_STATUS = [True, True, True, True]
         for i in range(2):
-            dxl_comm_result, dxl_error = self.packetHandler.write1ByteTxRx(
-                self.portHandler[i], BROADCAST_ID, ADDR_TORQUE_ENABLE, enable)
+            self.set_torque_enable(TORQUE_ENABLE, BROADCAST_ID, self.portHandler[i])
+        
+        self.timer_update_limb_status_port1 = self.create_timer(0.25, partial(self.update_limb_status, port_num = 0), callback_group=self.timer_cb_group_port1)
+        self.timer_update_limb_status_port2 = self.create_timer(0.25, partial(self.update_limb_status, port_num = 1), callback_group=self.timer_cb_group_port2)
+
+
+    def update_limb_status(self, port_num):
+        # Clear the queue of Subcribers
+        for events in self.subscriber_requests[port_num]:
+            # Write Goal Position (length : 4 bytes)
+            # When writing 2 byte data to AX / MX(1.0), use write2ByteTxRx() instead.
+            dxl_comm_result, dxl_error = self.packetHandler.write4ByteTxRx(
+                self.portHandler[port_num],
+                int(events[0]),
+                ADDR_GOAL_POSITION,
+                events[1])
+
             if dxl_comm_result != COMM_SUCCESS:
                 self.get_logger().info(self.packetHandler.getTxRxResult(dxl_comm_result))
             elif dxl_error != 0:
                 self.get_logger().info(self.packetHandler.getRxPacketError(dxl_error))
             else:
-                self.get_logger().info(f"Dynamixel has been successfully connected at port {i + 1}")
+                self.get_logger().info('Set [ID: %d] [Goal Position: %d]' % (events[0], events[1]))
+            time.sleep(0.2)
+
+        # Update position of all the motors
+        for i in range(6):
+            id = port_num * 6 + i
+            present_position, dxl_comm_result, dxl_error = self.packetHandler.read4ByteTxRx(
+                self.portHandler[port_num],
+                id + 1,
+                ADDR_PRESENT_POSITION,
+            )
+        
+            self.current_motor_position[id] = int(present_position)
+
+        # Update the status of all the limbs
+        dxl_devices, _dxl_comm_result = self.packetHandler.broadcastPing(self.portHandler[port_num])
+        if _dxl_comm_result != COMM_SUCCESS:
+            print("%s" % self.packetHandler.getTxRxResult(_dxl_comm_result))
+        
+        for i in range(6):
+            self.JOINT_STATUS[port_num * 6 + i] = False
+        for id in dxl_devices:
+            self.JOINT_STATUS[id - 1] = True
+
+        for k in range(2):
+            i = port_num * 2 + k
+            if self.JOINT_STATUS[i * 3] or self.JOINT_STATUS[i * 3 + 1] or self.JOINT_STATUS[i * 3 + 2]:
+                if self.LIMB_STATUS[i] == False:
+                    for j in range(3):
+                        id = i *3 + j + 1
+                        self.set_torque_enable(TORQUE_ENABLE, id, self.portHandler[port_num])
+                    self.get_logger().info(f"Limb {i + 1} attached !!")
+                    self.LIMB_STATUS[i] = True
+            else:
+                if self.LIMB_STATUS[i] == True:
+                    self.get_logger().info(f"Limb {i + 1} detached !!")
+                    self.LIMB_STATUS[i] = False
+        
+
+    def set_torque_enable(self, enable, id, port):
+        dxl_comm_result, dxl_error = self.packetHandler.write1ByteTxRx(
+            port, id, ADDR_TORQUE_ENABLE, enable)
+        if dxl_comm_result != COMM_SUCCESS:
+            self.get_logger().info(self.packetHandler.getTxRxResult(dxl_comm_result))
+        elif dxl_error != 0:
+            self.get_logger().info(self.packetHandler.getRxPacketError(dxl_error))
+        else:
+            self.get_logger().info(f"Torque Enabled for Sevo ID {id}")
 
 
     def set_position_callback(self, msg):
@@ -156,48 +226,24 @@ class DynamixelControl(Node):
         id = int(msg.id)
         portHandler_ID = (id - 1)//6
 
-        # Write Goal Position (length : 4 bytes)
-        # When writing 2 byte data to AX / MX(1.0), use write2ByteTxRx() instead.
-        dxl_comm_result, dxl_error = self.packetHandler.write4ByteTxRx(
-            self.portHandler[portHandler_ID],
-            int(msg.id),
-            ADDR_GOAL_POSITION,
-            goal_position)
-
-        if dxl_comm_result != COMM_SUCCESS:
-            self.get_logger().info(self.packetHandler.getTxRxResult(dxl_comm_result))
-        elif dxl_error != 0:
-            self.get_logger().info(self.packetHandler.getRxPacketError(dxl_error))
-        else:
-            self.get_logger().info('Set [ID: %d] [Goal Position: %d]' % (msg.id, msg.position))
+        self.subscriber_requests[portHandler_ID].append([id, goal_position])
         
     def get_present_position_callback(self, request, response):
         # Read Present Position (length : 4 bytes) and Convert uint32 -> int32
         id = request.id
-        portHandler_ID = (id - 1)//6
-        present_position, dxl_comm_result, dxl_error = self.packetHandler.read4ByteTxRx(
-            self.portHandler[portHandler_ID],
-            id,
-            ADDR_PRESENT_POSITION,
-        )
-
-    
-        response.position = int(present_position)
+        response.position = self.current_motor_position[id - 1]
 
         self.get_logger().info("Get [ID: %d] [Present Position: %d]" % (request.id, response.position))
        
         return response
-
-        # self.logger().info(f"Get [ID: {request.id}] [Present Position: {response.position}]")
-    
     
     def __del__(self):
         # Disable Dynamixel Torque
-        self.set_torque_enable(TORQUE_DISABLE)
 
         # Close the port
         for i in range(2):
-            self.portHandle[i].closePort()
+            self.set_torque_enable(TORQUE_DISABLE, BROADCAST_ID, self.portHandler[i])
+            self.portHandler[i].closePort()
             self.get_logger().info('Port closed')
 
 
@@ -205,9 +251,13 @@ def main(args=None):
     rclpy.init(args=args)
 
     dynamixel_control = DynamixelControl()
+    executor = MultiThreadedExecutor()
 
-    rclpy.spin(dynamixel_control)
+    executor.add_node(dynamixel_control)
 
+    executor.spin()
+
+    executor.shutdown()
     dynamixel_control.destroy_node()
     rclpy.shutdown()
 

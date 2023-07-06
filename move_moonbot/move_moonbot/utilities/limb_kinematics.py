@@ -62,7 +62,7 @@ def inverse_kinematics(position, leg_num):
     th2 = math.pi/2 - math.atan2((LL-L1), z)- math.acos((L3**2 - L2**2 - D**2)/(-2*D*L2))
     th3 = np.arccos((D**2 - L2**2 - L3**2)/(2*L2*L3))
 
-    return [bound_range(math.degrees(th1)), bound_range(math.degrees(th2)), bound_range(math.degrees(th3))] # The negative sign in third angle is because third servo is acting in opposite direction
+    return [bound_range(math.degrees(th1)), bound_range(math.degrees(th2)), -bound_range(math.degrees(th3))] # The negative sign in third angle is because third servo is acting in opposite direction
 
 def forward_kinematics(joint_angles, leg_num):
     ''' Returns the Forward Kinematics of the Limb
@@ -77,7 +77,7 @@ def forward_kinematics(joint_angles, leg_num):
 
     Th1 = math.radians(Th1)
     Th2 = math.radians(Th2)
-    Th3 = math.radians(Th3) # The negative sign in third angle is because third servo is acting in opposite direction
+    Th3 = -math.radians(Th3) # The negative sign in third angle is because third servo is acting in opposite direction
 
     ### Forward Kinematics
 

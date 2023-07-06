@@ -1,11 +1,12 @@
 import rclpy
 import numpy as np
 from rclpy.node import Node
-import moonbot.utilities.params as params
+import move_moonbot.utilities.params as params
 import time
 from moonbot_custom_interfaces.msg import JointAngles
 from moonbot_custom_interfaces.msg import SetPosition
 from moonbot_custom_interfaces.srv import GetPosition
+from moonbot_custom_interfaces.srv import SetJointAngles
 
 '''
 This Node acts as interface between joint_angle topic and dynamixel control code.
@@ -21,21 +22,19 @@ class JointInterface(Node):
         self.get_logger().info(f"Joint Interface Node Launched for Limb {self.limb_num}")
         self.servo_id = params.servo_id[str(self.limb_num)]
         self.publisher_servo = self.create_publisher(SetPosition, f'set_position', 10)
-        self.subscriber_angles = self.create_subscription(JointAngles, f'target_joint_angles_l{self.limb_num}', self.subscriber_callback, 10)
+        self.service_ = self.create_service(SetJointAngles, f'set_joint_angles_l{self.limb_num}', self.set_joint_angles)
         self.client_ = self.create_client(GetPosition, f'get_position')
         while not self.client_.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('Service not available, waiting ...')
         self.curr_angles = np.array([0,0,0]) # To store current joint angles in deg
-        self.sequence = [(0.0, -90.0, 0.0)]
-        if self.limb_num == 1:
-            self.sequence = [(0.0, -90.0, 0.0), (0.0, 90.0, 0.0), (45.0, 90.0, 0.0), (-45.0, 90.0, 0.0), (45.0, 90.0, 0.0), (-45.0, 90.0, 0.0), (0.0, 90.0, 0.0), (0.0, 90.0, 90.0), (0.0, -90.0, 0.0)]
-        if self.limb_num == 2:
-            self.sequence = [(-45.0, -90.0, 0.0)]
-        if self.limb_num == 4:
-            self.sequence = [(45.0, -90.0, 0.0)]
-        self.empty_sequence = True
         self.update_curr_pos()
-        self.execute_sequence()
+    
+    def set_joint_angles(self, request, response):
+        joint_angles = np.array([request.joint1, request.joint2, request.joint3])
+        # self.update_curr_pos()
+        self.compute_angle_steps(self.curr_angles, joint_angles)
+        return response
+
 
 
     def compute_angle_steps(self, curr_angles, target_angles):
@@ -64,13 +63,6 @@ class JointInterface(Node):
             self.curr_angles[i] = (INIT_POS - position) * 90 / params.DIFF_ANGLE
         self.get_logger().info(f'Current Position Updated for Limb {str(self.limb_num)}: {self.curr_angles}')
     
-    def execute_sequence(self):
-        while(len(self.sequence)):
-            # self.update_curr_pos() ## Updating curr position here is apparently prohibiting running the future codes.   
-            target_angles = np.array(self.sequence.pop(0))
-            self.compute_angle_steps(self.curr_angles, target_angles)
-        self.empty_sequence = True
-
         
     def publish_angles(self, joint_angles):
         for i in range(3):
@@ -79,14 +71,6 @@ class JointInterface(Node):
             INIT_POS = self.servo_id[i][1]
             msg.position = int(INIT_POS - DIFF_ANGLE/90 * joint_angles[i])
             self.publisher_servo.publish(msg)
-
-    def subscriber_callback(self, joint_msg):
-        joint_angles = [joint_msg.joint1, joint_msg.joint2, joint_msg.joint3]
-        if (list(self.curr_angles) != joint_angles) :
-            self.sequence.append(joint_angles)
-            if self.empty_sequence:
-                self.empty_sequence = False
-                self.execute_sequence()
 
 def main(args = None):
     rclpy.init(args = args)

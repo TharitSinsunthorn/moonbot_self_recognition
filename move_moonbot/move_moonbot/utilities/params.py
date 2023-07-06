@@ -21,7 +21,6 @@ servo_id = {
     "4": [(10, 2033), (11, 2064), (12, 2085)]
 }
 
-
 DIFF_ANGLE = 1023 # The difference between 0 deg and 90 deg
 
 '''
