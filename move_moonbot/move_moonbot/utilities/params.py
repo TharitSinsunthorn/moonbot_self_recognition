@@ -31,5 +31,5 @@ limb_angle = [45, 135, -135, -45]
 '''
 These values are for smoothly controlling the servos
 '''
-MAX_ANGLE_CHANGE = 5 # (in deg) maximum movement in servo at once.
-SLEEP_TIME_SERVO = 0.15 # Time delay between servo commands in seconds.
+MAX_VELOCITY = 60 # (in deg/s) maximum movement in servo at once.
+SLEEP_TIME_SERVO = 0.05 # Time delay between servo commands in seconds.
