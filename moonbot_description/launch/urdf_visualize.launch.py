@@ -11,7 +11,7 @@ import xacro
 def generate_launch_description():
 
     ####### DATA INPUT ##########
-    urdf_file = 'moonbot.urdf'
+    urdf_file = 'phantom.urdf'
     package_description = "moonbot_description"
 
     ####### DATA INPUT END ##########
@@ -68,6 +68,6 @@ def generate_launch_description():
         [            
             robot_state_publisher_node,
             rviz_node,
-            joint_state_publisher_node
+            # joint_state_publisher_node
         ]
     )

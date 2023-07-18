@@ -14,7 +14,7 @@
       <uri>model://ground_plane</uri>
     </include>
 
-    <!-- <physics name="ode_70iters" type="ode">
+    <physics name="ode_70iters" type="ode">
       <real_time_update_rate>1500</real_time_update_rate>
       <ode>
         <solver>
@@ -22,12 +22,9 @@
           <iters>70</iters>
         </solver>
       </ode>
-    </physics> -->
+    </physics>
 
-    <physics name="ode_200iters" type="ode">
-      <max_step_size>0.001</max_step_size>
-      <real_time_factor>1.0</real_time_factor>
-      <real_time_update_rate>1000.0</real_time_update_rate>
+    <physics name="ode_200iters" type="ode" default="true">
       <ode>
         <solver>
           <type>quick</type>
@@ -36,17 +33,17 @@
       </ode>
     </physics>
 
-    <!-- <physics name="ode_500iters" type="ode">
+    <physics name="ode_500iters" type="ode">
       <ode>
         <solver>
           <type>quick</type>
           <iters>500</iters>
         </solver>
       </ode>
-    </physics> -->
+    </physics>
 
-    <!-- <model name='unit_box'>
-      <pose>0 0 0 0 -0 0</pose>
+    <model name='unit_box'>
+      <pose>0.180332 1.4103 0.5 0 -0 0</pose>
       <link name='link'>
         <inertial>
           <mass>1</mass>
@@ -97,7 +94,7 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-    </model> -->
+    </model>
 
   </world>
 </sdf>
