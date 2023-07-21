@@ -135,7 +135,6 @@ class DynamixelControl(Node):
             f'get_position_d{self.dynamixel_num}',
             self.get_present_position_callback
         )
-        self.JOINT_STATUS = [True] * 6
         self.LIMB_STATUS = [True, True]
         self.set_torque_enable(TORQUE_ENABLE, BROADCAST_ID, self.portHandler)
         # self.timer_update_limb_status = self.create_timer(1, self.update_limb_status)
@@ -163,29 +162,21 @@ class DynamixelControl(Node):
         self.i+=1
 
     def update_limb_status(self):
-        self.get_logger().info("Updating Limb Status")
-        dxl_devices = []
-        dxl_data_list, _dxl_comm_result = self.packetHandler.broadcastPing(self.portHandler)
-        if _dxl_comm_result != COMM_SUCCESS:
-            print("%s" % self.packetHandler.getTxRxResult(_dxl_comm_result))
-        dxl_devices += dxl_data_list
-        self.JOINT_STATUS = [False] * 6
-        for id in dxl_devices:
-            self.JOINT_STATUS[id%6 - 1] = True
-
         for i in range(2):
-            if self.JOINT_STATUS[i * 3] or self.JOINT_STATUS[i * 3 + 1] or self.JOINT_STATUS[i * 3 + 2]:
-                if self.LIMB_STATUS[i] == False:
-                    self.LIMB_STATUS[i] = True
-                    for j in range(3):
-                        id = 6 * (self.dynamixel_num - 1) + 3 * i  + j + 1
-                        # self.packetHandler.reboot(self.portHandler[portHandler_ID], id)
-                        self.set_torque_enable(TORQUE_ENABLE, id, self.portHandler)
-                    self.get_logger().info(f"Limb {2 * (self.dynamixel_num - 1) + i + 1} attached !!")
-            else:
+            limb_id = 6 *(self.dynamixel_num - 1) + 3 * i + 1
+            dxl_model_number, dxl_comm_result, dxl_error = self.packetHandler.ping(self.portHandler, limb_id)
+            # self.get_logger().info(f'{dxl_comm_result}')
+            if dxl_comm_result != COMM_SUCCESS or dxl_error !=0:
                 if self.LIMB_STATUS[i] == True:
                     self.LIMB_STATUS[i] = False
                     self.get_logger().info(f"Limb {2 * (self.dynamixel_num - 1) + i + 1} detached !!")
+            else:
+                if self.LIMB_STATUS[i] == False:
+                    self.LIMB_STATUS[i] = True
+                    for j in range(3):
+                        id = limb_id + j
+                        self.set_torque_enable(TORQUE_ENABLE, id, self.portHandler)
+                    self.get_logger().info(f"Limb {2 * (self.dynamixel_num - 1) + i + 1} attached !!")
 
     def set_torque_enable(self, enable, id, port):
         dxl_comm_result, dxl_error = self.packetHandler.write1ByteTxRx(
