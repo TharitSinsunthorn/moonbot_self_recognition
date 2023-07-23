@@ -8,12 +8,30 @@ from moonbot_custom_interfaces.srv import SetJointAngles
 
 # Note that all joint3 angles are published in opposite angles. This is because of some problem with servo connection or idk.
 
-HOME_POS = [0.0, 30.0, 30.0]
-LIMB = [[15.395668506020229, 3.643952495843621, 21.658899255364986], [10.069114418394975, -43.55762527119134, -88.8445378622273], [-10.069114418394975, -43.55762527119134, -88.8445378622273], [-15.395668506020229, 3.643952495843621, 21.658899255364986]]
-RESET1 = [[89.850039491688, -9.219923466449245, 47.13538874427036], [1.0735163900000089, -9.884792400462175, 47.21419678757934], [1.0735163900000089, -31.22401100000002, 19.220637800000077]]
-RESET2 = [[26.96317036234035, 6.113017998637929, 9.28652581145002], [1.0735163900000089, -9.884792400462175, 47.21419678757934], [1.0735163900000089, -31.22401100000002, 19.220637800000077]]
-RESET3 = [[-26.10265920664665, 6.3449483593653895, 10.209450233083203], [1.0735163900000089, -9.884792400462175, 47.21419678757934], [1.0735163900000089, -31.22401100000002, 19.220637800000077]]
-RESET4 = [[-89.84429653467441, -10.803821897784246, 47.30198957255925], [1.0735163900000089, -9.884792400462175, 47.21419678757934], [1.0735163900000089, -31.22401100000002, 19.220637800000077]]
+HOME_POS1 = [0.0, -80.0, -35.0]
+HOME_POS2 = [0.0, -80.0, -35.0]
+HOME_POS3 = [0.0, -80.0, -35.0]
+HOME_POS4 = [0.0, -80.0, -35.0]
+FC1 = [42.75367285946197, -87.56527231978885, -28.818799182685552]
+HE1 = [-17.978297559378234, -69.13018151954225, -40.264044618557136]
+HEH1 = [-17.978297559378234, -22.44468177418719, -116.00228327659863]
+FEH1 = [-32.08994052366563, 3.518957523478093, -102.36615104573639]
+FE1 = [-32.08994052366563, -75.73519810712423, 9.132933625423277]
+FC2 = [-42.75367285946197, -87.56527231978885, -28.818799182685552]
+HE2 = [17.97829755937829, -69.13018151954225, -40.264044618557136]
+HEH2 = [17.97829755937829, -22.44468177418719, -116.00228327659863]
+FEH2 = [32.08994052366563, 3.518957523478093, -102.36615104573639]
+FE2 = [32.08994052366563, -75.73519810712423, 9.132933625423277]
+FC3 = [42.75367285946197, -87.56527231978885, -28.818799182685552]
+HE3 = [-17.978297559378234, -69.13018151954225, -40.264044618557136]
+HEH3 = [-17.978297559378234, -22.44468177418719, -116.00228327659863]
+FEH3 = [-32.08994052366563, 3.518957523478093, -102.36615104573639]
+FE3 = [-32.08994052366563, -75.73519810712423, 9.132933625423277]
+FC4 = [-42.75367285946197, -87.56527231978885, -28.818799182685552]
+HE4 = [17.97829755937829, -69.13018151954225, -40.264044618557136]
+HEH4 = [17.97829755937829, -22.44468177418719, -116.00228327659863]
+FEH4 = [32.08994052366563, 3.518957523478093, -102.36615104573639]
+FE4 = [32.08994052366563, -75.73519810712423, 9.132933625423277]
 
 class MoveRobot(Node):
     def __init__(self):
@@ -23,15 +41,24 @@ class MoveRobot(Node):
             while not self.clients_[i].wait_for_service(timeout_sec=1.0):
                 self.get_logger().info(f'Service not available for Limb {i+1}, waiting ...')
         self.client_futures = []
-        # self.moveX()   
-         
-        self.set_initial_position()
-        # self.moveX2()
-        # self.test_motion()
-        # self.moveX3(RESET1, 1)
-        # self.moveX3(RESET2, 2)
-        # self.moveX3(RESET3, 3)
-        # self.moveX3(RESET4, 4)  
+        # self.moveX()
+        self.setPositions([(HOME_POS1, 1), (HOME_POS2, 2), (HOME_POS3, 3), (HOME_POS4, 4)])
+        self.setPositions([(HE1, 1), (FC2, 2), (FC3, 3), (HE4, 4)]) 
+        # self.setPositions([(HEH1, 1)])
+        # self.setPositions([(FEH1, 1)])
+        # self.setPositions([(FE1, 1)])
+        # self.setPositions([(HEH4, 4)])
+        # self.setPositions([(FEH4, 4)])
+        # self.setPositions([(FE4, 4)])
+        # self.setPositions([(FC1, 1), (FC4, 4), (FE3, 3), (FE2, 2)])
+        # self.setPositions([(FEH2, 2)])
+        # self.setPositions([(HEH2, 2)])
+        # self.setPositions([(HE2, 2)])
+        # self.setPositions([(FEH3, 3)])
+        # self.setPositions([(HEH3, 3)])
+        # self.setPositions([(HE3, 3)])
+        # self.setPositions([(HOME_POS1, 1), (HOME_POS2, 2), (HOME_POS3, 3), (HOME_POS4, 4)])
+
 
     def test_motion(self):
         request = SetJointAngles.Request()
@@ -48,20 +75,20 @@ class MoveRobot(Node):
             rclpy.spin_until_future_complete(self, f)
         self.client_futures = []
 
-
-    def set_initial_position(self):
-        self.get_logger().info("Initialising position")
-        self.move_track = 0
-        request = SetJointAngles.Request()
-        request.joint1 = HOME_POS[0]
-        request.joint2 = HOME_POS[1]
-        request.joint3 = HOME_POS[2]
-
+    def setPositions(self, limbPositions):
+        '''
+        limbPositions: [(POS, legNum), (POS, legNum), (POS, legNum)]
+        '''
         self.client_futures = []
-        for i in range(4):
-            self.client_futures.append(self.clients_[i].call_async(request))
+        for i in limbPositions:
+            POS = i[0]
+            legNum = i[1]
+            request = SetJointAngles.Request()
+            request.joint1 = POS[0]
+            request.joint2 = POS[1]
+            request.joint3 = -POS[2]
+            self.client_futures.append(self.clients_[legNum - 1].call_async(request))
         self.spinFutures()
-        self.get_logger().info("Limb POsition Initialised")
 
     def moveX1(self):
         self.get_logger().info("Moving in X direction")
