@@ -8,30 +8,34 @@ from moonbot_custom_interfaces.srv import SetJointAngles
 
 # Note that all joint3 angles are published in opposite angles. This is because of some problem with servo connection or idk.
 
-HOME_POS1 = [0.0, -80.0, -35.0]
-HOME_POS2 = [0.0, -80.0, -35.0]
-HOME_POS3 = [0.0, -80.0, -35.0]
-HOME_POS4 = [0.0, -80.0, -35.0]
-FC1 = [42.75367285946197, -87.56527231978885, -28.818799182685552]
-HE1 = [-17.978297559378234, -69.13018151954225, -40.264044618557136]
-HEH1 = [-17.978297559378234, -22.44468177418719, -116.00228327659863]
-FEH1 = [-32.08994052366563, 3.518957523478093, -102.36615104573639]
-FE1 = [-32.08994052366563, -75.73519810712423, 9.132933625423277]
-FC2 = [-42.75367285946197, -87.56527231978885, -28.818799182685552]
-HE2 = [17.97829755937829, -69.13018151954225, -40.264044618557136]
-HEH2 = [17.97829755937829, -22.44468177418719, -116.00228327659863]
-FEH2 = [32.08994052366563, 3.518957523478093, -102.36615104573639]
-FE2 = [32.08994052366563, -75.73519810712423, 9.132933625423277]
-FC3 = [42.75367285946197, -87.56527231978885, -28.818799182685552]
-HE3 = [-17.978297559378234, -69.13018151954225, -40.264044618557136]
-HEH3 = [-17.978297559378234, -22.44468177418719, -116.00228327659863]
-FEH3 = [-32.08994052366563, 3.518957523478093, -102.36615104573639]
-FE3 = [-32.08994052366563, -75.73519810712423, 9.132933625423277]
-FC4 = [-42.75367285946197, -87.56527231978885, -28.818799182685552]
-HE4 = [17.97829755937829, -69.13018151954225, -40.264044618557136]
-HEH4 = [17.97829755937829, -22.44468177418719, -116.00228327659863]
-FEH4 = [32.08994052366563, 3.518957523478093, -102.36615104573639]
-FE4 = [32.08994052366563, -75.73519810712423, 9.132933625423277]
+HOME_POS1 = [0.0, 5.0, -115.0]
+HOME_POS2 = [0.0, 5.0, -115.0]
+HOME_POS3 = [0.0, 5.0, -115.0]
+HOME_POS4 = [0.0, 5.0, -115.0]
+STAGE11 = [33.81266267289558, -8.447375495254537, -121.36386684745158]
+STAGE12 = [15.975425232549906, 8.725731805269717, -89.4766988058537]
+STAGE13 = [-15.975425232549906, 8.725731805269717, -89.4766988058537]
+STAGE14 = [-33.81266267289558, -8.447375495254537, -121.36386684745158]
+HOPI2 = [15.975425232549906, 60.988270322240737, -105.48972974367456]
+HOPM2 = [-76.15080729501362, 22.079952222681893, -140.75753391433332]
+HOPF2 = [-76.15080729501362, -2.3240959163947394, -119.88607188066825]
+HOPI1 = [33.81266267289558, 60.032633807984126, -142.81328526152583]
+HOPM1 = [-23.99528663381575, 7.362509760753943, -51.45042615744111]
+HOPF1 = [-23.99528663381575, -16.22542337035274, -25.921949231986975]
+STAGE21 = [-15.975425232549888, 8.725731805269717, -89.4766988058537]
+STAGE22 = [-33.81266267289556, -8.447375495254537, -121.36386684745158]
+STAGE23 = [-23.995286633815756, -16.22542337035274, -25.921949231986975]
+STAGE24 = [-76.15080729501364, -2.3240959163947394, -119.88607188066825]
+HOPI3 = [-23.995286633815756, 60.362509760753943, -51.45042615744111]
+HOPM3 = [33.81266267289558, 14.032633807984112, -142.81328526152583]
+HOPF3 = [33.81266267289558, -8.44737549525455, -121.36386684745158]
+HOPI4 = [-76.15080729501364, 60.079952222681893, -140.75753391433332]
+HOPM4= [15.975425232549888, 29.988270322240737, -105.48972974367456]
+HOPF4 = [15.975425232549888, 8.725731805269717, -89.4766988058537]
+STAGE31 = [0.0, 4.999999999999995, -114.99999999999997]
+STAGE32 = [5.011655339005834e-15, 4.999999999999995, -115.0]
+STAGE33 = [0.0, 5.000000000000007, -115.00000000000003]
+STAGE34 = [0.0, 4.999999999999995, -114.99999999999997]
 
 class MoveRobot(Node):
     def __init__(self):
@@ -41,24 +45,54 @@ class MoveRobot(Node):
             while not self.clients_[i].wait_for_service(timeout_sec=1.0):
                 self.get_logger().info(f'Service not available for Limb {i+1}, waiting ...')
         self.client_futures = []
-        # self.moveX()
         self.setPositions([(HOME_POS1, 1), (HOME_POS2, 2), (HOME_POS3, 3), (HOME_POS4, 4)])
-        self.setPositions([(HE1, 1), (FC2, 2), (FC3, 3), (HE4, 4)]) 
-        # self.setPositions([(HEH1, 1)])
-        # self.setPositions([(FEH1, 1)])
-        # self.setPositions([(FE1, 1)])
-        # self.setPositions([(HEH4, 4)])
-        # self.setPositions([(FEH4, 4)])
-        # self.setPositions([(FE4, 4)])
-        # self.setPositions([(FC1, 1), (FC4, 4), (FE3, 3), (FE2, 2)])
-        # self.setPositions([(FEH2, 2)])
-        # self.setPositions([(HEH2, 2)])
-        # self.setPositions([(HE2, 2)])
-        # self.setPositions([(FEH3, 3)])
-        # self.setPositions([(HEH3, 3)])
-        # self.setPositions([(HE3, 3)])
-        # self.setPositions([(HOME_POS1, 1), (HOME_POS2, 2), (HOME_POS3, 3), (HOME_POS4, 4)])
+        self.setPositions([(STAGE11, 1), (STAGE12, 2), (STAGE13, 3), (STAGE14, 4)]) 
+        self.setPositions([(HOPI2, 2)])
+        self.setPositions([(HOPM2, 2)])
+        self.setPositions([(HOPF2, 2)])
+        self.setPositions([(HOPI1, 1)])
+        self.setPositions([(HOPM1, 1)])
+        self.setPositions([(HOPF1, 1)])
+        self.setPositions([(STAGE21, 1), (STAGE22, 2), (STAGE23, 3), (STAGE24, 4)])
+        self.setPositions([(HOPI3, 3)])
+        self.setPositions([(HOPM3, 3)])
+        self.setPositions([(HOPF3, 3)])
+        self.setPositions([(HOPI4, 4)])
+        self.setPositions([(HOPM4, 4)])
+        self.setPositions([(HOPF4, 4)])
+        # self.setPositions([(STAGE31, 1), (STAGE32, 2), (STAGE33, 3), (STAGE34, 4)])
 
+        self.setPositions([(STAGE11, 1), (STAGE12, 2), (STAGE13, 3), (STAGE14, 4)]) 
+        self.setPositions([(HOPI2, 2)])
+        self.setPositions([(HOPM2, 2)])
+        self.setPositions([(HOPF2, 2)])
+        self.setPositions([(HOPI1, 1)])
+        self.setPositions([(HOPM1, 1)])
+        self.setPositions([(HOPF1, 1)])
+        self.setPositions([(STAGE21, 1), (STAGE22, 2), (STAGE23, 3), (STAGE24, 4)])
+        self.setPositions([(HOPI3, 3)])
+        self.setPositions([(HOPM3, 3)])
+        self.setPositions([(HOPF3, 3)])
+        self.setPositions([(HOPI4, 4)])
+        self.setPositions([(HOPM4, 4)])
+        self.setPositions([(HOPF4, 4)])
+        self.setPositions([(STAGE31, 1), (STAGE32, 2), (STAGE33, 3), (STAGE34, 4)])
+
+        # self.setPositions([(STAGE11, 1), (STAGE12, 2), (STAGE13, 3), (STAGE14, 4)]) 
+        # self.setPositions([(HOPI2, 2)])
+        # self.setPositions([(HOPM2, 2)])
+        # self.setPositions([(HOPF2, 2)])
+        # self.setPositions([(HOPI1, 1)])
+        # self.setPositions([(HOPM1, 1)])
+        # self.setPositions([(HOPF1, 1)])
+        # self.setPositions([(STAGE21, 1), (STAGE22, 2), (STAGE23, 3), (STAGE24, 4)])
+        # self.setPositions([(HOPI3, 3)])
+        # self.setPositions([(HOPM3, 3)])
+        # self.setPositions([(HOPF3, 3)])
+        # self.setPositions([(HOPI4, 4)])
+        # self.setPositions([(HOPM4, 4)])
+        # self.setPositions([(HOPF4, 4)])
+        # self.setPositions([(STAGE31, 1), (STAGE32, 2), (STAGE33, 3), (STAGE34, 4)])
 
     def test_motion(self):
         request = SetJointAngles.Request()
