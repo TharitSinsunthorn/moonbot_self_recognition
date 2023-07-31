@@ -80,7 +80,7 @@ LEN_PRO_PRESENT_POSITION   = 4
 index = 0
 dxl_goal_position = [DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE]         # Goal position
 
-DEVICES = ['/dev/ttyUSB0', '/dev/ttyUSB1']
+DEVICES = ['/dev/ttyUSB1', '/dev/ttyUSB0']
 
 class DynamixelControl(Node):
     def __init__(self):

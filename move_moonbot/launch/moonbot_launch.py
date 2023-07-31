@@ -8,13 +8,13 @@ def generate_launch_description():
         executable='dynamixel_control',
         name=f'dynamixel_control_d{i+1}',
         parameters = [{'dynamixel_num': i + 1}]
-        ) for i in range(2)]
+        ) for i in range(1, 2)]
 
-    move_robot_node = Node(
+    move_robot_node = [Node(
         package="move_moonbot",
         executable="move_robot",
         name = "move_robot"
-        )
+        )]
     
     joint_interface_nodes = [Node(
         package="move_moonbot",
@@ -24,4 +24,4 @@ def generate_launch_description():
         ) for i in range(4)]
     
     # return LaunchDescription(dynamixel_nodes)
-    return LaunchDescription(dynamixel_node + joint_interface_nodes)
+    return LaunchDescription(dynamixel_node + joint_interface_nodes + move_robot_node)

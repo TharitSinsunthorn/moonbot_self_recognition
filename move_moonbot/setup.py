@@ -26,6 +26,7 @@ setup(
             "dynamixel_control = move_moonbot.dynamixel_control:main",
             "joint_interface = move_moonbot.joint_interface:main",
             "move_robot = move_moonbot.move_robot:main",
+            "dance_robot = move_moonbot.dance_robot:main",
         ],
     },
 )
