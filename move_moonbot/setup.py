@@ -27,6 +27,7 @@ setup(
             "joint_interface = move_moonbot.joint_interface:main",
             "move_robot = move_moonbot.move_robot:main",
             "dance_robot = move_moonbot.dance_robot:main",
+            "keyboard_controller = keyboard"
         ],
     },
 )
