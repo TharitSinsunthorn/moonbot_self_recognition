@@ -19,20 +19,25 @@ controller_manager:
 forward_position_controller:
   ros__parameters:
     joints:
-      - j_c1_lf
+      - j_c1_rf
+      - j_thigh_rf
+      - j_tibia_rf
     interface_name: position
 
 
 position_trajectory_controller:
   ros__parameters:
     joints:
-      - j_c1_lf
+      - j_c1_rf
+      - j_thigh_rf
+      - j_tibia_rf
 
     command_interfaces:
       - position
 
     state_interfaces:
       - position
+      - velocity
 
     state_publish_rate: 200.0 # Hz, Defaults to 50
     action_monitor_rate: 20.0 # Hz, Defaults to 20

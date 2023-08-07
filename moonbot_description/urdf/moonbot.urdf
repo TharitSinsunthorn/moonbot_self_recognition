@@ -591,8 +591,8 @@
     
     <joint name="Leg1_Joint1">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -609,8 +609,8 @@
 
     <joint name="Leg1_Joint2">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -627,8 +627,8 @@
 
     <joint name="Leg1_Joint3">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -645,8 +645,8 @@
 
     <joint name="Leg2_Joint1">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -663,8 +663,8 @@
 
     <joint name="Leg2_Joint2">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -681,8 +681,8 @@
 
     <joint name="Leg2_Joint3">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -699,8 +699,8 @@
 
     <joint name="Leg3_Joint1">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -717,8 +717,8 @@
 
     <joint name="Leg3_Joint2">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -735,8 +735,8 @@
 
     <joint name="Leg3_Joint3">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -753,8 +753,8 @@
 
     <joint name="Leg4_Joint1">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -771,8 +771,8 @@
 
     <joint name="Leg4_Joint2">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>
@@ -789,8 +789,8 @@
 
     <joint name="Leg4_Joint3">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.75</param>
+        <param name="max">1.75</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-3</param>

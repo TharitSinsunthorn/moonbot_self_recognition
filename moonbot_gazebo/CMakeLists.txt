@@ -44,6 +44,7 @@ install(
     scripts/joint_trajectory_test.py
     scripts/publisher_joint_trajectory_controller.py
     scripts/action_joint.py
+    scripts/limb_joint.py
 
   DESTINATION
     lib/${PROJECT_NAME}

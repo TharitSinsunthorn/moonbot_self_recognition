@@ -131,6 +131,14 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.01</mu>
+            <mu2>0.01</mu2>
+          </ode>
+        </friction>
+      </surface>
     </collision>
   </link>
 
@@ -269,6 +277,14 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.01</mu>
+            <mu2>0.01</mu2>
+          </ode>
+        </friction>
+      </surface>
     </collision>
   </link>
   <joint name="j_c1_rr" type="revolute">
@@ -401,6 +417,14 @@
       <geometry>
         <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.01</mu>
+            <mu2>0.01</mu2>
+          </ode>
+        </friction>
+      </surface>
     </collision>
   </link>
   <joint name="j_c1_lf" type="revolute">
@@ -536,6 +560,14 @@
         <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
     </collision>
+    <surface>
+      <friction>
+        <ode>
+          <mu>0.01</mu>
+          <mu2>0.01</mu2>
+        </ode>
+      </friction>
+    </surface>
   </link>
   <joint name="j_c1_lr" type="revolute">
     <parent link="MP_BODY"/>

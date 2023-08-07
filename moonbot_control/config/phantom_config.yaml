@@ -68,3 +68,43 @@ position_trajectory_controller:
       stopped_velocity_tolerance: 0.01 # Defaults to 0.01
       goal_time: 0.0 # Defaults to 0.0 (start immediately)
 
+    gains:
+      j_c1_lf:
+        p: 100.0
+        i: 0.01
+        d: 10.0
+      
+      j_c1_rf:
+          p: 100.0
+          i: 0.01
+          d: 10.0
+
+      j_c1_lr:
+        p: 100.0
+        i: 0.01
+        d: 10.0
+      
+      j_c1_rr:
+          p: 100.0
+          i: 0.01
+          d: 10.0
+
+      j_thigh_lf:
+        p: 100.0
+        i: 0.01
+        d: 10.0
+      
+      j_thigh_rf:
+          p: 100.0
+          i: 0.01
+          d: 10.0
+
+      j_thigh_lr:
+        p: 100.0
+        i: 0.01
+        d: 10.0
+      
+      j_thigh_rr:
+          p: 100.0
+          i: 0.01
+          d: 10.0
