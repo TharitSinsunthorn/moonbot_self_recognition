@@ -14,17 +14,14 @@
 
 using hardware_interface::return_type;
 
-namespace dynamixel_hardware
-{
-struct JointValue
-{
+namespace dynamixel_hardware {
+struct JointValue {
   double position{0.0};
   double velocity{0.0};
   double effort{0.0};
 };
 
-struct Joint
-{
+struct Joint {
   JointValue state{};
   JointValue command{};
 };
@@ -40,9 +37,7 @@ enum class ControlMode {
   PWM,
 };
 
-class DynamixelHardware
-: public hardware_interface::SystemInterface
-{
+class DynamixelHardware : public hardware_interface::SystemInterface {
 public:
   RCLCPP_SHARED_PTR_DEFINITIONS(DynamixelHardware)
 
