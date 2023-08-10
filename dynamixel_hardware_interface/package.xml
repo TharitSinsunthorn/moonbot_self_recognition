@@ -13,6 +13,7 @@
   <depend>pluginlib</depend>
   <depend>hardware_interface</depend>
   <depend>dynamixel_workbench_toolbox</depend>
+  <depend>rclcpp_lifecycle</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

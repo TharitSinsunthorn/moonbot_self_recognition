@@ -27,13 +27,13 @@ constexpr const char * kPresentLoadItem = "Present_Load";
 CallbackReturn DynamixelHardware::on_init(const hardware_interface::HardwareInfo & info)
 {
   RCLCPP_DEBUG(rclcpp::get_logger(kDynamixelHardware), "configure");
-  if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS)
+  if (DynamixelHardware::on_init(info) != CallbackReturn::SUCCESS)
   {
     return CallbackReturn::ERROR;
   }
 
-  joints_.resize(info_.joints.size(), Joint());
-  joint_ids_.resize(info_.joints.size(), 0);
+  joints_.resize(hardware_interface::HardwareInfo::info_.joints.size(), Joint());
+  joint_ids_.resize(hardware_interface::HardwareInfo::info_.joints.size(), 0);
 
   for (uint i = 0; i < info_.joints.size(); i++) {
     joint_ids_[i] = std::stoi(info_.joints[i].parameters.at("id"));
@@ -391,3 +391,7 @@ return_type DynamixelHardware::reset_command()
 }
 
 }  // namespace dynamixel_hardware 
+
+#include "pluginlib/class_list_macros.hpp"
+
+PLUGINLIB_EXPORT_CLASS(dynamixel_hardware::DynamixelHardware, hardware_interface::SystemInterface)

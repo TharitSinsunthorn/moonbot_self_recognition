@@ -10,9 +10,14 @@
 #include <rclcpp_lifecycle/state.hpp> 
 #include "rclcpp/macros.hpp"
 
+#include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
+#include "rclcpp_lifecycle/lifecycle_publisher.hpp"
+
 #include <dynamixel_workbench_toolbox/dynamixel_workbench.h>
 
 using hardware_interface::return_type;
+
+using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 namespace dynamixel_hardware {
 struct JointValue {
@@ -41,19 +46,19 @@ class DynamixelHardware : public hardware_interface::SystemInterface {
 public:
   RCLCPP_SHARED_PTR_DEFINITIONS(DynamixelHardware)
 
-  CallbackReturn on_init(const hardware_interface::HardwareInfo & info) override;
+  CallbackReturn on_init(const hardware_interface::HardwareInfo & info);
 
-  std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
+  std::vector<hardware_interface::StateInterface> export_state_interfaces();
 
-  std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
+  std::vector<hardware_interface::CommandInterface> export_command_interfaces();
 
-  CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
+  CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state);
 
-  CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
+  CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state);
 
-  return_type read() override;
+  return_type read();
 
-  return_type write() override;
+  return_type write();
 
 private:
   return_type enable_torque(const bool enabled);
