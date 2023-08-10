@@ -1,5 +1,5 @@
 <?xml version="1.0"?>  
-<robot name="box_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="limbbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
         
   <link name="base_link"/>
 
@@ -184,11 +184,12 @@
     <hardware>
       <plugin>dynamixel_hardware/DynamixelHardware</plugin>
       <param name="usb_port">/dev/ttyUSB0</param>
-      <param name="baud_rate">1000000</param>
+      <param name="baud_rate">57600</param>
       <param name="usb_dummy">true</param>
     </hardware>
     
     <joint name="j_c1_rf">
+      <param name="id">7</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
         <param name="max">2.6179939</param>
@@ -203,6 +204,7 @@
     </joint>
 
     <joint name="j_thigh_rf">
+      <param name="id">8</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
         <param name="max">2.6179939</param>
@@ -217,6 +219,7 @@
     </joint>
 
     <joint name="j_tibia_rf">
+      <param name="id">9</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
         <param name="max">2.6179939</param>

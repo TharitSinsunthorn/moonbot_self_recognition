@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(dynamixel_hardware_interface)
+project(dynamixel_hardware)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -21,12 +21,12 @@ find_package(rclcpp REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(hardware_interface REQUIRED)
 find_package(dynamixel_workbench_toolbox REQUIRED)
-find_package(rclcpp_lifecycle REQUIRED)
+# find_package(rclcpp_lifecycle REQUIRED)
 
 add_library(
   ${PROJECT_NAME}
   SHARED
-  src/dynamixel_hardware_interface.cpp
+  src/dynamixel_hardware.cpp
 )
 target_include_directories(
   ${PROJECT_NAME}

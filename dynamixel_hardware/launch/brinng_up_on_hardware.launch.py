@@ -25,7 +25,7 @@ def generate_launch_description():
     robot_description_config = xacro.process_file(robot_desc_path)
 
     controller_config = os.path.join(
-        get_package_share_directory("my_robot_hardware_interface"),
+        get_package_share_directory("dynamixel_hardware"),
         "config",
         "single_config.yaml"
     )
@@ -49,17 +49,17 @@ def generate_launch_description():
                        "--controller-manager", "/controller_manager"],
         ),
 
-        Node(
-            package="controller_manager",
-            executable="spawner.py",
-            arguments=["forward_position_controller",
-                       "-c", "/controller_manager"],
-        ),
+        # Node(
+        #     package="controller_manager",
+        #     executable="spawner.py",
+        #     arguments=["forward_position_controller",
+        #                "-c", "/controller_manager"],
+        # ),
 
         Node(
             package="controller_manager",
             executable="spawner.py",
-            arguments=["joint_trajectory_controller",
+            arguments=["position_trajectory_controller",
                        "-c", "/controller_manager"],
         ),
 
