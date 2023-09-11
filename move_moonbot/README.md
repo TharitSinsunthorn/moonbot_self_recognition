@@ -1,6 +1,6 @@
 ## move_moonbot (ROS package)
 
-This is the ROS2 package used to move the moonbot in four cardinal directions. The package uses gait patterns generated and optimized using Genetic Algorithm ()[Colab Notebook].
+This is the ROS2 package used to move the moonbot in four cardinal directions. The package uses gait patterns generated and optimized using Genetic Algorithm [/GA_Gait_(Simple).ipynb](Colab Notebook).
 
 ## Prerequisties
 * Ubuntu 20.04
