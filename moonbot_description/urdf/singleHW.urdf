@@ -162,7 +162,7 @@
   <joint name="j_tibia_rf" type="revolute">
     <parent link="thigh_rf"/>
     <child link="tibia_rf"/>
-    <origin rpy="-1.5707 0 3.14159" xyz="0 -0.0645 -0.0145"/>
+    <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>

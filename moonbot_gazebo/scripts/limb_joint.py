@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import sys
+import os
 import rclpy
 from rclpy.duration import Duration 
 from rclpy.action import ActionClient
@@ -8,6 +9,7 @@ from rclpy.node import Node
 from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 
+import limb_kinematics as lk
 # ros2 action list -t
 # ros2 action info /position_trajectory_controller/follow_joint_trajectory -t
 # ros2 interface show control_msgs/action/FolowJointTrajectory
@@ -30,22 +32,33 @@ class LimbActionClient(Node):
         
         sec = 1.0
 
+        tar = lk.inverse_kinematics([0.05, 0.05, 0.0])
 
+        seq = [[1.57, 1.57, 1.57], [0.0, 0.0, 0.0], tar, [0.0, 0.0, 0.0]]
         points = []
-        point1 = JointTrajectoryPoint()
-        point1.positions = [0.0, 0.0, 0.0]
+        # point1 = JointTrajectoryPoint()
+        # point1.positions = [0.0, 0.0, 0.0]
 
-        point2 = JointTrajectoryPoint()
-        point2.time_from_start = Duration(seconds=sec, nanoseconds=0).to_msg()
-        point2.positions = [0.0, 0.0, 0.25]
+        # point1 = JointTrajectoryPoint()
+        # point1.time_from_start = Duration(seconds=sec, nanoseconds=0).to_msg()
+        # point1.positions = [0.0, 0.0, 0.4]
+
+        # point2 = JointTrajectoryPoint()
+        # point2.time_from_start = Duration(seconds=2*sec, nanoseconds=0).to_msg()
+        # point2.positions = [0.0, 0.0, -0.4]
         
+        # for i in range(2):
+        #     point_name = f"point{i+1}"  # Generate the variable name using f-string
+        #     point = eval(point_name)
+        #     points.append(point)
+        #     print(points)
 
-        # points.append(point1)
-        # points.append(point2)
-        for i in range(2):
-            point_name = f"point{i+1}"  # Generate the variable name using f-string
-            point = eval(point_name)
+        for i in range(len(seq)):
+            point = JointTrajectoryPoint()
+            point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
+            point.positions = seq[i]
             points.append(point)
+            # print(points)
 
         goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
         goal_msg.trajectory.joint_names = joint_names
@@ -84,8 +97,9 @@ def main(args=None):
     action_client = LimbActionClient()
 
     # angle = [1.0, 1.0]
+    print(lk.inverse_kinematics([0.05, 0.05, 0.0]))
     action_client.send_goal()
-
+    
     rclpy.spin(action_client)
 
 if __name__ == '__main__':
