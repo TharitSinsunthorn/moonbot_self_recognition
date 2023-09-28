@@ -28,13 +28,18 @@ class LimbActionClient(Node):
         goal_msg = FollowJointTrajectory.Goal()
 
         # Fill in data for trajectory
-        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf"]
+        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
+                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
+                    #    "j_c1_rr", "j_thigh_rr", "j_tibia_rr",
+                    #    "j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
         
         sec = 1.0
 
         tar = lk.inverse_kinematics([0.05, 0.05, 0.0])
 
-        seq = [[1.57, 1.57, 1.57], [0.0, 0.0, 0.0], tar, [0.0, 0.0, 0.0]]
+        seq = [[0.5, 0.0, 0.5, 0.5, 0.0, 0.5], #, 0.2, 0.0, 0.5, 0.2, 0.0, 0.5], 
+               [0.0, 1.57, 0.0, 0.0, 1.57, 0.0]] #, 0.0, 1.57, 0.0, 0.0, 1.57, 0.0]]
+        
         points = []
         # point1 = JointTrajectoryPoint()
         # point1.positions = [0.0, 0.0, 0.0]
