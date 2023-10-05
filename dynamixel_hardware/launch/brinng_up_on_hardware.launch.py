@@ -25,7 +25,7 @@ def generate_launch_description():
     robot_description_config = xacro.process_file(robot_desc_path)
 
     controller_config = os.path.join(
-        get_package_share_directory("moonbot_control"),
+        get_package_share_directory("dynamixel_hardware"),
         "config",
         "single_config.yaml"
     )

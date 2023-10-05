@@ -67,17 +67,17 @@ position_trajectory_controller:
       goal_time: 0.0 # Defaults to 0.0 (start immediately)
 
     gain:
-      j_c1_lf:
+      j_c1_rf:
         p: 1000.0
         i: 10.0
         d: 3600.0
       
-      j_thigh_lf:
+      j_thigh_rf:
         p: 1000.0
         i: 10.0
         d: 3600.0
 
-      j_tibia_lf:
+      j_tibia_rf:
         p: 1000.0
         i: 10.0
         d: 3600.0

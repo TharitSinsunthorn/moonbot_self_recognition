@@ -102,7 +102,7 @@ return_type DynamixelHardware::configure(const hardware_interface::HardwareInfo 
   */
 
   enable_torque(false);
-  set_control_mode(ControlMode::Position, true);
+  set_control_mode(ControlMode::Velocity, true);
   enable_torque(true);
 
   const ControlItem * goal_position =

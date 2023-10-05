@@ -19,18 +19,18 @@ controller_manager:
 forward_position_controller:
   ros__parameters:
     joints:
-      - j_c1_lf
-      - j_thigh_lf
-      - j_tibia_lf
+      - j_c1_lr
+      - j_thigh_lr
+      - j_tibia_lr
     interface_name: position
 
 
 position_trajectory_controller:
   ros__parameters:
     joints:
-      - j_c1_lf
-      - j_thigh_lf
-      - j_tibia_lf
+      - j_c1_lr
+      - j_thigh_lr
+      - j_tibia_lr
 
     command_interfaces:
       - position
@@ -48,3 +48,19 @@ position_trajectory_controller:
     constraints:
       stopped_velocity_tolerance: 0.01 # Defaults to 0.01
       goal_time: 0.0 # Defaults to 0.0 (start immediately)
+
+    gain:
+      j_c1_lr:
+        p: 1000.0
+        i: 10.0
+        d: 3600.0
+      
+      j_thigh_lr:
+        p: 1000.0
+        i: 10.0
+        d: 3600.0
+
+      j_tibia_lr:
+        p: 1000.0
+        i: 10.0
+        d: 3600.0
