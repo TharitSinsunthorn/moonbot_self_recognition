@@ -19,9 +19,6 @@ controller_manager:
 forward_position_controller:
   ros__parameters:
     joints:
-      - j_c1_rf
-      - j_thigh_rf
-      - j_tibia_rf
       - j_c1_lf
       - j_thigh_lf
       - j_tibia_lf
@@ -31,9 +28,6 @@ forward_position_controller:
 position_trajectory_controller:
   ros__parameters:
     joints:
-      - j_c1_rf
-      - j_thigh_rf
-      - j_tibia_rf
       - j_c1_lf
       - j_thigh_lf
       - j_tibia_lf

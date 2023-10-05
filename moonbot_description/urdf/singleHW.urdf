@@ -149,14 +149,14 @@
     <child link="thigh_rf"/>
     <!--origin xyz="0 0 0" rpy=" 0 3.14159 3.14159" /-->
     <origin rpy="3.14159 0  0" xyz="0 0 0"/>
-    <axis xyz="1 0 0"/>
+    <axis xyz="-1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_tibia_rf" type="revolute">
     <parent link="thigh_rf"/>
     <child link="tibia_rf"/>
     <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
-    <axis xyz="1 0 0"/>
+    <axis xyz="-1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>
 
@@ -277,14 +277,270 @@
     <child link="thigh_lf"/>
     <!--origin xyz="0 0 0" rpy=" 0 3.14159 3.14159" /-->
     <origin rpy="3.14159 0  0" xyz="0 0 0"/>
-    <axis xyz="1 0 0"/>
+    <axis xyz="-1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_tibia_lf" type="revolute">
     <parent link="thigh_lf"/>
     <child link="tibia_lf"/>
     <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
+    <axis xyz="-1 0 0"/>
+    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+  </joint>
+
+  <link name="c1_rr">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
+      <mass value="0.024357719"/>
+      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <geometry>
+        <!--box size="0.045 0.022 0.0325" /-->
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
+      <geometry>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="c2_rr">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
+      <mass value="0.024357719"/>
+      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <geometry>
+        <!--box size="0.045 0.022 0.0325" /-->
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
+      <geometry>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="thigh_rr">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.024357719"/>
+      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <!--box size="0.045 0.022 0.0325" /-->
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l.STL" scale="1 1 1"/>
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l_coll.STL" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="tibia_rr">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.024357719"/>
+      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <!--box size="0.045 0.022 0.0325" /-->
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+  <joint name="j_c1_rr" type="revolute">
+    <parent link="BASE_LIMB"/>
+    <child link="c1_rr"/>
+    <origin rpy="-0.785 4.7123 0.7853981633974483" xyz="0 -0.1 -0.05"/>
     <axis xyz="1 0 0"/>
+    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+  </joint>
+  <joint name="j_c2_rr" type="fixed">
+    <parent link="c1_rr"/>
+    <child link="c2_rr"/>
+    <origin rpy="0 1.5704 3.14159" xyz="0 -0.054 0"/>
+  </joint>
+  <joint name="j_thigh_rr" type="revolute">
+    <parent link="c2_rr"/>
+    <child link="thigh_rr"/>
+    <!--origin xyz="0 0 0" rpy=" 0 3.14159 3.14159" /-->
+    <origin rpy="3.14159 0  0" xyz="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+  </joint>
+  <joint name="j_tibia_rr" type="revolute">
+    <parent link="thigh_rr"/>
+    <child link="tibia_rr"/>
+    <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
+    <axis xyz="-1 0 0"/>
+    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+  </joint>
+
+  <link name="c1_lr">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
+      <mass value="0.024357719"/>
+      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <geometry>
+        <!--box size="0.045 0.022 0.0325" /-->
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
+      <geometry>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="c2_lr">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
+      <mass value="0.024357719"/>
+      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <geometry>
+        <!--box size="0.045 0.022 0.0325" /-->
+        <mesh filename="package://moonbot_description/meshes_phantom/connect.STL" scale="1 1 1"/>
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
+      <geometry>
+        <mesh filename="package://moonbot_description/meshes_phantom/connect_coll.STL" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="thigh_lr">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.024357719"/>
+      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <!--box size="0.045 0.022 0.0325" /-->
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l.STL" scale="1 1 1"/>
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://moonbot_description/meshes_phantom/thigh_l_coll.STL" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="tibia_lr">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.024357719"/>
+      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <!--box size="0.045 0.022 0.0325" /-->
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+  <joint name="j_c1_lr" type="revolute">
+    <parent link="BASE_LIMB"/>
+    <child link="c1_lr"/>
+    <origin rpy="-2.356 4.7123 0.7853981633974483" xyz="-0.1 0 -0.05"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+  </joint>
+  <joint name="j_c2_lr" type="fixed">
+    <parent link="c1_lr"/>
+    <child link="c2_lr"/>
+    <origin rpy="0 1.5704 3.14159" xyz="0 -0.054 0"/>
+  </joint>
+  <joint name="j_thigh_lr" type="revolute">
+    <parent link="c2_lr"/>
+    <child link="thigh_lr"/>
+    <!--origin xyz="0 0 0" rpy=" 0 3.14159 3.14159" /-->
+    <origin rpy="3.14159 0  0" xyz="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+  </joint>
+  <joint name="j_tibia_lr" type="revolute">
+    <parent link="thigh_lr"/>
+    <child link="tibia_lr"/>
+    <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
+    <axis xyz="-1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>
 
@@ -295,11 +551,11 @@
       <plugin>dynamixel_hardware/DynamixelHardware</plugin>
       <param name="usb_port">/dev/ttyUSB0</param>
       <param name="baud_rate">57600</param>
-      <param name="usb_dummy">true</param>
+      <param name="usb_dummy">false</param>
     </hardware>
     
     <joint name="j_c1_rf">
-      <param name="id">1</param>
+      <param name="id">4</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
         <param name="max">2.6179939</param>
@@ -313,7 +569,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_thigh_rf">
-      <param name="id">2</param>
+      <param name="id">5</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
         <param name="max">2.6179939</param>
@@ -327,7 +583,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_tibia_rf">
-      <param name="id">3</param>
+      <param name="id">6</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
         <param name="max">2.6179939</param>
@@ -342,7 +598,7 @@
     </joint>
 
     <joint name="j_c1_lf">
-      <param name="id">4</param>
+      <param name="id">1</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
         <param name="max">2.6179939</param>
@@ -356,7 +612,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_thigh_lf">
-      <param name="id">5</param>
+      <param name="id">2</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
         <param name="max">2.6179939</param>
@@ -370,7 +626,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_tibia_lf">
-      <param name="id">6</param>
+      <param name="id">3</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
         <param name="max">2.6179939</param>
@@ -386,58 +642,15 @@
 
   </ros2_control>
 
-  <!-- <ros2_control name="MyRobotSystem2" type="system">
+  <ros2_control name="MyRobotSystem2" type="system">
     <hardware>
       <plugin>dynamixel_hardware/DynamixelHardware</plugin>
       <param name="usb_port">/dev/ttyUSB1</param>
       <param name="baud_rate">57600</param>
-      <param name="usb_dummy">true</param>
+      <param name="usb_dummy">false</param>
     </hardware>
     
     <joint name="j_c1_rr">
-      <param name="id">10</param>
-      <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="j_thigh_rr">
-      <param name="id">11</param>
-      <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="j_tibia_rr">
-      <param name="id">12</param>
-      <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-
-    <joint name="j_c1_lr">
       <param name="id">7</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
@@ -451,7 +664,7 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
-    <joint name="j_thigh_lr">
+    <joint name="j_thigh_rr">
       <param name="id">8</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
@@ -465,7 +678,7 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
-    <joint name="j_tibia_lr">
+    <joint name="j_tibia_rr">
       <param name="id">9</param>
       <command_interface name="position">
         <param name="min">-2.6179939</param>
@@ -480,7 +693,50 @@
       <state_interface name="effort"/>
     </joint>
 
-  </ros2_control> -->
+    <joint name="j_c1_lr">
+      <param name="id">10</param>
+      <command_interface name="position">
+        <param name="min">-2.6179939</param>
+        <param name="max">2.6179939</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="j_thigh_lr">
+      <param name="id">11</param>
+      <command_interface name="position">
+        <param name="min">-2.6179939</param>
+        <param name="max">2.6179939</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="j_tibia_lr">
+      <param name="id">12</param>
+      <command_interface name="position">
+        <param name="min">-2.6179939</param>
+        <param name="max">2.6179939</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+  </ros2_control>
 
 
 </robot>

@@ -29,16 +29,24 @@ class LimbActionClient(Node):
 
         # Fill in data for trajectory
         joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
-                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
-                    #    "j_c1_rr", "j_thigh_rr", "j_tibia_rr",
-                    #    "j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
+                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf",
+                       "j_c1_rr", "j_thigh_rr", "j_tibia_rr",
+                       "j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
         
         sec = 1.0
 
-        tar = lk.inverse_kinematics([0.05, 0.05, 0.0])
+        tar = lk.inverse_kinematics([0.3, 0.5, 0.0])
 
-        seq = [[0.5, 0.0, 0.5, 0.5, 0.0, 0.5], #, 0.2, 0.0, 0.5, 0.2, 0.0, 0.5], 
-               [0.0, 1.57, 0.0, 0.0, 1.57, 0.0]] #, 0.0, 1.57, 0.0, 0.0, 1.57, 0.0]]
+        RF = [[0.0, 0.5, -0.5], [0.0, -0.5, 0.5]]
+        LF = [[0.0, -1.57, 0.0], [0.0, -1.57, 0.0]]
+        RR = [[0.0, -1.57, 0.0], [0.0, -1.57, 0.0]]
+        LR = [[0.0, -1.57, 0.0], [0.0, -1.57, 0.0]]
+
+        seq = [RF[0]+LF[0]+RR[0]+LR[0], RF[1]+LF[1]+RR[1]+LR[1]]
+        
+
+        # seq = [[0.5, 0.0, 0.5, 0.5, 0.0, 0.5, 0.2, 0.0, 0.5, 0.2, 0.0, 0.5], 
+        #        [tar[0], tar[1], tar[2], 0.0, 1.57, 0.0, 0.0, 1.57, 0.0, 0.0, 1.57, 0.0]]
         
         points = []
         # point1 = JointTrajectoryPoint()
@@ -102,7 +110,7 @@ def main(args=None):
     action_client = LimbActionClient()
 
     # angle = [1.0, 1.0]
-    print(lk.inverse_kinematics([0.05, 0.05, 0.0]))
+    print(lk.inverse_kinematics([0.03, 0.04, 0.0]))
     action_client.send_goal()
     
     rclpy.spin(action_client)

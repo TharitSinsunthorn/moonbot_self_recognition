@@ -89,6 +89,18 @@ return_type DynamixelHardware::configure(const hardware_interface::HardwareInfo 
     }
   }
 
+  /*
+  std::vector<bool> is_connected(info_joints.size());
+
+  while(! is_connected) {
+    for (uint i = 0; i < info_.joints.size(); ++i) {
+    uint16_t model_number = 0;
+      if (dynamixel_workbench_.ping(joint_ids_[i], &model_number, &log)) {
+      }
+    }
+  }
+  */
+
   enable_torque(false);
   set_control_mode(ControlMode::Position, true);
   enable_torque(true);
