@@ -1,7 +1,7 @@
 # Controller manager configuration
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Hz
+    update_rate: 200 # Hz
 
     ### Controllers available
     joint_state_broadcaster:
@@ -19,18 +19,37 @@ controller_manager:
 forward_position_controller:
   ros__parameters:
     joints:
+      - j_c1_lf
+      - j_thigh_lf
+      - j_tibia_lf
       - j_c1_lr
       - j_thigh_lr
       - j_tibia_lr
+      - j_c1_rr
+      - j_thigh_rr
+      - j_tibia_rr
+      - j_c1_rf
+      - j_thigh_rf
+      - j_tibia_rf
+
     interface_name: position
 
 
 position_trajectory_controller:
   ros__parameters:
     joints:
+      - j_c1_lf
+      - j_thigh_lf
+      - j_tibia_lf
       - j_c1_lr
       - j_thigh_lr
       - j_tibia_lr
+      - j_c1_rr
+      - j_thigh_rr
+      - j_tibia_rr
+      - j_c1_rf
+      - j_thigh_rf
+      - j_tibia_rf
 
     command_interfaces:
       - position
@@ -39,28 +58,73 @@ position_trajectory_controller:
       - position
       
 
-    state_publish_rate: 200.0 # Hz, Defaults to 50
+    state_publish_rate: 50.0 # Hz, Defaults to 50
     action_monitor_rate: 20.0 # Hz, Defaults to 20
 
     allow_partial_joints_goal: false # Defaults to false
-    open_loop_control: true
+    open_loop_control: false
     allow_integration_in_goal_trajectories: true
     constraints:
       stopped_velocity_tolerance: 0.01 # Defaults to 0.01
       goal_time: 0.0 # Defaults to 0.0 (start immediately)
 
     gain:
+      j_c1_lf:
+        p: 100.0
+        i: 10.0
+        d: 3600.0
+      
+      j_thigh_lf:
+        p: 100.0
+        i: 10.0
+        d: 3600.0
+
+      j_tibia_lf:
+        p: 100.0
+        i: 10.0
+        d: 3600.0
+
       j_c1_lr:
-        p: 1000.0
+        p: 100.0
         i: 10.0
         d: 3600.0
       
       j_thigh_lr:
-        p: 1000.0
+        p: 100.0
         i: 10.0
         d: 3600.0
 
       j_tibia_lr:
-        p: 1000.0
+        p: 100.0
+        i: 10.0
+        d: 3600.0
+
+      j_c1_rr:
+        p: 100.0
+        i: 10.0
+        d: 3600.0
+      
+      j_thigh_rr:
+        p: 100.0
+        i: 10.0
+        d: 3600.0
+
+      j_tibia_rr:
+        p: 100.0
+        i: 10.0
+        d: 3600.0
+
+      j_c1_rf:
+        p: 100.0
+        i: 10.0
+        d: 3600.0
+      
+      j_thigh_rf:
+        p: 100.0
+        i: 10.0
+        d: 3600.0
+
+      j_tibia_rf:
+        p: 100.0
         i: 10.0
         d: 3600.0
