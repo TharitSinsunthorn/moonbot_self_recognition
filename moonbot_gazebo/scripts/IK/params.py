@@ -5,9 +5,9 @@ Joint nomeclature:
     joint3: joint near the tip
 '''
 
-L1 = 0.102 # Length between joint1 (Near the base joint) and joint2
-L2 = 0.113 # Length between joint2 and joint3 (Near the Tip Joint)
-L3 = 0.13 # Length between Joint3 and Tip
+L1 = 0.07 # Length between joint1 (Near the base joint) and joint2
+L2 = 0.13 # Length between joint2 and joint3 (Near the Tip Joint)
+L3 = 0.16 # Length between Joint3 and Tip
 D1 = 0.18 # Distance between Origin of base and origin of the joint1
 
 '''
@@ -21,7 +21,6 @@ servo_id = {
     "4": [(10, 2073), (11, 2064), (12, 2106)]
 }
 
-DIFF_ANGLE = 1023 # The difference between 0 deg and 90 deg
 
 '''
 limp_pos contains the angle of the orientation of the limb w.r.t. base frame

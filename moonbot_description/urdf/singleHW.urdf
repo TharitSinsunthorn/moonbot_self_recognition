@@ -32,7 +32,7 @@
     </collision>
   </link>
 
-  <!-- <link name="c1_rf">
+  <link name="c1_rf">
     <inertial>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <mass value="0.024357719"/>
@@ -153,7 +153,7 @@
     <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
-  </joint> -->
+  </joint>
 
   <link name="c1_lf">
     <inertial>
@@ -278,7 +278,7 @@
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>
 
-  <!-- <link name="c1_rr">
+  <link name="c1_rr">
     <inertial>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <mass value="0.024357719"/>
@@ -399,7 +399,7 @@
     <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
-  </joint> -->
+  </joint>
 
   <link name="c1_lr">
     <inertial>
@@ -529,7 +529,7 @@
   <ros2_control name="MyRobotSystem" type="system">
     <hardware>
       <plugin>dynamixel_hardware/DynamixelHardware</plugin>
-      <param name="usb_port">/dev/ttyUSB0</param>
+      <param name="usb_port">/dev/ttyUSB1</param>
       <param name="baud_rate">4000000</param>
       <param name="usb_dummy">false</param>
     </hardware>
@@ -537,8 +537,8 @@
     <joint name="j_c1_lr">
       <param name="id">4</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -551,8 +551,8 @@
     <joint name="j_thigh_lr">
       <param name="id">5</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">0.756</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -569,8 +569,8 @@
         <param name="max">2.6179939</param>
       </command_interface>
       <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -580,8 +580,8 @@
     <joint name="j_c1_lf">
       <param name="id">1</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -594,8 +594,8 @@
     <joint name="j_thigh_lf">
       <param name="id">2</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">0.756</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -608,8 +608,8 @@
     <joint name="j_tibia_lf">
       <param name="id">3</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -625,7 +625,7 @@
   <ros2_control name="MyRobotSystem2" type="system">
     <hardware>
       <plugin>dynamixel_hardware/DynamixelHardware</plugin>
-      <param name="usb_port">/dev/ttyUSB1</param>
+      <param name="usb_port">/dev/ttyUSB0</param>
       <param name="baud_rate">4000000</param>
       <param name="usb_dummy">false</param>
     </hardware>
@@ -633,8 +633,8 @@
     <joint name="j_c1_rr">
       <param name="id">7</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -647,8 +647,8 @@
     <joint name="j_thigh_rr">
       <param name="id">8</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">0.756</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -661,8 +661,8 @@
     <joint name="j_tibia_rr">
       <param name="id">9</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -676,8 +676,8 @@
     <joint name="j_c1_rf">
       <param name="id">10</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -690,8 +690,8 @@
     <joint name="j_thigh_rf">
       <param name="id">11</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">0.756</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
@@ -704,8 +704,8 @@
     <joint name="j_tibia_rf">
       <param name="id">12</param>
       <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
