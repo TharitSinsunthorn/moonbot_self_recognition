@@ -41,7 +41,10 @@ class InvKinematics():
         self.L2 = L2
         self.L3 = L3
 
-        # self.offset = [0,0]
+        self.MAX_coord_dist = self.L1 + self.L2 + self.L3
+        self.MIN_coord_dist = np.sqrt((self.L1-self.L3)**2 + self.L2**2)
+
+        self.offset = [0.24, 0.24]
 
         self.M_R = np.array([1, 1, 1])
         self.M_L = np.array([1, -1, 1])
@@ -77,12 +80,18 @@ class InvKinematics():
         coord = np.array(coord)
 
         # Calculate the distance from the origin coxa joint
-        dist = np.linalg.norm(point)
+        r = np.linalg.norm(point)
+
+        if r >= self.MIN_coord_dist and r <= self.MAX_coord_dist:
+            return False
+        else:
+            return True
 
 
     def get_joint_angles(self, coord):
         
         x, y, z = coord
+        th = [0,0,0]
         
         L1 = self.L1
         L2 = self.L2
@@ -90,62 +99,106 @@ class InvKinematics():
 
         LL = np.hypot(x, y)
         D = np.sqrt(z**2 + (LL-L1)**2)
-        
-        th1 = np.arctan(y/x)
-        th2 = np.arctan(z/(LL-L1)) - np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
-        th3 = np.arccos((D**2 - L2**2 - L3**2)/(-2*L2*L3)) - math.pi
 
-        return [th1, th2, th3] # The negative sign in third angle is because third servo is acting in opposite direction
+        a = (L3**2 - L2**2 - D**2)/(-2*D*L2)
+        b = (D**2 - L2**2 - L3**2)/(-2*L2*L3)
+
+        j1 = np.arctan(y/x)
+        if not np.isnan(j1):
+            th[0] = j1
+
+        if a > 1 or a < -1 or b > 1 or b < -1:
+            pass
+        else:
+            j2 = np.arctan(z/(LL-L1)) - np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
+            if not np.isnan(j2):
+                th[1] = j2
+
+            j3 = math.pi - np.arccos((D**2 - L2**2 - L3**2)/(-2*L2*L3))
+            if not np.isnan(j3):
+                th[2] = j3
+
+        # th[0] = np.arctan(y/x)
+        # th[1] = np.arctan(z/(LL-L1)) - np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
+        # th[2] = -np.arccos((D**2 - L2**2 - L3**2)/(-2*L2*L3)) + math.pi
+
+        return th # The negative sign in third angle is because third servo is acting in opposite direction
 
 
 
+    def get_FR_joint_angles(self, coord, eularAng):
+        # rotate around midle of the body
+        translate_FR = self.offset*self.M_F*self.M_R
+        coord_ = (np.dot((coord * self.M_R + translate_FR), self.rotMat(eularAng)) - translate_FR) * self.M_R
+        # check singularity of the legs
+        if self.is_singularity(coord_):
+                self.singularity[0] = True
+        else:
+            self.singularity[0] = False
+        #  check if any legs is in singularity
+        if any(self.singularity):
+            self.legState.FR.now_angles = self.legState.FR.prev_angles
+        # if no singularities, get new joint angles
+        else:
+            self.legState.FR.now_angles = self.get_joint_angles(coord_)
+            self.legState.FR.prev_angles = self.legState.FR.now_angles
+            self.singularity[0] = False
+        return self.legState.FR.now_angles
+
+    def get_FL_joint_angles(self, coord, eularAng):
+        translate_FL = self.offset*self.M_F*self.M_L
+        coord_ = (np.dot((coord * self.M_L + translate_FL), self.rotMat(eularAng)) - translate_FL) * self.M_L
+        # check singularity of the legs
+        if self.is_singularity(coord_):
+                self.singularity[1] = True
+        else:
+            self.singularity[1] = False
+        if any(self.singularity):
+            self.legState.FL.now_angles = self.legState.FL.prev_angles
+        # if no singularities, get new joint angles
+        else:
+            self.legState.FL.now_angles = self.get_joint_angles(coord_)
+            self.legState.FL.prev_angles = self.legState.FL.now_angles
+            self.singularity[1] = False
+        return self.legState.FL.now_angles
+     
+
+    def get_BR_joint_angles(self, coord, eularAng):
+        translate_BR = self.offset*self.M_B*self.M_R
+        coord_ = (np.dot((coord * self.M_R + translate_BR), self.rotMat(eularAng)) - translate_BR) * self.M_R
+        # check singularity of the legs
+        if self.is_singularity(coord_):
+                self.singularity[2] = True
+        else:
+            self.singularity[2] = False
+        if any(self.singularity):
+            self.legState.BR.now_angles = self.legState.BR.prev_angles
+        # if no singularities, get new joint angles
+        else:
+            self.legState.BR.now_angles = self.get_joint_angles(coord_)
+            self.legState.BR.prev_angles = self.legState.BR.now_angles
+            self.singularity[2] = False
+        return self.legState.BR.now_angles
+
+    def get_BL_joint_angles(self, coord, eularAng):
+        translate_FL = self.offset*self.M_B*self.M_L
+        coord_ = (np.dot((coord * self.M_L + translate_FL), self.rotMat(eularAng)) - translate_FL) * self.M_L
+        # check singularity of the legs
+        if self.is_singularity(coord_):
+                self.singularity[3] = True
+        else:
+            self.singularity[3] = False
+        if any(self.singularity):
+            self.legState.BL.now_angles = self.legState.BL.prev_angles
+        # if no singularities, get new joint angles
+        else:
+            self.legState.BL.now_angles = self.get_joint_angles(coord_)
+            self.legState.BL.prev_angles = self.legState.BL.now_angles
+            self.singularity[3] = False
+        return self.legState.BL.now_angles
 
 
 
-
-
-
-
-# def forward_kinematics(th):
-#     ''' Returns the Forward Kinematics of the Limb
-
-#     Args:
-#         joint_angles: an array containing the joint angle value (in deg) at each joint
-#         leg_num: leg number between 1 to 4
-#     Returns:
-#         an array containing the x,y,z position (in m) of the limp tip in frame of reference of Base
-#     '''
-#     L1 = params.L1
-#     L2 = params.L2
-#     L3 = params.L3
-#     Th1, Th2, Th3 = th
-
-#     Th1 = math.radians(Th1)
-#     Th2 = math.radians(Th2)
-#     Th3 = -math.radians(Th3) # The negative sign in third angle is because third servo is acting in opposite direction
-
-#     ### Forward Kinematics
-
-#     x = math.cos(Th1)* (L1 + L2*math.cos(Th2) + L3*math.cos(Th2+Th3))
-#     y = math.sin(Th1)* (L1 + L2*math.cos(Th2) + L3*math.cos(Th2+Th3))
-#     z = L2*math.sin(Th2) + L3*math.sin(Th2+Th3)
-
-#     '''
-#     Coordinate Transformation: Joint 1 to Base Frame
-#     '''
-#     theta = math.radians(params.limb_angle[leg_num-1])
-
-#     ### Rotation
-    
-#     xb = x * math.cos(theta) - y * math.sin(theta)
-#     yb = x * math.sin(theta) + y * math.cos(theta)
-#     zb = z
-
-#     #### Translation ####
-#     xb = xb + params.D1 * math.cos(theta)
-#     yb = yb + params.D1 * math.sin(theta)
-
-#     return [xb, yb, zb]
 
 
 

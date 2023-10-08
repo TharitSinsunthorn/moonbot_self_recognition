@@ -20,6 +20,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(geometry_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -39,8 +40,10 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/JointAngles.msg"
   "msg/SetPosition.msg"
   "msg/DynamixelPosition.msg"
+  "msg/Geometry.msg"
   "srv/GetPosition.srv"
   "srv/SetJointAngles.srv"
+  DEPENDENCIES builtin_interfaces geometry_msgs
 )
 
 ament_package()

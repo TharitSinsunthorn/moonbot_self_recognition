@@ -43,7 +43,7 @@ class LimbActionClient(Node):
 
         # tar = lk.inverse_kinematics([0.2, 0.0, 0.16])
 
-        tar = self.IK.get_joint_angles([0.2, 0.0, 0.16])
+        tar = self.IK.get_joint_angles([0.19, 0.0, 0.16])
         print(tar)
 
         # standup seq

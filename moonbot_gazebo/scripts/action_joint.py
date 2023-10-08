@@ -24,84 +24,73 @@ class LimbActionClient(Node):
         
     def send_goal(self):
         goal_msg = FollowJointTrajectory.Goal()
+        goal_msg2 = FollowJointTrajectory.Goal()
 
         # Fill in data for trajectory
-        joint_names = ["j_c1_lf", "j_c1_rf", "j_c1_lr", "j_c1_rr",
-                       "j_thigh_lf", "j_thigh_rf", "j_thigh_lr", "j_thigh_rr",
-                       "j_tibia_lf", "j_tibia_rf", "j_tibia_lr", "j_tibia_rr"]
+        joint_names = ["j_c1_rf", "j_c1_lr", "j_c1_rr",
+                       "j_thigh_rf", "j_thigh_lr", "j_thigh_rr",
+                       "j_tibia_rf", "j_tibia_lr", "j_tibia_rr"]
+
+        joint_names2 = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
         
         sec = 1.0
 
 
         points = []
         point1 = JointTrajectoryPoint()
-        point1.positions = [0.0, 0.0, 0.0, 0.0, 
-                            0.0, 0.0, 0.0, 0.0, 
-                            0.0, 0.0, 0.0, 0.0]
+        point1.positions = [0.0, 0.0, 0.0,
+                            0.0, 0.0, 0.0, 
+                            0.0, 0.0, 0.0]
 
         point2 = JointTrajectoryPoint()
         point2.time_from_start = Duration(seconds=sec, nanoseconds=0).to_msg()
-        point2.positions = [0.0, 0.0, 0.25, 0.0, 
-                            0.0, 0.0, -0.5, 0.0, 
-                            0.0, 0.0, 0.0, 0.0]
+        point2.positions = [0.0, 0.0, 0.25,
+                            0.0, 0.0, -0.5, 
+                            0.0, 0.0, 0.0]
 
         point3 = JointTrajectoryPoint()
         point3.time_from_start = Duration(seconds=2*sec, nanoseconds=0).to_msg()
-        point3.positions = [0.0, 0.0, 0.5, 0.0, 
-                            0.0, 0.0, 0.0, 0.0, 
-                            0.0, 0.0, 0.0, 0.0]
+        point3.positions = [0.0, 0.0, 0.5,
+                            0.0, 0.0, 0.0,  
+                            0.0, 0.0, 0.0]
         
-        point4 = JointTrajectoryPoint()
-        point4.time_from_start = Duration(seconds=3*sec, nanoseconds=0).to_msg()
-        point4.positions = [0.0, 0.0, 0.5, -0.25, 
-                            0.0, 0.0, 0.0, -0.5, 
-                            0.0, 0.0, 0.0, 0.0]
-        
-        point5 = JointTrajectoryPoint()
-        point5.time_from_start = Duration(seconds=4*sec, nanoseconds=0).to_msg()
-        point5.positions = [0.25, 0.0, 0.5, -0.5, 
-                            -0.5, 0.0, 0.0, 0.0, 
-                            0.0, 0.0, 0.0, 0.0]
-        
-        point6 = JointTrajectoryPoint()
-        point6.time_from_start = Duration(seconds=5*sec, nanoseconds=0).to_msg()
-        point6.positions = [0.5, 0.0, -0.0, 0.0,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                            0.0, 0.0, 0.0, 0.0, 
-                            0.0, 0.0, 0.0, 0.0]
+        sings = []
+        sing1 = JointTrajectoryPoint()
+        sing1.positions = [0.0, 0.0, 0.0]
+                            
+        sing2 = JointTrajectoryPoint()
+        sing2.time_from_start = Duration(seconds=sec, nanoseconds=0).to_msg()
+        sing2.positions = [0.0, 0.0, 0.25]
 
-        point7 = JointTrajectoryPoint()
-        point7.time_from_start = Duration(seconds=6*sec, nanoseconds=0).to_msg()
-        point7.positions = [0.5, -0.25, -0.0, 0.0,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                            0.0, -0.5, 0.0, 0.0, 
-                            0.0, 0.0, 0.0, 0.0]
-        
-        point8 = JointTrajectoryPoint()
-        point8.time_from_start = Duration(seconds=7*sec, nanoseconds=0).to_msg()
-        point8.positions = [0.5, -0.5, -0.0, 0.0,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                            0.0, 0.0, 0.0, 0.0, 
-                            0.0, 0.0, 0.0, 0.0]
-        
-        point9 = JointTrajectoryPoint()
-        point9.time_from_start = Duration(seconds=8*sec, nanoseconds=0).to_msg()
-        point9.positions = [0.0, -0.0, -0.0, 0.0,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                            0.0, 0.0, 0.0, 0.0, 
-                            0.0, 0.0, 0.0, 0.0]
+        sing3 = JointTrajectoryPoint()
+        sing3.time_from_start = Duration(seconds=2*sec, nanoseconds=0).to_msg()
+        sing3.positions = [0.0, 0.0, 0.5]
 
-        # points.append(point1)
-        # points.append(point2)
-        for i in range(9):
+        for i in range(3):
             point_name = f"point{i+1}"  # Generate the variable name using f-string
             point = eval(point_name)
             points.append(point)
+
+            sing_name = f"sing{i+1}"
+            sing = eval(sing_name)
+            sings.append(sing)
+
 
         goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
         goal_msg.trajectory.joint_names = joint_names
         goal_msg.trajectory.points = points
 
+        goal_msg2.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
+        goal_msg2.trajectory.joint_names = joint_names2
+        goal_msg2.trajectory.points = sings
+
         self._action_client.wait_for_server()
         self._send_goal_future = self._action_client.send_goal_async(
             goal_msg, feedback_callback=self.feedback_callback)
-        
+
+        # self._send_goal_future = self._action_client.send_goal_async(
+        #     goal_msg2, feedback_callback=self.feedback_callback)
+
         self._send_goal_future.add_done_callback(self.goal_response_callback)
 
     def goal_response_callback(self, future):
