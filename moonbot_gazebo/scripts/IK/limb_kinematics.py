@@ -104,26 +104,33 @@ class InvKinematics():
         b = (D**2 - L2**2 - L3**2)/(-2*L2*L3)
 
         j1 = np.arctan(y/x)
-        if not np.isnan(j1):
+        if not np.isnan(j1) and j1 <= 1.57 and j1 >= -1.57:
             th[0] = j1
+        elif j1 > 1.57:
+            th[0] = 1.57
+        elif j1 < -1.57:
+            th[0] = -1.57
 
         if a > 1 or a < -1 or b > 1 or b < -1:
             pass
         else:
-            j2 = np.arctan(z/(LL-L1)) - np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
-            if not np.isnan(j2):
+            j2 = -np.arctan(z/(LL-L1)) + np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
+            if not np.isnan(j2) and j2 <= 0.756 and j2 >= -1.57:
                 th[1] = j2
+            elif j2 > 0.756:
+                th[1] = 0.756
+            elif j3 < -1.57:
+                th[1] = -1.57
 
-            j3 = math.pi - np.arccos((D**2 - L2**2 - L3**2)/(-2*L2*L3))
-            if not np.isnan(j3):
+            j3 = np.arccos((D**2 - L2**2 - L3**2)/(-2*L2*L3)) - math.pi
+            if not np.isnan(j3) and j3 <= 1.57 and j3 >= -1.57:
                 th[2] = j3
+            elif j3 > 1.57:
+                th[2] = 1.57
+            elif j3 < -1.57:
+                th[2] = -1.57
 
-        # th[0] = np.arctan(y/x)
-        # th[1] = np.arctan(z/(LL-L1)) - np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
-        # th[2] = -np.arccos((D**2 - L2**2 - L3**2)/(-2*L2*L3)) + math.pi
-
-        return th # The negative sign in third angle is because third servo is acting in opposite direction
-
+        return th 
 
 
     def get_FR_joint_angles(self, coord, eularAng):

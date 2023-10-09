@@ -39,12 +39,10 @@ install(
 
 install(
   PROGRAMS
-    scripts/walk_demo.py
-    scripts/walker.py
     scripts/joint_trajectory_test.py
-    scripts/publisher_joint_trajectory_controller.py
     scripts/action_joint.py
     scripts/limb_joint.py
+    scripts/emergency.py
 
   DESTINATION
     lib/${PROJECT_NAME}

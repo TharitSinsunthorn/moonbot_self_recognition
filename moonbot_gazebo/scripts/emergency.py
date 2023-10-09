@@ -25,7 +25,6 @@ class LimbActionClient(Node):
             '/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
-        self.repeat = 3
 
 
     def send_goal(self):
@@ -40,28 +39,12 @@ class LimbActionClient(Node):
         # joint_names = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf",
         #                "j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
         
-        sec = 0.7
+        sec = 0.3
 
         # tar = lk.inverse_kinematics([0.2, 0.0, 0.16])
-        f = 0.06
-        h = 0.24
-        tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar2 = self.IK.get_joint_angles([0.13+f/2, f/2, h-0.04])
-        tar3 = self.IK.get_joint_angles([0.13+f, f, h])
 
-        tar4 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar5 = self.IK.get_joint_angles([0.13-f/2, -f/2, h-0.04])
-        tar6 = self.IK.get_joint_angles([0.13-f, -f, h])
-
-        tar7 = self.IK.get_joint_angles([0.13+f, -f, h])
-        tar8 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar9 = self.IK.get_joint_angles([0.13+f/2, -f/2, h-0.04])
-
-        tar10 = self.IK.get_joint_angles([0.13-f, f, h])
-        tar11 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar12= self.IK.get_joint_angles([0.13-f/2, f/2, h-0.04])
-        
-        
+        tar = self.IK.get_joint_angles([0.19, 0.0, 0.16])
+        print(tar)
 
         # standup seq
         # LF = [[0.0, 0.756, -1.57], tar]
@@ -71,79 +54,48 @@ class LimbActionClient(Node):
 
         # emergency
         E = [[0.0, -1.0, -0.57], 
-            [0.3, -0.6, -0.8], 
-            [0.6, -1.0, -0.57],
+            [0.25, -0.6, -0.8], 
+            [0.5, -1.0, -0.57],
             [0.0, -1.0, -0.57]]
 
-        # LF = [[-0.6, -1.0, -0.4],
-        #       [0.0, -1.0, -0.57], 
-        #       [-0.3, -0.6, -0.8]]
+        LF = [[-0.5, -1.0, -0.57],
+              [0.0, -1.0, -0.57], 
+              [-0.25, -0.6, -0.8], 
+              [-0.5, -1.0, -0.57]]
 
-        LF = [tar7, tar8, tar9]
+        RF = [[0.0, -1.0, -0.57], 
+              [0.25, -0.6, -0.8], 
+              [0.5, -1.0, -0.57],
+              [0.0, -1.0, -0.57]]
 
-        # RF = [[0.0, -1.0, -0.57], 
-        #       [0.3, -0.6, -0.8], 
-        #       [0.6, -1.0, -0.4]]
+        RR = [[0.5, -1.0, -0.57],
+              [0.0, -1.0, -0.57], 
+              [0.25, -0.6, -0.8], 
+              [0.5, -1.0, -0.57]]
 
-        RF = [tar1, tar2, tar3]
-              
+        LR = [[0.0, -1.0, -0.57], 
+              [-0.25, -0.6, -0.8], 
+              [-0.5, -1.0, -0.57],
+              [0.0, -1.0, -0.57]]
 
-        # RR = [[0.6, -1.0, -0.4],
-        #       [0.0, -1.0, -0.57], 
-        #       [0.3, -0.6, -0.8]]
 
-        RR = [tar10, tar11, tar12]
-              
 
-        # LR = [[0.0, -1.0, -0.57], 
-        #       [-0.3, -0.6, -0.8], 
-        #       [-0.6, -1.0, -0.4]]
+        # seq = [LF[0]+RF[0]+RR[0]+LR[0], LF[1]+RF[1]+RR[1]+LR[1]]
+        seq = []
+        for i in range(len(E)):
+            seq.append(LF[i]+RF[i]+RR[i]+LR[i])
+        seq = seq*10
 
-        LR = [tar4, tar5, tar6]
-              
+        vLF = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]        
+        vRF = [[0.0, 1.0, 1.0], [0.0, 0.0, 0.0]]
+        vRR = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+        vLR = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+        v = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
 
-        # vLF = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]        
-        # vRF = [[0.0, 1.0, 1.0], [0.0, 0.0, 0.0]]
-        # vRR = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
-        # vLR = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
-        # v = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
-
-        vLF = [[0.6, 1.0, 0.4],
-              [0.0, 1.0, 0.57], 
-              [0.3, 0.6, 0.8]]
-
-        vRF = [[0.0, 1.0, 0.57], 
-              [-0.3, 0.6, 0.8], 
-              [-0.6, 1.0, 0.4]]
-              
-
-        vRR = [[-0.6, 1.0, 0.4],
-              [0.0, 1.0, 0.57], 
-              [-0.3, 0.6, 0.8]]
-              
-
-        vLR = [[0.0, 1.0, 0.57], 
-              [0.3, 0.6, 0.8], 
-              [0.6, 1.0, 0.4]]
-
-        # vel = [vRF[0]+vRF[0]+vRF[0]+vRF[0], vRF[1]+vRF[1]+vRF[1]+vRF[1]]
+        vel = [vRF[0]+vRF[0]+vRF[0]+vRF[0], vRF[1]+vRF[1]+vRF[1]+vRF[1]]
         # vel = [vRF[0]+vRF[0], vRF[1]+vRF[1]]
         # vel = [vRF[0], v[1]]
-        # seq = [LF[0]+RF[0]+RR[0]+LR[0], LF[1]+RF[1]+RR[1]+LR[1]]
         
-        seq = []
-        vel = []
-        for i in range(len(LF)):
-            seq.append(LF[i]+RF[i]+RR[i]+LR[i])
-            vel.append(vLF[i]+vRF[i]+vRR[i]+vLR[i])
-
-        seq = seq*self.repeat
-        vel = vel*self.repeat
-        seq.insert(0, tar9+tar1+tar12+tar4)
-        seq.append(tar1+tar1+tar1+tar1)
-
-        # print(seq)
-
         # point1.positions = [0.0, 0.0, 0.0]
         points = []
         
@@ -200,4 +152,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
