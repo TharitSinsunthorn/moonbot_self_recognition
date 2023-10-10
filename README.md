@@ -46,10 +46,19 @@ ros2 service call /get_position dynamixel_custom_interfaces/srv/GetPosition "id:
 ```
 
 ## Usage of Moonbot simulation and control
-To spawn the moonbot model in Gazebo simulation
+To connect the moonbot and demonstrate the simple gait motion
 ```bash
-ros2 launch moonbot_gazebo spawn_robot_ros2.launch.xml
+## terminal 1
+ros2 launch dynamixel_hardware bring_up_on_hardware.launch.py
 ```
+```bash
+## terminal 2
+## For standing up the robot
+ros2 run moonbot_gazebo action_joint.py
+## For walking demo
+ros2 run moonbot_gazebo limb_joint.py
+```
+
 <img src="moonbot.png">
 
 ## Contributing

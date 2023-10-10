@@ -81,25 +81,41 @@ return_type DynamixelHardware::configure(const hardware_interface::HardwareInfo 
     return return_type::ERROR;
   }
 
+  // for (uint i = 0; i < info_.joints.size(); ++i) {
+  //   uint16_t model_number = 0;
+  //   if (!dynamixel_workbench_.ping(joint_ids_[i], &model_number, &log)) {
+  //     RCLCPP_FATAL(rclcpp::get_logger(kDynamixelHardware), "%s", log);
+  //     return return_type::ERROR;
+  //   }
+  // }
+
+  std::vector<uint8_t> connected_joint_ids;
+  std::vector<uint16_t> connected_model_numbers;
+
   for (uint i = 0; i < info_.joints.size(); ++i) {
     uint16_t model_number = 0;
-    if (!dynamixel_workbench_.ping(joint_ids_[i], &model_number, &log)) {
-      RCLCPP_FATAL(rclcpp::get_logger(kDynamixelHardware), "%s", log);
-      return return_type::ERROR;
+    
+    // Attempt to ping the joint
+    if (dynamixel_workbench_.ping(joint_ids_[i], &model_number, &log)) {
+        // Joint is responsive, add it to the list of connected joints
+        connected_joint_ids.push_back(joint_ids_[i]);
+        connected_model_numbers.push_back(model_number);
+    } else {
+        // Joint is not responsive, log an error but continue
+        RCLCPP_ERROR(rclcpp::get_logger(kDynamixelHardware), "Failed to ping joint ID %d: %s", joint_ids_[i], log);
     }
   }
 
-  /*
-  std::vector<bool> is_connected(info_joints.size());
+  // std::vector<bool> is_connected(info_joints.size());
 
-  while(! is_connected) {
-    for (uint i = 0; i < info_.joints.size(); ++i) {
-    uint16_t model_number = 0;
-      if (dynamixel_workbench_.ping(joint_ids_[i], &model_number, &log)) {
-      }
-    }
-  }
-  */
+  // while(! is_connected) {
+  //   for (uint i = 0; i < info_.joints.size(); ++i) {
+  //   uint16_t model_number = 0;
+  //     if (dynamixel_workbench_.ping(joint_ids_[i], &model_number, &log)) {
+  //     }
+  //   }
+  // }
+  
 
   enable_torque(false);
   set_control_mode(ControlMode::Velocity, true);

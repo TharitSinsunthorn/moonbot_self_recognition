@@ -40,19 +40,21 @@ class LimbActionClient(Node):
         # joint_names = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf",
         #                "j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
         
-        sec = 1
+        sec = 2.0
 
         # tar = lk.inverse_kinematics([0.19, 0.0, 0.16])
 
-        f = 0.07
-        tar = self.IK.get_joint_angles([0.13+f, f, 0.23])
-        print(tar)
+        
+        f = -0.06
+        h = 0.24
+        tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
+        print(tar1)
 
         # standup seq
-        RF = [tar]
-        RR = [[0.0, -1.0, -0.57]]
-        LR = [[0.0, -1.0, -0.57]]
-        LF = [[0.0, -1.0, -0.57]]
+        RF = [[0.0, 0.756, -1.5],[0.0, 0.756, -1.5],tar1]
+        RR = [[0.0, 0.756, -1.5],[0.0, 0.756, -1.5],tar1]
+        LR = [[0.0, 0.756, -1.5],[0.0, 0.756, -1.5],tar1]
+        LF = [[0.0, 0.756, -1.5],[0.0, 0.756, -1.5],tar1]
 
 
         # emergency
@@ -76,7 +78,7 @@ class LimbActionClient(Node):
         vel = []
         for i in range(len(LF)):
             seq.append(RF[i]+RR[i]+LR[i]+LF[i])
-            vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
+            # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
         # seq = seq*6
         # print(seq)
 
