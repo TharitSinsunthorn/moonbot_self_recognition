@@ -22,10 +22,14 @@ def generate_launch_description():
         urdf_file
     )
 
-    # doc = xacro.parse(open(robot_desc_path))
-    # xacro.process_doc(doc)
-    # robot_description_config = doc.toxml()
-    # robot_description = {'use_sim_time': True,'robot_description': robot_description_config}
+    # namespace = LaunchConfiguration('namespace')
+
+    # declare_namespace_cmd = DeclareLaunchArgument(
+    #     'namespace',
+    #     default_value='',
+    #     description='Top-level namespace')
+
+    
 
     # Robot State Publisher
     robot_state_publisher_node = Node(
@@ -35,14 +39,16 @@ def generate_launch_description():
         emulate_tty=True,
         parameters=[{'use_sim_time': True, 'robot_description': Command(['xacro ', robot_desc_path])}],
         # parameters=[robot_description],  ## for xacro
+        # namespace = "namespace",
         output="screen"
     )
 
     # Joint State Publisher
     joint_state_publisher_node = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
         output='screen'
+        # namespace = "namespace"
     )
 
     # RVIZ Configuration
@@ -60,14 +66,16 @@ def generate_launch_description():
         name='rviz_node',
         parameters=[{'use_sim_time': True}],
         arguments=['-d', rviz_config_dir]
+        # namespace = "namespace"
     )
 
 
     # create and return launch description object
     return LaunchDescription(
         [            
+            # declare_namespace_cmd,
             robot_state_publisher_node,
             rviz_node,
-            # joint_state_publisher_node
+            joint_state_publisher_node
         ]
     )

@@ -1,53 +1,33 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import FindPackageShare
 from launch_ros.actions import Node
 
-
 def generate_launch_description():
-    empty_world_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([FindPackageShare('gazebo_ros'), '/launch/empty_world.launch.py']),
-        launch_arguments={
-            'world_name': 'worlds/empty.world',
-            'paused': 'true'
-        }.items()
-    )
-
-    robot_description = DeclareLaunchArgument(
-        'robot_description',
-        default_value='$(find phantomx_description)/urdf/phantomx.urdf',
-        description='Path to the robot description file (URDF)'
-    )
-
-    spawn_urdf = Node(
-        package='gazebo_ros',
-        executable='spawn_model',
-        arguments=[
-            '-file', '$(find phantomx_description)/urdf/phantomx.urdf',
-            '-urdf',
-            '-model', 'phantomx',
-            '-z', '0.2'
-        ]
-    )
-
-    phantomx_control_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([FindPackageShare('phantomx_control'), '/launch/phantomx_control.launch.py'])
-    )
-
-    phantomx_walker = Node(
-        package='phantomx_gazebo',
-        executable='walker.py'
-    )
-
     return LaunchDescription([
-        empty_world_launch,
-        robot_description,
-        spawn_urdf,
-        phantomx_control_launch,
-        phantomx_walker
+        Node(
+            package='moonbot_gazebo',
+            # namespace='turtlesim1',
+            executable='RF.py',
+            name='RF'
+        ),
+        Node(
+            package='moonbot_gazebo',
+            # namespace='turtlesim1',
+            executable='LF.py',
+            name='LF'
+        ),
+        # Node(
+        #     package='turtlesim',
+        #     namespace='turtlesim2',
+        #     executable='turtlesim_node',
+        #     name='sim'
+        # ),
+        # Node(
+        #     package='turtlesim',
+        #     executable='mimic',
+        #     name='mimic',
+        #     remappings=[
+        #         ('/input/pose', '/turtlesim1/turtle1/pose'),
+        #         ('/output/cmd_vel', '/turtlesim2/turtle1/cmd_vel'),
+        #     ]
+        # )
     ])
-
-
-if __name__ == '__main__':
-    generate_launch_description()

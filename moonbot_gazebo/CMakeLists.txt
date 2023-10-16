@@ -26,6 +26,7 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+
 install(
   DIRECTORY
     launch
@@ -43,6 +44,11 @@ install(
     scripts/action_joint.py
     scripts/limb_joint.py
     scripts/emergency.py
+    scripts/RF.py
+    scripts/RR.py
+    scripts/LR.py
+    scripts/LF.py
+    scripts/modular.py
 
   DESTINATION
     lib/${PROJECT_NAME}
