@@ -25,30 +25,36 @@ class LimbActionClient(Node):
             '/LR/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
+        self.repeat = 1
 
 
     def send_goal(self):
         goal_msg = FollowJointTrajectory.Goal()
         
         joint_names = ["j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
-        # joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf"]
         
         sec = 1.0
 
-        f = -0.06
+        f = -0.04
         h = 0.24
         tar = self.IK.get_joint_angles([0.13, 0.0, h])
 
         # standup seq
-        # LF = [[0.0, 0.756, -1.57], tar]
-        # RR = [[0.0, 0.756, -1.57], tar]
-        LR = [[0.0, 0.756, -1.57], tar]
+        LR = [[0.0, 0.756, -1.57], [0.0, 0.756, -1.57], tar]
+
+        # Gait
+        tar4 = self.IK.get_joint_angles([0.13, 0.0, h])
+        tar5 = self.IK.get_joint_angles([0.13-f/2, -f/2, h-0.05])
+        tar6 = self.IK.get_joint_angles([0.13-f, -f, h])
+
+        # LR = [tar4, tar5, tar6]
 
     
         # seq = [LF[0]+RF[0]+RR[0]+LR[0], LF[1]+RF[1]+RR[1]+LR[1]]
         seq = []
         for i in range(len(LR)):
             seq.append(LR[i])
+        seq = seq*self.repeat
 
 
         vRF = [[0.0, 1.0, 1.0], [0.0, 0.0, 0.0]]

@@ -87,7 +87,7 @@ def generate_launch_description():
             package="rviz2",
             executable="rviz2",
             name="rviz2",
-            namespace = RR_ns,
+            # namespace = RR_ns,
             arguments=["-d", rviz_config],
             output={
                 "stdout": "screen",

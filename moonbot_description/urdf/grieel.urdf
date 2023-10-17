@@ -32,7 +32,7 @@
     </collision>
   </link>
 
-  <link name="c1_rf">
+  <link name="c1_gr">
     <inertial>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <mass value="0.024357719"/>
@@ -54,7 +54,7 @@
       </geometry>
     </collision>
   </link>
-  <link name="c2_rf">
+  <link name="c2_gr">
     <inertial>
       <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <mass value="0.024357719"/>
@@ -76,7 +76,7 @@
       </geometry>
     </collision>
   </link>
-  <link name="thigh_rf">
+  <link name="thigh_gr">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <mass value="0.024357719"/>
@@ -98,7 +98,7 @@
       </geometry>
     </collision>
   </link>
-  <link name="tibia_rf">
+  <link name="tibia_gr">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <mass value="0.024357719"/>
@@ -128,139 +128,81 @@
       </surface>
     </collision>
   </link>
-  <joint name="j_c1_rf" type="revolute">
+  <link name="end_gr">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.024357719"/>
+      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.06 0.06 0.06"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+
+  <joint name="j_c1_gr" type="revolute">
     <parent link="BASE_LIMB"/>
-    <child link="c1_rf"/>
+    <child link="c1_gr"/>
     <origin rpy="0.785 4.7123 0.7853981633974483" xyz="0.1 0 -0.05"/>
     <axis xyz="-1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>
-  <joint name="j_c2_rf" type="fixed">
-    <parent link="c1_rf"/>
-    <child link="c2_rf"/>
+  <joint name="j_c2_gr" type="fixed">
+    <parent link="c1_gr"/>
+    <child link="c2_gr"/>
     <origin rpy="0 1.5704 3.14159" xyz="0 -0.054 0"/>
   </joint>
-  <joint name="j_thigh_rf" type="revolute">
-    <parent link="c2_rf"/>
-    <child link="thigh_rf"/>
+  <joint name="j_thigh_gr" type="revolute">
+    <parent link="c2_gr"/>
+    <child link="thigh_gr"/>
     <origin rpy="3.14159 0  0" xyz="0 0 0"/>
     <axis xyz="-1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>
-  <joint name="j_tibia_rf" type="revolute">
-    <parent link="thigh_rf"/>
-    <child link="tibia_rf"/>
+  <joint name="j_tibia_gr" type="revolute">
+    <parent link="thigh_gr"/>
+    <child link="tibia_gr"/>
     <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>
+  <joint name="j_end_gr" type="revolute">
+    <parent link="tibia_gr"/>
+    <child link="end_gr"/>
+    <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/> 
+  </joint>
 
 
-  <!-- <ros2_control name="MyRobotSystem" type="system">
+  <ros2_control name="MyRobotSystem2" type="system">
     <hardware>
       <plugin>dynamixel_hardware/DynamixelHardware</plugin>
       <param name="usb_port">/dev/ttyUSB1</param>
       <param name="baud_rate">4000000</param>
       <param name="usb_dummy">false</param>
     </hardware>
-    
-    <joint name="j_c1_lr">
-      <param name="id">4</param>
-      <command_interface name="position">
-        <param name="min">-1.57</param>
-        <param name="max">1.57</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="j_thigh_lr">
-      <param name="id">5</param>
-      <command_interface name="position">
-        <param name="min">-1.57</param>
-        <param name="max">0.756</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="j_tibia_lr">
-      <param name="id">6</param>
-      <command_interface name="position">
-        <param name="min">-2.6179939</param>
-        <param name="max">2.6179939</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-1.57</param>
-        <param name="max">1.57</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
 
-    <joint name="j_c1_lf">
-      <param name="id">1</param>
-      <command_interface name="position">
-        <param name="min">-1.57</param>
-        <param name="max">1.57</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="j_thigh_lf">
-      <param name="id">2</param>
-      <command_interface name="position">
-        <param name="min">-1.57</param>
-        <param name="max">0.756</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="j_tibia_lf">
-      <param name="id">3</param>
-      <command_interface name="position">
-        <param name="min">-1.57</param>
-        <param name="max">1.57</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-
-  </ros2_control> -->
-
-  <ros2_control name="MyRobotSystem2" type="system">
-    <hardware>
-      <plugin>dynamixel_hardware/DynamixelHardware</plugin>
-      <param name="usb_port">/dev/ttyUSB2</param>
-      <param name="baud_rate">4000000</param>
-      <param name="usb_dummy">false</param>
-    </hardware>
-
-    <joint name="j_c1_rf">
+    <joint name="j_c1_gr">
       <param name="id">10</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
@@ -274,7 +216,7 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
-    <joint name="j_thigh_rf">
+    <joint name="j_thigh_gr">
       <param name="id">11</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
@@ -288,7 +230,21 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
-    <joint name="j_tibia_rf">
+    <joint name="j_tibia_gr">
+      <param name="id">12</param>
+      <command_interface name="position">
+        <param name="min">-1.57</param>
+        <param name="max">1.57</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-5.6548668</param>
+        <param name="max">5.6548668</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="j_end_gr">
       <param name="id">12</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
@@ -307,4 +263,3 @@
 
 
 </robot>
-

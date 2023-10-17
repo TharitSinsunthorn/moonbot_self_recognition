@@ -159,7 +159,7 @@
   <ros2_control name="MyRobotSystem" type="system">
     <hardware>
       <plugin>dynamixel_hardware/DynamixelHardware</plugin>
-      <param name="usb_port">/dev/ttyUSB0</param>
+      <param name="usb_port">/dev/ttyUSB1</param>
       <param name="baud_rate">4000000</param>
       <param name="usb_dummy">false</param>
     </hardware>
