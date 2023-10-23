@@ -49,6 +49,7 @@ install(
     scripts/LR.py
     scripts/LF.py
     scripts/modular.py
+    scripts/grieel.py
 
   DESTINATION
     lib/${PROJECT_NAME}

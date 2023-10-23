@@ -98,36 +98,7 @@
       </geometry>
     </collision>
   </link>
-  <link name="tibia_gr">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.024357719"/>
-      <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
-    </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l.STL" scale="1 1 1"/>
-      </geometry>
-      <material name="Grey">
-        <color rgba="0.20 0.20 0.20 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://moonbot_description/meshes_phantom/tibia_l_coll.STL" scale="1 1 1"/>
-      </geometry>
-      <surface>
-        <friction>
-          <ode>
-            <mu>0.1</mu>
-            <mu2>0.1</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
-  </link>
+  
   <link name="end_gr">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -178,15 +149,9 @@
     <axis xyz="-1 0 0"/>
     <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
   </joint>
-  <joint name="j_tibia_gr" type="revolute">
-    <parent link="thigh_gr"/>
-    <child link="tibia_gr"/>
-    <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
-    <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
-  </joint>
+  
   <joint name="j_end_gr" type="revolute">
-    <parent link="tibia_gr"/>
+    <parent link="thigh_gr"/>
     <child link="end_gr"/>
     <origin rpy="0 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
@@ -203,7 +168,7 @@
     </hardware>
 
     <joint name="j_c1_gr">
-      <param name="id">10</param>
+      <param name="id">1</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">1.57</param>
@@ -217,7 +182,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_thigh_gr">
-      <param name="id">11</param>
+      <param name="id">2</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">0.756</param>
@@ -230,24 +195,11 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
-    <joint name="j_tibia_gr">
-      <param name="id">12</param>
-      <command_interface name="position">
-        <param name="min">-1.57</param>
-        <param name="max">1.57</param>
-      </command_interface>
-      <command_interface name="velocity">
-        <param name="min">-5.6548668</param>
-        <param name="max">5.6548668</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
+    
     <joint name="j_end_gr">
-      <param name="id">12</param>
+      <param name="id">3</param>
       <command_interface name="position">
-        <param name="min">-1.57</param>
+        <param name="min">0</param>
         <param name="max">1.57</param>
       </command_interface>
       <command_interface name="velocity">

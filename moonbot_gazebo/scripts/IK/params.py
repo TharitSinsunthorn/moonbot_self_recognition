@@ -33,3 +33,10 @@ These values are for smoothly controlling the servos
 '''
 MAX_VELOCITY = 60 # (in deg/s) maximum movement in servo at once.
 SLEEP_TIME_SERVO = 0.05 # Time delay between servo commands in seconds.
+
+
+# Motion related
+sec = 1.0
+span = 0.13
+foward = -0.07
+height = 0.24

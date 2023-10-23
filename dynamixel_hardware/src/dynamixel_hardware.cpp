@@ -266,6 +266,7 @@ return_type DynamixelHardware::read()
   if (!dynamixel_workbench_.syncRead(
         kPresentPositionVelocityCurrentIndex, ids.data(), ids.size(), &log)) {
     RCLCPP_ERROR(rclcpp::get_logger(kDynamixelHardware), "%s", log);
+    // RCLCPP_INFO
   }
 
   if (!dynamixel_workbench_.getSyncReadData(

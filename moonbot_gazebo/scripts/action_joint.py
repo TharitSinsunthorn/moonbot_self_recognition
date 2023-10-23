@@ -22,7 +22,7 @@ class LimbActionClient(Node):
         self._action_client = ActionClient(
             self, 
             FollowJointTrajectory, 
-            '/position_trajectory_controller/follow_joint_trajectory')
+            '/moonbot/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
 
@@ -35,10 +35,6 @@ class LimbActionClient(Node):
                        "j_c1_rr", "j_thigh_rr", "j_tibia_rr",
                        "j_c1_lr", "j_thigh_lr", "j_tibia_lr",
                        "j_c1_lf", "j_thigh_lf", "j_tibia_lf",]
-
-                       
-        # joint_names = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf",
-        #                "j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
         
         sec = 2.0
 
@@ -47,14 +43,16 @@ class LimbActionClient(Node):
         
         f = -0.06
         h = 0.24
+        tar0 = self.IK.get_joint_angles([0.13, 0.0, -0.1])
         tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
+        sit = self.IK.get_joint_angles([0.13, 0.0, 0.1])
         print(tar1)
 
         # standup seq
-        RF = [[0.0, 0.756, -1.5],[0.0, 0.756, -1.5],tar1]
-        RR = [[0.0, 0.756, -1.5],[0.0, 0.756, -1.5],tar1]
-        LR = [[0.0, 0.756, -1.5],[0.0, 0.756, -1.5],tar1]
-        LF = [[0.0, 0.756, -1.5],[0.0, 0.756, -1.5],tar1]
+        RF = [tar0,tar0,tar1]
+        RR = [tar0,tar0,tar1]
+        LR = [tar0,tar0,tar1]
+        LF = [tar0,tar0,tar1]
 
 
         # emergency

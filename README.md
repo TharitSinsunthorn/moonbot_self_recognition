@@ -25,26 +25,6 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
-## Usage of Dynamixel control
-* "trial" package   
-This package is a package for simple control of Dynamixel servo usinng python with ros2. Please refer to this URL [https://emanual.robotis.com/docs/en/dxl/dxl-quick-start-insert]() for how to connect Dynamixel to the PC.
-
-After connecting the 
-```bash
-## terminal 1
-ros2 run trial dynacmixel_control.py
-```
-to set position
-```bash
-## terminal 2 
-ros2 topic pub 1 /set_position dynamixel_custom_interfaces/msg/SetPosition "{id: 1, position: 1000}"
-```
-to ask the current position
-```bash
-## terminal 2 
-ros2 service call /get_position dynamixel_custom_interfaces/srv/GetPosition "id: 1"
-```
-
 ## Usage of Moonbot simulation and control
 To connect the moonbot and demonstrate the simple gait motion
 ```bash

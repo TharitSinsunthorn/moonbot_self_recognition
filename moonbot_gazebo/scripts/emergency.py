@@ -49,7 +49,6 @@ class LimbActionClient(Node):
             callback_group=self.group)
         
         self.IK = InvKinematics()
-        self.repeat = 4
 
 
     def send_goal(self):
@@ -59,24 +58,26 @@ class LimbActionClient(Node):
         LF_goal_msg = FollowJointTrajectory.Goal()
 
 
-
         # Fill in data for trajectory
         joint_names_rf = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf"]
         joint_names_rr = ["j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
         joint_names_lr = ["j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
         joint_names_lf = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
                        
+        
 
-        
-        
-        sec = 0.7
+        repeat = 1
+        sec = 2.0
 
         f = -0.08
         h = 0.23
         lift = 0.08
 
-        startconfig = self.IK.get_joint_angles([0.13, 0.0, h])
+        startconfig = self.IK.get_joint_angles([0.13, 0.0, -0.1])
         startconfig2 = self.IK.get_joint_angles([0.13, 0.0, h])
+
+        sit = self.IK.get_joint_angles([0.13, 0.0, 0.0])
+
 
         tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
         tar2 = self.IK.get_joint_angles([0.13+f/2, f/2, h-lift])
@@ -94,82 +95,64 @@ class LimbActionClient(Node):
         tar11 = self.IK.get_joint_angles([0.13, 0.0, h])
         tar12= self.IK.get_joint_angles([0.13-f/2, f/2, h-lift])
 
-        # tar1 = self.IK.get_joint_angles([0.13-f, -f, h])
-        # tar2 = self.IK.get_joint_angles([0.13+f/2, f/2, h-lift])
-        # tar3 = self.IK.get_joint_angles([0.13+f, f, h])
-        # tar4 = self.IK.get_joint_angles([0.13, 0.0, h])
-        # tar5 = self.IK.get_joint_angles([0.13, 0.0, h])
 
-        # tar6 = self.IK.get_joint_angles([0.13+f, f, h])
-        # tar7 = self.IK.get_joint_angles([0.13-f/2, -f/2, h-lift])
-        # tar8 = self.IK.get_joint_angles([0.13-f, -f, h])
-        # tar9 = self.IK.get_joint_angles([0.13, 0.0, h])
-        # tar10 = self.IK.get_joint_angles([0.13, 0.0, h])
+        mission = "sit"
+        if mission == "s":
+            print("stand up!")
+            # standup seq
+            LF = [startconfig, startconfig, startconfig2]
+            RF = [startconfig, startconfig, startconfig2]
+            RR = [startconfig, startconfig, startconfig2]
+            LR = [startconfig, startconfig, startconfig2]
 
+        elif mission == "sit":
+            LF = [sit]
+            RF = [sit]
+            RR = [sit]
+            LR = [sit]
 
-        # tar11 = self.IK.get_joint_angles([0.13, 0.0, h])
-        # tar12 = self.IK.get_joint_angles([0.13, 0.0, h])
-        # tar13 = self.IK.get_joint_angles([0.13-f, f, h])
-        # tar14 = self.IK.get_joint_angles([0.13+f/2, -f/2, h-lift])
-        # tar15 = self.IK.get_joint_angles([0.13+f, -f, h])
+        elif mission == "w":
+            print("walk!")
+            # Move forward
+            RF = [tar1, tar2, tar3]*repeat
+            LR = [tar4, tar5, tar6]*repeat
+            LF = [tar7, tar8, tar9]*repeat
+            RR = [tar10, tar11, tar12]*repeat
 
+            # Initial and end forward
+            RF.insert(0, RF[0])
+            RF.append(startconfig2)
 
-        # tar16 = self.IK.get_joint_angles([0.13, 0.0, h])
-        # tar17 = self.IK.get_joint_angles([0.13, 0.0, h])
-        # tar18 = self.IK.get_joint_angles([0.13+f, -f, h])
-        # tar19 = self.IK.get_joint_angles([0.13-f/2, f/2, h-lift])
-        # tar20 = self.IK.get_joint_angles([0.13-f, f, h])
+            LR.insert(0, LR[0])
+            LR.append(startconfig2)
 
-        
-        # standup seq
-        # LF = [[0.0, 0.756, -1.57], tar]
-        # RF = [[0.0, 0.756, -1.57], tar]
-        # RR = [[0.0, 0.756, -1.57], tar]
-        # LR = [[0.0, 0.756, -1.57], tar]
+            LF.insert(0, LF[-1])
+            LF.append(startconfig2)
 
-        # Move forward
-        # RF = [tar1, tar2, tar3]*self.repeat
-        # LR = [tar4, tar5, tar6]*self.repeat
-        # LF = [tar7, tar8, tar9]*self.repeat
-        # RR = [tar10, tar11, tar12]*self.repeat
+            RR.insert(0, RR[-1])
+            RR.append(startconfig2)
 
-        # Move Left
-        RR = [tar1, tar2, tar3]*self.repeat
-        LF = [tar4, tar5, tar6]*self.repeat
-        RF = [tar7, tar8, tar9]*self.repeat
-        LR = [tar10, tar11, tar12]*self.repeat
+        elif mission == "l":
+            print("go left!")
+            # Move Left
+            RR = [tar1, tar2, tar3]*repeat
+            LF = [tar4, tar5, tar6]*repeat
+            RF = [tar7, tar8, tar9]*repeat
+            LR = [tar10, tar11, tar12]*repeat
 
-        # Improve
-        # RF = [tar1, tar2, tar3, tar4, tar5]*self.repeat
-        # LR = [tar6, tar7, tar8, tar9, tar10]*self.repeat
-        # LF = [tar11, tar12, tar13, tar14, tar15]*self.repeat
-        # RR = [tar16, tar17, tar18, tar19, tar20]*self.repeat
+            # Initial and end left
+            RR.insert(0, RR[0])
+            RR.append(startconfig2)
 
-        # Initial forward
-        # RF.insert(0, RF[0])
-        # RF.append(tar4)
+            LF.insert(0, LF[0])
+            LF.append(startconfig2)
 
-        # LR.insert(0, LR[0])
-        # LR.append(tar4)
+            RF.insert(0, RF[-1])
+            RF.append(startconfig2)
 
-        # LF.insert(0, LF[-1])
-        # LF.append(tar4)
+            LR.insert(0, LR[-1])
+            LR.append(startconfig2)
 
-        # RR.insert(0, RR[-1])
-        # RR.append(tar4)
-
-        # Initial left
-        RR.insert(0, RR[0])
-        RR.append(tar4)
-
-        LF.insert(0, LF[0])
-        LF.append(tar4)
-
-        RF.insert(0, RF[-1])
-        RF.append(tar4)
-
-        LR.insert(0, LR[-1])
-        LR.append(tar4)
         
         RF_points = []
         RR_points = []

@@ -36,6 +36,7 @@ def generate_launch_description():
             executable="ros2_control_node",
             parameters=[
                 {"robot_description": robot_description_config.toxml()}, controller_config],
+            # namespace='moonbot',
             output={
                 "stdout": "screen",
                 "stderr": "screen",
@@ -45,6 +46,7 @@ def generate_launch_description():
         Node(
             package="controller_manager",
             executable="spawner.py",
+            # namespace="moonbot",
             arguments=["joint_state_broadcaster",
                        "--controller-manager", "/controller_manager"],
         ),
@@ -59,6 +61,7 @@ def generate_launch_description():
         Node(
             package="controller_manager",
             executable="spawner.py",
+            # namespace="moonbot",
             arguments=["position_trajectory_controller",
                        "-c", "/controller_manager"],
         ),
@@ -67,6 +70,7 @@ def generate_launch_description():
             package="robot_state_publisher",
             executable="robot_state_publisher",
             name="robot_state_publisher",
+            # namespace="moonbot",
             parameters=[
                 {"robot_description": robot_description_config.toxml()}],
             output="screen"),
@@ -75,6 +79,7 @@ def generate_launch_description():
             package="rviz2",
             executable="rviz2",
             name="rviz2",
+            # namespace="moonbot",
             arguments=["-d", rviz_config],
             output={
                 "stdout": "screen",

@@ -22,7 +22,7 @@ class LimbActionClient(Node):
         self._action_client = ActionClient(
             self, 
             FollowJointTrajectory, 
-            '/RR/position_trajectory_controller/follow_joint_trajectory')
+            '/GR/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
         self.repeat = 1
@@ -30,43 +30,38 @@ class LimbActionClient(Node):
 
     def send_goal(self):
         goal_msg = FollowJointTrajectory.Goal()
+
+        # Fill in data for trajectory
+
+        joint_names = ["j_c1_gr", "j_thigh_gr", "j_end_gr"]
         
-        joint_names = ["j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
-        
-        sec = 1.0
+        sec = 2.0
 
-        f = -0.04
-        h = 0.24
-        tar = self.IK.get_joint_angles([0.13, 0.0, h])
+        # gripper seq
+        GR = [[0.4, -0.4, 0.756],
+              [0.4, -0.1, 1.2],
+              [0.0, 0.6, 0.756]]
+              # [0.0, 0.0, 0.756],
+              # [0.0, 1.0, 0.756], 
+              # [0.0, 0.0, 0.756]]
 
-        # standup seq
-        RR = [tar]
-
-        # Gait
-        tar10 = self.IK.get_joint_angles([0.13-f, f, h])
-        tar11 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar12= self.IK.get_joint_angles([0.13-f/2, f/2, h-0.05])
-
-        # RR = [tar10, tar11, tar12]
-
-    
-        # seq = [LF[0]+RF[0]+RR[0]+LR[0], LF[1]+RF[1]+RR[1]+LR[1]]
-        seq = []
-        for i in range(len(RR)):
-            seq.append(RR[i])
-        seq = seq*self.repeat
+        # seq = []
+        # for i in range(len(GR)):
+        #     seq.append(GR[i])
+        # seq = seq*self.repeat
 
 
-        vRR = [[0.0, 1.0, 1.0], [0.0, 0.0, 0.0]]
-        v = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+        vGR = [[1.0, -1.0, 0.0], 
+               [0.0, 2.0, 0.0],
+               [-1.0, 2.0, 0.0]]
 
         points = []
         
 
-        for i in range(len(seq)):
+        for i in range(len(GR)):
             point = JointTrajectoryPoint()
             point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
-            point.positions = seq[i]
+            point.positions = GR[i]
             # point.velocities = vel[i]
             points.append(point)
             # print(points)
