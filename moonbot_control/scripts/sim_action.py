@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#! /usr/bin/env python3
 
 import sys
 import os
@@ -22,45 +22,65 @@ class LimbActionClient(Node):
         self._action_client = ActionClient(
             self, 
             FollowJointTrajectory, 
-            '/RF/position_trajectory_controller/follow_joint_trajectory')
+            '/moonbot/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
-        self.repeat = 1
 
 
     def send_goal(self):
         goal_msg = FollowJointTrajectory.Goal()
 
-        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf"]
+        # Fill in data for trajectory
+        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
+                       "j_c1_rr", "j_thigh_rr", "j_tibia_rr",
+                       "j_c1_lr", "j_thigh_lr", "j_tibia_lr",
+                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf",]
         
-        sec = 1.0
+        sec = 2.0
 
-        f = -0.04
+        # tar = lk.inverse_kinematics([0.19, 0.0, 0.16])
+
+        
+        f = -0.06
         h = 0.24
-        tar = self.IK.get_joint_angles([0.13, 0.0, h])
+        tar0 = self.IK.get_joint_angles([0.13, 0.0, -0.1])
+        tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
+        sit = self.IK.get_joint_angles([0.13, 0.0, 0.1])
+        print(tar1)
 
         # standup seq
-        RF = [tar]
+        RF = [tar0,tar0,tar1]
+        RR = [tar0,tar0,tar1]
+        LR = [tar0,tar0,tar1]
+        LF = [tar0,tar0,tar1]
 
-        # Gait
-        tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar2 = self.IK.get_joint_angles([0.13+f/2, f/2, h-0.05])
-        tar3 = self.IK.get_joint_angles([0.13+f, f, h])
 
-        # RF = [tar1, tar2, tar3]
+        # emergency
+        E = [[0.0, -1.0, -0.57], 
+            [0.3, -0.6, -0.8], 
+            [0.6, -1.0, -0.57],
+            [0.0, -1.0, -0.57]]
+              
 
-        seq = []
-        for i in range(len(RF)):
-            seq.append(RF[i])
-        seq = seq*self.repeat
+        vLF = [[0.0, 0.0, 0.0]]
 
-        vRF = [[0.0, 1.0, 1.0], [0.0, 0.0, 0.0]]
-        v = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+        vRF = [[0.0, 0.0, 0.0]]
+              
 
-        # point1.positions = [0.0, 0.0, 0.0]
-        points = []
+        vRR = [[0.0, 0.0, 0.0]]
+
+        vLR = [[0.0, 0.0, 0.0]]
         
 
+        seq = []
+        vel = []
+        for i in range(len(LF)):
+            seq.append(RF[i]+RR[i]+LR[i]+LF[i])
+            # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
+        # seq = seq*6
+        # print(seq)
+
+        points = []
         for i in range(len(seq)):
             point = JointTrajectoryPoint()
             point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
@@ -105,6 +125,8 @@ def main(args=None):
 
     action_client = LimbActionClient()
 
+    # angle = [1.0, 1.0]
+    # print(self.IK([0.1, 0.0, 0.1]))
     action_client.send_goal()
     
     rclpy.spin(action_client)

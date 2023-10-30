@@ -14,11 +14,26 @@ source /opt/ros/foxy/setup.bash
 
 * Install dependencies
 ```bash
+sudo apt-get update
+
 rosdep install --from-paths src --ignore-src -r -y
+
+sudo apt-get ros-foxy-xacro
+
+sudo apt-get install ros-foxy-ros2-control 
+
+sudo apt-get install ros-foxy-ros2-controllers
+
+sudo apt-get install ros-foxy-gazebo-ros2-control
+
+sudo apt-get install ros-$ROS_DISTRO-dynamixel-sdk*
+
+sudo apt-get install ros-$ROS_DISTRO-dynamixel-workbench*
+
 ```
 Install program
 ```bash
-cd ros2_ws/src
+cd ros2_ws/
 
 colcon build --symlink-install
 

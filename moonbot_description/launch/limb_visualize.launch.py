@@ -76,6 +76,6 @@ def generate_launch_description():
             # declare_namespace_cmd,
             robot_state_publisher_node,
             rviz_node,
-            joint_state_publisher_node
+            # joint_state_publisher_node
         ]
     )

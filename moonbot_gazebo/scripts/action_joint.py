@@ -8,7 +8,9 @@ from rclpy.action import ActionClient
 from rclpy.node import Node
 from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
+from sensor_msgs.msg import JointState
 
+import numpy as np
 from IK.limb_kinematics import InvKinematics
 # ros2 action list -t
 # ros2 action info /position_trajectory_controller/follow_joint_trajectory -t
@@ -22,9 +24,22 @@ class LimbActionClient(Node):
         self._action_client = ActionClient(
             self, 
             FollowJointTrajectory, 
-            '/moonbot/position_trajectory_controller/follow_joint_trajectory')
+            '/position_trajectory_controller/follow_joint_trajectory')
         
+        self.RFsub = self.create_subscription(JointState, 
+            "RFstate", 
+            self.callback, 10)
+        self.testsub
+
         self.IK = InvKinematics()
+
+        self.tar = []
+
+    def callback(self, msg):
+        # self.mis = msg.position
+        self.get_logger().info(f'Received joint states: {msg.position}')
+        self.tar = msg.position
+
 
 
     def send_goal(self):
@@ -46,7 +61,10 @@ class LimbActionClient(Node):
         tar0 = self.IK.get_joint_angles([0.13, 0.0, -0.1])
         tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
         sit = self.IK.get_joint_angles([0.13, 0.0, 0.1])
-        print(tar1)
+
+        test = self.IK.get_joint_angles(np.array([0.13, 0.0, h]))
+        # print(test)
+        # print(tar1)
 
         # standup seq
         RF = [tar0,tar0,tar1]
@@ -125,11 +143,11 @@ def main(args=None):
 
     action_client = LimbActionClient()
 
-    # angle = [1.0, 1.0]
-    # print(self.IK([0.1, 0.0, 0.1]))
     action_client.send_goal()
-    
     rclpy.spin(action_client)
+
+    
+    
 
 if __name__ == '__main__':
     main()

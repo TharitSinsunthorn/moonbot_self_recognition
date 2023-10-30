@@ -263,16 +263,20 @@ return_type DynamixelHardware::read()
   std::copy(joint_ids_.begin(), joint_ids_.end(), ids.begin());
   const char * log = nullptr;
 
+  bool have_err = false;
+
   if (!dynamixel_workbench_.syncRead(
         kPresentPositionVelocityCurrentIndex, ids.data(), ids.size(), &log)) {
+    have_err = true;
     RCLCPP_ERROR(rclcpp::get_logger(kDynamixelHardware), "%s", log);
-    // RCLCPP_INFO
+    RCLCPP_INFO(rclcpp::get_logger(kDynamixelHardware), "Im here 1, trying to reconect");
   }
 
   if (!dynamixel_workbench_.getSyncReadData(
         kPresentPositionVelocityCurrentIndex, ids.data(), ids.size(),
         control_items_[kPresentCurrentItem]->address,
         control_items_[kPresentCurrentItem]->data_length, currents.data(), &log)) {
+    have_err = true;
     RCLCPP_ERROR(rclcpp::get_logger(kDynamixelHardware), "%s", log);
   }
 
@@ -280,6 +284,7 @@ return_type DynamixelHardware::read()
         kPresentPositionVelocityCurrentIndex, ids.data(), ids.size(),
         control_items_[kPresentVelocityItem]->address,
         control_items_[kPresentVelocityItem]->data_length, velocities.data(), &log)) {
+    have_err = true;
     RCLCPP_ERROR(rclcpp::get_logger(kDynamixelHardware), "%s", log);
   }
 
@@ -287,6 +292,7 @@ return_type DynamixelHardware::read()
         kPresentPositionVelocityCurrentIndex, ids.data(), ids.size(),
         control_items_[kPresentPositionItem]->address,
         control_items_[kPresentPositionItem]->data_length, positions.data(), &log)) {
+    have_err = true;
     RCLCPP_ERROR(rclcpp::get_logger(kDynamixelHardware), "%s", log);
   }
 
@@ -296,11 +302,26 @@ return_type DynamixelHardware::read()
     joints_[i].state.effort = dynamixel_workbench_.convertValue2Current(currents[i]);
   }
 
+  // if(have_err){
+  //   auto usb_port = info_.hardware_parameters.at("usb_port");
+  //   auto baud_rate = std::stoi(info_.hardware_parameters.at("baud_rate"));
+  //   const char * log = nullptr;
+
+  //   if (!dynamixel_workbench_.init(usb_port.c_str(), baud_rate, &log)) {
+  //     RCLCPP_FATAL(rclcpp::get_logger(kDynamixelHardware), "%s", log);
+  //     return return_type::ERROR;
+  //   }
+  //   enable_torque(false);
+  //   set_control_mode(ControlMode::Velocity, true);
+  //   enable_torque(true);
+    // }
   return return_type::OK;
+
 }
 
 return_type DynamixelHardware::write()
 {
+  // RCLCPP_INFO(rclcpp::get_logger(kDynamixelHardware), "Im in top of the write1");
   if (use_dummy_) {
     for (auto & joint : joints_) {
       joint.state.position = joint.command.position;

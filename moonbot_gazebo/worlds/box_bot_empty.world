@@ -27,11 +27,11 @@
     <physics name="ode_200iters" type="ode">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
-      <real_time_update_rate>1000.0</real_time_update_rate>
+      <real_time_update_rate>1200.0</real_time_update_rate>
       <ode>
         <solver>
           <type>quick</type>
-          <iters>200</iters>
+          <iters>500</iters>
         </solver>
       </ode>
     </physics>
