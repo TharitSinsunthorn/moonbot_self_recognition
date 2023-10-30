@@ -48,7 +48,8 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
           'world',
-          default_value=[os.path.join(pkg_moonbot_gazebo, 'worlds', 'box_bot_empty.world'), ''],
+          # default_value=[os.path.join(pkg_moonbot_gazebo, 'worlds', 'box_bot_empty.world'), ''],
+          default_value=[os.path.join(pkg_gazebo_ros, 'worlds', 'empty.world'), ''],
           description='SDF world file'),
         gazebo
     ])

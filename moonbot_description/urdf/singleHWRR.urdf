@@ -164,7 +164,7 @@
     </hardware>
     
     <joint name="j_c1_rr">
-      <param name="id">7</param>
+      <param name="id">1</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">1.57</param>
@@ -178,7 +178,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_thigh_rr">
-      <param name="id">8</param>
+      <param name="id">2</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">0.756</param>
@@ -192,7 +192,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_tibia_rr">
-      <param name="id">9</param>
+      <param name="id">3</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">1.57</param>

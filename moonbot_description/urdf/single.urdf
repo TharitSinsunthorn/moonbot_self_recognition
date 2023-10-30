@@ -3,7 +3,7 @@
         
   <link name="base_link"/>
 
-  <joint name="j_phantomx_attachment" type="fixed">
+  <joint name="j_moonbot_attachment" type="fixed">
     <parent link="base_link"/>
     <child link="BASE_LIMB"/>
     <origin rpy="0 0 0" xyz="0 0 0.2"/>

@@ -35,7 +35,6 @@ install(
     launch
     meshes
     meshes_phantom
-    meshes2
     meshesX
   DESTINATION
     share/${PROJECT_NAME}/

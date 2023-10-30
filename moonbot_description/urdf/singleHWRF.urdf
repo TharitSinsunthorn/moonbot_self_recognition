@@ -255,13 +255,13 @@
   <ros2_control name="MyRobotSystem2" type="system">
     <hardware>
       <plugin>dynamixel_hardware/DynamixelHardware</plugin>
-      <param name="usb_port">/dev/ttyUSB2</param>
+      <param name="usb_port">/dev/ttyUSB1</param>
       <param name="baud_rate">4000000</param>
       <param name="usb_dummy">false</param>
     </hardware>
 
     <joint name="j_c1_rf">
-      <param name="id">10</param>
+      <param name="id">1</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">1.57</param>
@@ -275,7 +275,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_thigh_rf">
-      <param name="id">11</param>
+      <param name="id">2</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">0.756</param>
@@ -289,7 +289,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_tibia_rf">
-      <param name="id">12</param>
+      <param name="id">3</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">1.57</param>

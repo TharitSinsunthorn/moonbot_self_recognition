@@ -17,16 +17,23 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
+find_package(rclpy REQUIRED)
 find_package(urdf REQUIRED)
 find_package(xacro REQUIRED)
 find_package(robot_state_publisher REQUIRED)
 find_package(moonbot_description REQUIRED)
 find_package(gazebo_ros REQUIRED)
 find_package(controller_manager REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
+  find_package(ament_cmake_pytest REQUIRED)
   ament_lint_auto_find_test_dependencies()
 endif()
 
@@ -36,6 +43,18 @@ install(
     config
   DESTINATION
     share/${PROJECT_NAME}/
+)
+
+install(
+  PROGRAMS
+    scripts/IK_node.py
+    scripts/leg_node.py
+    scripts/gait_node.py
+    scripts/real_action.py
+    scripts/sim_action.py
+
+  DESTINATION
+    lib/${PROJECT_NAME}
 )
 
 ament_package()
