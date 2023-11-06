@@ -8,7 +8,9 @@ from std_msgs.msg import Float64
 from std_srvs.srv import Empty
 from geometry_msgs.msg import Vector3
 
-from custom_messages.srv import Vect3
+# from custom_messages.srv import Vect3
+
+import IK.parameters as params
 
 
 def normalize(v):
@@ -25,11 +27,9 @@ class MoverNode(Node):
         super().__init__(f'mover_node')
         self.number_of_leg = 4
 
-        self.declare_parameter('std_movement_time', 0)
-        self.movement_time = self.get_parameter('std_movement_time').get_parameter_value().double_value
+        self.movement_time = params.movement_time
 
-        self.declare_parameter('movement_update_rate', 0)
-        self.movement_update_rate = self.get_parameter('movement_update_rate').get_parameter_value().double_value
+        self.movement_update_rate = params.movement_update_rate
 
         self.default_target = np.array([
             [300, 0, -150],
@@ -38,16 +38,16 @@ class MoverNode(Node):
             [0, -300, -150],
         ], dtype=float)
 
-        alive_client_list = [f"leg_{leg}_alive" for leg in range(4)]
-        while alive_client_list:
-            for client_name in alive_client_list:
-                self.necessary_client = self.create_client(Empty, client_name)
-                if not self.necessary_client.wait_for_service(timeout_sec=2):
-                    self.get_logger().warning(
-                        f'''Waiting for necessary node, check that the [{client_name}] service is running''')
-                else:
-                    alive_client_list.remove(client_name)
-                    self.get_logger().warning(f'''{client_name[:-6]} connected :)''')
+        # alive_client_list = [f"leg_{leg}_alive" for leg in range(4)]
+        # while alive_client_list:
+        #     for client_name in alive_client_list:
+        #         self.necessary_client = self.create_client(Empty, client_name)
+        #         if not self.necessary_client.wait_for_service(timeout_sec=2):
+        #             self.get_logger().warning(
+        #                 f'''Waiting for necessary node, check that the [{client_name}] service is running''')
+        #         else:
+        #             alive_client_list.remove(client_name)
+        #             self.get_logger().warning(f'''{client_name[:-6]} connected :)''')
 
         ############   V Publishers V
         #   \  /   #
@@ -121,68 +121,68 @@ class MoverNode(Node):
             msg.x, msg.y, msg.z = tuple(target.tolist())
             self.ik_pub_arr[leg].publish(msg)
 
-    def go_to_default_slow(self):
-        for leg in range(self.default_target.shape[0]):
-            target = self.default_target[leg, :]
-            msg = Vector3()
-            msg.x, msg.y, msg.z = tuple(target.tolist())
-            self.transl_pub_arr[leg].publish(msg)
+    # def go_to_default_slow(self):
+    #     for leg in range(self.default_target.shape[0]):
+    #         target = self.default_target[leg, :]
+    #         msg = Vector3()
+    #         msg.x, msg.y, msg.z = tuple(target.tolist())
+    #         self.transl_pub_arr[leg].publish(msg)
 
-    def gait_loop(self):
-        plot_for_stability = False
-        counter = 0
-        step_direction = np.array([100, 0, 0], dtype=float)
-        step_back_mm = 40
+    # def gait_loop(self):
+    #     plot_for_stability = False
+    #     counter = 0
+    #     step_direction = np.array([100, 0, 0], dtype=float)
+    #     step_back_mm = 40
 
-        now_targets = self.default_target.copy()
+    #     now_targets = self.default_target.copy()
 
-        for leg in range(now_targets.shape[0]):
-            target = now_targets[leg, :] + step_direction
+    #     for leg in range(now_targets.shape[0]):
+    #         target = now_targets[leg, :] + step_direction
 
-            step_back = normalize(target * np.array([1, 1, 0])) * step_back_mm
+    #         step_back = normalize(target * np.array([1, 1, 0])) * step_back_mm
 
-            for ground_leg in range(now_targets.shape[0]):
-                if ground_leg != leg:
-                    target_for_stepback = now_targets[ground_leg, :] + step_back
-                    now_targets[ground_leg, :] = target_for_stepback
+    #         for ground_leg in range(now_targets.shape[0]):
+    #             if ground_leg != leg:
+    #                 target_for_stepback = now_targets[ground_leg, :] + step_back
+    #                 now_targets[ground_leg, :] = target_for_stepback
 
-                    msg = Vector3()
-                    msg.x, msg.y, msg.z = tuple(target_for_stepback.tolist())
-                    self.transl_pub_arr[ground_leg].publish(msg)
+    #                 msg = Vector3()
+    #                 msg.x, msg.y, msg.z = tuple(target_for_stepback.tolist())
+    #                 self.transl_pub_arr[ground_leg].publish(msg)
 
-            if plot_for_stability:
-                plt.plot(np.delete(now_targets, leg, axis=0)[:, 0],
-                         np.delete(now_targets, leg, axis=0)[:, 1])
-                plt.scatter(0, 0, c="red")
-                plt.grid()
-                plt.savefig(f"{counter}.png")
-                plt.clf()
-                counter += 1
+    #         if plot_for_stability:
+    #             plt.plot(np.delete(now_targets, leg, axis=0)[:, 0],
+    #                      np.delete(now_targets, leg, axis=0)[:, 1])
+    #             plt.scatter(0, 0, c="red")
+    #             plt.grid()
+    #             plt.savefig(f"{counter}.png")
+    #             plt.clf()
+    #             counter += 1
 
-            now_targets[leg, :] = target + step_back
-            msg = Vector3()
-            msg.x, msg.y, msg.z = tuple(target.tolist())
-            self.hop_pub_arr[leg].publish(msg)
+    #         now_targets[leg, :] = target + step_back
+    #         msg = Vector3()
+    #         msg.x, msg.y, msg.z = tuple(target.tolist())
+    #         self.hop_pub_arr[leg].publish(msg)
 
-            time.sleep(self.movement_time)
-            for ground_leg in range(now_targets.shape[0]):
-                target = now_targets[ground_leg, :] - step_direction / 4 - step_back
+    #         time.sleep(self.movement_time)
+    #         for ground_leg in range(now_targets.shape[0]):
+    #             target = now_targets[ground_leg, :] - step_direction / 4 - step_back
 
-                now_targets[ground_leg, :] = target
+    #             now_targets[ground_leg, :] = target
 
-                msg = Vector3()
-                msg.x, msg.y, msg.z = tuple(target.tolist())
-                self.transl_pub_arr[ground_leg].publish(msg)
+    #             msg = Vector3()
+    #             msg.x, msg.y, msg.z = tuple(target.tolist())
+    #             self.transl_pub_arr[ground_leg].publish(msg)
 
-            if plot_for_stability:
-                plt.plot(np.delete(now_targets, [], axis=0)[:, 0],
-                         np.delete(now_targets, [], axis=0)[:, 1])
-                plt.scatter(0, 0, c="red")
-                plt.grid()
-                plt.savefig(f"{counter}.png")
-                plt.clf()
-                counter += 1
-            time.sleep(self.movement_time)
+    #         if plot_for_stability:
+    #             plt.plot(np.delete(now_targets, [], axis=0)[:, 0],
+    #                      np.delete(now_targets, [], axis=0)[:, 1])
+    #             plt.scatter(0, 0, c="red")
+    #             plt.grid()
+    #             plt.savefig(f"{counter}.png")
+    #             plt.clf()
+    #             counter += 1
+    #         time.sleep(self.movement_time)
 
     def gait_loopv2(self):
         plot_for_stability = False

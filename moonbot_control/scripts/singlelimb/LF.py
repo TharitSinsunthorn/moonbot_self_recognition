@@ -9,10 +9,8 @@ from rclpy.node import Node
 from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 
+sys.path.append('../moonbot_ws/src/moonbot_control/scripts')
 from IK.limb_kinematics import InvKinematics
-# ros2 action list -t
-# ros2 action info /position_trajectory_controller/follow_joint_trajectory -t
-# ros2 interface show control_msgs/action/FolowJointTrajectory
 
 
 class LimbActionClient(Node):
@@ -56,7 +54,6 @@ class LimbActionClient(Node):
         for i in range(len(LF)):
             seq.append(LF[i])
         seq = seq*self.repeat
-
 
         vRF = [[0.0, 1.0, 1.0], [0.0, 0.0, 0.0]]
         v = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]

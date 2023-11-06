@@ -25,7 +25,7 @@ class LimbActionClient(Node):
             '/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
-        self.repeat = 3
+        self.repeat = 1
 
 
     def send_goal(self):
@@ -42,7 +42,7 @@ class LimbActionClient(Node):
         
         sec = 0.7
 
-        # tar = lk.inverse_kinematics([0.2, 0.0, 0.16])
+        tar = self.IK.get_joint_angles([0.2, 0.0, 0.16])
         f = 0.05
         h = 0.24
         tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
@@ -75,30 +75,9 @@ class LimbActionClient(Node):
             [0.6, -1.0, -0.57],
             [0.0, -1.0, -0.57]]
 
-        # LF = [[-0.6, -1.0, -0.4],
-        #       [0.0, -1.0, -0.57], 
-        #       [-0.3, -0.6, -0.8]]
-
         LF = [tar7, tar8, tar9]
-
-        # RF = [[0.0, -1.0, -0.57], 
-        #       [0.3, -0.6, -0.8], 
-        #       [0.6, -1.0, -0.4]]
-
         RF = [tar1, tar2, tar3]
-              
-
-        # RR = [[0.6, -1.0, -0.4],
-        #       [0.0, -1.0, -0.57], 
-        #       [0.3, -0.6, -0.8]]
-
         RR = [tar10, tar11, tar12]
-              
-
-        # LR = [[0.0, -1.0, -0.57], 
-        #       [-0.3, -0.6, -0.8], 
-        #       [-0.6, -1.0, -0.4]]
-
         LR = [tar4, tar5, tar6]
               
 
@@ -135,12 +114,12 @@ class LimbActionClient(Node):
         vel = []
         for i in range(len(LF)):
             seq.append(LF[i]+RF[i]+RR[i]+LR[i])
-            vel.append(vLF[i]+vRF[i]+vRR[i]+vLR[i])
+            # vel.append(vLF[i]+vRF[i]+vRR[i]+vLR[i])
 
         seq = seq*self.repeat
-        vel = vel*self.repeat
-        seq.insert(0, tar9+tar1+tar12+tar4)
-        seq.append(tar1+tar1+tar1+tar1)
+        # vel = vel*self.repeat
+        # seq.insert(0, tar9+tar1+tar12+tar4)
+        # seq.append(tar1+tar1+tar1+tar1)
 
         # print(seq)
 

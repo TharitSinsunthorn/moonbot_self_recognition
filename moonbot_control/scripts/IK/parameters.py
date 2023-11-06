@@ -5,7 +5,7 @@ import math
 '''
 Joint nomeclature:
     joint1: Coxa
-    joint2: Femur
+    joint2: Thigh
     joint3: Tibia
 '''
 
@@ -20,7 +20,7 @@ limp_pos contains the angle of the orientation of the limb w.r.t. base frame
 '''
 limb_angle = [45, 135, -135, -45]
 
-
+# Robot parameters
 offset_x = D1
 offset_y = D1
 coxa_length = L1 
@@ -42,3 +42,6 @@ sec = 1.0
 span = 0.13
 foward = -0.07
 height = 0.24
+
+std_movement_time = 1 #sec
+movement_update_rate = 20 #Hz
