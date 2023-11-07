@@ -11,7 +11,7 @@ from geometry_msgs.msg import Vector3
 
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup, ReentrantCallbackGroup
 
-# from custom_messages.srv import Vect3
+from custom_messages.srv import Vect3
 import IK.parameters as params
 
 
@@ -73,79 +73,80 @@ class LegNode(Node):
         ############   V Publishers V
         #   \  /   #
         #    \/    #
-        self.ik_pub = self.create_publisher(Vector3, f'set_rf_target',
-                                            10
-                                            )
-        #    /\    #
+        # self.ik_pub = self.create_publisher(Vector3, f'set_rf_target',
+        #                                     10
+        #                                     )
+        self.RFpub = self.create_publisher(JointState, "RFstate", 10)
+        # #    /\    #
         #   /  \   #
         ############   ^ Publishers ^
 
         ############   V Subscribers V
         #   \  /   #
         #    \/    #
-        self.sub_rel_target = self.create_subscription(Vector3, f'rel_transl_{self.leg_num}',
-                                                       self.rel_transl_cbk,
-                                                       10,
-                                                       callback_group=movement_cbk_group
-                                                       )
-        self.sub_rel_target = self.create_subscription(Vector3, f'rel_hop_{self.leg_num}',
-                                                       self.rel_hop_cbk,
-                                                       10,
-                                                       callback_group=movement_cbk_group
-                                                       )
-        #    /\    #
+        # self.sub_rel_target = self.create_subscription(Vector3, f'rel_transl_{self.leg_num}',
+        #                                                self.rel_transl_cbk,
+        #                                                10,
+        #                                                callback_group=movement_cbk_group
+        #                                                )
+        # self.sub_rel_target = self.create_subscription(Vector3, f'rel_hop_{self.leg_num}',
+        #                                                self.rel_hop_cbk,
+        #                                                10,
+        #                                                callback_group=movement_cbk_group
+        #                                                )
+        # #    /\    #
         #   /  \   #
         ############   ^ Subscribers ^
 
         ############   V Service sever V
         #   \  /   #
         #    \/    #
-        self.iAmAlive = self.create_service(Empty, f'leg_{self.leg_num}_alive', lambda: None)
-        self.rel_transl_server = self.create_service(Vect3,
-                                                     f'leg_{self.leg_num}_rel_transl',
-                                                     self.rel_transl_srv_cbk,
-                                                     callback_group=movement_cbk_group)
-        self.rel_transl_server = self.create_service(Vect3,
-                                                     f'leg_{self.leg_num}_rel_hop',
-                                                     self.rel_transl_srv_cbk,
-                                                     callback_group=movement_cbk_group)
+        # self.iAmAlive = self.create_service(Empty, f'leg_{self.leg_num}_alive', lambda: None)
+        # self.rel_transl_server = self.create_service(Vect3,
+        #                                              f'leg_{self.leg_num}_rel_transl',
+        #                                              self.rel_transl_srv_cbk,
+        #                                              callback_group=movement_cbk_group)
+        # self.rel_transl_server = self.create_service(Vect3,
+        #                                              f'leg_{self.leg_num}_rel_hop',
+        #                                              self.rel_transl_srv_cbk,
+        #                                              callback_group=movement_cbk_group)
         #    /\    #
         #   /  \   #
         ############   ^ Service sever ^
 
-    # @error_catcher
-    def rel_transl(self, target: np.ndarray):
-        samples = int(self.movement_time * self.movement_update_rate)
-        rate = self.create_rate(self.movement_update_rate)
-        for x in np.linspace(0, 1, num=samples):
-            x = (1 - np.cos(x * np.pi)) / 2
-            intermediate_target = target * x + self.last_target * (1 - x)
+    # # @error_catcher
+    # def rel_transl(self, target: np.ndarray):
+    #     samples = int(self.movement_time * self.movement_update_rate)
+    #     rate = self.create_rate(self.movement_update_rate)
+    #     for x in np.linspace(0, 1, num=samples):
+    #         x = (1 - np.cos(x * np.pi)) / 2
+    #         intermediate_target = target * x + self.last_target * (1 - x)
 
-            msg = Vector3()
-            msg.x, msg.y, msg.z = tuple(intermediate_target.tolist())
-            self.ik_pub.publish(msg)
-            rate.sleep()
+    #         msg = Vector3()
+    #         msg.x, msg.y, msg.z = tuple(intermediate_target.tolist())
+    #         self.ik_pub.publish(msg)
+    #         rate.sleep()
 
-        self.last_target = target
-        return target
+    #     self.last_target = target
+    #     return target
 
-    # @error_catcher
-    def rel_hop(self, target: np.ndarray):
-        samples = int(self.movement_time * self.movement_update_rate)
-        rate = self.create_rate(self.movement_update_rate)
-        for x in np.linspace(0, 1, num=samples):
-            z_hop = (np.sin(x * np.pi)) * 50
-            x = (1 - np.cos(x * np.pi)) / 2
-            intermediate_target = target * x + self.last_target * (1 - x)
-            intermediate_target[2] += z_hop
+    # # @error_catcher
+    # def rel_hop(self, target: np.ndarray):
+    #     samples = int(self.movement_time * self.movement_update_rate)
+    #     rate = self.create_rate(self.movement_update_rate)
+    #     for x in np.linspace(0, 1, num=samples):
+    #         z_hop = (np.sin(x * np.pi)) * 50
+    #         x = (1 - np.cos(x * np.pi)) / 2
+    #         intermediate_target = target * x + self.last_target * (1 - x)
+    #         intermediate_target[2] += z_hop
 
-            msg = Vector3()
-            msg.x, msg.y, msg.z = tuple(intermediate_target.tolist())
-            self.ik_pub.publish(msg)
-            rate.sleep()
+    #         msg = Vector3()
+    #         msg.x, msg.y, msg.z = tuple(intermediate_target.tolist())
+    #         self.ik_pub.publish(msg)
+    #         rate.sleep()
 
-        self.last_target = target
-        return target
+    #     self.last_target = target
+    #     return target
 
     # @error_catcher
     def rel_transl_cbk(self, msg):
@@ -174,6 +175,8 @@ class LegNode(Node):
 
         response.success = True
         return response
+
+    
 
 
 def main(args=None):
