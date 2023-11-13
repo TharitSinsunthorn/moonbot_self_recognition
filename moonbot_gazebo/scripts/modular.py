@@ -13,6 +13,7 @@ from rclpy.callback_groups import ReentrantCallbackGroup, MutuallyExclusiveCallb
 from rclpy.executors import MultiThreadedExecutor, SingleThreadedExecutor
 
 from IK.limb_kinematics import InvKinematics
+import IK.params as params
 
 
 class LimbActionClient(Node):
@@ -47,10 +48,13 @@ class LimbActionClient(Node):
             callback_group=self.group)
         
         self.IK = InvKinematics()
-        self.repeat = 2
+        self.repeat = 3
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/231107_053258_data.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/2data.csv'
         self.seq = []
+
+        self.span = params.span
+        self.height = params.height
 
 
     def seq_generator(self, leg_no):
@@ -94,12 +98,12 @@ class LimbActionClient(Node):
                        
 
         
-        sec = 1  
+        sec = 0.7  
 
         f = -0.04
-        h = 0.26
+        h = self.height
         lift = 0.03
-        span = 0.11
+        span = self.span
 
         startconfig = self.IK.get_joint_angles([span, 0.0, 0.1])
         startconfig2 = self.IK.get_joint_angles([span, 0.0, h])
@@ -183,49 +187,49 @@ class LimbActionClient(Node):
 
         
 
-        # RF = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
-        # LR = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
-        # LF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
-        # RR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
+        RF = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
+        LR = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
+        LF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
+        RR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
 
-        # RF.insert(0, RF[-1])
-        # RF.insert(0, RF[-1])
+        RF.insert(0, RF[-1])
+        RF.insert(0, RF[-1])
 
-        # LR.insert(0, LR[-1])
-        # LR.insert(0, LR[-1])
+        LR.insert(0, LR[-1])
+        LR.insert(0, LR[-1])
 
-        # LF.insert(0, LF[-2])
-        # LF.insert(0, LF[-1])
-        # LF[-2] = tar19
-        # LF[-1] = tar4
+        LF.insert(0, LF[-2])
+        LF.insert(0, LF[-1])
+        LF[-2] = tar19
+        LF[-1] = tar4
 
-        # RR.insert(0, RR[-2])
-        # RR.insert(0, RR[-1])
-        # RR[-2] = tar14
-        # RR[-1] = tar4
+        RR.insert(0, RR[-2])
+        RR.insert(0, RR[-1])
+        RR[-2] = tar14
+        RR[-1] = tar4
 
 
         # Go left
-        RR = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
-        LF = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
-        RF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
-        LR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
+        # RR = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
+        # LF = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
+        # RF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
+        # LR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
 
-        RR.insert(0, RR[-1])
-        RR.insert(0, RR[-1])
+        # RR.insert(0, RR[-1])
+        # RR.insert(0, RR[-1])
 
-        LF.insert(0, LF[-1])
-        LF.insert(0, LF[-1])
+        # LF.insert(0, LF[-1])
+        # LF.insert(0, LF[-1])
 
-        RF.insert(0, RF[-2])
-        RF.insert(0, RF[-1])
-        RF[-2] = tar19
-        RF[-1] = tar4
+        # RF.insert(0, RF[-2])
+        # RF.insert(0, RF[-1])
+        # RF[-2] = tar19
+        # RF[-1] = tar4
 
-        LR.insert(0, LR[-2])
-        LR.insert(0, LR[-1])
-        LR[-2] = tar14
-        LR[-1] = tar4
+        # LR.insert(0, LR[-2])
+        # LR.insert(0, LR[-1])
+        # LR[-2] = tar14
+        # LR[-1] = tar4
 
 
         RF_points = []
@@ -444,7 +448,7 @@ def main(args=None):
     # action_client = LimbActionClient()
     try:
         action_client = LimbActionClient()
-        action_client.send_goal()
+        action_client.send_goal2()
 
 
         executor = MultiThreadedExecutor()

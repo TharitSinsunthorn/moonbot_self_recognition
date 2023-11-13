@@ -10,9 +10,7 @@ from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 
 from IK.limb_kinematics import InvKinematics
-# ros2 action list -t
-# ros2 action info /position_trajectory_controller/follow_joint_trajectory -t
-# ros2 interface show control_msgs/action/FolowJointTrajectory
+import IK.params as params
 
 
 class LimbActionClient(Node):
@@ -27,6 +25,9 @@ class LimbActionClient(Node):
         self.IK = InvKinematics()
         self.repeat = 1
 
+        self.span = params.span
+        self.height = params.height
+
 
     def send_goal(self):
         goal_msg = FollowJointTrajectory.Goal()
@@ -38,8 +39,10 @@ class LimbActionClient(Node):
         sec = 1.0
 
         f = -0.04
-        h = 0.24
-        tar = self.IK.get_joint_angles([0.13, 0.0, h])
+        span = self.span
+        h = self.height
+
+        tar = self.IK.get_joint_angles([span, 0.0, h])
 
         # standup seq
         LF = [tar]

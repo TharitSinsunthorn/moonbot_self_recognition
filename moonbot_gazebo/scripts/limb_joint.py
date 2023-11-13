@@ -29,7 +29,7 @@ class LimbActionClient(Node):
         self.IK = InvKinematics()
         self.repeat = 1
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/231107_053258_data.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/2data.csv'
         self.seq = []
 
         
