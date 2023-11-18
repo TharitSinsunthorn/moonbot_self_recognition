@@ -23,6 +23,7 @@ class IKNode(Node):
 
         self.IK = InvKinematics()
 
+
     # def publish_joint_states(self):
     #     msg = JointState()
     #     msg.header.stamp = self.get_clock().now().to_msg()
@@ -34,10 +35,10 @@ class IKNode(Node):
     #     self.get_logger().info('Publishing joint states')
 
     def set_ik_callback(self, msg):
-        # target = np.array([1.0, 2.0, 3.0], dtype=float)
+        # target = np.array([0.13, 0.0, 0.1], dtype=float)
         target = np.array([msg.x, msg.y, msg.z], dtype=float)
         angles = self.IK.get_joint_angles(target)
-        angles = angles.tolist()
+        # angles = angles.tolist()
 
         msg = JointState()
         msg.position = angles

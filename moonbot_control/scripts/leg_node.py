@@ -12,6 +12,8 @@ from geometry_msgs.msg import Vector3
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup, ReentrantCallbackGroup
 
 from custom_messages.srv import Vect3
+import IK.parameters as params
+
 
 def error_catcher(func):
     # This is a wrapper to catch and display exceptions
@@ -38,28 +40,32 @@ class LegNode(Node):
         # rclpy.init()
         super().__init__(f'ik_node')
 
-        self.declare_parameter('leg_number', 0)
-        self.leg_num = self.get_parameter('leg_number').get_parameter_value().integer_value
+        # self.declare_parameter('leg_number', 0)
+        # self.leg_num = self.get_parameter('leg_number').get_parameter_value().integer_value
+        self.leg_num = 1
 
-        self.declare_parameter('std_movement_time', 0)
-        self.movement_time = self.get_parameter('std_movement_time').get_parameter_value().double_value
 
-        self.declare_parameter('movement_update_rate', 0)
-        self.movement_update_rate = self.get_parameter('movement_update_rate').get_parameter_value().double_value
+        # self.declare_parameter('std_movement_time', 0)
+        # self.movement_time = self.get_parameter('std_movement_time').get_parameter_value().double_value
+        self.movement_time = params.movement_time
 
-        self.necessary_client = self.create_client(Empty, f'ik_{self.leg_num}_alive')
-        while not self.necessary_client.wait_for_service(timeout_sec=2):
-            self.get_logger().warning(
-                f'''Waiting for rviz interface, check that the [ik_{self.leg_num}_alive] service is running''')
+        # self.declare_parameter('movement_update_rate', 0)
+        # self.movement_update_rate = self.get_parameter('movement_update_rate').get_parameter_value().double_value
+        self.movement_update_rate = params.movement_update_rate
 
-        self.get_logger().warning(f'''ik_{self.leg_num} connected :)''')
+        # self.necessary_client = self.create_client(Empty, f'ik_{self.leg_num}_alive')
+        # while not self.necessary_client.wait_for_service(timeout_sec=2):
+        #     self.get_logger().warning(
+        #         f'''Waiting for rviz interface, check that the [ik_{self.leg_num}_alive] service is running''')
+
+        # self.get_logger().warning(f'''ik_{self.leg_num} connected :)''')
 
         self.last_target = np.zeros(3, dtype=float)
 
         ############   V Callback Groups V
         #   \  /   #
         #    \/    #
-        movement_cbk_group = MutuallyExclusiveCallbackGroup()
+        movement_cbk_group = ReentrantCallbackGroup()
         #    /\    #
         #   /  \   #
         ############   ^ Callback Groups ^
@@ -67,91 +73,92 @@ class LegNode(Node):
         ############   V Publishers V
         #   \  /   #
         #    \/    #
-        self.ik_pub = self.create_publisher(Vector3, f'set_ik_target_{self.leg_num}',
-                                            10
-                                            )
-        #    /\    #
+        # self.ik_pub = self.create_publisher(Vector3, f'set_rf_target',
+        #                                     10
+        #                                     )
+        self.RFpub = self.create_publisher(JointState, "RFstate", 10)
+        # #    /\    #
         #   /  \   #
         ############   ^ Publishers ^
 
         ############   V Subscribers V
         #   \  /   #
         #    \/    #
-        self.sub_rel_target = self.create_subscription(Vector3, f'rel_transl_{self.leg_num}',
-                                                       self.rel_transl_cbk,
-                                                       10,
-                                                       callback_group=movement_cbk_group
-                                                       )
-        self.sub_rel_target = self.create_subscription(Vector3, f'rel_hop_{self.leg_num}',
-                                                       self.rel_hop_cbk,
-                                                       10,
-                                                       callback_group=movement_cbk_group
-                                                       )
-        #    /\    #
+        # self.sub_rel_target = self.create_subscription(Vector3, f'rel_transl_{self.leg_num}',
+        #                                                self.rel_transl_cbk,
+        #                                                10,
+        #                                                callback_group=movement_cbk_group
+        #                                                )
+        # self.sub_rel_target = self.create_subscription(Vector3, f'rel_hop_{self.leg_num}',
+        #                                                self.rel_hop_cbk,
+        #                                                10,
+        #                                                callback_group=movement_cbk_group
+        #                                                )
+        # #    /\    #
         #   /  \   #
         ############   ^ Subscribers ^
 
         ############   V Service sever V
         #   \  /   #
         #    \/    #
-        self.iAmAlive = self.create_service(Empty, f'leg_{self.leg_num}_alive', lambda: None)
-        self.rel_transl_server = self.create_service(Vect3,
-                                                     f'leg_{self.leg_num}_rel_transl',
-                                                     self.rel_transl_srv_cbk,
-                                                     callback_group=movement_cbk_group)
-        self.rel_transl_server = self.create_service(Vect3,
-                                                     f'leg_{self.leg_num}_rel_hop',
-                                                     self.rel_transl_srv_cbk,
-                                                     callback_group=movement_cbk_group)
+        # self.iAmAlive = self.create_service(Empty, f'leg_{self.leg_num}_alive', lambda: None)
+        # self.rel_transl_server = self.create_service(Vect3,
+        #                                              f'leg_{self.leg_num}_rel_transl',
+        #                                              self.rel_transl_srv_cbk,
+        #                                              callback_group=movement_cbk_group)
+        # self.rel_transl_server = self.create_service(Vect3,
+        #                                              f'leg_{self.leg_num}_rel_hop',
+        #                                              self.rel_transl_srv_cbk,
+        #                                              callback_group=movement_cbk_group)
         #    /\    #
         #   /  \   #
         ############   ^ Service sever ^
 
-    @error_catcher
-    def rel_transl(self, target: np.ndarray):
-        samples = int(self.movement_time * self.movement_update_rate)
-        rate = self.create_rate(self.movement_update_rate)
-        for x in np.linspace(0, 1, num=samples):
-            x = (1 - np.cos(x * np.pi)) / 2
-            intermediate_target = target * x + self.last_target * (1 - x)
+    # # @error_catcher
+    # def rel_transl(self, target: np.ndarray):
+    #     samples = int(self.movement_time * self.movement_update_rate)
+    #     rate = self.create_rate(self.movement_update_rate)
+    #     for x in np.linspace(0, 1, num=samples):
+    #         x = (1 - np.cos(x * np.pi)) / 2
+    #         intermediate_target = target * x + self.last_target * (1 - x)
 
-            msg = Vector3()
-            msg.x, msg.y, msg.z = tuple(intermediate_target.tolist())
-            self.ik_pub.publish(msg)
-            rate.sleep()
+    #         msg = Vector3()
+    #         msg.x, msg.y, msg.z = tuple(intermediate_target.tolist())
+    #         self.ik_pub.publish(msg)
+    #         rate.sleep()
 
-        self.last_target = target
-        return target
+    #     self.last_target = target
+    #     return target
 
-    @error_catcher
-    def rel_hop(self, target: np.ndarray):
-        samples = int(self.movement_time * self.movement_update_rate)
-        rate = self.create_rate(self.movement_update_rate)
-        for x in np.linspace(0, 1, num=samples):
-            z_hop = (np.sin(x * np.pi)) * 50
-            x = (1 - np.cos(x * np.pi)) / 2
-            intermediate_target = target * x + self.last_target * (1 - x)
-            intermediate_target[2] += z_hop
+    # # @error_catcher
+    # def rel_hop(self, target: np.ndarray):
+    #     samples = int(self.movement_time * self.movement_update_rate)
+    #     rate = self.create_rate(self.movement_update_rate)
+    #     for x in np.linspace(0, 1, num=samples):
+    #         z_hop = (np.sin(x * np.pi)) * 50
+    #         x = (1 - np.cos(x * np.pi)) / 2
+    #         intermediate_target = target * x + self.last_target * (1 - x)
+    #         intermediate_target[2] += z_hop
 
-            msg = Vector3()
-            msg.x, msg.y, msg.z = tuple(intermediate_target.tolist())
-            self.ik_pub.publish(msg)
-            rate.sleep()
+    #         msg = Vector3()
+    #         msg.x, msg.y, msg.z = tuple(intermediate_target.tolist())
+    #         self.ik_pub.publish(msg)
+    #         rate.sleep()
 
-        self.last_target = target
-        return target
+    #     self.last_target = target
+    #     return target
 
-    @error_catcher
+    # @error_catcher
     def rel_transl_cbk(self, msg):
         target = np.array([msg.x, msg.y, msg.z], dtype=float)
         self.rel_transl(target)
 
-    @error_catcher
+    # @error_catcher
     def rel_hop_cbk(self, msg):
         target = np.array([msg.x, msg.y, msg.z], dtype=float)
         self.rel_transl(target)
 
-    @error_catcher
+    # @error_catcher
     def rel_transl_srv_cbk(self, request, response):
         target = np.array([request.vector.x, request.vector.y, request.vector.z], dtype=float)
 
@@ -160,7 +167,7 @@ class LegNode(Node):
         response.success = True
         return response
 
-    @error_catcher
+    # @error_catcher
     def rel_hop_srv_cbk(self, request, response):
         target = np.array([request.vector.x, request.vector.y, request.vector.z], dtype=float)
 
@@ -168,6 +175,8 @@ class LegNode(Node):
 
         response.success = True
         return response
+
+    
 
 
 def main(args=None):

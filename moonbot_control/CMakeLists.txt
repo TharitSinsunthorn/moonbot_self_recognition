@@ -52,6 +52,10 @@ install(
     scripts/gait_node.py
     scripts/real_action.py
     scripts/sim_action.py
+    scripts/singlelimb/RF.py
+    scripts/singlelimb/LF.py
+    scripts/singlelimb/LR.py
+    scripts/singlelimb/RR.py
 
   DESTINATION
     lib/${PROJECT_NAME}

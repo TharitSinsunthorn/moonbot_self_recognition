@@ -12,6 +12,8 @@ Joint nomeclature:
 L1 = params.L1
 L2 = params.L2
 L3 = params.L3
+offset_x = params.offset_x
+offset_y = params.offset_y
 
 
 class LegStates():
@@ -130,7 +132,9 @@ class InvKinematics():
             elif j3 < -1.57:
                 th[2] = -1.57
 
-        return th @ self.rotMat(rot)
+        goal = th @ self.rotMat(rot)
+
+        return goal.tolist()
 
 
     # def get_FR_joint_angles(self, coord, eularAng):

@@ -29,17 +29,32 @@ class LimbActionClient(Node):
         self.RFsub = self.create_subscription(JointState, 
             "RFstate", 
             self.callback, 10)
-        self.testsub
+        self.RFsub
 
         self.IK = InvKinematics()
 
         self.tar = []
 
+        self.target_received = False
+
     def callback(self, msg):
         # self.mis = msg.position
         self.get_logger().info(f'Received joint states: {msg.position}')
         self.tar = msg.position
+        self.tar = self.tar.tolist()
+        self.target_received = True
+        # print(self.tar)
 
+
+    def target_checker(self):
+        while rclpy.ok():
+            # rclpy.spin_once(self)
+            if self.target_received:
+                self.send_goal()
+                break
+            # self.target_received = False
+            rclpy.spin_once(self)
+            
 
 
     def send_goal(self):
@@ -63,11 +78,11 @@ class LimbActionClient(Node):
         sit = self.IK.get_joint_angles([0.13, 0.0, 0.1])
 
         test = self.IK.get_joint_angles(np.array([0.13, 0.0, h]))
-        # print(test)
-        # print(tar1)
+        # print(self.tar)
 
         # standup seq
-        RF = [tar0,tar0,tar1]
+        RF = [tar0,tar0,self.tar]
+        # RF = [tar0,tar0,self.tar]
         RR = [tar0,tar0,tar1]
         LR = [tar0,tar0,tar1]
         LF = [tar0,tar0,tar1]
@@ -143,9 +158,10 @@ def main(args=None):
 
     action_client = LimbActionClient()
 
-    action_client.send_goal()
+    # action_client.send_goal()
+    action_client.target_checker()
     rclpy.spin(action_client)
-
+    # rclpy.shutdown()
     
     
 

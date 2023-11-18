@@ -96,6 +96,12 @@ def generate_launch_description():
                 "stdout": "screen",
                 "stderr": "log",
             },
-        )
+        ),
+
+        # Node(
+        #     package="moonbot_gazebo",
+        #     executable="LR.py",
+        #     output="screen"
+        # )
 
     ])

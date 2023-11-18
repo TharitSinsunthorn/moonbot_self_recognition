@@ -39,4 +39,4 @@ SLEEP_TIME_SERVO = 0.05 # Time delay between servo commands in seconds.
 sec = 1.0
 span = 0.13
 foward = -0.07
-height = 0.24
+height = 0.23
