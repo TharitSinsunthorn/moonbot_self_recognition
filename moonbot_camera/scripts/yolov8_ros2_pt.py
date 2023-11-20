@@ -19,7 +19,8 @@ class Camera_subscriber(Node):
 		super().__init__('moonbot_detector_node')
 
 		# Define YOLO model
-		model_directory = '/home/tharit/moonbot_ws/src/moonbot_camera/config/runs/detect/yolov8n_v8_50e/weights/best.pt'
+		# model_directory = '/home/tharit/moonbot_ws/src/moonbot_camera/config/runs/detect/yolov8n_v8_50e/weights/best.pt'
+		model_directory = '/home/tharit/moonbot_ws/src/moonbot_camera/config/runs/detect/moonbot_perception/weights/best.pt'
 		self.model = YOLO(model_directory)
 
 		# Define instance of YOLOv8 inference msg
@@ -56,9 +57,8 @@ class Camera_subscriber(Node):
 		# Inference is done
 		results = self.model.predict(
 			source=img, 
-			conf=0.7,
-			iou=0.35,
-			classes=[3,4,5])
+			conf=0.85,
+			iou=0.2)
 
 		# Adding framerate and timestamp to a header of YOLOv8 inference msg
 		self.yolov8_inference.header.frame_id = "inference"

@@ -70,23 +70,23 @@ class Yolo_subscriber(Node):
         # self.get_logger().info(f"{self.class_name}")
         
 
-        if "leg" in self.class_name and self.leg_detected == False:
+        if "connection" in self.class_name and self.leg_detected == False:
         #   time.sleep(3)
             self.leg_detected = True
             self.last_leg_detected == time.time()
             self.get_logger().info(f"leg is connected")
             self.send_request(True)
 
-        elif "leg" not in self.class_name and self.leg_detected == True:
+        elif "connection" not in self.class_name and self.leg_detected == True:
             self.leg_detected = False
             self.get_logger().info(f"leg is disconnected")
             self.send_request(False)
 
         
-        elif "leg" in self.class_name and self.leg_detected == True:
+        elif "connection" in self.class_name and self.leg_detected == True:
             self.get_logger().info(f"leg is detected")
 
-        elif "leg" not in self.class_name and self.leg_detected == False:
+        elif "connection" not in self.class_name and self.leg_detected == False:
             self.get_logger().info(f"No leg detected")
 
         self.class_name.clear()

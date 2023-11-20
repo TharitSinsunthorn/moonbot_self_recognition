@@ -86,22 +86,22 @@ def generate_launch_description():
                 {"robot_description": robot_description_config.toxml()}],
             output="both"),
 
-        Node(
-            package="rviz2",
-            executable="rviz2",
-            name="rviz2",
-            # namespace = '/LF',
-            arguments=["-d", rviz_config],
-            output={
-                "stdout": "screen",
-                "stderr": "log",
-            },
-        ),
-
         # Node(
-        #     package="moonbot_gazebo",
-        #     executable="LF.py",
-        #     output="screen"
-        # )
+        #     package="rviz2",
+        #     executable="rviz2",
+        #     name="rviz2",
+        #     # namespace = '/LF',
+        #     arguments=["-d", rviz_config],
+        #     output={
+        #         "stdout": "screen",
+        #         "stderr": "log",
+        #     },
+        # ),
+
+        Node(
+            package="moonbot_gazebo",
+            executable="LF.py",
+            output="screen"
+        )
 
     ])

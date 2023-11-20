@@ -1,3 +1,4 @@
+# !/usr/bin/env python3
 # credit https://www.youtube.com/watch?v=xqroBkpf3lY&t=368s
 
 import cv2 
@@ -25,7 +26,9 @@ align_to = rs.stream.color
 align = rs.align(align_to)
 
 # Define YOLO model
-model_directory = '/home/tharit/moonbot_ws/src/moonbot_camera/config/runs/detect/yolov8n_v8_50e/weights/best.pt'
+# model_directory = '/home/tharit/moonbot_ws/src/moonbot_camera/config/runs/detect/yolov8n_v8_50e/weights/best.pt'
+model_directory = '/home/tharit/moonbot_ws/src/moonbot_camera/config/runs/detect/moonbot_perception/weights/best.pt'
+
 # model_directory = '/home/tharit/realsense_ws/src/yolotraining/yolov8n.pt'
 model = YOLO(model_directory)
 
@@ -49,8 +52,9 @@ while True:
     # Inference is done here
     results = model.predict(
             source=color_image, 
-            conf=0.5,
-            iou=0.75)
+            conf=0.25,
+            iou=0.1,
+            classes=[1])
 
     for r in results: 
         boxes = r.boxes
