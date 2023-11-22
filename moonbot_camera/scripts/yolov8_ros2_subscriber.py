@@ -44,8 +44,10 @@ class Yolo_subscriber(Node):
         self.bottom = None
         self.right = None
 
+        self.detection_class = "connection"
         self.last_leg_detected = 0.0
         self.leg_detected = False
+        self.losing_patient = 0
 
 
         # self.img_pub = self.create_publisher(Image, "/inference_result_cv2", 1)
@@ -56,7 +58,6 @@ class Yolo_subscriber(Node):
         
 
     def yolo_callback(self, data):
-        # global img
         # self.get_logger().info(f"{data.yolov8_inference}")
 
         for r in data.yolov8_inference:
@@ -69,24 +70,32 @@ class Yolo_subscriber(Node):
 
         # self.get_logger().info(f"{self.class_name}")
         
+        detection_class = self.detection_class
 
-        if "connection" in self.class_name and self.leg_detected == False:
-        #   time.sleep(3)
+        if detection_class in self.class_name and self.leg_detected == False:
             self.leg_detected = True
             self.last_leg_detected == time.time()
             self.get_logger().info(f"leg is connected")
             self.send_request(True)
 
-        elif "connection" not in self.class_name and self.leg_detected == True:
-            self.leg_detected = False
-            self.get_logger().info(f"leg is disconnected")
-            self.send_request(False)
+        elif detection_class not in self.class_name and self.leg_detected == True:
+            self.losing_patient += 1
+            
+            if self.losing_patient >= 5:
+                self.leg_detected = False
+                self.get_logger().info(f"leg is disconnected")
+                self.send_request(False)
+                self.losing_patient = 0
+            else:
+                self.get_logger().info(f"wait")
+                pass
 
         
-        elif "connection" in self.class_name and self.leg_detected == True:
+        elif detection_class in self.class_name and self.leg_detected == True:
             self.get_logger().info(f"leg is detected")
+            self.losing_patient = 0
 
-        elif "connection" not in self.class_name and self.leg_detected == False:
+        elif detection_class not in self.class_name and self.leg_detected == False:
             self.get_logger().info(f"No leg detected")
 
         self.class_name.clear()
@@ -99,14 +108,6 @@ class Yolo_subscriber(Node):
 def main(args=None):
     rclpy.init(args=None)
     yolo_subscriber = Yolo_subscriber()
-    # camera_subscriber = Camera_subscriber()
-
-    # executor = MultiThreadedExecutor()
-    # executor.add_node(yolo_subscriber)
-    # executor.add_node(camera_subscriber)
-
-    # executor_thread = threading.Thread(target=executor.spin, daemon=True)
-    # executor_thread.start()
 
     # rate = yolo_subscriber.create_rate(2)
     # try:
@@ -116,8 +117,8 @@ def main(args=None):
     #   pass 
 
     rclpy.spin(yolo_subscriber)
+    yolo_subscriber.destroy_node()
     rclpy.shutdown()
-    # executor_thread.join
 
 if __name__ == '__main__':
     main()

@@ -22,7 +22,7 @@ class LimbActionClient(Node):
         self._action_client = ActionClient(
             self, 
             FollowJointTrajectory, 
-            '/moonbot/position_trajectory_controller/follow_joint_trajectory')
+            '/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
 
