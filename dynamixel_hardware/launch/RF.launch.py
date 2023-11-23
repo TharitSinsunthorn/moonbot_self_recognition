@@ -87,10 +87,10 @@ def generate_launch_description():
             },
         ),
 
-        Node(
-            package="moonbot_gazebo",
-            executable="RF.py",
-            output="screen"
-        )
+        # Node(
+        #     package="moonbot_gazebo",
+        #     executable="RF.py",
+        #     output="screen"
+        # )
 
     ])

@@ -31,9 +31,16 @@ def generate_launch_description():
     ####### DATA INPUT END ##########
 
     # Realsense camera launch file
-    rs_launch = IncludeLaunchDescription(
+    rs_LF = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(launch_realsense_dir)
     )
+    # rs_LF = Node(
+    #     package=rs_pkg,
+    #     executable=rs_file,
+    #     namespace='cam_LF',
+    #     parameters=[{'camera_name': 141122078145}]
+
+    # )
 
     # YOLOv8 result launch file
     yolov8 = Node(
@@ -60,7 +67,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            rs_launch,
+            rs_LF,
             yolov8,
             rviz_node,
         ]

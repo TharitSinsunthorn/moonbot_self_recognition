@@ -48,9 +48,10 @@ class LimbActionClient(Node):
             callback_group=self.group)
         
         self.IK = InvKinematics()
-        self.repeat = 3
+        self.repeat = 1
+        self.repeat2 = 2
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/2data.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/COM0_5cm.csv'
         self.seq = []
 
         self.span = params.span
@@ -65,9 +66,10 @@ class LimbActionClient(Node):
 
             for row in csv_reader:
                 data_list.append(row)
+            # print(data_list)
 
         # for i in range(12):
-        for j in range(1,8002):
+        for j in range(1, len(data_list)):
             if leg_no == "LF":
                 float_generator = [float(item) for item in data_list[j][111:114]]
             elif leg_no == "LR":
@@ -100,7 +102,7 @@ class LimbActionClient(Node):
         
         sec = 0.7  
 
-        f = -0.04
+        f = -0.05
         h = self.height
         lift = 0.03
         span = self.span
@@ -312,17 +314,22 @@ class LimbActionClient(Node):
 
         sec = 0.0015
 
-        f = -0.04
-        h = 0.26
-        lift = 0.03
-        span = 0.11
+        # f = -0.04
+        # h = 0.26
+        # lift = 0.03
+        # span = 0.11
 
-        RR = self.seq_generator("RR")*self.repeat
-        LF = self.seq_generator("LF")*self.repeat
-        RF = self.seq_generator("RF")*self.repeat
-        LR = self.seq_generator("LR")*self.repeat
+        # RR = self.seq_generator("RR")*self.repeat2
+        # LF = self.seq_generator("LF")*self.repeat2
+        # RF = self.seq_generator("RF")*self.repeat2
+        # LR = self.seq_generator("LR")*self.repeat2
 
-        print(len(LF))
+        LF = self.seq_generator("RR")*self.repeat2
+        RR = self.seq_generator("LF")*self.repeat2
+        LR = self.seq_generator("RF")*self.repeat2
+        RF = self.seq_generator("LR")*self.repeat2
+
+        # print(len(LF))
 
 
 
