@@ -13,7 +13,7 @@ from moonbot_custom_interfaces.msg import Yolov8Inference
 
 bridge = CvBridge()
 
-class Camera_subscriber(Node):
+class PortCamera_subscriber(Node):
 
 	def __init__(self):
 		super().__init__('moonbot_detector_node')
@@ -29,6 +29,8 @@ class Camera_subscriber(Node):
 
 		# Callbackgroup
 		self.group = ReentrantCallbackGroup()
+		self.groupLF = MutuallyExclusiveCallbackGroup()
+		self.groupRR = MutuallyExclusiveCallbackGroup()
 
 		##### SUBSCRIBER #####
 		self.rs_LF_subscription = self.create_subscription(
@@ -36,7 +38,7 @@ class Camera_subscriber(Node):
 			'LFcam/color/image_raw',
 			self.camera_callback_LF,
 			10,
-			callback_group=self.group)
+			callback_group=self.groupLF)
 		self.rs_LF_subscription
 
 		self.rs_RR_subscription = self.create_subscription(
@@ -44,7 +46,7 @@ class Camera_subscriber(Node):
 			'RRcam/color/image_raw',
 			self.camera_callback_RR,
 			10,
-			callback_group=self.group)
+			callback_group=self.groupRR)
 		self.rs_RR_subscription
 		##### SUBSCRIBER #####
  
@@ -53,25 +55,25 @@ class Camera_subscriber(Node):
 			Yolov8Inference, 
 			"LFcam/Yolov8_Inference", 
 			10, 
-			callback_group=self.group)
+			callback_group=self.groupLF)
 		
 		self.rs_LF_img_pub = self.create_publisher(
 			Image, 
 			"LFcam/color/inference_result", 
 			10, 
-			callback_group=self.group)
+			callback_group=self.groupLF)
 
 		self.rs_RR_yolov8_pub = self.create_publisher(
 			Yolov8Inference, 
 			"RRcam/Yolov8_Inference", 
 			10, 
-			callback_group=self.group)
+			callback_group=self.groupRR)
 		
 		self.rs_RR_img_pub = self.create_publisher(
 			Image, 
 			"RRcam/color/inference_result", 
 			10, 
-			callback_group=self.group)
+			callback_group=self.groupRR)
 		##### PUBLISHER #####
 
 
@@ -84,11 +86,13 @@ class Camera_subscriber(Node):
 			source=img, 
 			conf=0.85,
 			iou=0.2,
-			classes=[3])
+			classes=[3], stream=True)
+
+		# results = self.model(source=img, stream=True)
 
 		# Adding framerate and timestamp to a header of YOLOv8 inference msg
-		self.yolov8_inference_LF.header.frame_id = "inference"
-		self.yolov8_inference_LF.header.stamp = Camera_subscriber().get_clock().now().to_msg()
+		# self.yolov8_inference_LF.header.frame_id = "inference"
+		# self.yolov8_inference_LF.header.stamp = PortCamera_subscriber().get_clock().now().to_msg()
 
 		# Putting an array inference results of each object
 		for r in results:
@@ -105,9 +109,9 @@ class Camera_subscriber(Node):
 				self.yolov8_inference_LF.yolov8_inference.append(self.inference_result)
 
 			# camera_subsciber.get_logger().info(f"{self.yolov8_inference}")
-
+			annotated_frame = r.plot()
 		# Extract an annotated img from result and convert it to a raw's msg
-		annotated_frame = results[0].plot()
+		# annotated_frame = results[0].plot()
 		img_msg = bridge.cv2_to_imgmsg(annotated_frame)
 
 		# Image and inference results are published
@@ -125,11 +129,11 @@ class Camera_subscriber(Node):
 			source=img, 
 			conf=0.85,
 			iou=0.2,
-			classes=[3])
+			classes=[3], stream=True)
 
 		# Adding framerate and timestamp to a header of YOLOv8 inference msg
-		self.yolov8_inference_RR.header.frame_id = "inference"
-		self.yolov8_inference_RR.header.stamp = Camera_subscriber().get_clock().now().to_msg()
+		# self.yolov8_inference_RR.header.frame_id = "inference"
+		# self.yolov8_inference_RR.header.stamp = PortCamera_subscriber().get_clock().now().to_msg()
 
 		# Putting an array inference results of each object
 		for r in results:
@@ -146,9 +150,9 @@ class Camera_subscriber(Node):
 				self.yolov8_inference_RR.yolov8_inference.append(self.inference_result)
 
 			# camera_subsciber.get_logger().info(f"{self.yolov8_inference}")
-
+			annotated_frame = r.plot()
 		# Extract an annotated img from result and convert it to a raw's msg
-		annotated_frame = results[0].plot()
+		# annotated_frame = results[0].plot()
 		img_msg = bridge.cv2_to_imgmsg(annotated_frame)
 
 		# Image and inference results are published
@@ -161,7 +165,7 @@ class Camera_subscriber(Node):
 def main(args=None):
 	rclpy.init(args=None)
 	try:
-		camera_subsciber = Camera_subscriber()
+		camera_subsciber = PortCamera_subscriber()
 
 		executor = MultiThreadedExecutor()
 		executor.add_node(camera_subsciber)
