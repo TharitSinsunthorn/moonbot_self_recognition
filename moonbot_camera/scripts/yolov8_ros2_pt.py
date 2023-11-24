@@ -24,33 +24,58 @@ class Camera_subscriber(Node):
 		self.model = YOLO(model_directory)
 
 		# Define instance of YOLOv8 inference msg
-		self.yolov8_inference = Yolov8Inference()
+		self.yolov8_inference_LF = Yolov8Inference()
+		self.yolov8_inference_RR = Yolov8Inference()
 
 		# Callbackgroup
 		self.group = ReentrantCallbackGroup()
 
-		self.subscription = self.create_subscription(
+		##### SUBSCRIBER #####
+		self.rs_LF_subscription = self.create_subscription(
 			Image,
-			'camera/color/image_raw',
-			self.camera_callback,
+			'LFcam/color/image_raw',
+			self.camera_callback_LF,
 			10,
 			callback_group=self.group)
-		self.subscription
+		self.rs_LF_subscription
+
+		self.rs_RR_subscription = self.create_subscription(
+			Image,
+			'RRcam/color/image_raw',
+			self.camera_callback_RR,
+			10,
+			callback_group=self.group)
+		self.rs_RR_subscription
+		##### SUBSCRIBER #####
  
-		self.yolov8_pub = self.create_publisher(
+ 		##### PUBLISHER #####
+		self.rs_LF_yolov8_pub = self.create_publisher(
 			Yolov8Inference, 
-			"/Yolov8_Inference", 
+			"LFcam/Yolov8_Inference", 
 			10, 
 			callback_group=self.group)
 		
-		self.img_pub = self.create_publisher(
+		self.rs_LF_img_pub = self.create_publisher(
 			Image, 
-			"camera/color/inference_result", 
+			"LFcam/color/inference_result", 
 			10, 
 			callback_group=self.group)
 
+		self.rs_RR_yolov8_pub = self.create_publisher(
+			Yolov8Inference, 
+			"RRcam/Yolov8_Inference", 
+			10, 
+			callback_group=self.group)
+		
+		self.rs_RR_img_pub = self.create_publisher(
+			Image, 
+			"RRcam/color/inference_result", 
+			10, 
+			callback_group=self.group)
+		##### PUBLISHER #####
 
-	def camera_callback(self, data):
+
+	def camera_callback_LF(self, data):
 
 		# Raw's msgs are converted to cv2 image format
 		img = bridge.imgmsg_to_cv2(data, "bgr8")
@@ -58,11 +83,12 @@ class Camera_subscriber(Node):
 		results = self.model.predict(
 			source=img, 
 			conf=0.85,
-			iou=0.2)
+			iou=0.2,
+			classes=[3])
 
 		# Adding framerate and timestamp to a header of YOLOv8 inference msg
-		self.yolov8_inference.header.frame_id = "inference"
-		self.yolov8_inference.header.stamp = Camera_subscriber().get_clock().now().to_msg()
+		self.yolov8_inference_LF.header.frame_id = "inference"
+		self.yolov8_inference_LF.header.stamp = Camera_subscriber().get_clock().now().to_msg()
 
 		# Putting an array inference results of each object
 		for r in results:
@@ -76,7 +102,7 @@ class Camera_subscriber(Node):
 				self.inference_result.left = int(b[1])
 				self.inference_result.bottom  = int(b[2])
 				self.inference_result.right = int(b[3])
-				self.yolov8_inference.yolov8_inference.append(self.inference_result)
+				self.yolov8_inference_LF.yolov8_inference.append(self.inference_result)
 
 			# camera_subsciber.get_logger().info(f"{self.yolov8_inference}")
 
@@ -85,10 +111,51 @@ class Camera_subscriber(Node):
 		img_msg = bridge.cv2_to_imgmsg(annotated_frame)
 
 		# Image and inference results are published
-		self.img_pub.publish(img_msg)
-		self.yolov8_pub.publish(self.yolov8_inference)
+		self.rs_LF_img_pub.publish(img_msg)
+		self.rs_LF_yolov8_pub.publish(self.yolov8_inference_LF)
 		# Clear an array each time a new topic is received
-		self.yolov8_inference.yolov8_inference.clear()
+		self.yolov8_inference_LF.yolov8_inference.clear()
+
+	def camera_callback_RR(self, data):
+
+		# Raw's msgs are converted to cv2 image format
+		img = bridge.imgmsg_to_cv2(data, "bgr8")
+		# Inference is done
+		results = self.model.predict(
+			source=img, 
+			conf=0.85,
+			iou=0.2,
+			classes=[3])
+
+		# Adding framerate and timestamp to a header of YOLOv8 inference msg
+		self.yolov8_inference_RR.header.frame_id = "inference"
+		self.yolov8_inference_RR.header.stamp = Camera_subscriber().get_clock().now().to_msg()
+
+		# Putting an array inference results of each object
+		for r in results:
+			boxes = r.boxes
+			for box in boxes:
+				self.inference_result = InferenceResult()
+				b = box.xyxy[0].to('cpu').detach().numpy().copy() # get box coordinates
+				c = box.cls 
+				self.inference_result.class_name = self.model.names[int(c)]
+				self.inference_result.top  = int(b[0])
+				self.inference_result.left = int(b[1])
+				self.inference_result.bottom  = int(b[2])
+				self.inference_result.right = int(b[3])
+				self.yolov8_inference_RR.yolov8_inference.append(self.inference_result)
+
+			# camera_subsciber.get_logger().info(f"{self.yolov8_inference}")
+
+		# Extract an annotated img from result and convert it to a raw's msg
+		annotated_frame = results[0].plot()
+		img_msg = bridge.cv2_to_imgmsg(annotated_frame)
+
+		# Image and inference results are published
+		self.rs_RR_img_pub.publish(img_msg)
+		self.rs_RR_yolov8_pub.publish(self.yolov8_inference_RR)
+		# Clear an array each time a new topic is received
+		self.yolov8_inference_RR.yolov8_inference.clear()
 
 
 def main(args=None):

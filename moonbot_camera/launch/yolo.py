@@ -30,17 +30,30 @@ def generate_launch_description():
     
     ####### DATA INPUT END ##########
 
+    ####### NAMESPACE DECLARATION ##########
+    # Namespace for the Realsense camera
+    rs_LF = LaunchConfiguration('rs_LF', default='rs_LF')
+
+    # Declare a launch argument for the namespace
+    declare_rs_LF_arg = DeclareLaunchArgument(
+        'rs_LF', 
+        default_value='rs_LF', 
+        description='Namespace for Realsense camera at LF'
+    )
+    ####### NAMESPACE DECLARATION ###########
+
+
     # Realsense camera launch file
     rs_LF = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(launch_realsense_dir)
+        PythonLaunchDescriptionSource(launch_realsense_dir),
+        launch_arguments={'camera_name': 'LFcam', 'serial_no': '_141122078145'}.items(), 
     )
-    # rs_LF = Node(
-    #     package=rs_pkg,
-    #     executable=rs_file,
-    #     namespace='cam_LF',
-    #     parameters=[{'camera_name': 141122078145}]
 
-    # )
+    rs_RR = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(launch_realsense_dir),
+        launch_arguments={'camera_name': 'RRcam', 'serial_no': '_139522075252'}.items(),
+    )
+    
 
     # YOLOv8 result launch file
     yolov8 = Node(
@@ -67,8 +80,10 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            # declare_rs_LF_arg,
             rs_LF,
+            rs_RR,
             yolov8,
-            rviz_node,
+            # rviz_node,
         ]
     )

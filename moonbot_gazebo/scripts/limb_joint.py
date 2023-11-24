@@ -27,9 +27,9 @@ class LimbActionClient(Node):
             '/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
-        self.repeat = 1
+        self.repeat = 2
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/2data.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/nody.csv'
         self.seq = []
 
         
@@ -42,9 +42,12 @@ class LimbActionClient(Node):
 
             for row in csv_reader:
                 data_list.append(row)
+            print(data_list[1][111:])
+            print("\n")
+            print(data_list[-1][111:])
 
         # for i in range(12):
-        for j in range(1,8002):
+        for j in range(1,len(data_list)):
             # print(data_list[j][111:])
             float_generator = [float(item) for item in data_list[j][111:]]
             self.seq.append(float_generator)
@@ -63,7 +66,7 @@ class LimbActionClient(Node):
 
 
                        
-        sec = 0.001
+        sec = 0.0016
 
         tar = self.IK.get_joint_angles([0.2, 0.0, 0.16])
         f = 0.05

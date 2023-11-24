@@ -49,9 +49,9 @@ class LimbActionClient(Node):
         
         self.IK = InvKinematics()
         self.repeat = 1
-        self.repeat2 = 2
+        self.repeat2 = 1
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/COM0_5cm.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/RL3.csv'
         self.seq = []
 
         self.span = params.span
@@ -312,7 +312,7 @@ class LimbActionClient(Node):
         joint_names_lf = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
                        
 
-        sec = 0.0015
+        sec = 0.2
 
         # f = -0.04
         # h = 0.26
