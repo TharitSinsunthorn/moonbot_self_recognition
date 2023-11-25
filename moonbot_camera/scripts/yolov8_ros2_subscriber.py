@@ -21,101 +21,160 @@ class Yolo_subscriber(Node):
         super().__init__('yolo_subscriber')
 
         ##### Subcriber ##### 
-        self.subscription = self.create_subscription(
+        self.inf_LF_subscription = self.create_subscription(
             Yolov8Inference,
-            '/Yolov8_Inference',
-            self.yolo_callback,
+            'LFcam/Yolov8_Inference',
+            self.LF_yolo_callback,
+            10)
+        self.subscription
+
+        self.inf_RR_subscription = self.create_subscription(
+            Yolov8Inference,
+            'RRcam/Yolov8_Inference',
+            self.RR_yolo_callback,
             10)
         self.subscription
         ##### Subcriber
 
         ##### Service Client #####
-        self.Leg_ConnectionClient = self.create_client(SetBool, 'leg_trigger')
-        while not self.Leg_ConnectionClient.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('service not available, waiting again...')
-        self.req = SetBool.Request()
+        self.LF_ConnectionClient = self.create_client(SetBool, 'LF_trigger')
+        while not self.LF_ConnectionClient.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('LF service not available, waiting again...')
+        self.LFreq = SetBool.Request()
+
+        self.RR_ConnectionClient = self.create_client(SetBool, 'RR_trigger')
+        while not self.RR_ConnectionClient.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('RR service not available, waiting again...')
+        self.RRreq = SetBool.Request()
         ##### Service Client #####
 
-        # self.timer = self.create_timer(1.0, self.timer_callback)
+        self.RF_class_name = []
+        self.LF_class_name = []
+        self.LR_class_name = []
+        self.RR_class_name = []
 
-        self.class_name = []
-        self.top = None 
-        self.left = None
-        self.bottom = None
-        self.right = None
+        self.leg_number = 4
+        self.RF_box = [None] * self.leg_number
+        self.LF_box =  [None] * self.leg_number #[top, left, bottom, right]
+        self.LR_box = [None] * self.leg_number
+        self.RR_box = [None] * self.leg_number
+
+        # self.LF_top = None 
+        # self.LF_left = None
+        # self.LF_bottom = None
+        # self.LF_right = None
 
         self.detection_class = "connection"
-        self.last_leg_detected = 0.0
-        self.leg_detected = False
-        self.losing_patient = 0
+        self.RF_detected = False
+        self.RF_countdown = 0
+
+        self.LF_detected = False
+        self.LF_countdown = 0
+        
+        self.LR_detected = False
+        self.LR_countdown = 0
+        
+        self.RR_detected = False
+        self.RR_countdown = 0
+        
+        self.losing_patient = 5 #sec
 
 
         # self.img_pub = self.create_publisher(Image, "/inference_result_cv2", 1)
 
-    def send_request(self, request):
-        self.req.data = request
-        self.future = self.Leg_ConnectionClient.call_async(self.req)
+    def LF_send_request(self, request):
+        self.LFreq.data = request
+        self.future = self.LF_ConnectionClient.call_async(self.LFreq)
+
+    def RR_send_request(self, request):
+        self.RRreq.data = request
+        self.future = self.RR_ConnectionClient.call_async(self.RRreq)
         
 
-    def yolo_callback(self, data):
+    def LF_yolo_callback(self, data):
         # self.get_logger().info(f"{data.yolov8_inference}")
-
         for r in data.yolov8_inference:
-
-            self.class_name.append(r.class_name)
-            self.top = r.top
-            self.left = r.left
-            self.bottom = r.bottom
-            self.right = r.right
+            self.LF_class_name.append(r.class_name)
+            self.LF_box[0] = r.top
+            self.LF_box[1] = r.left
+            self.LF_box[2] = r.bottom
+            self.LF_box[3] = r.right
 
         # self.get_logger().info(f"{self.class_name}")
         
         detection_class = self.detection_class
 
-        if detection_class in self.class_name and self.leg_detected == False:
-            self.leg_detected = True
-            self.last_leg_detected == time.time()
-            self.get_logger().info(f"leg is connected")
-            self.send_request(True)
+        if detection_class in self.LF_class_name and self.LF_detected == False:
+            self.LF_detected = True
+            self.get_logger().info(f"LF is connected")
+            self.LF_send_request(True)
 
-        elif detection_class not in self.class_name and self.leg_detected == True:
-            self.losing_patient += 1
+        elif detection_class not in self.LF_class_name and self.LF_detected == True:
+            self.LF_countdown += 1
             
-            if self.losing_patient >= 5:
-                self.leg_detected = False
-                self.get_logger().info(f"leg is disconnected")
-                self.send_request(False)
-                self.losing_patient = 0
+            if self.LF_countdown >= self.losing_patient:
+                self.LF_detected = False
+                self.get_logger().info(f"LF is disconnected")
+                self.LF_send_request(False)
+                self.LF_countdown = 0
             else:
-                self.get_logger().info(f"wait")
+                self.get_logger().info(f"wait for LF")
                 pass
 
+        elif detection_class in self.LF_class_name and self.LF_detected == True:
+            self.get_logger().info(f"LF is detected")
+            self.LF_countdown = 0
+
+        elif detection_class not in self.LF_class_name and self.LF_detected == False:
+            self.get_logger().info(f"No LF detection")
+
+        self.LF_class_name.clear()
+
+
+    def RR_yolo_callback(self, data):
+        # self.get_logger().info(f"{data.yolov8_inference}")
+        for r in data.yolov8_inference:
+            self.RR_class_name.append(r.class_name)
+            self.RR_box[0] = r.top
+            self.RR_box[1] = r.left
+            self.RR_box[2] = r.bottom
+            self.RR_box[3] = r.right
+
+        # self.get_logger().info(f"{self.class_name}")
         
-        elif detection_class in self.class_name and self.leg_detected == True:
-            self.get_logger().info(f"leg is detected")
-            self.losing_patient = 0
+        detection_class = self.detection_class
 
-        elif detection_class not in self.class_name and self.leg_detected == False:
-            self.get_logger().info(f"No leg detected")
+        if detection_class in self.RR_class_name and self.RR_detected == False:
+            self.RR_detected = True
+            self.get_logger().info(f"RR is connected")
+            self.RR_send_request(True)
 
-        self.class_name.clear()
+        elif detection_class not in self.RR_class_name and self.RR_detected == True:
+            self.RR_countdown += 1
+            
+            if self.RR_countdown >= self.losing_patient:
+                self.RR_detected = False
+                self.get_logger().info(f"RR is disconnected")
+                self.RR_send_request(False)
+                self.RR_countdown = 0
+            else:
+                self.get_logger().info(f"wait for RR")
+                pass
+
+        elif detection_class in self.RR_class_name and self.RR_detected == True:
+            self.get_logger().info(f"RR is detected")
+            self.RR_countdown = 0
+
+        elif detection_class not in self.RR_class_name and self.RR_detected == False:
+            self.get_logger().info(f"No RR detection")
+
+        self.RR_class_name.clear()
 
 
-    def timer_callback(self):
-        # Your periodic processing logic here
-        pass
 
 def main(args=None):
     rclpy.init(args=None)
     yolo_subscriber = Yolo_subscriber()
-
-    # rate = yolo_subscriber.create_rate(2)
-    # try:
-    #   while rclpy.ok():
-    #       rate.sleep()
-    # except KeyboardInterrupt:
-    #   pass 
-
     rclpy.spin(yolo_subscriber)
     yolo_subscriber.destroy_node()
     rclpy.shutdown()

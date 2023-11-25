@@ -24,56 +24,81 @@ class PortCamera_subscriber(Node):
 		self.model = YOLO(model_directory)
 
 		# Define instance of YOLOv8 inference msg
+		self.yolov8_inference_RF = Yolov8Inference()
 		self.yolov8_inference_LF = Yolov8Inference()
+		self.yolov8_inference_LR = Yolov8Inference()
 		self.yolov8_inference_RR = Yolov8Inference()
 
-		# Callbackgroup
+		##### Callbackgroup #####
 		self.group = ReentrantCallbackGroup()
-		self.groupLF = MutuallyExclusiveCallbackGroup()
-		self.groupRR = MutuallyExclusiveCallbackGroup()
+		# self.groupLF = MutuallyExclusiveCallbackGroup()
+		# self.groupRR = MutuallyExclusiveCallbackGroup()
 
 		##### SUBSCRIBER #####
+		# self.rs_RF_subscription = self.create_subscription(
+		# 	Image,
+		# 	'RFcam/color/image_raw',
+		# 	self.camera_callback_RF,
+		# 	10,
+		# 	callback_group=self.group)
+		# self.rs_RF_subscription
+
 		self.rs_LF_subscription = self.create_subscription(
 			Image,
 			'LFcam/color/image_raw',
 			self.camera_callback_LF,
 			10,
-			callback_group=self.groupLF)
+			callback_group=self.group)
 		self.rs_LF_subscription
+
+		# self.rs_LR_subscription = self.create_subscription(
+		# 	Image,
+		# 	'LRcam/color/image_raw',
+		# 	self.camera_callback_LR,
+		# 	10,
+		# 	callback_group=self.group)
+		# self.rs_LR_subscription
 
 		self.rs_RR_subscription = self.create_subscription(
 			Image,
 			'RRcam/color/image_raw',
 			self.camera_callback_RR,
 			10,
-			callback_group=self.groupRR)
+			callback_group=self.group)
 		self.rs_RR_subscription
 		##### SUBSCRIBER #####
  
  		##### PUBLISHER #####
+ 		# self.rs_RF_yolov8_pub = self.create_publisher(Yolov8Inference, "RFcam/Yolov8_Inference", 10)
+ 		# self.rs_LF_yolov8_pub = self.create_publisher(Yolov8Inference, "LFcam/Yolov8_Inference", 10)
+ 		# self.rs_LR_yolov8_pub = self.create_publisher(Yolov8Inference, "LRcam/Yolov8_Inference", 10)
+ 		# self.rs_RR_yolov8_pub = self.create_publisher(Yolov8Inference, "RRcam/Yolov8_Inference", 10)
+
+		# self.rs_RF_img_pub = self.create_publisher(Image, "RFcam/color/inference_result", 10)
+		# self.rs_LF_img_pub = self.create_publisher(Image, "LFcam/color/inference_result", 10)
+		# self.rs_LR_img_pub = self.create_publisher(Image, "LRcam/color/inference_result", 10)
+		# self.rs_RR_img_pub = self.create_publisher(Image, "RRcam/color/inference_result", 10)
+
+
 		self.rs_LF_yolov8_pub = self.create_publisher(
 			Yolov8Inference, 
 			"LFcam/Yolov8_Inference", 
-			10, 
-			callback_group=self.groupLF)
+			10)
 		
 		self.rs_LF_img_pub = self.create_publisher(
 			Image, 
 			"LFcam/color/inference_result", 
-			10, 
-			callback_group=self.groupLF)
+			10)
 
 		self.rs_RR_yolov8_pub = self.create_publisher(
 			Yolov8Inference, 
 			"RRcam/Yolov8_Inference", 
-			10, 
-			callback_group=self.groupRR)
+			10)
 		
 		self.rs_RR_img_pub = self.create_publisher(
 			Image, 
 			"RRcam/color/inference_result", 
-			10, 
-			callback_group=self.groupRR)
+			10)
 		##### PUBLISHER #####
 
 
@@ -87,12 +112,6 @@ class PortCamera_subscriber(Node):
 			conf=0.85,
 			iou=0.2,
 			classes=[3], stream=True)
-
-		# results = self.model(source=img, stream=True)
-
-		# Adding framerate and timestamp to a header of YOLOv8 inference msg
-		# self.yolov8_inference_LF.header.frame_id = "inference"
-		# self.yolov8_inference_LF.header.stamp = PortCamera_subscriber().get_clock().now().to_msg()
 
 		# Putting an array inference results of each object
 		for r in results:
@@ -112,6 +131,7 @@ class PortCamera_subscriber(Node):
 			annotated_frame = r.plot()
 		# Extract an annotated img from result and convert it to a raw's msg
 		# annotated_frame = results[0].plot()
+		
 		img_msg = bridge.cv2_to_imgmsg(annotated_frame)
 
 		# Image and inference results are published
@@ -167,7 +187,7 @@ def main(args=None):
 	try:
 		camera_subsciber = PortCamera_subscriber()
 
-		executor = MultiThreadedExecutor()
+		executor = MultiThreadedExecutor(num_threads=16)
 		executor.add_node(camera_subsciber)
 
 		try:
