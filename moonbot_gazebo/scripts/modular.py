@@ -48,10 +48,10 @@ class LimbActionClient(Node):
             callback_group=self.group)
         
         self.IK = InvKinematics()
-        self.repeat = 1
+        self.repeat = 5
         self.repeat2 = 1
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/RL3.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/high.csv'
         self.seq = []
 
         self.span = params.span
@@ -102,9 +102,9 @@ class LimbActionClient(Node):
         
         sec = 0.7  
 
-        f = -0.05
+        f = -0.06
         h = self.height
-        lift = 0.03
+        lift = 0.055
         span = self.span
 
         startconfig = self.IK.get_joint_angles([span, 0.0, 0.1])
@@ -312,7 +312,7 @@ class LimbActionClient(Node):
         joint_names_lf = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
                        
 
-        sec = 0.2
+        sec = 0.001
 
         # f = -0.04
         # h = 0.26

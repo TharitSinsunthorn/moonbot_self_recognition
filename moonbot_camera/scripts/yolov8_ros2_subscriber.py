@@ -26,14 +26,14 @@ class Yolo_subscriber(Node):
             'LFcam/Yolov8_Inference',
             self.LF_yolo_callback,
             10)
-        self.subscription
+        self.inf_LF_subscription
 
         self.inf_RR_subscription = self.create_subscription(
             Yolov8Inference,
             'RRcam/Yolov8_Inference',
             self.RR_yolo_callback,
             10)
-        self.subscription
+        self.inf_RR_subscription
         ##### Subcriber
 
         ##### Service Client #####

@@ -13,6 +13,8 @@ L1 = params.L1
 L2 = params.L2
 L3 = params.L3
 
+offset = params.offset
+
 
 class LegStates():
     prev_coord = None
@@ -22,10 +24,10 @@ class LegStates():
     in_singularity = None
 
 class Legs():
-    port_1 = LegStates()
-    port_2 = LegStates()
-    port_3 = LegStates()
-    port_4 = LegStates()
+    RF = LegStates()
+    LF = LegStates()
+    LR = LegStates()
+    RR = LegStates()
     
 
 # def bound_range(angle):
@@ -44,7 +46,7 @@ class InvKinematics():
         self.MAX_coord_dist = self.L1 + self.L2 + self.L3
         self.MIN_coord_dist = np.sqrt((self.L1-self.L3)**2 + self.L2**2)
 
-        self.offset = [0.24, 0.24]
+        self.offset = offset
 
         self.M_R = np.array([1, 1, 1])
         self.M_L = np.array([1, -1, 1])
