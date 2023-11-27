@@ -8,8 +8,9 @@ import multiprocessing
 from launch import LaunchService
 # from yolo import generate_launch_description
 sys.path.append('../moonbot_ws/src')
-# from moonbot_camera.launch.test import generate_launch_description
-from dynamixel_hardware.launch.Grieel import generate_launch_description
+# from moonbot_camera.launch import *
+# from dynamixel_hardware.launch.Grieel import generate_launch_description
+from dynamixel_hardware.launch import *
 
 import rclpy
 from rclpy.node import Node
@@ -40,30 +41,113 @@ class LaunchServiceAsync(Node):
 
     def __init__(self):
         super().__init__('LegConnection_service')
-        self.srv = self.create_service(SetBool, 'leg_trigger', self.callback_trigger)
-        self.ReqBool = SetBool.Request()
 
-        self.launcher = Ros2LaunchParent()
-        self.launch_description = generate_launch_description()
-
-    def callback_trigger(self, request, response):
-        self.ReqBool = request
-        # print(self.ReqBool.data)
-        self.get_logger().info(f'Received request: {self.ReqBool.data}')
+        ##### SERVICE #####
+        self.RF_connection_srv = self.create_service(SetBool, 'RF_trigger', self.RF_callback_trigger)
+        self.LF_connection_srv = self.create_service(SetBool, 'LF_trigger', self.LF_callback_trigger)
+        self.LR_connection_srv = self.create_service(SetBool, 'LR_trigger', self.LR_callback_trigger)
+        self.RR_connection_srv = self.create_service(SetBool, 'RR_trigger', self.RR_callback_trigger)
         
-        if self.ReqBool.data == True:
-            # self.launch_main(True)
-            time.sleep(3)
-            self.launcher.start(self.launch_description)
+        ##### SERVICE #####
 
-        elif self.ReqBool.data == False:
+        ##### SetBool #####
+        self.RF_ReqBool = SetBool.Request()
+        self.LF_ReqBool = SetBool.Request()
+        self.LR_ReqBool = SetBool.Request()
+        self.RR_ReqBool = SetBool.Request()
+        ##### SetBool #####
+
+        ##### LAUNCHER ######
+        self.RF_launcher = Ros2LaunchParent()
+        self.RF_launch_description = RF.generate_launch_description()
+
+        self.LF_launcher = Ros2LaunchParent()
+        self.LF_launch_description = LF.generate_launch_description()
+
+        self.LR_launcher = Ros2LaunchParent()
+        self.LR_launch_description = LR.generate_launch_description()
+
+        self.RR_launcher = Ros2LaunchParent()
+        self.RR_launch_description = RR.generate_launch_description()
+        ##### LAUNCHER ######
+
+
+    def RF_callback_trigger(self, request, response):
+        self.RF_ReqBool = request
+        # print(self.LF_ReqBool.data)
+        self.get_logger().info(f'Received request: {self.RF_ReqBool.data}')
+        
+        if self.RF_ReqBool.data == True:
+            # self.launch_main(True)
+            time.sleep(2)
+            self.RF_launcher.start(self.RF_launch_description)
+
+        elif self.RF_ReqBool.data == False:
             # self.launch_main(False)
-            time.sleep(3)
-            self.launcher.shutdown()
+            time.sleep(2)
+            self.RF_launcher.shutdown()
+
+        response.message = "None"
+        return response
+
+
+    def LF_callback_trigger(self, request, response):
+        self.LF_ReqBool = request
+        # print(self.LF_ReqBool.data)
+        self.get_logger().info(f'Received request: {self.LF_ReqBool.data}')
+        
+        if self.LF_ReqBool.data == True:
+            # self.launch_main(True)
+            time.sleep(2)
+            self.LF_launcher.start(self.LF_launch_description)
+
+        elif self.LF_ReqBool.data == False:
+            # self.launch_main(False)
+            time.sleep(2)
+            self.LF_launcher.shutdown()
+
+        response.message = "None"
+        return response
+
+
+    def LR_callback_trigger(self, request, response):
+        self.LR_ReqBool = request
+        # print(self.LF_ReqBool.data)
+        self.get_logger().info(f'Received request: {self.LR_ReqBool.data}')
+        
+        if self.LR_ReqBool.data == True:
+            # self.launch_main(True)
+            time.sleep(2)
+            self.LR_launcher.start(self.LR_launch_description)
+
+        elif self.LR_ReqBool.data == False:
+            # self.launch_main(False)
+            time.sleep(2)
+            self.LR_launcher.shutdown()
+
+        response.message = "None"
+        return response
+
+
+    def RR_callback_trigger(self, request, response):
+        self.RR_ReqBool = request
+        # print(self.LF_ReqBool.data)
+        self.get_logger().info(f'Received request: {self.RR_ReqBool.data}')
+        
+        if self.RR_ReqBool.data == True:
+            # self.launch_main(True)
+            time.sleep(2)
+            self.RR_launcher.start(self.RR_launch_description)
+
+        elif self.RR_ReqBool.data == False:
+            # self.launch_main(False)
+            time.sleep(2)
+            self.RR_launcher.shutdown()
 
         response.message = "None"
         return response
     
+
 def main(args=None):
     rclpy.init(args=args)
     service = LaunchServiceAsync()

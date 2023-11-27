@@ -51,7 +51,7 @@ class LimbActionClient(Node):
         self.repeat = 5
         self.repeat2 = 1
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/high.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/3.csv'
         self.seq = []
 
         self.span = params.span
@@ -455,7 +455,7 @@ def main(args=None):
     # action_client = LimbActionClient()
     try:
         action_client = LimbActionClient()
-        action_client.send_goal2()
+        action_client.send_goal()
 
 
         executor = MultiThreadedExecutor()

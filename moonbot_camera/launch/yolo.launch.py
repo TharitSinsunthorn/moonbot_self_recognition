@@ -44,14 +44,24 @@ def generate_launch_description():
 
 
     # Realsense camera launch file
+    rs_RF = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(launch_realsense_dir),
+        launch_arguments={'camera_name': 'RFcam', 'serial_no': '_139522075252'}.items(), 
+    )
+
     rs_LF = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(launch_realsense_dir),
         launch_arguments={'camera_name': 'LFcam', 'serial_no': '_141122078145'}.items(), 
     )
 
+    rs_LR = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(launch_realsense_dir),
+        launch_arguments={'camera_name': 'LRcam', 'serial_no': '_819312071934'}.items(), 
+    )
+
     rs_RR = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(launch_realsense_dir),
-        launch_arguments={'camera_name': 'RRcam', 'serial_no': '_139522075252'}.items(),
+        launch_arguments={'camera_name': 'RRcam', 'serial_no': '_827312073365'}.items(),
     )
     
 
@@ -80,8 +90,9 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            # declare_rs_LF_arg,
+            rs_RF,
             rs_LF,
+            rs_LR,
             rs_RR,
             yolov8,
             # rviz_node,

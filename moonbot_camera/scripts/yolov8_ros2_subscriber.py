@@ -21,12 +21,27 @@ class Yolo_subscriber(Node):
         super().__init__('yolo_subscriber')
 
         ##### Subcriber ##### 
+
+        self.inf_RF_subscription = self.create_subscription(
+            Yolov8Inference,
+            'RFcam/Yolov8_Inference',
+            self.RF_yolo_callback,
+            10)
+        self.inf_RF_subscription
+
         self.inf_LF_subscription = self.create_subscription(
             Yolov8Inference,
             'LFcam/Yolov8_Inference',
             self.LF_yolo_callback,
             10)
         self.inf_LF_subscription
+
+        self.inf_LR_subscription = self.create_subscription(
+            Yolov8Inference,
+            'LRcam/Yolov8_Inference',
+            self.LR_yolo_callback,
+            10)
+        self.inf_LR_subscription
 
         self.inf_RR_subscription = self.create_subscription(
             Yolov8Inference,
@@ -37,10 +52,20 @@ class Yolo_subscriber(Node):
         ##### Subcriber
 
         ##### Service Client #####
+        self.RF_ConnectionClient = self.create_client(SetBool, 'RF_trigger')
+        while not self.RF_ConnectionClient.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('RF service not available, waiting again...')
+        self.RFreq = SetBool.Request()
+
         self.LF_ConnectionClient = self.create_client(SetBool, 'LF_trigger')
         while not self.LF_ConnectionClient.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('LF service not available, waiting again...')
         self.LFreq = SetBool.Request()
+
+        self.LR_ConnectionClient = self.create_client(SetBool, 'LR_trigger')
+        while not self.LR_ConnectionClient.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('LR service not available, waiting again...')
+        self.LRreq = SetBool.Request()
 
         self.RR_ConnectionClient = self.create_client(SetBool, 'RR_trigger')
         while not self.RR_ConnectionClient.wait_for_service(timeout_sec=1.0):
@@ -80,15 +105,62 @@ class Yolo_subscriber(Node):
         self.losing_patient = 5 #sec
 
 
-        # self.img_pub = self.create_publisher(Image, "/inference_result_cv2", 1)
+    def RF_send_request(self, request):
+        self.RFreq.data = request
+        self.future = self.RF_ConnectionClient.call_async(self.RFreq)
 
     def LF_send_request(self, request):
         self.LFreq.data = request
         self.future = self.LF_ConnectionClient.call_async(self.LFreq)
 
+    def LR_send_request(self, request):
+        self.LRreq.data = request
+        self.future = self.LR_ConnectionClient.call_async(self.LRreq)
+
     def RR_send_request(self, request):
         self.RRreq.data = request
         self.future = self.RR_ConnectionClient.call_async(self.RRreq)
+
+
+    def RF_yolo_callback(self, data):
+        # self.get_logger().info(f"{data.yolov8_inference}")
+        for r in data.yolov8_inference:
+            self.RF_class_name.append(r.class_name)
+            self.RF_box[0] = r.top
+            self.RF_box[1] = r.left
+            self.RF_box[2] = r.bottom
+            self.RF_box[3] = r.right
+
+        # self.get_logger().info(f"{self.class_name}")
+        
+        detection_class = self.detection_class
+
+        if detection_class in self.RF_class_name and self.RF_detected == False:
+            self.RF_detected = True
+            self.get_logger().info(f"RF is connected")
+            self.RF_send_request(True)
+
+        elif detection_class not in self.RF_class_name and self.RF_detected == True:
+            self.RF_countdown += 1
+            
+            if self.RF_countdown >= self.losing_patient:
+                self.RF_detected = False
+                self.get_logger().info(f"RF is disconnected")
+                self.RF_send_request(False)
+                self.RF_countdown = 0
+            else:
+                self.get_logger().info(f"wait for RF")
+                pass
+
+        elif detection_class in self.RF_class_name and self.RF_detected == True:
+            self.get_logger().info(f"RF is detected")
+            self.RF_countdown = 0
+
+        elif detection_class not in self.RF_class_name and self.RF_detected == False:
+            self.get_logger().info(f"No RF detection")
+
+        self.RF_class_name.clear()
+        time.sleep(1)
         
 
     def LF_yolo_callback(self, data):
@@ -129,6 +201,47 @@ class Yolo_subscriber(Node):
             self.get_logger().info(f"No LF detection")
 
         self.LF_class_name.clear()
+        time.sleep(1)
+
+
+    def LR_yolo_callback(self, data):
+        # self.get_logger().info(f"{data.yolov8_inference}")
+        for r in data.yolov8_inference:
+            self.LR_class_name.append(r.class_name)
+            self.LR_box[0] = r.top
+            self.LR_box[1] = r.left
+            self.LR_box[2] = r.bottom
+            self.LR_box[3] = r.right
+
+        # self.get_logger().info(f"{self.class_name}")
+        
+        detection_class = self.detection_class
+
+        if detection_class in self.LR_class_name and self.LR_detected == False:
+            self.LR_detected = True
+            self.get_logger().info(f"LR is connected")
+            self.LR_send_request(True)
+
+        elif detection_class not in self.LR_class_name and self.LR_detected == True:
+            self.LR_countdown += 1
+            
+            if self.LR_countdown >= self.losing_patient:
+                self.LR_detected = False
+                self.get_logger().info(f"LR is disconnected")
+                self.LR_send_request(False)
+                self.LR_countdown = 0
+            else:
+                self.get_logger().info(f"wait for LR")
+                pass
+
+        elif detection_class in self.LR_class_name and self.LR_detected == True:
+            self.get_logger().info(f"LR is detected")
+            self.LR_countdown = 0
+
+        elif detection_class not in self.LR_class_name and self.LR_detected == False:
+            self.get_logger().info(f"No LR detection")
+
+        self.LR_class_name.clear()
 
 
     def RR_yolo_callback(self, data):
