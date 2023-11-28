@@ -261,7 +261,7 @@ def main(args=None):
 	try:
 		camera_subsciber = PortCamera_subscriber()
 
-		executor = MultiThreadedExecutor(num_threads=16)
+		executor = MultiThreadedExecutor()
 		executor.add_node(camera_subsciber)
 
 		try:

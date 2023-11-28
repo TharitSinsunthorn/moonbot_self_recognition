@@ -20,34 +20,40 @@ class Yolo_subscriber(Node):
     def __init__(self):
         super().__init__('yolo_subscriber')
 
-        ##### Subcriber ##### 
+        ##### Callbackgroup #####
+        self.group = ReentrantCallbackGroup()
 
+        ##### Subcriber ##### 
         self.inf_RF_subscription = self.create_subscription(
             Yolov8Inference,
             'RFcam/Yolov8_Inference',
             self.RF_yolo_callback,
-            10)
+            10, 
+            callback_group=self.group)
         self.inf_RF_subscription
 
         self.inf_LF_subscription = self.create_subscription(
             Yolov8Inference,
             'LFcam/Yolov8_Inference',
             self.LF_yolo_callback,
-            10)
+            10,
+            callback_group=self.group)
         self.inf_LF_subscription
 
         self.inf_LR_subscription = self.create_subscription(
             Yolov8Inference,
             'LRcam/Yolov8_Inference',
             self.LR_yolo_callback,
-            10)
+            10,
+            callback_group=self.group)
         self.inf_LR_subscription
 
         self.inf_RR_subscription = self.create_subscription(
             Yolov8Inference,
             'RRcam/Yolov8_Inference',
             self.RR_yolo_callback,
-            10)
+            10,
+            callback_group=self.group)
         self.inf_RR_subscription
         ##### Subcriber
 
@@ -84,10 +90,6 @@ class Yolo_subscriber(Node):
         self.LR_box = [None] * self.leg_number
         self.RR_box = [None] * self.leg_number
 
-        # self.LF_top = None 
-        # self.LF_left = None
-        # self.LF_bottom = None
-        # self.LF_right = None
 
         self.detection_class = "connection"
         self.RF_detected = False
@@ -242,6 +244,7 @@ class Yolo_subscriber(Node):
             self.get_logger().info(f"No LR detection")
 
         self.LR_class_name.clear()
+        time.sleep(1)
 
 
     def RR_yolo_callback(self, data):
@@ -282,15 +285,25 @@ class Yolo_subscriber(Node):
             self.get_logger().info(f"No RR detection")
 
         self.RR_class_name.clear()
+        time.sleep(1)
 
 
 
 def main(args=None):
     rclpy.init(args=None)
-    yolo_subscriber = Yolo_subscriber()
-    rclpy.spin(yolo_subscriber)
-    yolo_subscriber.destroy_node()
-    rclpy.shutdown()
+    try:
+        yolo_subscriber = Yolo_subscriber()
+
+        executor = MultiThreadedExecutor()
+        executor.add_node(yolo_subscriber)
+
+        try:
+            executor.spin()
+        finally:
+            executor.shutdown()
+    finally:  
+        yolo_subscriber.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()

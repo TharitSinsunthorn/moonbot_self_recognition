@@ -95,6 +95,6 @@ def generate_launch_description():
             rs_LR,
             rs_RR,
             yolov8,
-            # rviz_node,
+            rviz_node,
         ]
     )

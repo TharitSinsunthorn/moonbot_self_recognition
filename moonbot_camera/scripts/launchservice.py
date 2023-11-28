@@ -14,6 +14,8 @@ from dynamixel_hardware.launch import *
 
 import rclpy
 from rclpy.node import Node
+from rclpy.executors import MultiThreadedExecutor, SingleThreadedExecutor
+from rclpy.callback_groups import ReentrantCallbackGroup, MutuallyExclusiveCallbackGroup
 from std_srvs.srv import SetBool, Trigger
 
 
@@ -42,11 +44,15 @@ class LaunchServiceAsync(Node):
     def __init__(self):
         super().__init__('LegConnection_service')
 
+        ##### Callbackgroup #####
+        self.group = ReentrantCallbackGroup()
+        ##### Callbackgroup #####
+
         ##### SERVICE #####
-        self.RF_connection_srv = self.create_service(SetBool, 'RF_trigger', self.RF_callback_trigger)
-        self.LF_connection_srv = self.create_service(SetBool, 'LF_trigger', self.LF_callback_trigger)
-        self.LR_connection_srv = self.create_service(SetBool, 'LR_trigger', self.LR_callback_trigger)
-        self.RR_connection_srv = self.create_service(SetBool, 'RR_trigger', self.RR_callback_trigger)
+        self.RF_connection_srv = self.create_service(SetBool, 'RF_trigger', self.RF_callback_trigger, callback_group=self.group)
+        self.LF_connection_srv = self.create_service(SetBool, 'LF_trigger', self.LF_callback_trigger, callback_group=self.group)
+        self.LR_connection_srv = self.create_service(SetBool, 'LR_trigger', self.LR_callback_trigger, callback_group=self.group)
+        self.RR_connection_srv = self.create_service(SetBool, 'RR_trigger', self.RR_callback_trigger, callback_group=self.group)
         
         ##### SERVICE #####
 
@@ -150,12 +156,21 @@ class LaunchServiceAsync(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    service = LaunchServiceAsync()
-
-    rclpy.spin(service)
     
-    sevice.destroy_node()
-    rclpy.shutdown()
+    try:
+        service_node = LaunchServiceAsync()
+
+        executor = MultiThreadedExecutor()
+        executor.add_node(service_node)
+    
+        try:
+            executor.spin()
+        finally:
+            executor.shutdown()
+    
+    finally:        
+        service_node.destroy_node()
+        rclpy.shutdown()
 
 
 if __name__ == "__main__":
