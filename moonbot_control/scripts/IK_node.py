@@ -38,6 +38,12 @@ class JointPublisher(Node):
         self.LEGsub
         ##### SUBSCRIBER #####
 
+        ##### TIMER ######
+        self.timer_period = 1  # seconds execute every 0.5 seconds
+        self.timer = self.create_timer(self.timer_period, self.pub_callback)
+        self.i = -10
+        ##### TIMER ######
+
         self.IK = InvKinematics()
 
         self.tar = []
@@ -48,6 +54,23 @@ class JointPublisher(Node):
         self.ang_LF = []
         self.ang_LR = []
         self.ang_RR = []
+        self.all_joint_angles = []
+
+
+    def pub_callback(self):
+        print(self.IK.get_RF_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
+        print(self.IK.get_LF_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
+        print(self.IK.get_LR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
+        print(self.IK.get_RR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
+        if self.all_joint_angles != None:
+            A = [0.0, 0.1, -0.1]
+            B = [0.13, 0.0, 0.24]
+            self.pubpub([self.IK.get_RF_joint_angles(B, A),
+                        self.IK.get_LF_joint_angles(B, A),
+                        self.IK.get_LR_joint_angles(B, A),
+                        self.IK.get_RR_joint_angles(B, A)])
+          
+            # self.i += 1
 
 
     def LEGcallback(self, msg):
@@ -60,10 +83,10 @@ class JointPublisher(Node):
         # rr_coord = np.array([msg.rr.x, msg.rr.y, msg.rr.z])
 
         eulerAng = np.array([0,0,0])
-        rf_coord = np.array([0.13, 0.0, 0.24])
-        lf_coord = np.array([0.13, 0.0, 0.24])
-        lr_coord = np.array([0.13, 0.0, 0.24])
-        rr_coord = np.array([0.13, 0.0, 0.24])
+        rf_coord = np.array([0.13, 0.0, -0.24])
+        lf_coord = np.array([0.13, 0.0, -0.24])
+        lr_coord = np.array([0.13, 0.0, -0.24])
+        rr_coord = np.array([0.13, 0.0, -0.24])
 
         self.ang_RF = self.IK.get_joint_angles(rf_coord, eulerAng)
         self.ang_LF = self.IK.get_joint_angles(lf_coord, eulerAng)
@@ -73,16 +96,11 @@ class JointPublisher(Node):
         print("debug")
         print(self.ang_LF)
 
-        # self.ang_RF = self.ang_RF.tolist()
-        # self.ang_LF = self.ang_LF.tolist()
-        # self.ang_LR = self.ang_LR.tolist()
-        # self.ang_RR = self.ang_RR.tolist()
+  
+        self.all_joint_angles = [self.ang_RF, self.ang_LF, self.ang_LR, self.ang_RR]
+        print(self.all_joint_angles)
 
-
-        # self.tar = msg.position
-        # self.tar = self.tar.tolist()
         self.target_received = True
-        # print(self.tar)
 
 
     def target_checker(self):
@@ -95,7 +113,7 @@ class JointPublisher(Node):
             # rclpy.spin_once(self)
             
 
-    def pubpub(self):
+    def pubpub(self, all_joint_angles):
         msg = JointTrajectory()
 
         joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
@@ -103,29 +121,14 @@ class JointPublisher(Node):
                        "j_c1_lr", "j_thigh_lr", "j_tibia_lr",
                        "j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
                        
-                       
+                    
+        sec = 0.1
 
-        sec = 2.0
 
-        f = -0.06
-        h = 0.24
-        tar0 = self.IK.get_joint_angles([0.13, 0.0, -0.1])
-        tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
-        sit = self.IK.get_joint_angles([0.13, 0.0, 0.1])
-
-        test = self.IK.get_joint_angles(np.array([0.13, 0.0, h]))
-        # print(self.tar)
-
-        # standup seq
-        # RF = [tar0,tar0,self.tar]
-        # RR = [tar0,tar0,tar1]
-        # LR = [tar0,tar0,tar1]
-        # LF = [tar0,tar0,tar1]
-
-        RF = [self.ang_RF]
-        LF = [self.ang_LF]
-        LR = [self.ang_LR]
-        RR = [self.ang_RR]
+        RF = [all_joint_angles[0]]
+        LF = [all_joint_angles[1]]
+        LR = [all_joint_angles[2]]
+        RR = [all_joint_angles[3]]
 
         seq = []
         for i in range(len(LF)):
@@ -136,7 +139,7 @@ class JointPublisher(Node):
         points = []
         for i in range(len(seq)):
             point = JointTrajectoryPoint()
-            point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
+            point.time_from_start = Duration(seconds=(i+1)*self.timer_period, nanoseconds=0).to_msg()
             point.positions = seq[i]
             # point.velocities = vel[i]
             points.append(point)
@@ -156,9 +159,9 @@ def main(args=None):
 
     joint_publisher = JointPublisher()
 
-    joint_publisher.target_checker()
+    # joint_publisher.target_checker()
 
-    rclpy.spin(joint_publisher)
+    rclpy.spin_once(joint_publisher)
 
     joint_publisher.destroy_node()
 

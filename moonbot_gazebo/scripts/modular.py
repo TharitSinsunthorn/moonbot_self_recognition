@@ -48,10 +48,10 @@ class LimbActionClient(Node):
             callback_group=self.group)
         
         self.IK = InvKinematics()
-        self.repeat = 5
-        self.repeat2 = 1
+        self.repeat = 10
+        self.repeat2 = 10
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/3.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/002legh_Crawl.csv'
         self.seq = []
 
         self.span = params.span
@@ -455,10 +455,10 @@ def main(args=None):
     # action_client = LimbActionClient()
     try:
         action_client = LimbActionClient()
-        action_client.send_goal()
+        action_client.send_goal2()
 
 
-        executor = MultiThreadedExecutor()
+        executor = MultiThreadedExecutor(num_threads=16)
         executor.add_node(action_client)
 
         try:

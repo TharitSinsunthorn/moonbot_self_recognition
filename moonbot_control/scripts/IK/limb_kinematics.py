@@ -14,7 +14,7 @@ L2 = params.L2
 L3 = params.L3
 offset_x = params.offset_x
 offset_y = params.offset_y
-offset = [offset_x, offset_y]
+offset = [offset_x, offset_y, 0]
 
 
 class LegStates():
@@ -52,11 +52,11 @@ class InvKinematics():
         self.M_R = np.array([1, 1, 1])
         self.M_L = np.array([-1, 1, 1])
         self.M_F = np.array([1, 1, 1])
-        self.M_B = np.array([1, -1, 1])
+        self.M_Rr = np.array([1, -1, 1])
 
-        self.legsState = Legs()
+        self.legState = Legs()
 
-        self.in_singularity = [0,0,0,0]
+        self.singularity = [0,0,0,0]
 
 
     def rotMat(self, eularAng):
@@ -83,7 +83,7 @@ class InvKinematics():
         coord = np.array(coord)
 
         # Calculate the distance from the origin coxa joint
-        r = np.linalg.norm(point)
+        r = np.linalg.norm(coord)
 
         if r >= self.MIN_coord_dist and r <= self.MAX_coord_dist:
             return False
@@ -135,13 +135,13 @@ class InvKinematics():
 
         goal = th @ self.rotMat(rot)
 
-        return goal.tolist()
+        return th
 
 
     def get_RF_joint_angles(self, coord, eularAng):
         # rotate around midle of the body
         translate_RF = self.offset*self.M_F*self.M_R
-        coord_ = (np.dot((coord * self.M_R + translate_RF), self.rotMat(eularAng)) - translate_RF) * self.M_R
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-0*math.pi/2])) + translate_RF), self.rotMat(eularAng)) - translate_RF), self.rotMat([0,0,0*math.pi/2]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[0] = True
@@ -159,7 +159,7 @@ class InvKinematics():
 
     def get_LF_joint_angles(self, coord, eularAng):
         translate_LF = self.offset*self.M_F*self.M_L
-        coord_ = (np.dot((coord * self.M_L + translate_LF), self.rotMat(eularAng)) - translate_LF) * self.M_L
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-1*math.pi/2])) + translate_LF), self.rotMat(eularAng)) - translate_LF), self.rotMat([0,0,1*math.pi/2]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[1] = True
@@ -175,8 +175,8 @@ class InvKinematics():
         return self.legState.LF.now_angles
 
     def get_LR_joint_angles(self, coord, eularAng):
-        translate_FL = self.offset*self.M_B*self.M_L
-        coord_ = (np.dot((coord * self.M_L + translate_FL), self.rotMat(eularAng)) - translate_FL) * self.M_L
+        translate_LR = self.offset*self.M_Rr*self.M_L
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-2*math.pi/2])) + translate_LR), self.rotMat(eularAng)) - translate_LR), self.rotMat([0,0,2*math.pi/2]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[3] = True
@@ -193,8 +193,8 @@ class InvKinematics():
 
 
     def get_RR_joint_angles(self, coord, eularAng):
-        translate_RR = self.offset*self.M_B*self.M_R
-        coord_ = (np.dot((coord * self.M_R + translate_RR), self.rotMat(eularAng)) - translate_RR) * self.M_R
+        translate_RR = self.offset*self.M_Rr*self.M_R
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-3*math.pi/2])) + translate_RR), self.rotMat(eularAng)) - translate_RR), self.rotMat([0,0,3*math.pi/2]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[2] = True

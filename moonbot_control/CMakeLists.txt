@@ -52,6 +52,7 @@ install(
     scripts/leg_node.py
     scripts/gait_node.py
     scripts/real_action.py
+    scripts/real_pub.py
     scripts/sim_action.py
     scripts/singlelimb/RF.py
     scripts/singlelimb/LF.py

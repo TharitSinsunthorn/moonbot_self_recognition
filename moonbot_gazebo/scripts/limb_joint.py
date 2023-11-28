@@ -28,9 +28,9 @@ class LimbActionClient(Node):
             '/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
-        self.repeat = 5
+        self.repeat = 3
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/003legh_Crawl.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/002legh_Crawl.csv'
         self.seq = []
 
         self.span = params.span
@@ -70,7 +70,7 @@ class LimbActionClient(Node):
 
 
                        
-        sec = 0.0016
+        sec = 0.001
 
         tar = self.IK.get_joint_angles([0.2, 0.0, 0.16])
         f = 0.05
@@ -159,9 +159,9 @@ class LimbActionClient(Node):
             seq.append(LF[i]+RF[i]+RR[i]+LR[i])
             # vel.append(vLF[i]+vRF[i]+vRR[i]+vLR[i])
 
-        seq = self.seq_generator()
+        seq_ori = self.seq_generator()
         # vel = vel*self.repeat
-        # seq = seq*self.repeat
+        seq = seq_ori*self.repeat
         # seq.insert(0, tar9+tar1+tar12+tar4)
         # seq.append(tar1+tar1+tar1+tar1)
 
@@ -173,7 +173,9 @@ class LimbActionClient(Node):
 
         for i in range(len(seq)):
             point = JointTrajectoryPoint()
-            point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
+            
+            point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
+            # point.time_from_start = Duration(seconds=(i)*sec + 1 + 0.45*(i//len(seq_ori)), nanoseconds=0).to_msg()
             point.positions = seq[i]
             # point.velocities = vel[i]
             points.append(point)
