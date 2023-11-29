@@ -200,13 +200,13 @@ class LimbActionClient(Node):
         LR.insert(0, LR[-1])
         LR.insert(0, LR[-1])
 
-        LF.insert(0, LF[-2])
         LF.insert(0, LF[-1])
+        LF.insert(0, LF[-2])
         LF[-2] = tar19
         LF[-1] = tar4
 
-        RR.insert(0, RR[-2])
         RR.insert(0, RR[-1])
+        RR.insert(0, RR[-2])
         RR[-2] = tar14
         RR[-1] = tar4
 

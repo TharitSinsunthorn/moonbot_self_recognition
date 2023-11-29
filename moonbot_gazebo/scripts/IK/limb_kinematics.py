@@ -53,9 +53,9 @@ class InvKinematics():
         self.M_F = np.array([1, 1, 1])
         self.M_B = np.array([-1, 1, 1])
 
-        self.legsState = Legs()
+        self.legState = Legs()
 
-        self.in_singularity = [0,0,0,0]
+        self.singularity = [0,0,0,0]
 
 
     def rotMat(self, eularAng):
@@ -82,7 +82,7 @@ class InvKinematics():
         coord = np.array(coord)
 
         # Calculate the distance from the origin coxa joint
-        r = np.linalg.norm(point)
+        r = np.linalg.norm(coord)
 
         if r >= self.MIN_coord_dist and r <= self.MAX_coord_dist:
             return False
@@ -90,7 +90,7 @@ class InvKinematics():
             return True
 
 
-    def get_joint_angles(self, coord):
+    def get_joint_angles(self, coord, rot = [0, 0, 0]):
         
         x, y, z = coord
         th = [0,0,0]
@@ -132,13 +132,15 @@ class InvKinematics():
             elif j3 < -1.57:
                 th[2] = -1.57
 
-        return th 
+        goal = th @ self.rotMat(rot)
+
+        return goal.tolist()
 
 
-    def get_FR_joint_angles(self, coord, eularAng):
+    def get_RF_joint_angles(self, coord, eularAng = [0,0,0]):
         # rotate around midle of the body
-        translate_FR = self.offset*self.M_F*self.M_R
-        coord_ = (np.dot((coord * self.M_R + translate_FR), self.rotMat(eularAng)) - translate_FR) * self.M_R
+        translate_RF = self.offset*self.M_F*self.M_R
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-0*math.pi/2])) + translate_RF), self.rotMat(eularAng)) - translate_RF), self.rotMat([0,0,0*math.pi/2]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[0] = True
@@ -146,65 +148,65 @@ class InvKinematics():
             self.singularity[0] = False
         #  check if any legs is in singularity
         if any(self.singularity):
-            self.legState.FR.now_angles = self.legState.FR.prev_angles
+            self.legState.RF.now_angles = self.legState.RF.prev_angles
         # if no singularities, get new joint angles
         else:
-            self.legState.FR.now_angles = self.get_joint_angles(coord_)
-            self.legState.FR.prev_angles = self.legState.FR.now_angles
+            self.legState.RF.now_angles = self.get_joint_angles(coord_)
+            self.legState.RF.prev_angles = self.legState.RF.now_angles
             self.singularity[0] = False
-        return self.legState.FR.now_angles
+        return self.legState.RF.now_angles
 
-    def get_FL_joint_angles(self, coord, eularAng):
-        translate_FL = self.offset*self.M_F*self.M_L
-        coord_ = (np.dot((coord * self.M_L + translate_FL), self.rotMat(eularAng)) - translate_FL) * self.M_L
+    def get_LF_joint_angles(self, coord, eularAng = [0,0,0]):
+        translate_LF = self.offset*self.M_F*self.M_L
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-1*math.pi/2])) + translate_LF), self.rotMat(eularAng)) - translate_LF), self.rotMat([0,0,1*math.pi/2]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[1] = True
         else:
             self.singularity[1] = False
         if any(self.singularity):
-            self.legState.FL.now_angles = self.legState.FL.prev_angles
+            self.legState.LF.now_angles = self.legState.LF.prev_angles
         # if no singularities, get new joint angles
         else:
-            self.legState.FL.now_angles = self.get_joint_angles(coord_)
-            self.legState.FL.prev_angles = self.legState.FL.now_angles
+            self.legState.LF.now_angles = self.get_joint_angles(coord_)
+            self.legState.LF.prev_angles = self.legState.LF.now_angles
             self.singularity[1] = False
-        return self.legState.FL.now_angles
-     
+        return self.legState.LF.now_angles
 
-    def get_BR_joint_angles(self, coord, eularAng):
-        translate_BR = self.offset*self.M_B*self.M_R
-        coord_ = (np.dot((coord * self.M_R + translate_BR), self.rotMat(eularAng)) - translate_BR) * self.M_R
-        # check singularity of the legs
-        if self.is_singularity(coord_):
-                self.singularity[2] = True
-        else:
-            self.singularity[2] = False
-        if any(self.singularity):
-            self.legState.BR.now_angles = self.legState.BR.prev_angles
-        # if no singularities, get new joint angles
-        else:
-            self.legState.BR.now_angles = self.get_joint_angles(coord_)
-            self.legState.BR.prev_angles = self.legState.BR.now_angles
-            self.singularity[2] = False
-        return self.legState.BR.now_angles
-
-    def get_BL_joint_angles(self, coord, eularAng):
-        translate_FL = self.offset*self.M_B*self.M_L
-        coord_ = (np.dot((coord * self.M_L + translate_FL), self.rotMat(eularAng)) - translate_FL) * self.M_L
+    def get_LR_joint_angles(self, coord, eularAng = [0,0,0]):
+        translate_LR = self.offset*self.M_Rr*self.M_L
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-2*math.pi/2])) + translate_LR), self.rotMat(eularAng)) - translate_LR), self.rotMat([0,0,2*math.pi/2]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[3] = True
         else:
             self.singularity[3] = False
         if any(self.singularity):
-            self.legState.BL.now_angles = self.legState.BL.prev_angles
+            self.legState.LR.now_angles = self.legState.LR.prev_angles
         # if no singularities, get new joint angles
         else:
-            self.legState.BL.now_angles = self.get_joint_angles(coord_)
-            self.legState.BL.prev_angles = self.legState.BL.now_angles
+            self.legState.LR.now_angles = self.get_joint_angles(coord_)
+            self.legState.LR.prev_angles = self.legState.LR.now_angles
             self.singularity[3] = False
-        return self.legState.BL.now_angles
+        return self.legState.LR.now_angles
+
+
+    def get_RR_joint_angles(self, coord, eularAng = [0,0,0]):
+        translate_RR = self.offset*self.M_Rr*self.M_R
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-3*math.pi/2])) + translate_RR), self.rotMat(eularAng)) - translate_RR), self.rotMat([0,0,3*math.pi/2]))
+        # check singularity of the legs
+        if self.is_singularity(coord_):
+                self.singularity[2] = True
+        else:
+            self.singularity[2] = False
+        if any(self.singularity):
+            self.legState.RR.now_angles = self.legState.RR.prev_angles
+        # if no singularities, get new joint angles
+        else:
+            self.legState.RR.now_angles = self.get_joint_angles(coord_)
+            self.legState.RR.prev_angles = self.legState.RR.now_angles
+            self.singularity[2] = False
+        return self.legState.RR.now_angles
 
 
 

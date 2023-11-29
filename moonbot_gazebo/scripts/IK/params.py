@@ -23,7 +23,7 @@ limb_angle = [45, 135, -135, -45]
 # Robot parameters
 offset_x = D1
 offset_y = D1
-offset = [offset_x, offset_y]
+offset = [offset_x, offset_y, 0]
 
 coxa_length = L1 
 femur_length = L2 
