@@ -30,6 +30,14 @@ sudo apt-get install ros-$ROS_DISTRO-dynamixel-sdk*
 
 sudo apt-get install ros-$ROS_DISTRO-dynamixel-workbench*
 
+sudo apt-get install ros-foxy-realsense2-camera
+
+pip install torch
+
+pip install ultralytics
+
+pip install pyrealsense2
+
 ```
 Install program
 ```bash
