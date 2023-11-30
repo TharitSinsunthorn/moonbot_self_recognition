@@ -41,7 +41,8 @@ class LimbActionClient(Node):
         span = self.span
 
         tar = self.IK.get_joint_angles([span, 0.0, h])
-        targ = self.IK.get_joint_angles([0.09, -0.05, h])
+        # targ = self.IK.get_joint_angles([0.09, -0.05, h])
+        targ = self.IK.get_joint_angles([0.13, 0.0, h])
 
         # standup seq
         RF = [targ]

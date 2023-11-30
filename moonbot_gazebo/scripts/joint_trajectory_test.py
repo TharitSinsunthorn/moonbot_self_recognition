@@ -20,10 +20,10 @@ class JointPublisher(Node):
             '/position_trajectory_controller/joint_trajectory',
             10)
 
-        self.RFsub = self.create_subscription(JointState, 
-            "RFstate", 
-            self.RFcallback, 10)
-        self.RFsub
+        # self.RFsub = self.create_subscription(JointState, 
+        #     "RFstate", 
+        #     self.RFcallback, 10)
+        # self.RFsub
 
         self.IK = InvKinematics()
 
@@ -71,7 +71,7 @@ class JointPublisher(Node):
         # print(self.tar)
 
         # standup seq
-        RF = [tar0,tar0,self.tar]
+        RF = [tar0,tar0,tar1]
         RR = [tar0,tar0,tar1]
         LR = [tar0,tar0,tar1]
         LF = [tar0,tar0,tar1]
@@ -106,13 +106,11 @@ def main(args=None):
 
     joint_publisher = JointPublisher()
 
-    joint_publisher.target_checker()
+    # joint_publisher.target_checker()
+    joint_publisher.pubpub()
 
     rclpy.spin(joint_publisher)
 
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
     joint_publisher.destroy_node()
     rclpy.shutdown()
 

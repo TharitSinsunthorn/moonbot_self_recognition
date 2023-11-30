@@ -28,6 +28,7 @@ find_package(controller_manager REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(moonbot_custom_interfaces REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 
@@ -51,6 +52,7 @@ install(
     scripts/leg_node.py
     scripts/gait_node.py
     scripts/real_action.py
+    scripts/real_pub.py
     scripts/sim_action.py
     scripts/singlelimb/RF.py
     scripts/singlelimb/LF.py

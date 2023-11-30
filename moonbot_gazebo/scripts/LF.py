@@ -23,7 +23,7 @@ class LimbActionClient(Node):
             '/LF/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
-        self.repeat = 1
+        self.repeat = 3
 
         self.span = params.span
         self.height = params.height
@@ -36,7 +36,7 @@ class LimbActionClient(Node):
 
         joint_names = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
         
-        sec = 1.0
+        sec = 0.8
 
         f = -0.04
         span = self.span

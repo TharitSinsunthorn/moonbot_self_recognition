@@ -41,10 +41,12 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/SetPosition.msg"
   "msg/DynamixelPosition.msg"
   "msg/Geometry.msg"
+  "msg/InferenceResult.msg"
+  "msg/Yolov8Inference.msg"
   "srv/GetPosition.srv"
   "srv/SetJointAngles.srv"
   "srv/Vect3.srv"
-  DEPENDENCIES builtin_interfaces geometry_msgs
+  DEPENDENCIES builtin_interfaces geometry_msgs std_msgs
 )
 
 ament_package()

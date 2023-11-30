@@ -9,6 +9,7 @@ from rclpy.node import Node
 from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 
+sys.path.append('../moonbot_ws/src/moonbot_control/scripts')
 from IK.limb_kinematics import InvKinematics
 # ros2 action list -t
 # ros2 action info /position_trajectory_controller/follow_joint_trajectory -t

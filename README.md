@@ -30,8 +30,12 @@ sudo apt-get install ros-$ROS_DISTRO-dynamixel-sdk*
 
 sudo apt-get install ros-$ROS_DISTRO-dynamixel-workbench*
 
+sudo apt-get install joystick jstest
+
+sudo apt-get ros-foxy-joy* ros-foxy-teleop*
+
 ```
-Install program
+* Install program
 ```bash
 cd ros2_ws/
 
@@ -42,16 +46,29 @@ source install/setup.bash
 
 ## Usage of Moonbot simulation and control
 To connect the moonbot and demonstrate the simple gait motion
+* Simulation in Gazebo
 ```bash
 ## terminal 1
-ros2 launch dynamixel_hardware bring_up_on_hardware.launch.py
+ros2 launch moonbot_gazebo spawn_robot_ros2.launch.py
+## terminal 2: For walking demo
+ros2 run moonbot_gazebo limb_joint.py
+```
+
+* Connect to the real Moonbot
+```bash
+## terminal 1
+ros2 launch dynamixel_hardware LF.py
+## terminal 2
+ros2 laucnh dynamixel_hardware RF.py
+## terminal 3
+ros2 launch dynamixel_hardware LR.py
+## terminal 4
+ros2 launch dynamixel_hardware RR.py
 ```
 ```bash
 ## terminal 2
-## For standing up the robot
-ros2 run moonbot_gazebo action_joint.py
 ## For walking demo
-ros2 run moonbot_gazebo limb_joint.py
+ros2 run moonbot_control real_action.py
 ```
 
 <img src="moonbot.png">

@@ -10,6 +10,7 @@ from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 
 from IK.limb_kinematics import InvKinematics
+import IK.params as params
 # ros2 action list -t
 # ros2 action info /position_trajectory_controller/follow_joint_trajectory -t
 # ros2 interface show control_msgs/action/FolowJointTrajectory
@@ -27,10 +28,13 @@ class LimbActionClient(Node):
             '/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
-        self.repeat = 1
+        self.repeat = 3
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/2data.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/002legh_Crawl.csv'
         self.seq = []
+
+        self.span = params.span
+        self.height = params.height
 
         
 
@@ -42,9 +46,12 @@ class LimbActionClient(Node):
 
             for row in csv_reader:
                 data_list.append(row)
+            print(data_list[1][111:])
+            print("\n")
+            print(data_list[-1][111:])
 
         # for i in range(12):
-        for j in range(1,8002):
+        for j in range(1,len(data_list)):
             # print(data_list[j][111:])
             float_generator = [float(item) for item in data_list[j][111:]]
             self.seq.append(float_generator)
@@ -68,23 +75,34 @@ class LimbActionClient(Node):
         tar = self.IK.get_joint_angles([0.2, 0.0, 0.16])
         f = 0.05
         h = 0.24
-        tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar2 = self.IK.get_joint_angles([0.13+f/2, f/2, h-0.04])
-        tar3 = self.IK.get_joint_angles([0.13+f, f, h])
+        lift = 0.03
+        span = self.span
 
-        tar4 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar5 = self.IK.get_joint_angles([0.13-f/2, -f/2, h-0.04])
-        tar6 = self.IK.get_joint_angles([0.13-f, -f, h])
+        tar1 = self.IK.get_joint_angles([span-f, -f, h])
+        tar2 = self.IK.get_joint_angles([span+f/2, f/2, h-lift])
+        tar3 = self.IK.get_joint_angles([span+f, f, h])
+        tar4 = self.IK.get_joint_angles([span, 0.0, h])
+        tar5 = self.IK.get_joint_angles([span, 0.0, h])
 
-        tar7 = self.IK.get_joint_angles([0.13+f, -f, h])
-        tar8 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar9 = self.IK.get_joint_angles([0.13+f/2, -f/2, h-0.04])
+        tar6 = self.IK.get_joint_angles([span+f, f, h])
+        tar7 = self.IK.get_joint_angles([span-f/2, -f/2, h-lift])
+        tar8 = self.IK.get_joint_angles([span-f, -f, h])
+        tar9 = self.IK.get_joint_angles([span, 0.0, h])
+        tar10 = self.IK.get_joint_angles([span, 0.0, h])
 
-        tar10 = self.IK.get_joint_angles([0.13-f, f, h])
-        tar11 = self.IK.get_joint_angles([0.13, 0.0, h])
-        tar12= self.IK.get_joint_angles([0.13-f/2, f/2, h-0.04])
-        
-        # print(tar1)
+
+        tar11 = self.IK.get_joint_angles([span, 0.0, h])
+        tar12 = self.IK.get_joint_angles([span, 0.0, h])
+        tar13 = self.IK.get_joint_angles([span-f, f, h])
+        tar14 = self.IK.get_joint_angles([span+f/2, -f/2, h-lift])
+        tar15 = self.IK.get_joint_angles([span+f, -f, h])
+
+
+        tar16 = self.IK.get_joint_angles([span, 0.0, h])
+        tar17 = self.IK.get_joint_angles([span, 0.0, h])
+        tar18 = self.IK.get_joint_angles([span+f, -f, h])
+        tar19 = self.IK.get_joint_angles([span-f/2, f/2, h-lift])
+        tar20 = self.IK.get_joint_angles([span-f, f, h])
 
         # standup seq
         # LF = [[0.0, 0.756, -1.57], tar]
@@ -92,17 +110,28 @@ class LimbActionClient(Node):
         # RR = [[0.0, 0.756, -1.57], tar]
         # LR = [[0.0, 0.756, -1.57], tar]
 
-        # emergency
-        E = [[0.0, -1.0, -0.57], 
-            [0.3, -0.6, -0.8], 
-            [0.6, -1.0, -0.57],
-            [0.0, -1.0, -0.57]]
 
-        LF = [tar7, tar8, tar9]
-        RF = [tar1, tar2, tar3]
-        RR = [tar10, tar11, tar12]
-        LR = [tar4, tar5, tar6]
+        RF = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
+        LR = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
+        RR = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
+        LF = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
               
+
+        RF.insert(0, RF[-1])
+        RF.insert(0, RF[-1])
+
+        LR.insert(0, LR[-1])
+        LR.insert(0, LR[-1])
+
+        LF.insert(0, LF[-2])
+        LF.insert(0, LF[-1])
+        LF[-2] = tar19
+        LF[-1] = tar4
+
+        RR.insert(0, RR[-2])
+        RR.insert(0, RR[-1])
+        RR[-2] = tar14
+        RR[-1] = tar4
 
         vLF = [[0.6, 1.0, 0.4],
               [0.0, 1.0, 0.57], 
@@ -130,9 +159,9 @@ class LimbActionClient(Node):
             seq.append(LF[i]+RF[i]+RR[i]+LR[i])
             # vel.append(vLF[i]+vRF[i]+vRR[i]+vLR[i])
 
-        seq = self.seq_generator()
-        # print(seq)
+        seq_ori = self.seq_generator()
         # vel = vel*self.repeat
+        seq = seq_ori*self.repeat
         # seq.insert(0, tar9+tar1+tar12+tar4)
         # seq.append(tar1+tar1+tar1+tar1)
 
@@ -144,7 +173,9 @@ class LimbActionClient(Node):
 
         for i in range(len(seq)):
             point = JointTrajectoryPoint()
-            point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
+            
+            point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
+            # point.time_from_start = Duration(seconds=(i)*sec + 1 + 0.45*(i//len(seq_ori)), nanoseconds=0).to_msg()
             point.positions = seq[i]
             # point.velocities = vel[i]
             points.append(point)

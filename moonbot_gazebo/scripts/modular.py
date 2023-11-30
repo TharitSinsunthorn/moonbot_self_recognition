@@ -48,9 +48,10 @@ class LimbActionClient(Node):
             callback_group=self.group)
         
         self.IK = InvKinematics()
-        self.repeat = 3
+        self.repeat = 10
+        self.repeat2 = 10
 
-        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/2data.csv'
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/002legh_Crawl.csv'
         self.seq = []
 
         self.span = params.span
@@ -65,9 +66,10 @@ class LimbActionClient(Node):
 
             for row in csv_reader:
                 data_list.append(row)
+            # print(data_list)
 
         # for i in range(12):
-        for j in range(1,8002):
+        for j in range(1, len(data_list)):
             if leg_no == "LF":
                 float_generator = [float(item) for item in data_list[j][111:114]]
             elif leg_no == "LR":
@@ -100,9 +102,9 @@ class LimbActionClient(Node):
         
         sec = 0.7  
 
-        f = -0.04
+        f = -0.06
         h = self.height
-        lift = 0.03
+        lift = 0.055
         span = self.span
 
         startconfig = self.IK.get_joint_angles([span, 0.0, 0.1])
@@ -198,13 +200,13 @@ class LimbActionClient(Node):
         LR.insert(0, LR[-1])
         LR.insert(0, LR[-1])
 
-        LF.insert(0, LF[-2])
         LF.insert(0, LF[-1])
+        LF.insert(0, LF[-2])
         LF[-2] = tar19
         LF[-1] = tar4
 
-        RR.insert(0, RR[-2])
         RR.insert(0, RR[-1])
+        RR.insert(0, RR[-2])
         RR[-2] = tar14
         RR[-1] = tar4
 
@@ -310,19 +312,24 @@ class LimbActionClient(Node):
         joint_names_lf = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
                        
 
-        sec = 0.0015
+        sec = 0.001
 
-        f = -0.04
-        h = 0.26
-        lift = 0.03
-        span = 0.11
+        # f = -0.04
+        # h = 0.26
+        # lift = 0.03
+        # span = 0.11
 
-        RR = self.seq_generator("RR")*self.repeat
-        LF = self.seq_generator("LF")*self.repeat
-        RF = self.seq_generator("RF")*self.repeat
-        LR = self.seq_generator("LR")*self.repeat
+        # RR = self.seq_generator("RR")*self.repeat2
+        # LF = self.seq_generator("LF")*self.repeat2
+        # RF = self.seq_generator("RF")*self.repeat2
+        # LR = self.seq_generator("LR")*self.repeat2
 
-        print(len(LF))
+        LF = self.seq_generator("RR")*self.repeat2
+        RR = self.seq_generator("LF")*self.repeat2
+        LR = self.seq_generator("RF")*self.repeat2
+        RF = self.seq_generator("LR")*self.repeat2
+
+        # print(len(LF))
 
 
 
@@ -451,7 +458,7 @@ def main(args=None):
         action_client.send_goal2()
 
 
-        executor = MultiThreadedExecutor()
+        executor = MultiThreadedExecutor(num_threads=16)
         executor.add_node(action_client)
 
         try:
