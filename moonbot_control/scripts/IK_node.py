@@ -11,7 +11,7 @@ from trajectory_msgs.msg import JointTrajectoryPoint
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64
 from geometry_msgs.msg import Vector3
-from moonbot_custom_interfaces.msg import SetPosition
+from moonbot_custom_interfaces.msg import SetPosition, Geometry
 
 import numpy as np
 from IK.limb_kinematics import InvKinematics
@@ -31,8 +31,8 @@ class JointPublisher(Node):
         ##### PUBLISHER #####
 
         ##### SUBSCRIBER
-        self.LEGsub = self.create_subscription(SetPosition, 
-            "Moonbot_geometry", 
+        self.LEGsub = self.create_subscription(Geometry, 
+            "moonbot_geometry", 
             self.LEGcallback, 
             10)
         self.LEGsub
@@ -55,50 +55,56 @@ class JointPublisher(Node):
         self.ang_LR = []
         self.ang_RR = []
         self.all_joint_angles = []
+        self.prev_joint_angs = None
 
 
     def pub_callback(self):
-        print(self.IK.get_RF_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
-        print(self.IK.get_LF_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
-        print(self.IK.get_LR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
-        print(self.IK.get_RR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
+        # print(self.IK.get_RF_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
+        # print(self.IK.get_LF_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
+        # print(self.IK.get_LR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
+        # print(self.IK.get_RR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
         if self.all_joint_angles != None:
             A = [0.0, 0.1, -0.1]
             B = [0.13, 0.0, 0.24]
-            self.pubpub([self.IK.get_RF_joint_angles(B, A),
-                        self.IK.get_LF_joint_angles(B, A),
-                        self.IK.get_LR_joint_angles(B, A),
-                        self.IK.get_RR_joint_angles(B, A)])
+            print(self.all_joint_angles)
+            self.pubpub(self.all_joint_angles)
           
             # self.i += 1
 
 
     def LEGcallback(self, msg):
         # self.mis = msg.position
-        self.get_logger().info(f'Received joint states:')
-        # eulerAng = np.array([msg.euler_ang.x, msg.euler_ang.y, msg.euler_ang.z])
-        # rf_coord = np.array([msg.rf.x, msg.rf.y, msg.rf.z])
-        # lf_coord = np.array([msg.lf.x, msg.lf.y, msg.lf.z])
-        # lr_coord = np.array([msg.lr.x, msg.lr.y, msg.lr.z])
-        # rr_coord = np.array([msg.rr.x, msg.rr.y, msg.rr.z])
+        # self.get_logger().info(f'Received joint states:')
 
-        eulerAng = np.array([0,0,0])
-        rf_coord = np.array([0.13, 0.0, -0.24])
-        lf_coord = np.array([0.13, 0.0, -0.24])
-        lr_coord = np.array([0.13, 0.0, -0.24])
-        rr_coord = np.array([0.13, 0.0, -0.24])
+        eulerAng = np.array([msg.euler_ang.x, msg.euler_ang.y, msg.euler_ang.z])
+        rf_coord = np.array([msg.rf.x, msg.rf.y, msg.rf.z])
+        lf_coord = np.array([msg.lf.x, msg.lf.y, msg.lf.z])
+        lr_coord = np.array([msg.lr.x, msg.lr.y, msg.lr.z])
+        rr_coord = np.array([msg.rr.x, msg.rr.y, msg.rr.z])
 
-        self.ang_RF = self.IK.get_joint_angles(rf_coord, eulerAng)
-        self.ang_LF = self.IK.get_joint_angles(lf_coord, eulerAng)
-        self.ang_LR = self.IK.get_joint_angles(lr_coord, eulerAng)
-        self.ang_RR = self.IK.get_joint_angles(rr_coord, eulerAng)
+        # eulerAng = np.array([0,0,0])
+        # rf_coord = np.array([0.13, 0.0, msg.rf.z])
+        # lf_coord = np.array([0.13, 0.0, msg.lf.z])
+        # lr_coord = np.array([0.13, 0.0, msg.lr.z])
+        # rr_coord = np.array([0.13, 0.0, msg.rr.z])
 
-        print("debug")
-        print(self.ang_LF)
+        self.ang_RF = self.IK.get_RF_joint_angles(rf_coord, eulerAng)
+        self.ang_LF = self.IK.get_LF_joint_angles(lf_coord, eulerAng)
+        self.ang_LR = self.IK.get_LR_joint_angles(lr_coord, eulerAng)
+        self.ang_RR = self.IK.get_RR_joint_angles(rr_coord, eulerAng)
+
+        # print(f'RF: {self.ang_RF}')
+        # print(f'LF: {self.ang_LF}')
+        # print(f'LR: {self.ang_LR}')
+        # print(f'RR: {self.ang_RR}')
 
   
-        self.all_joint_angles = [self.ang_RF, self.ang_LF, self.ang_LR, self.ang_RR]
-        print(self.all_joint_angles)
+        # self.all_joint_angles = [self.ang_RF, self.ang_LF, self.ang_LR, self.ang_RR]
+        self.all_joint_angles = self.ang_RF + self.ang_LF + self.ang_LR + self.ang_RR
+        
+        self.prev_joint_angs = self.all_joint_angles
+
+        # self.get_logger().info(f'all: {self.all_joint_angles}')
 
         self.target_received = True
 
@@ -125,16 +131,18 @@ class JointPublisher(Node):
         sec = 0.1
 
 
-        RF = [all_joint_angles[0]]
-        LF = [all_joint_angles[1]]
-        LR = [all_joint_angles[2]]
-        RR = [all_joint_angles[3]]
+        # RF = [all_joint_angles[0]]
+        # LF = [all_joint_angles[1]]
+        # LR = [all_joint_angles[2]]
+        # RR = [all_joint_angles[3]]
 
-        seq = []
-        for i in range(len(LF)):
-            seq.append(RF[i]+LF[i]+LR[i]+RR[i])
+        # seq = []
+        # for i in range(len(LF)):
+        #     seq.append(RF[i]+LF[i]+LR[i]+RR[i])
             # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
         # print(seq)
+        seq = [all_joint_angles]
+        print(f'seq: {seq}')
 
         points = []
         for i in range(len(seq)):
@@ -161,7 +169,7 @@ def main(args=None):
 
     # joint_publisher.target_checker()
 
-    rclpy.spin_once(joint_publisher)
+    rclpy.spin(joint_publisher)
 
     joint_publisher.destroy_node()
 

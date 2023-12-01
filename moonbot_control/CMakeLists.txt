@@ -49,6 +49,8 @@ install(
 install(
   PROGRAMS
     scripts/IK_node.py
+    scripts/cmd_manager_node.py
+    scripts/maincmd.py
     scripts/leg_node.py
     scripts/gait_node.py
     scripts/real_action.py

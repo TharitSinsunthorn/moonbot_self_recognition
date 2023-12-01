@@ -45,37 +45,41 @@ class PublishingSubscriber : public rclcpp::Node
     void joy_state_to_joy_cmd(sensor_msgs::msg::Joy::SharedPtr msg_joy)
     { 
       // set start <- btn: start
-      if (!cmd.states[0] && msg_joy->buttons[7] && (clock() - t1 > btn_tgl_delay)){
+      if (!cmd.states[0] && msg_joy->buttons[10] && (clock() - t1 > btn_tgl_delay)){
         cmd.states[0] = true;
         t1 = clock();
       }
-      else if (cmd.states[0] && msg_joy->buttons[7] && (clock() - t1 > btn_tgl_delay )){
+      else if (cmd.states[0] && msg_joy->buttons[10] && (clock() - t1 > btn_tgl_delay )){
         cmd.states[0] = false;
         t1 = clock();
       }
 
       if (cmd.states[0]){
-        // set walk <- btn: back
-        if (!cmd.states[1] && msg_joy->buttons[6] && (clock() - t2 > btn_tgl_delay)){
+        // set walk <- btn: L1 btn
+        if (!cmd.states[1] && msg_joy->buttons[4] && (clock() - t2 > btn_tgl_delay)){
           cmd.states[1] = true;
+          cmd.gait_step.z = 0.01;
           t2 = clock();
         }
-        else if (cmd.states[1] && msg_joy->buttons[6] && (clock() - t2 > btn_tgl_delay )){
+        else if (cmd.states[1] && msg_joy->buttons[4] && (clock() - t2 > btn_tgl_delay )){
           cmd.states[1] = false;
+          cmd.gait_step.z += 0.0;
           t2 = clock();
         }
 
-        // change side_walk_mode <- btn: RJ btn
-        if (!cmd.states[2] && msg_joy->buttons[10] && (clock() - t3 > btn_tgl_delay)){
+        // change side_walk_mode <- btn: R1 btn
+        if (!cmd.states[2] && msg_joy->buttons[5] && (clock() - t3 > btn_tgl_delay)){
           cmd.states[2] = true;
+          cmd.gait_step.z = 0.01;
           t3 = clock();
         }
-        else if (cmd.states[2] && msg_joy->buttons[10] && (clock() - t3 > btn_tgl_delay )){
+        else if (cmd.states[2] && msg_joy->buttons[5] && (clock() - t3 > btn_tgl_delay )){
           cmd.states[2] = false;
+          cmd.gait_step.z = 0.0;
           t3 = clock();
         }
 
-        // select gait <- btn: A, B, X, Y
+        // select gait <- btn: X, O, /\, |_|
         if(msg_joy->buttons[0]){
           cmd.gait_type = 0;
         }
@@ -94,46 +98,48 @@ class PublishingSubscriber : public rclcpp::Node
           cmd.pose.position.z = MIN_HEIGHT;
         if(cmd.pose.position.z > MAX_HEIGHT)
           cmd.pose.position.z = MAX_HEIGHT;
-        if(!msg_joy->buttons[4] && msg_joy->axes[7] > 0 && cmd.pose.position.z < MAX_HEIGHT ){
-          cmd.pose.position.z += 5;
+        if(!msg_joy->buttons[5] && msg_joy->axes[7] > 0 && cmd.pose.position.z < MAX_HEIGHT ){
+          cmd.pose.position.z += 0.001;
         }
-        if(!msg_joy->buttons[4] && msg_joy->axes[7] < 0 && cmd.pose.position.z > MIN_HEIGHT ){
-          cmd.pose.position.z -= 5;
+        if(!msg_joy->buttons[5] && msg_joy->axes[7] < 0 && cmd.pose.position.z > MIN_HEIGHT ){
+          cmd.pose.position.z -= 0.001;
         }
 
         // if walking mode is on and robot's height is not enough for walking, 
         // increase robot's height and swing step height
-        if (cmd.states[1] == true && cmd.pose.position.z < 100){
-          cmd.pose.position.z += 5;
-          cmd.gait_step.z += 5;
+        if (cmd.states[1] == true && cmd.pose.position.z < MIN_HEIGHT){
+          cmd.pose.position.z += 0.001;
+          cmd.gait_step.z += 0.001;
         }
 
         // set step height
         if (cmd.gait_step.z > cmd.pose.position.z - MIN_HEIGHT)
           cmd.gait_step.z = cmd.pose.position.z - MIN_HEIGHT;
-        if(msg_joy->buttons[4] && msg_joy->axes[7] > 0 && cmd.gait_step.z < cmd.pose.position.z - MIN_HEIGHT){      
-          cmd.gait_step.z += 5;
+        if(msg_joy->buttons[9] && msg_joy->axes[7] > 0 && cmd.gait_step.z < cmd.pose.position.z - MIN_HEIGHT){      
+          cmd.gait_step.z += 0.001;
         }
-        if(msg_joy->buttons[4] && msg_joy->axes[7] < 0 && cmd.gait_step.z > 10 ){      
-          cmd.gait_step.z -= 5;
+        if(msg_joy->buttons[9] && msg_joy->axes[7] < 0 && cmd.gait_step.z > 10 ){      
+          cmd.gait_step.z -= 0.001;
         }
 
         // set eular angles
-        if (!msg_joy->buttons[9] && !LJ_btn_sw){
-          cmd.pose.orientation.x = -msg_joy->axes[0] * ROLL_RANGE;
-          cmd.pose.orientation.y = msg_joy->axes[1] * PITCH_RANGE;
+        if (!msg_joy->buttons[12] && !LJ_btn_sw){
+          cmd.pose.orientation.x = -msg_joy->axes[3] * ROLL_RANGE;
+          cmd.pose.orientation.y = msg_joy->axes[4] * PITCH_RANGE;
           cmd.pose.orientation.z = (msg_joy->axes[2] - msg_joy->axes[5])/2 * YAW_RANGE;
+          cmd.pose.position.x = 0;
+          cmd.pose.position.y = 0;
         }
 
         // set step length x y
-        cmd.gait_step.x = msg_joy->axes[4] * MAX_STEP_LENGTH_X;
-        cmd.gait_step.y = -msg_joy->axes[3] * MAX_STEP_LENGTH_Y;
+        cmd.gait_step.x = msg_joy->axes[1] * MAX_STEP_LENGTH_X;
+        cmd.gait_step.y = -msg_joy->axes[0] * MAX_STEP_LENGTH_Y;
 
         // set slant
-        if (msg_joy->buttons[9]){
+        if (msg_joy->buttons[12]){
           LJ_btn_sw = 1;
           if (cmd.pose.position.x <= SLANT_X_MAX && cmd.pose.position.x >= SLANT_X_MIN){
-            cmd.pose.position.x += msg_joy->axes[1]*5 ;
+            cmd.pose.position.x += msg_joy->axes[4]*5 ;
           }
           else if (cmd.pose.position.x < SLANT_X_MIN){
             cmd.pose.position.x = SLANT_X_MIN;
@@ -142,7 +148,7 @@ class PublishingSubscriber : public rclcpp::Node
             cmd.pose.position.x = SLANT_X_MAX;
           }
           if (cmd.pose.position.y <= SLANT_Y_MAX && cmd.pose.position.y >= SLANT_Y_MIN){
-            cmd.pose.position.y -= msg_joy->axes[0]*5 ;
+            cmd.pose.position.y -= msg_joy->axes[3]*5 ;
           }
           else if (cmd.pose.position.y < SLANT_Y_MIN){
             cmd.pose.position.y = SLANT_Y_MIN;
@@ -151,7 +157,7 @@ class PublishingSubscriber : public rclcpp::Node
             cmd.pose.position.y = SLANT_Y_MAX;
           }
         }
-        if (msg_joy->axes[0] == 0 && msg_joy->axes[1] == 0){
+        if (msg_joy->axes[3] == 0 && msg_joy->axes[4] == 0){
           LJ_btn_sw = 0;
         }
         
