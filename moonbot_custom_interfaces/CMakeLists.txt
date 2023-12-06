@@ -45,6 +45,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/JoyCtrlCmds.msg"
   "msg/InferenceResult.msg"
   "msg/Yolov8Inference.msg"
+  "msg/Detection.msg"
   "srv/GetPosition.srv"
   "srv/SetJointAngles.srv"
   "srv/Vect3.srv"

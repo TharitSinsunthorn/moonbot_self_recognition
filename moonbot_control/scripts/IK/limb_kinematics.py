@@ -93,6 +93,7 @@ class InvKinematics():
 
     def get_joint_angles(self, coord, rot = [0, 0, 0]):
         
+        coord = coord @ self.rotMat(rot)
         x, y, z = coord
         th = [0,0,0]
         
@@ -133,7 +134,7 @@ class InvKinematics():
             elif j3 < -1.57:
                 th[2] = -1.57
 
-        goal = th @ self.rotMat(rot)
+        # goal = th @ self.rotMat(rot)
 
         return th
 

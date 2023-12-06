@@ -123,7 +123,7 @@ class JointPublisher(Node):
         h = 0.24
         lift = 0.02
         span = 0.255
-        self.repeat = 3
+        self.repeat = 10
         ground = 0.05
         pathrange = 20
 

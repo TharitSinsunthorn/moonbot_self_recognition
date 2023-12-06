@@ -56,6 +56,8 @@ install(
     scripts/real_action.py
     scripts/real_pub.py
     scripts/sim_action.py
+    scripts/sim_pub.py
+    scripts/modular.py
     scripts/singlelimb/RF.py
     scripts/singlelimb/LF.py
     scripts/singlelimb/LR.py

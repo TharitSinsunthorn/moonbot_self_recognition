@@ -46,9 +46,9 @@ class LimbActionClient(Node):
 
             for row in csv_reader:
                 data_list.append(row)
-            print(data_list[1][111:])
-            print("\n")
-            print(data_list[-1][111:])
+            # print(data_list[1][111:])
+            # print("\n")
+            # print(data_list[-1][111:])
 
         # for i in range(12):
         for j in range(1,len(data_list)):
@@ -133,24 +133,6 @@ class LimbActionClient(Node):
         RR[-2] = tar14
         RR[-1] = tar4
 
-        vLF = [[0.6, 1.0, 0.4],
-              [0.0, 1.0, 0.57], 
-              [0.3, 0.6, 0.8]]
-
-        vRF = [[0.0, 1.0, 0.57], 
-              [-0.3, 0.6, 0.8], 
-              [-0.6, 1.0, 0.4]]
-              
-
-        vRR = [[-0.6, 1.0, 0.4],
-              [0.0, 1.0, 0.57], 
-              [-0.3, 0.6, 0.8]]
-              
-
-        vLR = [[0.0, 1.0, 0.57], 
-              [0.3, 0.6, 0.8], 
-              [0.6, 1.0, 0.4]]
-
        
         
         seq = []
@@ -209,7 +191,7 @@ class LimbActionClient(Node):
 
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
-        # self.get_logger().info('Received feedbackl:'+str(feedback))
+        self.get_logger().info('Received feedbackl:'+str(feedback.error.positions)+str(type(feedback.actual.positions)))
 
 
 def main(args=None):
