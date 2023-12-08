@@ -62,6 +62,7 @@ install(
     scripts/singlelimb/LF.py
     scripts/singlelimb/LR.py
     scripts/singlelimb/RR.py
+    scripts/launch_detection.py
 
   DESTINATION
     lib/${PROJECT_NAME}

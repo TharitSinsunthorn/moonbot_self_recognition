@@ -157,20 +157,26 @@ class LaunchServiceAsync(Node):
 def main(args=None):
     rclpy.init(args=args)
     
-    try:
-        service_node = LaunchServiceAsync()
+    # try:
+    #     service_node = LaunchServiceAsync()
 
-        executor = MultiThreadedExecutor()
-        executor.add_node(service_node)
+    #     executor = MultiThreadedExecutor()
+    #     executor.add_node(service_node)
     
-        try:
-            executor.spin()
-        finally:
-            executor.shutdown()
+    #     try:
+    #         executor.spin()
+    #     finally:
+    #         executor.shutdown()
     
-    finally:        
-        service_node.destroy_node()
-        rclpy.shutdown()
+    # finally:        
+    #     service_node.destroy_node()
+    #     rclpy.shutdown()
+    service = LaunchServiceAsync()
+
+    rclpy.spin(service)
+
+    sevice.destroy_node()
+    rclpy.shutdown()
 
 
 if __name__ == "__main__":
