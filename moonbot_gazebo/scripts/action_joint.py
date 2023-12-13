@@ -1,323 +1,114 @@
 #! /usr/bin/env python3
-import time
+
+import sys
+import os
+import csv
 import rclpy
-import math
+from rclpy.duration import Duration 
+from rclpy.action import ActionClient
 from rclpy.node import Node
-from rclpy.duration import Duration
-from rclpy.executors import SingleThreadedExecutor
-
-
-from trajectory_msgs.msg import JointTrajectory
+from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
-from sensor_msgs.msg import JointState
-from std_msgs.msg import Float64
-from geometry_msgs.msg import Vector3
-from moonbot_custom_interfaces.msg import SetPosition
+from rclpy.callback_groups import ReentrantCallbackGroup, MutuallyExclusiveCallbackGroup
+from rclpy.executors import MultiThreadedExecutor, SingleThreadedExecutor
 
-import numpy as np
 from IK.limb_kinematics import InvKinematics
+import IK.params as params
 
 
-
-class JointPublisher(Node):
+class LimbActionClient(Node):
 
     def __init__(self):
-        super().__init__('JointPublisher_Node')
+        super().__init__("limb_actionclient")
 
-        ##### PUBLISHER #####
-        self.joint_publisher = self.create_publisher(
-            JointTrajectory,
-            '/position_trajectory_controller/joint_trajectory',
-            10)
-        ##### PUBLISHER #####
+        self.group = ReentrantCallbackGroup()
 
-        ##### SUBSCRIBER
-        self.LEGsub = self.create_subscription(SetPosition, 
-            "Moonbot_geometry", 
-            self.LEGcallback, 
-            10)
-        self.LEGsub
-        ##### SUBSCRIBER #####
+        self._action_RF = ActionClient(
+            self, 
+            FollowJointTrajectory, 
+            'RFposition_trajectory_controller/follow_joint_trajectory',
+            callback_group=self.group)
 
-        ##### TIMER ######
-        self.timer_period = 1  # seconds execute every 0.5 seconds
-        self.timer = self.create_timer(self.timer_period, self.pub_callback)
-        self.i = -10
-        ##### TIMER ######
+        self._action_RR = ActionClient(
+            self, 
+            FollowJointTrajectory, 
+            'RRposition_trajectory_controller/follow_joint_trajectory',
+            callback_group=self.group)
 
+        self._action_LR = ActionClient(
+            self, 
+            FollowJointTrajectory, 
+            'LRposition_trajectory_controller/follow_joint_trajectory',
+            callback_group=self.group)
+
+        self._action_LF = ActionClient(
+            self, 
+            FollowJointTrajectory, 
+            'LFposition_trajectory_controller/follow_joint_trajectory',
+            callback_group=self.group)
+        
         self.IK = InvKinematics()
+        self.repeat = 2
+        self.repeat2 = 2
 
-        self.tar = []
+        self.csv_file_path = '../moonbot_ws/src/moonbot_gazebo/src/002legh_Crawl.csv'
+        self.seq = []
 
-        self.target_received = False
-
-        self.ang_RF = []
-        self.ang_LF = []
-        self.ang_LR = []
-        self.ang_RR = []
-        self.all_joint_angles = []
+        self.span = params.span
+        self.height = params.height
 
 
-    def pub_callback(self):
-        print(self.IK.get_RF_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
-        print(self.IK.get_LF_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
-        print(self.IK.get_LR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
-        print(self.IK.get_RR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
-        if self.all_joint_angles != None:
-            A = [0.0, 0.1, -0.1]
-            B = [0.13, 0.0, 0.24]
-            self.pubpub([self.IK.get_RF_joint_angles(B, A),
-                        self.IK.get_LF_joint_angles(B, A),
-                        self.IK.get_LR_joint_angles(B, A),
-                        self.IK.get_RR_joint_angles(B, A)])
-          
-            # self.i += 1
+    def seq_generator(self, leg_no):
+        gen_seq = []
+        with open(self.csv_file_path, 'r') as file:
+            csv_reader = csv.reader(file)
+            data_list = []
+
+            for row in csv_reader:
+                data_list.append(row)
+            # print(data_list)
+
+        # for i in range(12):
+        for j in range(1, len(data_list)):
+            if leg_no == "LF":
+                float_generator = [float(item) for item in data_list[j][111:114]]
+            elif leg_no == "LR":
+                float_generator = [float(item) for item in data_list[j][114:117]]
+            elif leg_no == "RR":
+                float_generator = [float(item) for item in data_list[j][117:120]]
+            elif leg_no == "RF":
+                float_generator = [float(item) for item in data_list[j][120:123]]
+
+            gen_seq.append(float_generator)
+
+        return gen_seq
 
 
-    def LEGcallback(self, msg):
-        # self.mis = msg.position
-        self.get_logger().info(f'Received joint states:')
-        # eulerAng = np.array([msg.euler_ang.x, msg.euler_ang.y, msg.euler_ang.z])
-        # rf_coord = np.array([msg.rf.x, msg.rf.y, msg.rf.z])
-        # lf_coord = np.array([msg.lf.x, msg.lf.y, msg.lf.z])
-        # lr_coord = np.array([msg.lr.x, msg.lr.y, msg.lr.z])
-        # rr_coord = np.array([msg.rr.x, msg.rr.y, msg.rr.z])
-
-        eulerAng = np.array([0,0,0])
-        rf_coord = np.array([0.13, 0.0, -0.24])
-        lf_coord = np.array([0.13, 0.0, -0.24])
-        lr_coord = np.array([0.13, 0.0, -0.24])
-        rr_coord = np.array([0.13, 0.0, -0.24])
-
-        self.ang_RF = self.IK.get_joint_angles(rf_coord, eulerAng)
-        self.ang_LF = self.IK.get_joint_angles(lf_coord, eulerAng)
-        self.ang_LR = self.IK.get_joint_angles(lr_coord, eulerAng)
-        self.ang_RR = self.IK.get_joint_angles(rr_coord, eulerAng)
-
-        print("debug")
-        print(self.ang_LF)
-
-  
-        self.all_joint_angles = [self.ang_RF, self.ang_LF, self.ang_LR, self.ang_RR]
-        print(self.all_joint_angles)
-
-        self.target_received = True
+    def send_goal(self):
+        RF_goal_msg = FollowJointTrajectory.Goal()
+        RR_goal_msg = FollowJointTrajectory.Goal()
+        LR_goal_msg = FollowJointTrajectory.Goal()
+        LF_goal_msg = FollowJointTrajectory.Goal()
 
 
-    def SinPub(self, LegID = None):
-        msg = JointTrajectory()
 
-        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
-                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf",
-                       "j_c1_lr", "j_thigh_lr", "j_tibia_lr",
-                       "j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
-
-
-        # connected_leg = [joint_names[LegID*3 + 0], joint_names[LegID*3 + 1], joint_names[LegID*3 + 2]]
+        # Fill in data for trajectory
+        joint_names_rf = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf"]
+        joint_names_rr = ["j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
+        joint_names_lr = ["j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
+        joint_names_lf = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
                        
-                    
-        sec = 0.5
 
         
-        f = 0.08
-        h = 0.24
-        lift = 0.02
-        span = 0.255
-        self.repeat = 10
-        ground = 0.05
-        pathrange = 20
+        sec = 0.7  
 
-        L = []
-        plot = []
-        for j in range(pathrange):
-            div = (f)/pathrange     
-            x = span + div*j 
-            z = -np.sqrt(lift**2 * (1 - (2*(x-span-f/2)/f)**2))
-            plot.append([x, 0.0, z + ground])
-            L.append(self.IK.get_joint_angles([x, 0.0, z + ground]))
-        L.append(self.IK.get_joint_angles([span+f, 0.0, ground]))
+        f = -0.06
+        h = self.height
+        lift = 0.055
+        span = self.span
 
-        for j in range(pathrange):
-            div = (f)/pathrange     
-            x = span + f - div*j 
-            L.append(self.IK.get_joint_angles([x, 0.0, ground]))
-            plot.append([x, 0.0, ground])
-
-
-        tar0 = self.IK.get_joint_angles([span + f/2, 0, -lift])
-        tar1 = self.IK.get_joint_angles([span + f, 0, ground])
-        tar2 = self.IK.get_joint_angles([span, 0, ground])
-
-        tar3 = self.IK.get_joint_angles([span + f/2, 0, -lift], [0, 0, math.pi/4])
-        tar4 = self.IK.get_joint_angles([span + f, 0, ground], [0, 0, math.pi/4])
-        tar5 = self.IK.get_joint_angles([span, 0, ground], [0, 0, math.pi/4])
-
-
-
-
-        L = [tar0, tar1, tar2] * self.repeat
-        R = [tar4, tar4, tar4] * self.repeat
-        # L = L*self.repeat
-
-        seq = []
-        for i in range(len(L)):
-            seq.append(L[i]+R[i]+L[i]+L[i])
-            # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
-
-        points = []
-        for i in range(len(seq)):
-            point = JointTrajectoryPoint()
-            point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
-            point.positions = seq[i]
-            # point.velocities = vel[i]
-            points.append(point)
-
-
-        msg.joint_names = joint_names
-        msg.points = points
-
-        self.joint_publisher.publish(msg)
-
-
-    def DuoPub(self, all_joint_angles = None):
-        msg = JointTrajectory()
-
-        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
-                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf",
-                       "j_c1_lr", "j_thigh_lr", "j_tibia_lr",
-                       "j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
-                       
-                    
-        sec = 0.1
-
-        tar = self.IK.get_joint_angles([0.2, 0.0, 0.16])
-        f = 0.05
-        h = 0.24
-        lift = 0.03
-        span = 0.13
-        self.repeat = 3
-
-
-        RF = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
-        LR = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
-        LF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
-        RR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
-              
-
-        RF.insert(0, RF[-1])
-        RF.insert(0, RF[-1])
-
-        LR.insert(0, LR[-1])
-        LR.insert(0, LR[-1])
-
-        LF.insert(0, LF[-1])
-        LF.insert(0, LF[-2])
-        LF[-2] = tar19
-        LF[-1] = tar4
-
-        RR.insert(0, RR[-1])
-        RR.insert(0, RR[-2])
-        RR[-2] = tar14
-        RR[-1] = tar4
-
-        seq = []
-        for i in range(len(LF)):
-            seq.append(RF[i]+LF[i]+LR[i]+RR[i])
-            # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
-
-        points = []
-        for i in range(len(seq)):
-            point = JointTrajectoryPoint()
-            point.time_from_start = Duration(seconds=(i+1)*self.timer_period, nanoseconds=0).to_msg()
-            point.positions = seq[i]
-            # point.velocities = vel[i]
-            points.append(point)
-
-
-        msg.joint_names = joint_names
-        msg.points = points
-
-        self.joint_publisher.publish(msg)
-
-
-    def TriPub(self, all_joint_angles = None):
-        msg = JointTrajectory()
-
-        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
-                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf",
-                       "j_c1_lr", "j_thigh_lr", "j_tibia_lr",
-                       "j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
-                       
-                    
-        sec = 0.1
-
-        tar = self.IK.get_joint_angles([0.2, 0.0, 0.16])
-        f = 0.05
-        h = 0.24
-        lift = 0.03
-        span = 0.13
-        self.repeat = 3
-
-
-        RF = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
-        LR = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
-        LF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
-        RR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
-              
-
-        RF.insert(0, RF[-1])
-        RF.insert(0, RF[-1])
-
-        LR.insert(0, LR[-1])
-        LR.insert(0, LR[-1])
-
-        LF.insert(0, LF[-1])
-        LF.insert(0, LF[-2])
-        LF[-2] = tar19
-        LF[-1] = tar4
-
-        RR.insert(0, RR[-1])
-        RR.insert(0, RR[-2])
-        RR[-2] = tar14
-        RR[-1] = tar4
-
-        seq = []
-        for i in range(len(LF)):
-            seq.append(RF[i]+LF[i]+LR[i]+RR[i])
-            # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
-
-        points = []
-        for i in range(len(seq)):
-            point = JointTrajectoryPoint()
-            point.time_from_start = Duration(seconds=(i+1)*self.timer_period, nanoseconds=0).to_msg()
-            point.positions = seq[i]
-            # point.velocities = vel[i]
-            points.append(point)
-
-
-        msg.joint_names = joint_names
-        msg.points = points
-
-        self.joint_publisher.publish(msg)
-
-
-    def pubpub(self, all_joint_angles = None):
-        msg = JointTrajectory()
-
-        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
-                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf",
-                       "j_c1_lr", "j_thigh_lr", "j_tibia_lr",
-                       "j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
-                       
-                    
-        sec = 0.1
-
-        tar = self.IK.get_joint_angles([0.2, 0.0, 0.16])
-        f = 0.05
-        h = 0.24
-        lift = 0.03
-        span = 0.13
-        self.repeat = 3
+        startconfig = self.IK.get_joint_angles([span, 0.0, 0.1])
+        startconfig2 = self.IK.get_joint_angles([span, 0.0, h])
 
         tar1 = self.IK.get_joint_angles([span-f, -f, h])
         tar2 = self.IK.get_joint_angles([span+f/2, f/2, h-lift])
@@ -345,12 +136,63 @@ class JointPublisher(Node):
         tar19 = self.IK.get_joint_angles([span-f/2, f/2, h-lift])
         tar20 = self.IK.get_joint_angles([span-f, f, h])
 
+        # mission = "w"
+        # if mission == "s":
+        #     print("stand up!")
+        #     # standup seq
+        #     LF = [startconfig, startconfig, startconfig2]
+        #     RF = [startconfig, startconfig, startconfig2]
+        #     RR = [startconfig, startconfig, startconfig2]
+        #     LR = [startconfig, startconfig, startconfig2]
+
+        # elif mission == "w":
+        #     print("walk!")
+        #     # Move forward
+        #     RF = [tar1, tar2, tar3]*repeat
+        #     LR = [tar4, tar5, tar6]*repeat
+        #     LF = [tar7, tar8, tar9]*repeat
+        #     RR = [tar10, tar11, tar12]*repeat
+
+        #     # Initial and end forward
+        #     RF.insert(0, RF[0])
+        #     RF.append(startconfig2)
+
+        #     LR.insert(0, LR[0])
+        #     LR.append(startconfig2)
+
+        #     LF.insert(0, LF[-1])
+        #     LF.append(startconfig2)
+
+        #     RR.insert(0, RR[-1])
+        #     RR.append(startconfig2)
+
+        # elif mission == "l":
+        #     print("go left!")
+        #     # Move Left
+        #     RR = [tar1, tar2, tar3]*repeat
+        #     LF = [tar4, tar5, tar6]*repeat
+        #     RF = [tar7, tar8, tar9]*repeat
+        #     LR = [tar10, tar11, tar12]*repeat
+
+        #     # Initial left
+        #     RR.insert(0, RR[0])
+        #     RR.append(tar4)
+
+        #     LF.insert(0, LF[0])
+        #     LF.append(tar4)
+
+        #     RF.insert(0, RF[-1])
+        #     RF.append(tar4)
+
+        #     LR.insert(0, LR[-1])
+        #     LR.append(tar4)
+
+        
 
         RF = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
         LR = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
         LF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
         RR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
-              
 
         RF.insert(0, RF[-1])
         RF.insert(0, RF[-1])
@@ -368,42 +210,271 @@ class JointPublisher(Node):
         RR[-2] = tar14
         RR[-1] = tar4
 
-        seq = []
-        for i in range(len(LF)):
-            seq.append(RF[i]+LF[i]+LR[i]+RR[i])
-            # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
 
-        points = []
-        for i in range(len(seq)):
-            point = JointTrajectoryPoint()
-            point.time_from_start = Duration(seconds=(i+1)*self.timer_period, nanoseconds=0).to_msg()
-            point.positions = seq[i]
+        # Go left
+        # RR = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
+        # LF = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
+        # RF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
+        # LR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
+
+        # RR.insert(0, RR[-1])
+        # RR.insert(0, RR[-1])
+
+        # LF.insert(0, LF[-1])
+        # LF.insert(0, LF[-1])
+
+        # RF.insert(0, RF[-2])
+        # RF.insert(0, RF[-1])
+        # RF[-2] = tar19
+        # RF[-1] = tar4
+
+        # LR.insert(0, LR[-2])
+        # LR.insert(0, LR[-1])
+        # LR[-2] = tar14
+        # LR[-1] = tar4
+
+
+        RF_points = []
+        RR_points = []
+        LR_points = []
+        LF_points = []
+        for i in range(len(RF)):
+            RF_point = JointTrajectoryPoint()
+            RR_point = JointTrajectoryPoint()
+            LR_point = JointTrajectoryPoint()
+            LF_point = JointTrajectoryPoint()
+
+            RF_point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
+            RR_point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
+            LR_point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
+            LF_point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
+
+            RF_point.positions = RF[i]
+            RR_point.positions = RR[i]
+            LR_point.positions = LR[i]
+            LF_point.positions = LF[i]
+
             # point.velocities = vel[i]
-            points.append(point)
+            RF_points.append(RF_point)
+            RR_points.append(RR_point)
+            LR_points.append(LR_point)
+            LF_points.append(LF_point)
+            # print(points)
+
+        RF_goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
+        RF_goal_msg.trajectory.joint_names = joint_names_rf
+        RF_goal_msg.trajectory.points = RF_points
+
+        RR_goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
+        RR_goal_msg.trajectory.joint_names = joint_names_rr
+        RR_goal_msg.trajectory.points = RR_points
+
+        LR_goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
+        LR_goal_msg.trajectory.joint_names = joint_names_lr
+        LR_goal_msg.trajectory.points = LR_points
+
+        LF_goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
+        LF_goal_msg.trajectory.joint_names = joint_names_lf
+        LF_goal_msg.trajectory.points = LF_points
+
+        self._action_RF.wait_for_server()
+        self._sendRF_goal_future = self._action_RF.send_goal_async(
+            RF_goal_msg, feedback_callback=self.feedback_callback)
+        self._sendRF_goal_future.add_done_callback(self.goal_response_callback)
+
+        self._action_RR.wait_for_server()
+        self._sendRR_goal_future = self._action_RR.send_goal_async(
+            RR_goal_msg, feedback_callback=self.feedback_callback)
+        self._sendRR_goal_future.add_done_callback(self.goal_response_callback)
+
+        self._action_LR.wait_for_server()
+        self._sendLR_goal_future = self._action_LR.send_goal_async(
+            LR_goal_msg, feedback_callback=self.feedback_callback)
+        self._sendLR_goal_future.add_done_callback(self.goal_response_callback)
+
+        self._action_LF.wait_for_server()
+        self._sendLF_goal_future = self._action_LF.send_goal_async(
+            LF_goal_msg, feedback_callback=self.feedback_callback)
+        self._sendRR_goal_future.add_done_callback(self.goal_response_callback)
 
 
-        msg.joint_names = joint_names
-        msg.points = points
+    def send_goal2(self):
+        RF_goal_msg = FollowJointTrajectory.Goal()
+        RR_goal_msg = FollowJointTrajectory.Goal()
+        LR_goal_msg = FollowJointTrajectory.Goal()
+        LF_goal_msg = FollowJointTrajectory.Goal()
 
-        self.joint_publisher.publish(msg)
 
+        # Fill in data for trajectory
+        joint_names_rf = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf"]
+        joint_names_rr = ["j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
+        joint_names_lr = ["j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
+        joint_names_lf = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
+                       
+
+        sec = 0.001
+
+        # f = -0.04
+        # h = 0.26
+        # lift = 0.03
+        # span = 0.11
+
+        # RR = self.seq_generator("RR")*self.repeat2
+        # LF = self.seq_generator("LF")*self.repeat2
+        # RF = self.seq_generator("RF")*self.repeat2
+        # LR = self.seq_generator("LR")*self.repeat2
+
+        LF = self.seq_generator("RR")*self.repeat2
+        RR = self.seq_generator("LF")*self.repeat2
+        LR = self.seq_generator("RF")*self.repeat2
+        RF = self.seq_generator("LR")*self.repeat2
+
+        # print(len(LF))
+
+
+
+        RF_points = []
+        RR_points = []
+        LR_points = []
+        LF_points = []
+        for i in range(len(RF)):
+            RF_point = JointTrajectoryPoint()
+            RR_point = JointTrajectoryPoint()
+            LR_point = JointTrajectoryPoint()
+            LF_point = JointTrajectoryPoint()
+
+            if i == 0:
+                RF_point.time_from_start = Duration(seconds=1, nanoseconds=0).to_msg()
+                RR_point.time_from_start = Duration(seconds=1, nanoseconds=0).to_msg()
+                LR_point.time_from_start = Duration(seconds=1, nanoseconds=0).to_msg()
+                LF_point.time_from_start = Duration(seconds=1, nanoseconds=0).to_msg()
+            else:
+
+                RF_point.time_from_start = Duration(seconds=(i+1)*sec + 1, nanoseconds=0).to_msg()
+                RR_point.time_from_start = Duration(seconds=(i+1)*sec + 1, nanoseconds=0).to_msg()
+                LR_point.time_from_start = Duration(seconds=(i+1)*sec + 1, nanoseconds=0).to_msg()
+                LF_point.time_from_start = Duration(seconds=(i+1)*sec + 1, nanoseconds=0).to_msg()
+
+            RF_point.positions = RF[i]
+            RR_point.positions = RR[i]
+            LR_point.positions = LR[i]
+            LF_point.positions = LF[i]
+
+            # point.velocities = vel[i]
+            RF_points.append(RF_point)
+            RR_points.append(RR_point)
+            LR_points.append(LR_point)
+            LF_points.append(LF_point)
+            # print(points)
+
+        RF_goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
+        RF_goal_msg.trajectory.joint_names = joint_names_rf
+        RF_goal_msg.trajectory.points = RF_points
+
+        RR_goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
+        RR_goal_msg.trajectory.joint_names = joint_names_rr
+        RR_goal_msg.trajectory.points = RR_points
+
+        LR_goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
+        LR_goal_msg.trajectory.joint_names = joint_names_lr
+        LR_goal_msg.trajectory.points = LR_points
+
+        LF_goal_msg.goal_time_tolerance = Duration(seconds=1, nanoseconds=0).to_msg()
+        LF_goal_msg.trajectory.joint_names = joint_names_lf
+        LF_goal_msg.trajectory.points = LF_points
+
+        self._action_RF.wait_for_server()
+        self._sendRF_goal_future = self._action_RF.send_goal_async(
+            RF_goal_msg, feedback_callback=self.feedback_callback)
+        self._sendRF_goal_future.add_done_callback(self.goal_response_callback)
+
+        self._action_RR.wait_for_server()
+        self._sendRR_goal_future = self._action_RR.send_goal_async(
+            RR_goal_msg, feedback_callback=self.feedback_callback)
+        self._sendRR_goal_future.add_done_callback(self.goal_response_callback)
+
+        self._action_LR.wait_for_server()
+        self._sendLR_goal_future = self._action_LR.send_goal_async(
+            LR_goal_msg, feedback_callback=self.feedback_callback)
+        self._sendLR_goal_future.add_done_callback(self.goal_response_callback)
+
+        self._action_LF.wait_for_server()
+        self._sendLF_goal_future = self._action_LF.send_goal_async(
+            LF_goal_msg, feedback_callback=self.feedback_callback)
+        self._sendRR_goal_future.add_done_callback(self.goal_response_callback)
+
+
+    def goal_response_callback(self, future):
+        goal_handle = future.result()
+        if not goal_handle.accepted:
+            self.get_logger().info('Goal rejected :(')
+            return
         
+        self.get_logger().info('Goal accepted :)')
+
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+
+    def get_result_callback(self, future):
+        result = future.result().result
+        self.get_logger().info('Result: '+str(result))
+        rclpy.shutdown()
+
+
+    def feedback_callback(self, feedback_msg):
+        feedback = feedback_msg.feedback
+        # self.get_logger().info('Received feedbackl:'+str(feedback))
+
+    def goal_response_callback(self, future):
+        goal_handle = future.result()
+        if not goal_handle.accepted:
+            self.get_logger().info('Goal rejected :(')
+            return
+        
+        self.get_logger().info('Goal accepted :)')
+
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+
+    def get_result_callback(self, future):
+        result = future.result().result
+        self.get_logger().info('Result: '+str(result))
+        rclpy.shutdown()
+
+
+    def feedback_callback(self, feedback_msg):
+        feedback = feedback_msg.feedback
+        # self.get_logger().info('Received feedbackl:'+str(feedback))
 
 
 def main(args=None):
-    rclpy.init(args=args)
+    rclpy.init()
 
-    joint_publisher = JointPublisher()
+    # action_client = LimbActionClient()
+    try:
+        action_client = LimbActionClient()
+        action_client.send_goal2()
 
-    # joint_publisher.pubpub()
-    joint_publisher.SinPub()
 
-    # rclpy.spin_once(joint_publisher)
+        executor = MultiThreadedExecutor()
+        executor.add_node(action_client)
 
-    joint_publisher.destroy_node()
+        try:
+            executor.spin()
+        finally:
+            executor.shutdown()
+            action_client.destroy_node()
 
-    rclpy.shutdown()
+    finally:
+        rclpy.shutdown()
 
+
+    # action_client.send_goal()
+    
+    # rclpy.spin(action_client)
 
 if __name__ == '__main__':
     main()
+

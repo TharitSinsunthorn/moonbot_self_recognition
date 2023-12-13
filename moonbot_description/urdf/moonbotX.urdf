@@ -24,7 +24,7 @@
         xyz="0.0099766 -0.00010893 0.00095216"
         rpy="0 0 0" />
       <mass
-        value="10.84" />
+        value="0.84" />
       <inertia
         ixx="0.0017317"
         ixy="6.9779E-10"
@@ -806,8 +806,8 @@
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -817,15 +817,15 @@
     <joint name="j_thigh_rf">
       <command_interface name="position">
         <param name="min">-1.57</param>
-        <param name="max">1.57</param>
+        <param name="max">0.756</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -842,8 +842,8 @@
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -860,8 +860,8 @@
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -871,15 +871,15 @@
     <joint name="j_thigh_lf">
       <command_interface name="position">
         <param name="min">-1.57</param>
-        <param name="max">1.57</param>
+        <param name="max">0.756</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -896,8 +896,8 @@
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -914,8 +914,8 @@
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -925,15 +925,15 @@
     <joint name="j_thigh_lr">
       <command_interface name="position">
         <param name="min">-1.57</param>
-        <param name="max">1.57</param>
+        <param name="max">0.756</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -950,8 +950,8 @@
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -968,8 +968,8 @@
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -979,15 +979,15 @@
     <joint name="j_thigh_rr">
       <command_interface name="position">
         <param name="min">-1.57</param>
-        <param name="max">1.57</param>
+        <param name="max">0.756</param>
       </command_interface>
       <command_interface name="velocity">
         <param name="min">-5.6548668</param>
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -1004,8 +1004,8 @@
         <param name="max">5.6548668</param>
       </command_interface>
       <command_interface name="effort">
-        <param name="min">-2.8</param>
-        <param name="max">2.8</param>
+        <param name="min">-15.0</param>
+        <param name="max">15.0</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>

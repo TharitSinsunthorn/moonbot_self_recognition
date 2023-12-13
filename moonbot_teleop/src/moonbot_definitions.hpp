@@ -1,8 +1,8 @@
 #ifndef __MOONBOT_DEFINITIONS_H__
 #define __MOONBOT_DEFINITIONS_H__
 
-#define PITCH_RANGE   10
-#define ROLL_RANGE    10
+#define PITCH_RANGE   7
+#define ROLL_RANGE    7
 #define YAW_RANGE     20
 
 #define MIN_HEIGHT    0.13

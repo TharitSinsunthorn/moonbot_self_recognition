@@ -8,6 +8,8 @@ from multiprocessing import Process
 import threading
 import time
 import rclpy
+import numpy as np
+import math
 
 leg = Leg()
 body = Body()

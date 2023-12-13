@@ -16,6 +16,8 @@ from moonbot_custom_interfaces.msg import SetPosition, Geometry
 import numpy as np
 from IK.limb_kinematics import InvKinematics
 
+from rclpy.callback_groups import ReentrantCallbackGroup, MutuallyExclusiveCallbackGroup
+from rclpy.executors import MultiThreadedExecutor, SingleThreadedExecutor
 
 
 class JointPublisher(Node):
@@ -23,11 +25,37 @@ class JointPublisher(Node):
     def __init__(self):
         super().__init__('JointPublisher_Node')
 
+        self.group = ReentrantCallbackGroup()
+
         ##### PUBLISHER #####
         self.joint_publisher = self.create_publisher(
             JointTrajectory,
             '/position_trajectory_controller/joint_trajectory',
             10)
+
+        self.RF_joint_publisher = self.create_publisher(
+            JointTrajectory,
+            'RFposition_trajectory_controller/joint_trajectory',
+            10, 
+            callback_group=self.group)
+
+        self.LF_joint_publisher = self.create_publisher(
+            JointTrajectory,
+            'LFposition_trajectory_controller/joint_trajectory',
+            10,
+            callback_group=self.group)
+
+        self.LR_joint_publisher = self.create_publisher(
+            JointTrajectory,
+            'LRposition_trajectory_controller/joint_trajectory',
+            10,
+            callback_group=self.group)
+
+        self.RR_joint_publisher = self.create_publisher(
+            JointTrajectory,
+            'RRposition_trajectory_controller/joint_trajectory',
+            10,
+            callback_group=self.group)
         ##### PUBLISHER #####
 
         ##### SUBSCRIBER
@@ -39,9 +67,9 @@ class JointPublisher(Node):
         ##### SUBSCRIBER #####
 
         ##### TIMER ######
-        self.timer_period = 1  # seconds execute every 0.5 seconds
+        self.timer_period = 0.1  # seconds execute every 0.5 seconds
         self.timer = self.create_timer(self.timer_period, self.pub_callback)
-        self.i = -10
+        # self.i = -10
         ##### TIMER ######
 
         self.IK = InvKinematics()
@@ -95,7 +123,6 @@ class JointPublisher(Node):
         # print(f'LR: {self.ang_LR}')
         # print(f'RR: {self.ang_RR}')
   
-        self.all_joint_angles = self.ang_RF + self.ang_LF + self.ang_LR + self.ang_RR
         
         self.prev_joint_angs = self.all_joint_angles
 
@@ -115,44 +142,70 @@ class JointPublisher(Node):
             
 
     def pubpub(self, all_joint_angles):
-        msg = JointTrajectory()
+        # msg = JointTrajectory()
 
-        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
-                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf",
-                       "j_c1_lr", "j_thigh_lr", "j_tibia_lr",
-                       "j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
+        RF_msg = JointTrajectory()
+        LF_msg = JointTrajectory()
+        LR_msg = JointTrajectory()
+        RR_msg = JointTrajectory()
+
+
+        joint_names_rf = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf"]
+        joint_names_lf = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
+        joint_names_lr = ["j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
+        joint_names_rr = ["j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
                        
                     
-        sec = 0.1
+        sec = self.timer_period
+
+        RF = [self.ang_RF] 
+        LF = [self.ang_LF]
+        LR = [self.ang_LR]
+        RR = [self.ang_RR]
 
 
-        # RF = [all_joint_angles[0]]
-        # LF = [all_joint_angles[1]]
-        # LR = [all_joint_angles[2]]
-        # RR = [all_joint_angles[3]]
+        RF_points = []
+        LF_points = []
+        LR_points = []
+        RR_points = []
+        for i in range(len(RF)):
+            RF_point = JointTrajectoryPoint()
+            LF_point = JointTrajectoryPoint()
+            LR_point = JointTrajectoryPoint()
+            RR_point = JointTrajectoryPoint()
 
-        # seq = []
-        # for i in range(len(LF)):
-        #     seq.append(RF[i]+LF[i]+LR[i]+RR[i])
-            # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
-        # print(seq)
-        seq = [all_joint_angles]
-        # print(f'seq: {seq}') 
+            RF_point.time_from_start = Duration(seconds=(i+1)*sec , nanoseconds=0).to_msg()
+            LF_point.time_from_start = Duration(seconds=(i+1)*sec , nanoseconds=0).to_msg()
+            LR_point.time_from_start = Duration(seconds=(i+1)*sec , nanoseconds=0).to_msg()
+            RR_point.time_from_start = Duration(seconds=(i+1)*sec , nanoseconds=0).to_msg()
 
-        points = []
-        for i in range(len(seq)):
-            point = JointTrajectoryPoint()
-            point.time_from_start = Duration(seconds=(i+1)*self.timer_period, nanoseconds=0).to_msg()
-            point.positions = seq[i]
-            # point.velocities = vel[i]
-            points.append(point)
-            # print(points)
+            RF_point.positions = RF[i]
+            LF_point.positions = LF[i]
+            LR_point.positions = LR[i]
+            RR_point.positions = RR[i]
+
+            RF_points.append(RF_point)
+            LF_points.append(LF_point)
+            LR_points.append(LR_point)
+            RR_points.append(RR_point)
 
 
-        msg.joint_names = joint_names
-        msg.points = points
+        RF_msg.joint_names = joint_names_rf
+        RF_msg.points = RF_points
 
-        self.joint_publisher.publish(msg)
+        LF_msg.joint_names = joint_names_lf
+        LF_msg.points = LF_points
+
+        LR_msg.joint_names = joint_names_lr
+        LR_msg.points = LR_points
+
+        RR_msg.joint_names = joint_names_rr
+        RR_msg.points = RR_points
+
+        self.RF_joint_publisher.publish(RF_msg)
+        self.LF_joint_publisher.publish(LF_msg)
+        self.LR_joint_publisher.publish(LR_msg)
+        self.RR_joint_publisher.publish(RR_msg)
 
         
 

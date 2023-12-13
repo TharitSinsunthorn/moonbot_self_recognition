@@ -16,6 +16,15 @@ offset_x = params.offset_x
 offset_y = params.offset_y
 offset = [offset_x, offset_y, 0]
 
+coxa_upperlimit = params.coxa_upperlimit
+coxa_lowerlimit = params.coxa_lowerlimit
+
+femur_upperlimit = params.femur_upperlimit
+femur_lowerlimit = params.femur_lowerlimit
+
+tibia_upperlimit = params.tibia_upperlimit
+tibia_lowerlimit = params.tibia_lowerlimit
+
 
 class LegStates():
     prev_coord = None
@@ -108,33 +117,31 @@ class InvKinematics():
         b = (D**2 - L2**2 - L3**2)/(-2*L2*L3)
 
         j1 = np.arctan(y/x)
-        if not np.isnan(j1) and j1 <= 1.57 and j1 >= -1.57:
+        if not np.isnan(j1) and j1 <= coxa_upperlimit and j1 >= coxa_lowerlimit:
             th[0] = j1
-        elif j1 > 1.57:
-            th[0] = 1.57
-        elif j1 < -1.57:
-            th[0] = -1.57
+        elif j1 > coxa_upperlimit:
+            th[0] = coxa_upperlimit
+        elif j1 < coxa_lowerlimit:
+            th[0] = coxa_lowerlimit
 
         if a > 1 or a < -1 or b > 1 or b < -1:
             pass
         else:
             j2 = -np.arctan(z/(LL-L1)) + np.arccos((L3**2 - L2**2 - D**2)/(-2*D*L2))
-            if not np.isnan(j2) and j2 <= 0.756 and j2 >= -1.57:
+            if not np.isnan(j2) and j2 <= femur_upperlimit and j2 >= femur_lowerlimit:
                 th[1] = j2
-            elif j2 > 0.756:
-                th[1] = 0.756
-            elif j3 < -1.57:
-                th[1] = -1.57
+            elif j2 > femur_upperlimit:
+                th[1] = femur_upperlimit
+            elif j3 < femur_lowerlimit:
+                th[1] = femur_lowerlimit
 
             j3 = np.arccos((D**2 - L2**2 - L3**2)/(-2*L2*L3)) - math.pi
-            if not np.isnan(j3) and j3 <= 1.57 and j3 >= -1.57:
+            if not np.isnan(j3) and j3 <= tibia_upperlimit and j3 >= tibia_lowerlimit:
                 th[2] = j3
-            elif j3 > 1.57:
-                th[2] = 1.57
-            elif j3 < -1.57:
-                th[2] = -1.57
-
-        # goal = th @ self.rotMat(rot)
+            elif j3 > tibia_upperlimit:
+                th[2] = tibia_upperlimit
+            elif j3 < tibia_lowerlimit:
+                th[2] = tibia_lowerlimit
 
         return th
 
@@ -142,7 +149,7 @@ class InvKinematics():
     def get_RF_joint_angles(self, coord, eularAng):
         # rotate around midle of the body
         translate_RF = self.offset*self.M_F*self.M_R
-        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-0*math.pi/2])) + translate_RF), self.rotMat(eularAng)) - translate_RF), self.rotMat([0,0,0*math.pi/2]))
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-1*math.pi/4])) + translate_RF), self.rotMat(eularAng)) - translate_RF), self.rotMat([0,0,1*math.pi/4]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[0] = True
@@ -160,7 +167,7 @@ class InvKinematics():
 
     def get_LF_joint_angles(self, coord, eularAng):
         translate_LF = self.offset*self.M_F*self.M_L
-        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-1*math.pi/2])) + translate_LF), self.rotMat(eularAng)) - translate_LF), self.rotMat([0,0,1*math.pi/2]))
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-3*math.pi/4])) + translate_LF), self.rotMat(eularAng)) - translate_LF), self.rotMat([0,0,3*math.pi/4]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[1] = True
@@ -177,7 +184,7 @@ class InvKinematics():
 
     def get_LR_joint_angles(self, coord, eularAng):
         translate_LR = self.offset*self.M_Rr*self.M_L
-        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-2*math.pi/2])) + translate_LR), self.rotMat(eularAng)) - translate_LR), self.rotMat([0,0,2*math.pi/2]))
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-5*math.pi/4])) + translate_LR), self.rotMat(eularAng)) - translate_LR), self.rotMat([0,0,5*math.pi/4]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[3] = True
@@ -195,7 +202,7 @@ class InvKinematics():
 
     def get_RR_joint_angles(self, coord, eularAng):
         translate_RR = self.offset*self.M_Rr*self.M_R
-        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-3*math.pi/2])) + translate_RR), self.rotMat(eularAng)) - translate_RR), self.rotMat([0,0,3*math.pi/2]))
+        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-7*math.pi/4])) + translate_RR), self.rotMat(eularAng)) - translate_RR), self.rotMat([0,0,7*math.pi/4]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[2] = True
