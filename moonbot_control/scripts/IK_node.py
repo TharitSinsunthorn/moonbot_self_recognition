@@ -64,12 +64,9 @@ class JointPublisher(Node):
         # print(self.IK.get_LR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
         # print(self.IK.get_RR_joint_angles([0.2, 0.0, 0.0], [0.05, 0, 0.0]))
         if self.all_joint_angles != None:
-            A = [0.0, 0.1, -0.1]
-            B = [0.13, 0.0, 0.24]
-            print(self.all_joint_angles)
+            # print(self.all_joint_angles)
             self.pubpub(self.all_joint_angles)
           
-            # self.i += 1
 
 
     def LEGcallback(self, msg):
@@ -97,9 +94,7 @@ class JointPublisher(Node):
         # print(f'LF: {self.ang_LF}')
         # print(f'LR: {self.ang_LR}')
         # print(f'RR: {self.ang_RR}')
-
   
-        # self.all_joint_angles = [self.ang_RF, self.ang_LF, self.ang_LR, self.ang_RR]
         self.all_joint_angles = self.ang_RF + self.ang_LF + self.ang_LR + self.ang_RR
         
         self.prev_joint_angs = self.all_joint_angles
@@ -142,7 +137,7 @@ class JointPublisher(Node):
             # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
         # print(seq)
         seq = [all_joint_angles]
-        print(f'seq: {seq}')
+        # print(f'seq: {seq}') 
 
         points = []
         for i in range(len(seq)):
@@ -167,25 +162,11 @@ def main(args=None):
 
     joint_publisher = JointPublisher()
 
-    # joint_publisher.target_checker()
-
     rclpy.spin(joint_publisher)
 
     joint_publisher.destroy_node()
 
     rclpy.shutdown()
-
-# def main(args=None):
-#     rclpy.init(args=args)
-#     iknode = IKNode()
-#     executor = SingleThreadedExecutor()
-#     executor.add_node(iknode)
-#     try:
-#         executor.spin()
-#     except KeyboardInterrupt as e:
-#         iknode.get_logger().debug('KeyboardInterrupt caught, node shutting down cleanly\nbye bye <3')
-#     iknode.destroy_node()
-#     rclpy.shutdown()
 
 
 if __name__ == '__main__':

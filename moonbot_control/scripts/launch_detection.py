@@ -33,7 +33,12 @@ class State_subscriber(Node):
         self.LF_intualizer = self.create_timer(self.timer_period, self.LF_initualizer_callback, callback_group=self.LF_timer_group)
         self.LR_intualizer = self.create_timer(self.timer_period, self.LR_initualizer_callback, callback_group=self.LR_timer_group)
         self.RR_intualizer = self.create_timer(self.timer_period, self.RR_initualizer_callback, callback_group=self.RR_timer_group)
+        self.status_timer = self.create_timer(2, self.status_callback, callback_group=self.group)
         ##### TIMER #####
+
+        ##### PUBLISHER #####
+        self.connection_status_pub = self.create_publisher(Detection, "moonbot_detection", 10)
+        ##### PUBLISHER #####
 
         ##### Subcriber ##### 
         self.RF_state = self.create_subscription(
@@ -99,7 +104,7 @@ class State_subscriber(Node):
         self.LF_connected = False
         
         self.LR_detected = False
-        self.RR_connected = False
+        self.LR_connected = False
 
         self.RR_detected = False
         self.RR_connected = False
@@ -126,6 +131,13 @@ class State_subscriber(Node):
         self.RRreq.data = request
         self.future = self.RR_ConnectionClient.call_async(self.RRreq)
 
+    
+    def status_callback(self):
+        msg = Detection()
+        msg.data = [self.RF_connected, self.LF_connected, self.LR_connected, self.RR_connected]
+        self.connection_status_pub.publish(msg)
+        self.get_logger().info(f"Status: {msg.data}")
+
 
     def RF_initualizer_callback(self):
         # self.get_logger().info(f'NOW RF STATE: {self.RF_state}')
@@ -139,7 +151,7 @@ class State_subscriber(Node):
                 self.RF_detected = True
                 self.RF_connected = True
             else:
-                self.get_logger().warn('No state detected!')
+                self.get_logger().warn('No RF tate detected!')
 
         elif self.RF_detected:
             if self.RF_connected == True:
@@ -167,7 +179,7 @@ class State_subscriber(Node):
                 self.LF_detected = True
                 self.LF_connected = True
             else:
-                self.get_logger().warn('No state detected!')
+                self.get_logger().warn('No LF state detected!')
 
         elif self.LF_detected:
             if self.LF_connected == True:
@@ -195,7 +207,7 @@ class State_subscriber(Node):
                 self.LR_detected = True
                 self.LR_connected = True
             else:
-                self.get_logger().warn('No state detected!')
+                self.get_logger().warn('No LR state detected!')
 
         elif self.LR_detected:
             if self.LR_connected == True:
@@ -224,7 +236,7 @@ class State_subscriber(Node):
                 self.RR_detected = True
                 self.RR_connected = True
             else:
-                self.get_logger().warn('No state detected!')
+                self.get_logger().warn('No RR state detected!')
 
         elif self.RR_detected:
             if self.RR_connected == True:

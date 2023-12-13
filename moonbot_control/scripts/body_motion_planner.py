@@ -13,9 +13,9 @@ class BodyMotionPlanner():
 
         self.prev_slant = self.cmd.body.slant
 
-        self.__L1 = self.leg.physical._L1
-        self.__L2 = self.leg.physical._L2
-        self.__L3 = self.leg.physical._L3
+        # self.__L1 = self.leg.physical._L1
+        # self.__L2 = self.leg.physical._L2
+        # self.__L3 = self.leg.physical._L3
 
         self.cmd.leg.foot_zero_pnt[:,1] = 0.0
 
@@ -42,9 +42,9 @@ class BodyMotionPlanner():
         while True:
             self.cmd.leg.foot_zero_pnt[:,2] = np.array(self.cmd.body.height) 
             """ uncomment below 2 lines to activate slant from joystick"""
-            self.cmd.leg.foot_zero_pnt[:,1] = self.__L1
-            # self.cmd.leg.foot_zero_pnt[::2,:2] = np.array([0,self.__L1]) + self.cmd.body.slant[:2]
-            # self.cmd.leg.foot_zero_pnt[1::2,:2] = np.array([0,self.__L1]) + self.cmd.body.slant[:2]*np.array([1,-1])
+            self.cmd.leg.foot_zero_pnt[:,1] = 0
+            # self.cmd.leg.foot_zero_pnt[::2,:2] = np.array([0,0]) + self.cmd.body.slant[:2]
+            # self.cmd.leg.foot_zero_pnt[1::2,:2] = np.array([0,0]) + self.cmd.body.slant[:2]*np.array([1,-1])
             self.body.roll = self.cmd.body.roll
             self.body.pitch = self.cmd.body.pitch
             self.body.yaw = self.cmd.body.yaw

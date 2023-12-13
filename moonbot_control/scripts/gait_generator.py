@@ -8,6 +8,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import math
 
 from moonbot_variables import Body, Leg, Cmds
+from IK.limb_kinematics import InvKinematics
 
 
 
@@ -37,7 +38,7 @@ class GaitPlanner():
         self.trot_gait_cycle_time = 0.5
         self.trot_gait_swing_time = self.cmd.gait.cycle_time/4
 
-        
+        self.IK = InvKinematics()
 
 
     def swing_RF(self, t):
@@ -66,7 +67,7 @@ class GaitPlanner():
         else:
             traj_pnt[:2] = self.leg.RF.pose.cur_coord[:2] - self.cmd.leg.foot_zero_pnt[0,:2]
             traj_pnt[2] = 0
-        self.RF_traj = np.array(traj_pnt)
+        self.RF_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
         
 
     def stance_RF(self, t):
@@ -93,7 +94,7 @@ class GaitPlanner():
         else:
             traj_pnt[:2] = self.leg.RF.pose.cur_coord[:2] - self.cmd.leg.foot_zero_pnt[0,:2]
             traj_pnt[2] = 0
-        self.RF_traj = np.array(traj_pnt)
+        self.RF_traj = np.array(traj_pnt) 
         
 
     def swing_LF(self, t):
@@ -121,7 +122,7 @@ class GaitPlanner():
         else:
             traj_pnt[:2] = self.leg.LF.pose.cur_coord[:2] - self.cmd.leg.foot_zero_pnt[1,:2]
             traj_pnt[2] = 0
-        self.LF_traj = np.array(traj_pnt) 
+        self.LF_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,-0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
         
 
     def stance_LF(self, t):
@@ -179,7 +180,7 @@ class GaitPlanner():
         else:
             traj_pnt[:2] = self.leg.LR.pose.cur_coord[:2] - self.cmd.leg.foot_zero_pnt[2,:2]
             traj_pnt[2] = 0
-        self.LR_traj = np.array(traj_pnt)
+        self.LR_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
         
 
     def stance_LR(self, t):
@@ -239,7 +240,7 @@ class GaitPlanner():
         else:
             traj_pnt[:2] = self.leg.RR.pose.cur_coord[:2] - self.cmd.leg.foot_zero_pnt[3,:2]
             traj_pnt[2] = 0
-        self.RR_traj = np.array(traj_pnt) * np.array([1,1,1])
+        self.RR_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,-0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
         
 
     def stance_RR(self, t):
@@ -501,15 +502,15 @@ class GaitPlanner():
             time.sleep(0.0001)
 
     
-    def give_hand(self):
+    # def give_hand(self):
         
         
-        self.body.ZMP_handler[::2,1] = self.len_zmp_wavegait 
-        self.body.ZMP_handler[1::2,1] = -self.len_zmp_wavegait 
+    #     self.body.ZMP_handler[::2,1] = self.len_zmp_wavegait 
+    #     self.body.ZMP_handler[1::2,1] = -self.len_zmp_wavegait 
            
-        while self.cmd.mode.gait_type == 0:
-            self.RF_traj[0] = self.cmd.gait.step_len[0]
-            self.RF_traj[2] = self.cmd.gait.step_len[1]
+    #     while self.cmd.mode.gait_type == 0:
+    #         self.RF_traj[0] = self.cmd.gait.step_len[0]
+    #         self.RF_traj[2] = self.cmd.gait.step_len[1]
            
 
 
@@ -532,7 +533,8 @@ class GaitPlanner():
                     self.body.ZMP_handler[:,:] = 0
                     self.run_trot()
                 elif self.cmd.mode.gait_type == 0:
-                    self.give_hand()
+                    # self.give_hand()
+                    pass
                 
             else:
                 self.RF_traj[2] = 0

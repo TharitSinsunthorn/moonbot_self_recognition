@@ -183,13 +183,13 @@ class JointPublisher(Node):
         self.generate_joints_name(connected_port)
                        
         ##### Single limb parameters #####      
-        f = 0.08
+        f = 0.12
         ff = 0.1
-        h = 0.24
-        lift = 0.05
-        span = 0.255
+        h = 0.22
+        lift = 0.2
+        span = 0.22
         self.repeat = 1
-        ground = 0.07
+        ground = 0.15
         pathrange = self.pathrange
         sec = self.timer_period / pathrange / 2
         ##### Single limb parameters ##### 
@@ -279,6 +279,9 @@ class JointPublisher(Node):
             
             
     def TriPub(self):
+        pass
+
+    def QuadPub(self):
         pass
 
  
