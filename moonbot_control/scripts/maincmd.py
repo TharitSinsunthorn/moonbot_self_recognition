@@ -20,10 +20,10 @@ cmd = Cmds()
 # leg.foot_zero_pnt[:,2] = body.height  = cmd.body.height
 cmd.gait.cycle_time = 0.8
 cmd.gait.swing_time = 0.2
-cmd.leg.foot_zero_pnt[0,0] = 0.13
-cmd.leg.foot_zero_pnt[1,0] = 0.13
-cmd.leg.foot_zero_pnt[2,0] = 0.13
-cmd.leg.foot_zero_pnt[3,0] = 0.13
+# cmd.leg.foot_zero_pnt[0,0] = 0.13 * np.cos(math.pi/4)
+# cmd.leg.foot_zero_pnt[1,0] = -0.13* np.cos(math.pi/4)
+# cmd.leg.foot_zero_pnt[2,0] = -0.13 * np.cos(math.pi/4)
+# cmd.leg.foot_zero_pnt[3,0] = 0.13 * np.cos(math.pi/4)
 cmd.gait.stance_step_h = 0
 
 cmd_manager = CmdManager_ROS(set_msgs=cmd, send_msgs=[leg, body])

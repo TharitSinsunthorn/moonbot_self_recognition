@@ -149,7 +149,7 @@ class InvKinematics():
     def get_RF_joint_angles(self, coord, eularAng):
         # rotate around midle of the body
         translate_RF = self.offset*self.M_F*self.M_R
-        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-1*math.pi/4])) + translate_RF), self.rotMat(eularAng)) - translate_RF), self.rotMat([0,0,1*math.pi/4]))
+        coord_ = np.dot((np.dot((coord + translate_RF), self.rotMat(eularAng)) - translate_RF), self.rotMat([0,0,1*math.pi/4]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[0] = True
@@ -167,7 +167,7 @@ class InvKinematics():
 
     def get_LF_joint_angles(self, coord, eularAng):
         translate_LF = self.offset*self.M_F*self.M_L
-        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-3*math.pi/4])) + translate_LF), self.rotMat(eularAng)) - translate_LF), self.rotMat([0,0,3*math.pi/4]))
+        coord_ = np.dot((np.dot((coord + translate_LF), self.rotMat(eularAng)) - translate_LF), self.rotMat([0,0,3*math.pi/4]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[1] = True
@@ -184,7 +184,7 @@ class InvKinematics():
 
     def get_LR_joint_angles(self, coord, eularAng):
         translate_LR = self.offset*self.M_Rr*self.M_L
-        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-5*math.pi/4])) + translate_LR), self.rotMat(eularAng)) - translate_LR), self.rotMat([0,0,5*math.pi/4]))
+        coord_ = np.dot((np.dot((coord + translate_LR), self.rotMat(eularAng)) - translate_LR), self.rotMat([0,0,5*math.pi/4]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[3] = True
@@ -202,7 +202,7 @@ class InvKinematics():
 
     def get_RR_joint_angles(self, coord, eularAng):
         translate_RR = self.offset*self.M_Rr*self.M_R
-        coord_ = np.dot((np.dot((np.dot(coord, self.rotMat([0,0,-7*math.pi/4])) + translate_RR), self.rotMat(eularAng)) - translate_RR), self.rotMat([0,0,7*math.pi/4]))
+        coord_ = np.dot((np.dot((coord + translate_RR), self.rotMat(eularAng)) - translate_RR), self.rotMat([0,0,7*math.pi/4]))
         # check singularity of the legs
         if self.is_singularity(coord_):
                 self.singularity[2] = True

@@ -8,10 +8,10 @@
 #define MIN_HEIGHT    0.13
 #define MAX_HEIGHT    0.24
 
-#define SLANT_X_MIN   -0.15
-#define SLANT_X_MAX   0.15
-#define SLANT_Y_MIN   -0.1
-#define SLANT_Y_MAX   0.1
+#define SLANT_X_MIN   -0.05
+#define SLANT_X_MAX   0.05
+#define SLANT_Y_MIN   -0.05
+#define SLANT_Y_MAX   0.05
 
 #define MAX_STEP_LENGTH_X         0.07
 #define MAX_STEP_LENGTH_Y         0.07

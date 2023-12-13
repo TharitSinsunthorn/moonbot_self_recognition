@@ -67,7 +67,8 @@ class GaitPlanner():
         else:
             traj_pnt[:2] = self.leg.RF.pose.cur_coord[:2] - self.cmd.leg.foot_zero_pnt[0,:2]
             traj_pnt[2] = 0
-        self.RF_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
+        # self.RF_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
+        self.RF_traj = np.array(traj_pnt)
         
 
     def stance_RF(self, t):
@@ -122,8 +123,8 @@ class GaitPlanner():
         else:
             traj_pnt[:2] = self.leg.LF.pose.cur_coord[:2] - self.cmd.leg.foot_zero_pnt[1,:2]
             traj_pnt[2] = 0
-        self.LF_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,-0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
-        
+        # self.LF_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,-0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
+        self.LF_traj = np.array(traj_pnt)
 
     def stance_LF(self, t):
         traj_pnt = np.zeros([3])
@@ -180,8 +181,8 @@ class GaitPlanner():
         else:
             traj_pnt[:2] = self.leg.LR.pose.cur_coord[:2] - self.cmd.leg.foot_zero_pnt[2,:2]
             traj_pnt[2] = 0
-        self.LR_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
-        
+        # self.LR_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
+        self.LR_traj = np.array(traj_pnt)
 
     def stance_LR(self, t):
         traj_pnt = np.zeros([3])
@@ -240,8 +241,8 @@ class GaitPlanner():
         else:
             traj_pnt[:2] = self.leg.RR.pose.cur_coord[:2] - self.cmd.leg.foot_zero_pnt[3,:2]
             traj_pnt[2] = 0
-        self.RR_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,-0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
-        
+        # self.RR_traj = (np.array(traj_pnt) - np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])) @ self.IK.rotMat([0,0,-0.756]) + np.array([self.cmd.leg.foot_zero_pnt[0,0], 0, 0])
+        self.RR_traj = np.array(traj_pnt)
 
     def stance_RR(self, t):
         traj_pnt = np.zeros([3])
