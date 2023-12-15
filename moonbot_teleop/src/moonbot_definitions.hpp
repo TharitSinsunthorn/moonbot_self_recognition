@@ -13,8 +13,8 @@
 #define SLANT_Y_MIN   -0.05
 #define SLANT_Y_MAX   0.05
 
-#define MAX_STEP_LENGTH_X         0.07
-#define MAX_STEP_LENGTH_Y         0.07
+#define MAX_STEP_LENGTH_X         0.08
+#define MAX_STEP_LENGTH_Y         0.08
 #define MAX_STEPUP_HEIGHT       MAX_HEIGHT-0.08
 #define MAX_STEPDOWN_HEIGHT     0.1
 

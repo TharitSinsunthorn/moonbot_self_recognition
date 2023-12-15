@@ -98,10 +98,10 @@ class PublishingSubscriber : public rclcpp::Node
           cmd.pose.position.z = MIN_HEIGHT;
         if(cmd.pose.position.z > MAX_HEIGHT)
           cmd.pose.position.z = MAX_HEIGHT;
-        if(!msg_joy->buttons[5] && msg_joy->axes[7] > 0 && cmd.pose.position.z < MAX_HEIGHT ){
+        if(!msg_joy->buttons[9] && msg_joy->axes[7] > 0 && cmd.pose.position.z < MAX_HEIGHT ){
           cmd.pose.position.z += 0.001;
         }
-        if(!msg_joy->buttons[5] && msg_joy->axes[7] < 0 && cmd.pose.position.z > MIN_HEIGHT ){
+        if(!msg_joy->buttons[9] && msg_joy->axes[7] < 0 && cmd.pose.position.z > MIN_HEIGHT ){
           cmd.pose.position.z -= 0.001;
         }
 
@@ -118,7 +118,7 @@ class PublishingSubscriber : public rclcpp::Node
         if(msg_joy->buttons[9] && msg_joy->axes[7] > 0 && cmd.gait_step.z < cmd.pose.position.z - MIN_HEIGHT){      
           cmd.gait_step.z += 0.001;
         }
-        if(msg_joy->buttons[9] && msg_joy->axes[7] < 0 && cmd.gait_step.z > 10 ){      
+        if(msg_joy->buttons[9] && msg_joy->axes[7] < 0 && cmd.gait_step.z > 0.01 ){      
           cmd.gait_step.z -= 0.001;
         }
 
@@ -132,8 +132,8 @@ class PublishingSubscriber : public rclcpp::Node
         }
 
         // set step length x y
-        cmd.gait_step.x = msg_joy->axes[1] * MAX_STEP_LENGTH_X;
-        cmd.gait_step.y = -msg_joy->axes[0] * MAX_STEP_LENGTH_Y;
+        cmd.gait_step.x = - msg_joy->axes[0] * MAX_STEP_LENGTH_X;
+        cmd.gait_step.y = msg_joy->axes[1] * MAX_STEP_LENGTH_Y;
 
         // set slant
         if (msg_joy->buttons[12]){

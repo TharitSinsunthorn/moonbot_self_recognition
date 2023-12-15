@@ -54,10 +54,10 @@ class BodyMotionPlanner():
             self.body.yaw = self.cmd.body.yaw
             # if np.any(self.cmd.body.slant != self.prev_slant):
             #     self.leg.RF.pose.cur_coord[:2] = 
-            self.leg.RF.pose.cur_coord[:] = np.array(self.cmd.leg.foot_zero_pnt[0,:]) + self.gait.RF_traj[:] + self.body.ZMP_handler[0,:]*np.array([0,1,0]) + self.cmd.body.slant[:]*np.array([1,1,0])
-            self.leg.LF.pose.cur_coord[:] = np.array(self.cmd.leg.foot_zero_pnt[1,:]) + self.gait.LF_traj[:] + self.body.ZMP_handler[1,:]*np.array([0,1,0]) + self.cmd.body.slant[:]*np.array([1,1,0])
-            self.leg.LR.pose.cur_coord[:] = np.array(self.cmd.leg.foot_zero_pnt[2,:]) + self.gait.LR_traj[:] + self.body.ZMP_handler[2,:]*np.array([0,1,0]) + self.cmd.body.slant[:]*np.array([1,1,0])
-            self.leg.RR.pose.cur_coord[:] = np.array(self.cmd.leg.foot_zero_pnt[3,:]) + self.gait.RR_traj[:] + self.body.ZMP_handler[3,:]*np.array([0,1,0]) + self.cmd.body.slant[:]*np.array([1,1,0])
+            self.leg.RF.pose.cur_coord[:] = np.array(self.cmd.leg.foot_zero_pnt[0,:]) + self.gait.RF_traj[:] + self.body.ZMP_handler[0,:]*np.array([1,1,0]) + self.cmd.body.slant[:]*np.array([1,1,0])
+            self.leg.LF.pose.cur_coord[:] = np.array(self.cmd.leg.foot_zero_pnt[1,:]) + self.gait.LF_traj[:] + self.body.ZMP_handler[1,:]*np.array([1,1,0]) + self.cmd.body.slant[:]*np.array([1,1,0])
+            self.leg.LR.pose.cur_coord[:] = np.array(self.cmd.leg.foot_zero_pnt[2,:]) + self.gait.LR_traj[:] + self.body.ZMP_handler[2,:]*np.array([1,1,0]) + self.cmd.body.slant[:]*np.array([1,1,0])
+            self.leg.RR.pose.cur_coord[:] = np.array(self.cmd.leg.foot_zero_pnt[3,:]) + self.gait.RR_traj[:] + self.body.ZMP_handler[3,:]*np.array([1,1,0]) + self.cmd.body.slant[:]*np.array([1,1,0])
             
             time.sleep(0.0002)
         # print(self.leg.RF.pose.cur_coord[:]) 
