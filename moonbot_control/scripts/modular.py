@@ -59,15 +59,13 @@ class JointPublisher(Node):
         ##### SUBSCRIBER #####
 
         ##### TIMER ######
-        self.timer_period = 1  # seconds execute every 0.5 seconds
-        self.timer = self.create_timer(self.timer_period + 1, self.pub_callback)
+        self.timer_period = 3  # seconds execute every 0.5 seconds
+        self.timer = self.create_timer(self.timer_period, self.pub_callback)
         ##### TIMER ######
 
         self.IK = InvKinematics()
 
         self.pathrange = 20
-
-        self.tar = []
 
         self.joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
                             "j_c1_lf", "j_thigh_lf", "j_tibia_lf",
@@ -79,6 +77,7 @@ class JointPublisher(Node):
         self.ang_LR = []
         self.ang_RR = []
         self.all_joint_angles = []
+        self.intial_point_duration = 1.0
 
         self.leg_connection_state = [False, False, False, False]
         self.leg_connection_state_prev = [False, False, False, False]
@@ -113,6 +112,10 @@ class JointPublisher(Node):
         if self.StateChanged:
             # self.timer.cancel()
             self.get_logger().info('CHANGED!')
+            # self.ang_RF.clear()
+            # self.ang_LF.clear()
+            # self.ang_LR.clear()
+            # self.ang_RR.clear()
 
         if self.NumCon != 0: 
 
@@ -128,7 +131,7 @@ class JointPublisher(Node):
             elif self.NumCon == 4:
                 self.QuadPub()
 
-            self.RobotPub(self.tar)
+            self.RobotPub()
 
         elif self.NumCon == 0:
             self.connected_joints = []
@@ -151,10 +154,11 @@ class JointPublisher(Node):
         self.repeat = 1
         ground = 0.05
         pathrange = self.pathrange
-        sec = self.timer_period / pathrange / 2
+        self.intial_point_duration = 1.0
         ##### Single limb parameters #####      
 
         traj = []
+        trajDummy = [[0.0, math.pi/4, -math.pi/2]]
         plot = []
         for j in range(1, pathrange):
             div = (f)/pathrange     
@@ -170,10 +174,28 @@ class JointPublisher(Node):
             plot.append([x, 0.0, ground])
         # traj.append(self.IK.get_joint_angles([span, 0.0, ground]))
 
-        self.ang_RF = traj
-        self.ang_LF = traj
-        self.ang_LR = traj
-        self.ang_RR = traj
+        if connected_port[0] == 0:
+            self.ang_RF = traj * self.repeat
+            self.ang_LF = trajDummy * len(traj)
+            self.ang_LR = trajDummy * len(traj)
+            self.ang_RR = trajDummy * len(traj)
+        elif connected_port[0] == 1:
+            self.ang_RF = trajDummy * len(traj)
+            self.ang_LF = traj * self.repeat
+            self.ang_LR = trajDummy * len(traj)
+            self.ang_RR = trajDummy * len(traj)
+        elif connected_port[0] == 2:
+            self.ang_RF = trajDummy * len(traj)
+            self.ang_LF = trajDummy * len(traj)
+            self.ang_LR = traj * self.repeat
+            self.ang_RR = trajDummy * len(traj)
+        elif connected_port[0] == 3:
+            self.ang_RF = trajDummy * len(traj)
+            self.ang_LF = trajDummy * len(traj)
+            self.ang_LR = trajDummy * len(traj)
+            self.ang_RR = traj * self.repeat
+
+        self.sec = 1 / len(traj)
 
 
     def DuoPub(self):
@@ -184,18 +206,19 @@ class JointPublisher(Node):
                        
         ##### Single limb parameters #####      
         f = 0.12
-        ff = 0.1
-        h = 0.22
-        lift = 0.2
+        ff = 0.12
+        # h = 0.22
+        lift = 0.06
         span = 0.22
-        self.repeat = 1
-        ground = 0.15
+        self.repeat = 2
+        ground = 0.08
         pathrange = self.pathrange
-        sec = self.timer_period / pathrange / 2
+        self.intial_point_duration = 0.5
         ##### Single limb parameters ##### 
 
         
         trajDummy = []
+        ang_dummy = [0.0, math.pi/4, -math.pi/2]
         trajL = []
         trajR = []
         plot = []
@@ -210,17 +233,21 @@ class JointPublisher(Node):
                 x = div*j 
                 z = -np.sqrt(lift**2 * (1 - (2*(x-ff/2)/ff)**2))
                 # plot.append([x, 0.0, z + ground])
-                trajDummy.append([0.0, 0.0, 0.0])
+                trajDummy.append(ang_dummy)
                 trajL.append(self.IK.get_joint_angles([span, -x, z + ground]))
                 trajR.append(self.IK.get_joint_angles([span, x, z + ground]))
 
             for j in range(1,pathrange):
                 div = (ff)/pathrange     
                 x = ff - div*j
-                trajDummy.append([0.0, 0.0, 0.0])
-                trajL.append(self.IK.get_joint_angles([span, -x, z + ground]))
-                trajR.append(self.IK.get_joint_angles([span, x, z + ground]))
+                trajDummy.append(ang_dummy)
+                trajL.append(self.IK.get_joint_angles([span, -x, ground]))
+                trajR.append(self.IK.get_joint_angles([span, x,  ground]))
                 # plot.append([x, 0.0, ground]) 
+
+            trajDummy = trajDummy * self.repeat
+            trajL = trajL * self.repeat
+            trajR = trajR * self.repeat
 
             if connected_port[0] == 0:
                 self.ang_RF = trajR
@@ -241,17 +268,21 @@ class JointPublisher(Node):
                 x = span + div*j 
                 z = -np.sqrt(lift**2 * (1 - (2*(x-span-f/2)/f)**2))
                 # plot.append([x, 0.0, z + ground])
-                trajDummy.append([0.0, 0.0, 0.0])
+                trajDummy.append(ang_dummy)
                 trajL.append(self.IK.get_joint_angles([x, 0.0, z + ground], [0, 0, -math.pi/4]))
                 trajR.append(self.IK.get_joint_angles([x, 0.0, z + ground], [0, 0, math.pi/4]))
 
             for j in range(1,pathrange):
                 div = (f)/pathrange     
                 x = span + f - div*j
-                trajDummy.append([0.0, 0.0, 0.0])
-                trajL.append(self.IK.get_joint_angles([x, 0.0, z + ground], [0, 0, -math.pi/4]))
-                trajR.append(self.IK.get_joint_angles([x, 0.0, z + ground], [0, 0, math.pi/4]))
+                trajDummy.append(ang_dummy)
+                trajL.append(self.IK.get_joint_angles([x, 0.0, ground], [0, 0, -math.pi/4]))
+                trajR.append(self.IK.get_joint_angles([x, 0.0, ground], [0, 0, math.pi/4]))
                 # plot.append([x, 0.0, ground])
+
+            trajDummy = trajDummy * self.repeat
+            trajL = trajL * self.repeat
+            trajR = trajR * self.repeat
 
             if connected_port[0] == 0 and connected_port[1] != 3:
                 self.ang_RF = trajL
@@ -276,16 +307,81 @@ class JointPublisher(Node):
                 self.ang_LF = trajDummy
                 self.ang_LR = trajDummy
                 self.ang_RR = trajL
+
+        self.sec = self.timer_period / len(trajDummy) /2
             
             
     def TriPub(self):
         pass
 
     def QuadPub(self):
-        pass
+
+        f = 0.05
+        h = 0.24
+        lift = 0.06
+        span = 0.13
+        self.repeat = 1
+        self.intial_point_duration = 0.0
+
+        startconfig = self.IK.get_joint_angles([span, 0.0, 0.1])
+        startconfig2 = self.IK.get_joint_angles([span, 0.0, h])
+
+        tar1 = self.IK.get_joint_angles([span-f, -f, h])
+        tar2 = self.IK.get_joint_angles([span+f/2, f/2, h-lift])
+        tar3 = self.IK.get_joint_angles([span+f, f, h])
+        tar4 = self.IK.get_joint_angles([span, 0.0, h])
+        tar5 = self.IK.get_joint_angles([span, 0.0, h])
+
+        tar6 = self.IK.get_joint_angles([span+f, f, h])
+        tar7 = self.IK.get_joint_angles([span-f/2, -f/2, h-lift])
+        tar8 = self.IK.get_joint_angles([span-f, -f, h])
+        tar9 = self.IK.get_joint_angles([span, 0.0, h])
+        tar10 = self.IK.get_joint_angles([span, 0.0, h])
+
+
+        tar11 = self.IK.get_joint_angles([span, 0.0, h])
+        tar12 = self.IK.get_joint_angles([span, 0.0, h])
+        tar13 = self.IK.get_joint_angles([span-f, f, h])
+        tar14 = self.IK.get_joint_angles([span+f/2, -f/2, h-lift])
+        tar15 = self.IK.get_joint_angles([span+f, -f, h])
+
+
+        tar16 = self.IK.get_joint_angles([span, 0.0, h])
+        tar17 = self.IK.get_joint_angles([span, 0.0, h])
+        tar18 = self.IK.get_joint_angles([span+f, -f, h])
+        tar19 = self.IK.get_joint_angles([span-f/2, f/2, h-lift])
+        tar20 = self.IK.get_joint_angles([span-f, f, h])
+
+        RF = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
+        LR = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
+        LF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
+        RR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
+
+        # RF.insert(0, RF[-1])
+        # RF.insert(0, RF[-1])
+
+        # LR.insert(0, LR[-1])
+        # LR.insert(0, LR[-1])
+
+        # LF.insert(0, LF[-1])
+        # LF.insert(0, LF[-2])
+        # # LF[-2] = tar19
+        # LF[-1] = tar4
+
+        # RR.insert(0, RR[-1])
+        # RR.insert(0, RR[-2])
+        # RR[-2] = tar14
+        # RR[-1] = tar4
+
+        self.ang_RF = RF
+        self.ang_LF = LF
+        self.ang_LR = LR 
+        self.ang_RR = RR
+
+        self.sec = self.timer_period/len(RF)
 
  
-    def RobotPub(self, seq):
+    def RobotPub(self):
         RF_msg = JointTrajectory()
         LF_msg = JointTrajectory()
         LR_msg = JointTrajectory()
@@ -301,7 +397,8 @@ class JointPublisher(Node):
         LR = self.ang_LR
         RR = self.ang_RR
 
-        sec = self.timer_period / len(RF)
+        # sec = self.timer_period / len(RF)
+        sec = self.sec
 
         RF_points = []
         LF_points = []
@@ -313,10 +410,10 @@ class JointPublisher(Node):
             LR_point = JointTrajectoryPoint()
             RR_point = JointTrajectoryPoint()
 
-            RF_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
-            LF_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
-            LR_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
-            RR_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
+            RF_point.time_from_start = Duration(seconds=(i+1)*sec + self.intial_point_duration, nanoseconds=0).to_msg()
+            LF_point.time_from_start = Duration(seconds=(i+1)*sec + self.intial_point_duration, nanoseconds=0).to_msg()
+            LR_point.time_from_start = Duration(seconds=(i+1)*sec + self.intial_point_duration, nanoseconds=0).to_msg()
+            RR_point.time_from_start = Duration(seconds=(i+1)*sec + self.intial_point_duration, nanoseconds=0).to_msg()
 
             RF_point.positions = RF[i]
             LF_point.positions = LF[i]
