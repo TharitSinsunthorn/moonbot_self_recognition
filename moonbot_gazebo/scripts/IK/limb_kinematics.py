@@ -136,6 +136,48 @@ class InvKinematics():
 
         return goal.tolist()
 
+    def get_EE_position(self, th):
+        Th1 = abs(th[0])
+        Th2 = abs(th[1])
+        Th3 = abs(th[2])
+
+        x0 = 0.0
+        y0 = 0.0
+        z0 = 0.0
+
+        L1 = self.L1
+        L2 = self.L2
+        L3 = self.L3
+
+        ##################################################
+        # position of tip of link 1
+        # x1 = L1*math.cos(Th2)*math.cos(Th1)
+        # y1 = L1*math.cos(Th2)*math.sin(Th1)
+        # z1 = L1*math.sin(Th2)
+
+        x1 = L1*math.cos(Th1)
+        y1 = L1*math.sin(Th1)
+        z1 = 0.0
+
+        # position of tip of link 2
+        # x2 = x1 + L2*math.cos(Th2+Th3)*math.cos(Th1)
+        # y2 = y1 + L2*math.cos(Th2+Th3)*math.sin(Th1)
+        # z2 = z1 + L2*math.sin(Th2+Th3)
+        ##################################################
+        x2 = x1 + L2*math.cos(Th2)*math.cos(Th1)
+        y2 = y1 + L2*math.cos(Th2)*math.sin(Th1)
+        z2 = z1 + L2*math.sin(Th2)
+
+        # position of tip of link 3
+        x3 = x2 + L3*math.cos(Th2+Th3)*math.cos(Th1)
+        y3 = y2 + L3*math.cos(Th2+Th3)*math.sin(Th1)
+        z3 = z2 + L3*math.sin(Th2+Th3)
+        ##################################################
+
+        X = [x3, y3, z3]
+
+        return X
+
 
     def get_RF_joint_angles(self, coord, eularAng = [0,0,0]):
         # rotate around midle of the body
