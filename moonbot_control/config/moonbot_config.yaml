@@ -61,7 +61,7 @@ RFposition_trajectory_controller:
       - position
       - velocity
 
-    state_publish_rate: 200.0 # Hz, Defaults to 50
+    state_publish_rate: 50.0 # Hz, Defaults to 50
     action_monitor_rate: 20.0 # Hz, Defaults to 20
 
     allow_partial_joints_goal: false # Defaults to false
@@ -75,17 +75,17 @@ RFposition_trajectory_controller:
       j_c1_rf:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
       
       j_thigh_rf:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
       
       j_tibia_rf:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
 
 LFposition_trajectory_controller:
   ros__parameters:
@@ -115,17 +115,17 @@ LFposition_trajectory_controller:
       j_c1_lf:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
       
       j_thigh_lf:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
       
       j_tibia_lf:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
 
 LRposition_trajectory_controller:
   ros__parameters:
@@ -155,17 +155,17 @@ LRposition_trajectory_controller:
       j_c1_lr:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
       
       j_thigh_lr:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
       
       j_tibia_lr:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
 
 
 RRposition_trajectory_controller:
@@ -196,17 +196,17 @@ RRposition_trajectory_controller:
       j_c1_rr:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
       
       j_thigh_rr:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
       
       j_tibia_rr:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
 
 
 position_trajectory_controller:
@@ -246,59 +246,59 @@ position_trajectory_controller:
       j_c1_lf:
         p: 12.0
         i: 0.01
-        d: 10.0
+        d: 100.0
       
       j_c1_rf:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
 
       j_c1_lr:
         p: 12.0
         i: 0.01
-        d: 10.0
+        d: 100.0
       
       j_c1_rr:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
 
       j_thigh_lf:
         p: 12.0
         i: 0.01
-        d: 10.0
+        d: 100.0
       
       j_thigh_rf:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
 
       j_thigh_lr:
         p: 12.0
         i: 0.01
-        d: 10.0
+        d: 100.0
       
       j_thigh_rr:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
 
       j_tibia_lf:
         p: 12.0
         i: 0.01
-        d: 10.0
+        d: 100.0
       
       j_tibia_rf:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0
 
       j_tibia_lr:
         p: 12.0
         i: 0.01
-        d: 10.0
+        d: 100.0
       
       j_tibia_rr:
           p: 12.0
           i: 0.01
-          d: 10.0
+          d: 100.0

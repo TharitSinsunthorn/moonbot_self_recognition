@@ -30,7 +30,7 @@ class CmdManager_ROS():
         self.sub1_name = 'moonbot_joy_ctrl_cmd' 
         self.sub1_interface = JoyCtrlCmds  #moonbot_custom_interfaces.msg.CtrlCmd
         self.sub1_callback = self._joy_cmd_callback
-        self.sub1_queueSize = 30
+        self.sub1_queueSize = 10
         # -----   sub2  -----------
         self.sub2 = None
         self.sub2_name = 'vel_cmd'
@@ -41,9 +41,9 @@ class CmdManager_ROS():
         self.pub = None
         self.pub_name = 'moonbot_geometry'
         self.pub_interface = Geometry   #moonbot_custom_interfaces.msg.Geometry
-        self.pub_timer_period = 0.001
+        self.pub_timer_period = 0.05
         self.pub_timer = None
-        self.pub_queueSize = 12
+        self.pub_queueSize = 10
         self.pub_callback = self._pub_callback
 
         self.stop = True

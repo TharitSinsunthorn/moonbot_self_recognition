@@ -36,9 +36,9 @@ class PublishingSubscriber : public rclcpp::Node
     : Node("moonbot_teleop_gamepad_node")
     {
       subscription_ = this->create_subscription<sensor_msgs::msg::Joy>(
-        "joy", 12, std::bind(&PublishingSubscriber::topic_callback, this, _1));
+        "joy", 10, std::bind(&PublishingSubscriber::topic_callback, this, _1));
 
-      publisher_ = this->create_publisher<moonbot_custom_interfaces::msg::JoyCtrlCmds>("moonbot_joy_ctrl_cmd",40);
+      publisher_ = this->create_publisher<moonbot_custom_interfaces::msg::JoyCtrlCmds>("moonbot_joy_ctrl_cmd",10);
     }
 
   

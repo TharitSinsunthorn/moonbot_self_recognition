@@ -35,26 +35,26 @@ class JointPublisher(Node):
 
         self.RF_joint_publisher = self.create_publisher(
             JointTrajectory,
-            'RFposition_trajectory_controller/joint_trajectory',
-            10, 
+            '/RF/position_trajectory_controller/joint_trajectory',
+            1, 
             callback_group=self.group)
 
         self.LF_joint_publisher = self.create_publisher(
             JointTrajectory,
-            'LFposition_trajectory_controller/joint_trajectory',
-            10,
+            '/LF/position_trajectory_controller/joint_trajectory',
+            1,
             callback_group=self.group)
 
         self.LR_joint_publisher = self.create_publisher(
             JointTrajectory,
-            'LRposition_trajectory_controller/joint_trajectory',
-            10,
+            '/LR/position_trajectory_controller/joint_trajectory',
+            1,
             callback_group=self.group)
 
         self.RR_joint_publisher = self.create_publisher(
             JointTrajectory,
-            'RRposition_trajectory_controller/joint_trajectory',
-            10,
+            '/RR/position_trajectory_controller/joint_trajectory',
+            1,
             callback_group=self.group)
         ##### PUBLISHER #####
 
@@ -67,7 +67,7 @@ class JointPublisher(Node):
         ##### SUBSCRIBER #####
 
         ##### TIMER ######
-        self.timer_period = 0.1  # seconds execute every 0.5 seconds
+        self.timer_period = 0.1 # seconds execute every 0.5 seconds
         self.timer = self.create_timer(self.timer_period, self.pub_callback)
         # self.i = -10
         ##### TIMER ######
