@@ -169,7 +169,7 @@ class InvKinematics():
         z2 = z1 + L2*math.sin(Th2)
 
         # position of tip of link 3
-        x3 = x2 + L3*math.cos(Th2+Th3)*math.cos(Th1)
+        x3 = x2 - L3*math.cos(Th2+Th3)*math.cos(Th1)
         y3 = y2 + L3*math.cos(Th2+Th3)*math.sin(Th1)
         z3 = z2 + L3*math.sin(Th2+Th3)
         ##################################################

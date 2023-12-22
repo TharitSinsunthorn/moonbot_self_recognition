@@ -7,98 +7,203 @@ from std_msgs.msg import String
 from trajectory_msgs.msg import JointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 from sensor_msgs.msg import JointState
+from moonbot_custom_interfaces.msg import Detection
+
+from rclpy.callback_groups import ReentrantCallbackGroup, MutuallyExclusiveCallbackGroup
+from rclpy.executors import MultiThreadedExecutor, SingleThreadedExecutor
+
 
 import numpy as np
+import math
 from IK.limb_kinematics import InvKinematics
 
 class JointPublisher(Node):
 
     def __init__(self):
         super().__init__('minimal_subscriber')
-        self.joint_publisher = self.create_publisher(
-            JointTrajectory,
-            '/position_trajectory_controller/joint_trajectory',
-            10)
 
-        # self.RFsub = self.create_subscription(JointState, 
-        #     "RFstate", 
-        #     self.RFcallback, 10)
-        # self.RFsub
+        self.group = ReentrantCallbackGroup()
+
+        ##### PUBLISHER ######
+        self.RF_joint_publisher = self.create_publisher(
+            JointTrajectory,
+            'RFposition_trajectory_controller/joint_trajectory',
+            10, 
+            callback_group=self.group)
+
+        self.LF_joint_publisher = self.create_publisher(
+            JointTrajectory,
+            'LFposition_trajectory_controller/joint_trajectory',
+            10,
+            callback_group=self.group)
+
+        self.LR_joint_publisher = self.create_publisher(
+            JointTrajectory,
+            'LRposition_trajectory_controller/joint_trajectory',
+            10,
+            callback_group=self.group)
+
+        self.RR_joint_publisher = self.create_publisher(
+            JointTrajectory,
+            'RRposition_trajectory_controller/joint_trajectory',
+            10,
+            callback_group=self.group)
+        ##### PUBLISHER #####
+
+
+        ##### TIMER ######
+        self.timer_period = 3
+        self.timer = self.create_timer(self.timer_period, self.pub_callback)
+        ##### TIMER ######
 
         self.IK = InvKinematics()
 
-        self.tar = []
+        ##### Gait Parameter #####
+        self.swing_sample = 20
+        self.stance_sample = 20
+        self.step_len = 0.05
+        self.step_height = 0.06
+        ##### Gait Parameter #####
 
-        self.target_received = False
+        ##### Pose Parameters #####
+        self.span = 0.13 * np.sin(math.pi/4)
+        self.height = 0.24
+
+        # self.EEpose = np.zeros([4,3]) #End Effector position
+        # for i in range(4):
+        #     self.EEpose[i,:] = np.array([self.span * np.cos((2*i+1)*math.pi/4), self.span * np.sin((2*i+1)*math.pi/4), self.height]) 
+
+        # self.TRAJ = np.zeros([4,3])
+        # self.ZMP = np.zeros([4,3])
+
+        self.RF_pose = [[self.span, self.span, self.height]]
+        self.LF_pose = [[-self.span, self.span, self.height]]
+        self.LR_pose = [[-self.span, -self.span, self.height]]
+        self.RR_pose = [[self.span, -self.span, self.height]]
+        ##### Pose Parameters #####
+
+        self.ang_RF = []
+        self.ang_LF = []
+        self.ang_LR = []
+        self.ang_RR = []
+        self.all_joint_angles = []
 
 
-    def RFcallback(self, msg):
-        # self.mis = msg.position
-        self.get_logger().info(f'Received joint states: {msg.position}')
-        self.tar = msg.position
-        self.tar = self.tar.tolist()
-        self.target_received = True
-        # print(self.tar)
+    def zmp_handler(self, shift):
+        RF_zmp = np.array(self.RF_pose[0]) + np.array(shift)
+        LF_zmp = np.array(self.LF_pose[0]) + np.array(shift)
+        LR_zmp = np.array(self.LR_pose[0]) + np.array(shift)
+        RR_zmp = np.array(self.RR_pose[0]) + np.array(shift)
+
+        self.RF_pose.append(RF_zmp.tolist())
+        self.LF_pose.append(LF_zmp.tolist())
+        self.LR_pose.append(LR_zmp.tolist())
+        self.RR_pose.append(RR_zmp.tolist())
 
 
-    def target_checker(self):
-        while rclpy.ok():
-            rclpy.spin_once(self)
-            if self.target_received:
-                self.pubpub()
-                # break
-            # self.target_received = False
-            # rclpy.spin_once(self)
-            
+    def swing_RF(self):
+        trajRF = []
+        for j in range(0, self.swing_sample):
+            div = self.step_len / self.swing_sample     
+            x = 0.0
+            y = div*j
+            z = - self.step_height*np.sin(math.pi/self.step_len * y)
+            traj.append(self.IK.get_RF_joint_angles([x, y, z]))
 
-    def pubpub(self):
-        msg = JointTrajectory()
+    def stance_RF(self):
+        trajRF = []
+        for j in range(0,self.stance_sample, 2):
+            div = (f)/pathrange     
+            x = span + f - div*j 
+            traj.append(self.IK.get_joint_angles([x, 0.0, ground]))
+            plot.append([x, 0.0, ground])
 
-        joint_names = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf",
-                       "j_c1_rr", "j_thigh_rr", "j_tibia_rr",
-                       "j_c1_lr", "j_thigh_lr", "j_tibia_lr",
-                       "j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
 
-        sec = 2.0
+    def crawl_gait(self):
+        self.zmp_handler([-0.03, 0.0, 0.0])
+    
+    def pub_callback(self):
 
-        f = -0.06
-        h = 0.24
-        tar0 = self.IK.get_joint_angles([0.13, 0.0, -0.1])
-        tar1 = self.IK.get_joint_angles([0.13, 0.0, h])
-        sit = self.IK.get_joint_angles([0.13, 0.0, 0.1])
+        self.crawl_gait()
 
-        test = self.IK.get_joint_angles(np.array([0.13, 0.0, h]))
-        # print(self.tar)
+        for i in range(len(self.RF_pose)):
+            self.ang_RF.append(self.IK.get_RF_joint_angles(self.RF_pose[i], [0,0,0]))
+            self.ang_LF.append(self.IK.get_LF_joint_angles(self.LF_pose[i], [0,0,0]))
+            self.ang_LR.append(self.IK.get_LR_joint_angles(self.LR_pose[i], [0,0,0]))
+            self.ang_RR.append(self.IK.get_RR_joint_angles(self.RR_pose[i], [0,0,0]))
 
-        # standup seq
-        RF = [tar0,tar0,tar1]
-        RR = [tar0,tar0,tar1]
-        LR = [tar0,tar0,tar1]
-        LF = [tar0,tar0,tar1]
+        self.RobotPub()
 
-        seq = []
-        for i in range(len(LF)):
-            seq.append(RF[i]+RR[i]+LR[i]+LF[i])
-            # vel.append(vRF[i]+vRR[i]+vLR[i]+LF[i])
-        # seq = seq*6
-        # print(seq)
+        self.get_logger().info(f'pub')
 
-        points = []
-        for i in range(len(seq)):
-            point = JointTrajectoryPoint()
-            point.time_from_start = Duration(seconds=(i+1)*sec, nanoseconds=0).to_msg()
-            point.positions = seq[i]
+        self.ang_RF.clear()
+        self.ang_LF.clear()
+        self.ang_LR.clear()
+        self.ang_RR.clear()
+
+
+ 
+    def RobotPub(self):
+        RF_msg = JointTrajectory()
+        LF_msg = JointTrajectory()
+        LR_msg = JointTrajectory()
+        RR_msg = JointTrajectory()
+
+        joint_names_rf = ["j_c1_rf", "j_thigh_rf", "j_tibia_rf"]
+        joint_names_lf = ["j_c1_lf", "j_thigh_lf", "j_tibia_lf"]
+        joint_names_lr = ["j_c1_lr", "j_thigh_lr", "j_tibia_lr"]
+        joint_names_rr = ["j_c1_rr", "j_thigh_rr", "j_tibia_rr"]
+
+        RF = self.ang_RF 
+        LF = self.ang_LF
+        LR = self.ang_LR
+        RR = self.ang_RR
+
+        sec = 1
+
+        RF_points = []
+        LF_points = []
+        LR_points = []
+        RR_points = []
+        for i in range(len(RF)):
+            RF_point = JointTrajectoryPoint()
+            LF_point = JointTrajectoryPoint()
+            LR_point = JointTrajectoryPoint()
+            RR_point = JointTrajectoryPoint()
+
+            RF_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
+            LF_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
+            LR_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
+            RR_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
+
+            RF_point.positions = RF[i]
+            LF_point.positions = LF[i]
+            LR_point.positions = LR[i]
+            RR_point.positions = RR[i]
+
             # point.velocities = vel[i]
-            points.append(point)
-            # print(points)
+            RF_points.append(RF_point)
+            LF_points.append(LF_point)
+            LR_points.append(LR_point)
+            RR_points.append(RR_point)
 
 
-        msg.joint_names = joint_names
-        msg.points = points
+        RF_msg.joint_names = joint_names_rf
+        RF_msg.points = RF_points
 
-        self.joint_publisher.publish(msg)
+        LF_msg.joint_names = joint_names_lf
+        LF_msg.points = LF_points
 
-        
+        LR_msg.joint_names = joint_names_lr
+        LR_msg.points = LR_points
+
+        RR_msg.joint_names = joint_names_rr
+        RR_msg.points = RR_points
+
+        self.RF_joint_publisher.publish(RF_msg)
+        self.LF_joint_publisher.publish(LF_msg)
+        self.LR_joint_publisher.publish(LR_msg)
+        self.RR_joint_publisher.publish(RR_msg)
 
 
 def main(args=None):
@@ -107,9 +212,10 @@ def main(args=None):
     joint_publisher = JointPublisher()
 
     # joint_publisher.target_checker()
-    joint_publisher.pubpub()
-
     # rclpy.spin(joint_publisher)
+    # joint_publisher.pubpub()
+
+    rclpy.spin(joint_publisher)
 
     joint_publisher.destroy_node()
     rclpy.shutdown()

@@ -59,7 +59,7 @@ class JointPublisher(Node):
         ##### SUBSCRIBER #####
 
         ##### TIMER ######
-        self.timer_period = 3  # seconds execute every 0.5 seconds
+        self.timer_period = 3  
         self.timer = self.create_timer(self.timer_period, self.pub_callback)
         ##### TIMER ######
 
@@ -77,6 +77,7 @@ class JointPublisher(Node):
         self.ang_LR = []
         self.ang_RR = []
         self.all_joint_angles = []
+        self.connected_joints = []
         self.intial_point_duration = 1.0
 
         self.leg_connection_state = [False, False, False, False]
@@ -85,6 +86,8 @@ class JointPublisher(Node):
         self.NumCon = 0
         self.NumCon_prev = 0
         self.StateChanged = False
+
+        self.standing = False
 
 
     def leg_callback(self, msg):
@@ -112,24 +115,27 @@ class JointPublisher(Node):
         if self.StateChanged:
             # self.timer.cancel()
             self.get_logger().info('CHANGED!')
-            # self.ang_RF.clear()
-            # self.ang_LF.clear()
-            # self.ang_LR.clear()
-            # self.ang_RR.clear()
 
         if self.NumCon != 0: 
 
             if self.NumCon == 1:
+                self.standing = False
                 self.SinPub()
 
             elif self.NumCon == 2:
+                self.standing = False
                 self.DuoPub()
 
             elif self.NumCon == 3:
+                self.standing = False
                 self.TriPub()
 
             elif self.NumCon == 4:
-                self.QuadPub()
+                if self.standing == False:
+                    self.start_fullconfig()
+                    self.standing = True
+                else:
+                    self.QuadPub()
 
             self.RobotPub()
 
@@ -355,10 +361,10 @@ class JointPublisher(Node):
         tar19 = self.IK.get_joint_angles([span-f/2, f/2, h-lift])
         tar20 = self.IK.get_joint_angles([span-f, f, h])
 
-        RF = [tar1, tar2, tar3, tar4, tar5, tar5]*self.repeat
-        LR = [tar6, tar7, tar8, tar9, tar10,tar10]*self.repeat
-        LF = [tar11, tar11, tar12, tar13, tar14, tar15]*self.repeat
-        RR = [tar16, tar16, tar17, tar18, tar19, tar20]*self.repeat
+        RF = [tar2, tar3, tar4, tar5, tar5, tar1]*self.repeat
+        LR = [tar7, tar8, tar9, tar10, tar10, tar6]*self.repeat
+        LF = [tar11, tar12, tar13, tar14, tar15, tar11]*self.repeat
+        RR = [tar16, tar17, tar18, tar19, tar20, tar16]*self.repeat
 
         # RF.insert(0, RF[-1])
         # RF.insert(0, RF[-1])
@@ -383,6 +389,23 @@ class JointPublisher(Node):
 
         self.sec = self.timer_period/len(RF)
 
+    def start_fullconfig(self):
+
+        h = 0.24
+        span = 0.13
+        self.intial_point_duration = 0.0
+        self.sec = 0.8
+
+        startconfig = self.IK.get_joint_angles([span, 0.0, -0.1])
+        startconfig2 = self.IK.get_joint_angles([span, 0.0, h])
+
+        self.ang_RF = [startconfig, startconfig, startconfig2]
+        self.ang_LF = [startconfig, startconfig, startconfig2]
+        self.ang_LR = [startconfig, startconfig, startconfig2] 
+        self.ang_RR = [startconfig, startconfig, startconfig2]
+
+
+
  
     def RobotPub(self):
         RF_msg = JointTrajectory()
@@ -400,7 +423,6 @@ class JointPublisher(Node):
         LR = self.ang_LR
         RR = self.ang_RR
 
-        # sec = self.timer_period / len(RF)
         sec = self.sec
 
         RF_points = []

@@ -56,8 +56,14 @@ class JointPublisher(Node):
         #     )
         ##### PUBLISHER #####
 
+        ##### TIMER ######
+        self.timer_period = 2 
+        self.timer = self.create_timer(self.timer_period, self.forward_callback)
+        ##### TIMER ######
 
         self.IK = InvKinematics()
+
+        self.pointRF = []
 
 
     def EE_callback(self, state):
@@ -74,10 +80,14 @@ class JointPublisher(Node):
         pointLF.x = poseLF[0]
         pointLF.y = poseLF[1]
         pointLF.z = poseLF[2]
-        # self.get_logger().info(f"{point}")
+        
         self.RF_EE_pose.publish(pointRF)
         self.LF_EE_pose.publish(pointLF)
-        # time.sleep(1)
+
+        self.pointRF = [poseRF[0], poseRF[1], poseRF[2]]
+
+    def forward_callback(self):
+        self.get_logger().info(f"{self.pointRF}")
 
 
 def main(args=None):
