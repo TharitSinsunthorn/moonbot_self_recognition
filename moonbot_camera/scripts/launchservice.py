@@ -10,7 +10,7 @@ from launch import LaunchService
 sys.path.append('../moonbot_ws/src')
 # from moonbot_camera.launch import *
 # from dynamixel_hardware.launch.Grieel import generate_launch_description
-from dynamixel_hardware.launch import *
+from dynamixel_hardware.launch import RF, LF, LR, RR, Grieel
 
 import rclpy
 from rclpy.node import Node
@@ -53,7 +53,7 @@ class LaunchServiceAsync(Node):
         self.LF_connection_srv = self.create_service(SetBool, 'LF_trigger', self.LF_callback_trigger, callback_group=self.group)
         self.LR_connection_srv = self.create_service(SetBool, 'LR_trigger', self.LR_callback_trigger, callback_group=self.group)
         self.RR_connection_srv = self.create_service(SetBool, 'RR_trigger', self.RR_callback_trigger, callback_group=self.group)
-        
+        self.GR_connection_srv = self.create_service(SetBool, 'GR_trigger', self.GR_callback_trigger, callback_group=self.group)
         ##### SERVICE #####
 
         ##### SetBool #####
@@ -61,6 +61,7 @@ class LaunchServiceAsync(Node):
         self.LF_ReqBool = SetBool.Request()
         self.LR_ReqBool = SetBool.Request()
         self.RR_ReqBool = SetBool.Request()
+        self.GR_seqBool = SetBool.Request()
         ##### SetBool #####
 
         ##### LAUNCHER ######
@@ -75,6 +76,9 @@ class LaunchServiceAsync(Node):
 
         self.RR_launcher = Ros2LaunchParent()
         self.RR_launch_description = RR.generate_launch_description()
+
+        self.GR_launcher = Ros2LaunchParent()
+        self.GR_launch_description = Grieel.generate_launch_description()
         ##### LAUNCHER ######
 
 
@@ -152,25 +156,30 @@ class LaunchServiceAsync(Node):
 
         response.message = "None"
         return response
+
+
+    def GR_callback_trigger(self, request, response):
+        self.GR_ReqBool = request
+        # print(self.LF_ReqBool.data)
+        self.get_logger().info(f'Received request: {self.GR_ReqBool.data}')
+        
+        if self.GR_ReqBool.data == True:
+            # self.launch_main(True)
+            time.sleep(2)
+            self.GR_launcher.start(self.GR_launch_description)
+
+        elif self.GR_ReqBool.data == False:
+            # self.launch_main(False)
+            time.sleep(2)
+            self.GR_launcher.shutdown()
+
+        response.message = "None"
+        return response
     
 
 def main(args=None):
     rclpy.init(args=args)
     
-    # try:
-    #     service_node = LaunchServiceAsync()
-
-    #     executor = MultiThreadedExecutor()
-    #     executor.add_node(service_node)
-    
-    #     try:
-    #         executor.spin()
-    #     finally:
-    #         executor.shutdown()
-    
-    # finally:        
-    #     service_node.destroy_node()
-    #     rclpy.shutdown()
     service = LaunchServiceAsync()
 
     rclpy.spin(service)

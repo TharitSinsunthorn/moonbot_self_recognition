@@ -37,7 +37,7 @@ class LimbActionClient(Node):
         sec = 1.0
 
         f = -0.04
-        h = 0.24
+        h = 0.21
         tar = self.IK.get_joint_angles([self.span, 0.0, self.height])
         targ = self.IK.get_joint_angles([0.13, 0.0, h])
 

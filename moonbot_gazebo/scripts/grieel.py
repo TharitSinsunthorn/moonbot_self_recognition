@@ -22,7 +22,7 @@ class LimbActionClient(Node):
         self._action_client = ActionClient(
             self, 
             FollowJointTrajectory, 
-            '/GR/position_trajectory_controller/follow_joint_trajectory')
+            '/RR/position_trajectory_controller/follow_joint_trajectory')
         
         self.IK = InvKinematics()
         self.repeat = 1

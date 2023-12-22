@@ -168,7 +168,7 @@
     </hardware>
 
     <joint name="j_c1_gr">
-      <param name="id">1</param>
+      <param name="id">4</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">1.57</param>
@@ -182,7 +182,7 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="j_thigh_gr">
-      <param name="id">2</param>
+      <param name="id">5</param>
       <command_interface name="position">
         <param name="min">-1.57</param>
         <param name="max">0.756</param>
@@ -197,7 +197,7 @@
     </joint>
     
     <joint name="j_end_gr">
-      <param name="id">3</param>
+      <param name="id">6</param>
       <command_interface name="position">
         <param name="min">0</param>
         <param name="max">1.57</param>

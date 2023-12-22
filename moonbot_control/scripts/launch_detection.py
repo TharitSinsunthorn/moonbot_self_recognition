@@ -94,6 +94,11 @@ class State_subscriber(Node):
         while not self.RR_ConnectionClient.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('RR service not available, waiting again...')
         self.RRreq = SetBool.Request()
+
+        self.GR_ConnectionClient = self.create_client(SetBool, 'GR_trigger')
+        while not self.GR_ConnectionClient.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('GR service not available, waiting again...')
+        self.GRreq = SetBool.Request()
         ##### Service Client #####
 
 
@@ -115,6 +120,11 @@ class State_subscriber(Node):
         self.RR_state = 0.0
 
 
+        #### Temporary variable for testing #####
+        self.gripper_detected = False
+        self.griepper_connnected = False
+
+
     def RF_send_request(self, request):
         self.RFreq.data = request
         self.future = self.RF_ConnectionClient.call_async(self.RFreq)
@@ -130,6 +140,10 @@ class State_subscriber(Node):
     def RR_send_request(self, request):
         self.RRreq.data = request
         self.future = self.RR_ConnectionClient.call_async(self.RRreq)
+
+    def GR_send_request(self, request):
+        self.GRreq.data = request
+        self.future = self.GR_ConnectionClient.call_async(self.GRreq)
 
     
     def status_callback(self):
@@ -235,6 +249,14 @@ class State_subscriber(Node):
                 time.sleep(5)
                 self.RR_detected = True
                 self.RR_connected = True
+
+            elif self.dxl_is_detected("/dev/moonbot_RR", 4000000, 4):
+                self.GR_send_request(True)
+                self.get_logger().info('GR is deteceted')
+                time.sleep(5)
+                self.RR_detected = True
+                self.gripper_connected = True
+
             else:
                 self.get_logger().warn('No RR state detected!')
 
@@ -247,6 +269,19 @@ class State_subscriber(Node):
                     self.RR_send_request(False)
                     self.get_logger().info(f"RR LOSE!")
                     self.RR_connected = False
+                    self.RR_detected = False  
+                else:
+                    self.get_logger().info(f"RR CONNECTED!")
+                    self.RR_detected = True
+
+            elif self.gripper_connected == True:
+                RR_state = float(self.RR_state)
+
+                if abs(RR_state) > 3.14:
+                    # time.sleep(1)
+                    self.GR_send_request(False)
+                    self.get_logger().info(f"RR LOSE!")
+                    self.GR_connected = False
                     self.RR_detected = False  
                 else:
                     self.get_logger().info(f"RR CONNECTED!")
