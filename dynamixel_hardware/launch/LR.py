@@ -98,10 +98,10 @@ def generate_launch_description():
             },
         ),
 
-        # Node(
-        #     package="moonbot_gazebo",
-        #     executable="LR.py",
-        #     output="screen"
-        # )
+        Node(
+            package="moonbot_gazebo",
+            executable="LR.py",
+            output="screen"
+        )
 
     ])
