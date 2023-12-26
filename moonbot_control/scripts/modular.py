@@ -394,7 +394,7 @@ class JointPublisher(Node):
         h = 0.24
         span = 0.13
         self.intial_point_duration = 0.0
-        self.sec = 0.8
+        self.sec = 0.95
 
         startconfig = self.IK.get_joint_angles([span, 0.0, -0.1])
         startconfig2 = self.IK.get_joint_angles([span, 0.0, h])

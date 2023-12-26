@@ -446,7 +446,7 @@ class GaitPlanner():
         i = 0
         self.body.ZMP_handler[:,:] = 0
 
-        while self.cmd.mode.walk and np.any(self.cmd.gait.step_len[:] != 0):
+        while self.cmd.mode.walk :
             zone_time = self.cmd.gait.cycle_time/4
             if dt <= self.cmd.gait.cycle_time + 2*t_zmp:
                 if dt >= self.sample_time*i:
@@ -632,7 +632,7 @@ class GaitPlanner():
 
     def run(self):
         while True:
-            if self.cmd.mode.walk:
+            if self.cmd.mode.walk and np.any(self.cmd.gait.step_len[:] != 0):
                 if self.cmd.mode.gait_type == 1:
                     self.cmd.gait.cycle_time = 1.0
                     self.cmd.gait.swing_time = 0.5* self.cmd.gait.cycle_time
@@ -641,7 +641,7 @@ class GaitPlanner():
                     self.run_trot()
                 elif self.cmd.mode.gait_type == 2:
                     self.cmd.gait.cycle_time = 3.0
-                    self.cmd.gait.swing_time = 0.2 * self.cmd.gait.cycle_time
+                    self.cmd.gait.swing_time = 0.25 * self.cmd.gait.cycle_time
                     self.body.ZMP_handler[:,:] = 0
                     self.run_waveGait()
                 elif self.cmd.mode.gait_type == 3:

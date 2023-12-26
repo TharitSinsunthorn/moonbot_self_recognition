@@ -7,7 +7,7 @@ from std_msgs.msg import String
 from trajectory_msgs.msg import JointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 from sensor_msgs.msg import JointState
-from moonbot_custom_interfaces.msg import Detection
+# from moonbot_custom_interfaces.msg import Detection
 
 from rclpy.callback_groups import ReentrantCallbackGroup, MutuallyExclusiveCallbackGroup
 from rclpy.executors import MultiThreadedExecutor, SingleThreadedExecutor
@@ -17,12 +17,18 @@ import numpy as np
 import math
 from IK.limb_kinematics import InvKinematics
 
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.animation import FuncAnimation
+
+
 class JointPublisher(Node):
 
     def __init__(self):
         super().__init__('minimal_subscriber')
 
         self.group = ReentrantCallbackGroup()
+        self.timer_group = ReentrantCallbackGroup()
 
         ##### PUBLISHER ######
         self.RF_joint_publisher = self.create_publisher(
@@ -52,17 +58,24 @@ class JointPublisher(Node):
 
 
         ##### TIMER ######
-        self.timer_period = 3
-        self.timer = self.create_timer(self.timer_period, self.pub_callback)
+        self.timer_period = 5
+        self.RF_timer = self.create_timer(self.timer_period, self.pub_callback)
         ##### TIMER ######
 
         self.IK = InvKinematics()
 
         ##### Gait Parameter #####
+        self.start_walk = False
+        self.loop_shift = np.zeros([4,3])
         self.swing_sample = 20
         self.stance_sample = 20
+        self.zmp_sample = 10
         self.step_len = 0.05
+        self.step_goal = np.array([0.0, self.step_len, 0.0])
+        self.stance_goal = np.array([0.0, -self.step_len, 0.0])
+        self.stance_init = np.array([0.0, 0.0, 0.0])
         self.step_height = 0.06
+        self.sample_time = self.timer_period / (4*self.zmp_sample + 4*self.swing_sample)
         ##### Gait Parameter #####
 
         ##### Pose Parameters #####
@@ -80,6 +93,12 @@ class JointPublisher(Node):
         self.LF_pose = [[-self.span, self.span, self.height]]
         self.LR_pose = [[-self.span, -self.span, self.height]]
         self.RR_pose = [[self.span, -self.span, self.height]]
+
+        self.zero_pnt = np.array([[self.span, self.span, self.height], 
+                                  [-self.span, self.span, self.height],
+                                  [-self.span, -self.span, self.height], 
+                                  [self.span, -self.span, self.height]])
+
         ##### Pose Parameters #####
 
         self.ang_RF = []
@@ -89,38 +108,182 @@ class JointPublisher(Node):
         self.all_joint_angles = []
 
 
-    def zmp_handler(self, shift):
-        RF_zmp = np.array(self.RF_pose[0]) + np.array(shift)
-        LF_zmp = np.array(self.LF_pose[0]) + np.array(shift)
-        LR_zmp = np.array(self.LR_pose[0]) + np.array(shift)
-        RR_zmp = np.array(self.RR_pose[0]) + np.array(shift)
+    def zmp_handler(self, shift, sample=10):
+        start_point = [self.RF_pose[-1] - self.zero_pnt[0], 
+                       self.LF_pose[-1] - self.zero_pnt[1], 
+                       self.LR_pose[-1] - self.zero_pnt[2], 
+                       self.RR_pose[-1] - self.zero_pnt[3]]
 
-        self.RF_pose.append(RF_zmp.tolist())
-        self.LF_pose.append(LF_zmp.tolist())
-        self.LR_pose.append(LR_zmp.tolist())
-        self.RR_pose.append(RR_zmp.tolist())
+        goal = -np.array([shift]*4)
+
+        for i in range(sample):
+            RF_zmp = (goal[0] - start_point[0]) * (i+1)/sample #* np.array([1,1,0])
+            LF_zmp = (goal[1] - start_point[1]) * (i+1)/sample #* np.array([1,1,0])
+            LR_zmp = (goal[2] - start_point[2]) * (i+1)/sample #* np.array([1,1,0])
+            RR_zmp = (goal[3] - start_point[3]) * (i+1)/sample #* np.array([1,1,0])
+
+            self.RF_pose.append(RF_zmp + start_point[0] + self.zero_pnt[0])
+            self.LF_pose.append(LF_zmp + start_point[1] + self.zero_pnt[1])
+            self.LR_pose.append(LR_zmp + start_point[2] + self.zero_pnt[2])
+            self.RR_pose.append(RR_zmp + start_point[3] + self.zero_pnt[3])
+        # self.stance_RF(np.array(shift))
+        # self.stance_LF(np.array(shift))
+        # self.stance_LR(np.array(shift))
+        # self.stance_RR(np.array(shift))
 
 
-    def swing_RF(self):
+
+
+
+    def swing_RF(self, goal):
         trajRF = []
+        start_point = np.array(self.RF_pose[-1]) - self.zero_pnt[0]
+        stride = goal - start_point
+        div = (stride[1]) / self.swing_sample
+
         for j in range(0, self.swing_sample):
-            div = self.step_len / self.swing_sample     
             x = 0.0
-            y = div*j
-            z = - self.step_height*np.sin(math.pi/self.step_len * y)
-            traj.append(self.IK.get_RF_joint_angles([x, y, z]))
+            y = div*(j+1)
+            z = - self.step_height*np.sin(math.pi/stride[1] * y)
 
-    def stance_RF(self):
+            trajRF = np.array(start_point) + np.array([x,y,z])
+            self.RF_pose.append(trajRF + self.zero_pnt[0])
+
+    def stance_RF(self, goal):
         trajRF = []
-        for j in range(0,self.stance_sample, 2):
-            div = (f)/pathrange     
-            x = span + f - div*j 
-            traj.append(self.IK.get_joint_angles([x, 0.0, ground]))
-            plot.append([x, 0.0, ground])
+        start_point = np.array(self.RF_pose[-1]) - self.zero_pnt[0]
+        stride = goal - start_point
+        div = (stride) / self.swing_sample
 
+        for j in range(0,self.stance_sample):
+            x = 0.0
+            y = div[1]*(j+1)
+            z = 0.0
+
+            trajRF = np.array(start_point) + np.array([x,y,z])
+            self.RF_pose.append(trajRF + self.zero_pnt[0])
+
+    def swing_LF(self, goal):
+        trajLF = []
+        start_point = np.array(self.LF_pose[-1]) - self.zero_pnt[1]
+        stride = goal - start_point
+        div = (stride[1]) / self.swing_sample
+
+        for j in range(0, self.swing_sample):
+            x = 0.0
+            y = div*(j+1)
+            z = - self.step_height*np.sin(math.pi/stride[1] * y)
+
+            trajLF = np.array(start_point) + np.array([x,y,z])
+            self.LF_pose.append(trajLF + self.zero_pnt[1])
+
+    def stance_LF(self, goal):
+        trajLF = []
+        start_point = np.array(self.LF_pose[-1]) - self.zero_pnt[1]
+        stride = goal - start_point
+        div = (stride) / self.swing_sample   
+
+        for j in range(0,self.stance_sample):
+            x = 0.0
+            y = div[1]*(j+1)
+            z = 0.0
+
+            trajLF = np.array(start_point) + np.array([x,y,z])
+            self.LF_pose.append(trajLF + self.zero_pnt[1])
+
+    def swing_LR(self, goal):
+        trajLR = []
+        start_point = np.array(self.LR_pose[-1]) - self.zero_pnt[2]
+        stride = goal - start_point
+        div = (stride[1]) / self.swing_sample
+
+        for j in range(0,self.swing_sample):
+            x = 0.0
+            y = div*(j+1)
+            z = - self.step_height*np.sin(math.pi/stride[1] * y)
+
+            trajLR = np.array(start_point) + np.array([x,y,z])
+            self.LR_pose.append(trajLR + self.zero_pnt[2])
+
+    def stance_LR(self, goal):
+        trajLR = []
+        start_point = np.array(self.LR_pose[-1]) - self.zero_pnt[2]
+        stride = goal - start_point
+        div = (stride) / self.swing_sample
+    
+        for j in range(0,self.stance_sample):
+            x = 0.0
+            y = div[1]*(j+1)
+            z = 0.0
+
+            trajLR = np.array(start_point) + np.array([x,y,z])
+            self.LR_pose.append(trajLR + self.zero_pnt[2])
+
+    def swing_RR(self, goal):
+        trajRR = []
+        start_point = np.array(self.RR_pose[-1]) - self.zero_pnt[3]
+        
+        stride = goal-start_point
+        div = (stride[1]) / self.swing_sample
+
+        for j in range(0, self.swing_sample):
+            x = 0.0
+            y = div*(j+1)
+            z = - self.step_height*np.sin(math.pi/stride[1] * y)
+
+            trajRR = np.array(start_point) + np.array([x,y,z])
+            self.RR_pose.append(trajRR + self.zero_pnt[3])
+
+    def stance_RR(self, goal):
+        trajRR = []
+        start_point = np.array(self.RR_pose[-1]) - self.zero_pnt[3]
+        stride = goal-start_point
+        div = (stride) / self.swing_sample
+
+        for j in range(0,self.stance_sample):
+            x = 0.0
+            y = div[1]*(j+1)
+            z = 0.0
+
+            trajRR = np.array(start_point) + np.array([x,y,z])
+            self.RR_pose.append(trajRR + self.zero_pnt[3])
 
     def crawl_gait(self):
-        self.zmp_handler([-0.03, 0.0, 0.0])
+
+        if self.start_walk == True:
+            self.loop_shift = [self.stance_goal, -self.stance_goal/3, self.stance_goal/3, np.zeros(3)] 
+            # self.loop_shift = self.loop_shift
+            # RF_loop_stance = [-s]
+
+        self.zmp_handler([-0.025, 0.0, 0.0], 2*self.zmp_sample)
+
+        self.stance_RF(self.stance_init + self.loop_shift[0])
+        self.stance_LF(self.stance_init + self.loop_shift[1])
+        self.stance_LR(self.stance_init + self.loop_shift[2])
+        self.swing_RR(self.step_goal)
+
+        self.swing_RF(self.step_goal)
+        self.stance_LF(2*self.stance_goal/3 + self.loop_shift[1])
+        self.stance_LR(2*self.stance_goal/3 + self.loop_shift[2])
+        self.stance_RR(-self.stance_goal/3)
+
+        self.zmp_handler([0.025, 0.0, 0.0], 2*self.zmp_sample)
+
+        self.stance_RF(-self.stance_goal/3)
+        self.stance_LF(4*self.stance_goal/3 + self.loop_shift[1])
+        self.swing_LR(self.step_goal)
+        self.stance_RR(self.stance_goal/3)
+
+        self.stance_RF(self.stance_goal/3)
+        self.swing_LF(self.step_goal)
+        self.stance_LR(-self.stance_goal/3)
+        self.stance_RR(self.stance_goal)
+
+        self.start_walk = True
+
+        self.plot_debug()
+        # self.plot_debug_animation()
+
     
     def pub_callback(self):
 
@@ -136,10 +299,7 @@ class JointPublisher(Node):
 
         self.get_logger().info(f'pub')
 
-        self.ang_RF.clear()
-        self.ang_LF.clear()
-        self.ang_LR.clear()
-        self.ang_RR.clear()
+        self.cleardata()
 
 
  
@@ -159,7 +319,7 @@ class JointPublisher(Node):
         LR = self.ang_LR
         RR = self.ang_RR
 
-        sec = 1
+        sec = self.sample_time
 
         RF_points = []
         LF_points = []
@@ -171,10 +331,10 @@ class JointPublisher(Node):
             LR_point = JointTrajectoryPoint()
             RR_point = JointTrajectoryPoint()
 
-            RF_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
-            LF_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
-            LR_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
-            RR_point.time_from_start = Duration(seconds=(i)*sec + 1, nanoseconds=0).to_msg()
+            RF_point.time_from_start = Duration(seconds=(i+1)*sec + 0, nanoseconds=0).to_msg()
+            LF_point.time_from_start = Duration(seconds=(i+1)*sec + 0, nanoseconds=0).to_msg()
+            LR_point.time_from_start = Duration(seconds=(i+1)*sec + 0, nanoseconds=0).to_msg()
+            RR_point.time_from_start = Duration(seconds=(i+1)*sec + 0, nanoseconds=0).to_msg()
 
             RF_point.positions = RF[i]
             LF_point.positions = LF[i]
@@ -206,19 +366,80 @@ class JointPublisher(Node):
         self.RR_joint_publisher.publish(RR_msg)
 
 
+    def plot_debug(self):
+        # Extract coordinates for plotting
+        d = 0.0
+        offset =  np.array([[d,d,0.0], [-d,d,0.0], [-d,-d,0.0], [d,-d,0.0]])
+
+        RF_pose = (self.RF_pose + np.ones([len(self.RF_pose),3])*offset[0,:]) * np.array([[1,1,-1]])
+        LF_pose = (self.LF_pose + np.ones([len(self.LF_pose),3])*offset[1,:]) * np.array([[1,1,-1]])
+        LR_pose = (self.LR_pose + np.ones([len(self.LR_pose),3])*offset[2,:]) * np.array([[1,1,-1]])
+        RR_pose = (self.RR_pose + np.ones([len(self.RR_pose),3])*offset[3,:]) * np.array([[1,1,-1]])
+
+        # Extract coordinates for plotting
+        RF_X, RF_Y, RF_Z = zip(*RF_pose)
+        LF_X, LF_Y, LF_Z = zip(*LF_pose)
+        LR_X, LR_Y, LR_Z = zip(*LR_pose)
+        RR_X, RR_Y, RR_Z = zip(*RR_pose)
+
+        # Plotting
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+
+        # Plot points for each pose
+        ax.scatter(RF_X, RF_Y, RF_Z, c='r', marker='o', label='RF Pose')
+        ax.scatter(LF_X, LF_Y, LF_Z, c='g', marker='^', label='LF Pose')
+        ax.scatter(LR_X, LR_Y, LR_Z, c='b', marker='s', label='LR Pose')
+        ax.scatter(RR_X, RR_Y, RR_Z, c='m', marker='x', label='RR Pose')
+
+        #ax.set_xlim([0.2, 0.3])
+        # ax.set_ylim([-0.3, 0.3])
+        ax.set_zlim([-self.height, -self.height + 0.5])
+
+        # Set labels and title
+        ax.set_xlabel('X-axis')
+        ax.set_ylabel('Y-axis')
+        ax.set_zlabel('Z-axis')
+        ax.set_title('3D Plot of Poses')
+
+        
+        # Add a legend
+        ax.legend()
+
+        plt.show()
+
+    def cleardata(self):
+        # self.RF_pose = [[self.span, self.span, self.height]]
+        # self.LF_pose = [[-self.span, self.span, self.height]]
+        # self.LR_pose = [[-self.span, -self.span, self.height]]
+        # self.RR_pose = [[self.span, -self.span, self.height]]
+
+        last_pose = [self.RF_pose[-1], self.LF_pose[-1], self.LR_pose[-1], self.RR_pose[-1]]
+
+        self.RF_pose = [last_pose[0]]
+        self.LF_pose = [last_pose[1]]
+        self.LR_pose = [last_pose[2]]
+        self.RR_pose = [last_pose[3]]
+
+        self.ang_RF.clear()
+        self.ang_LF.clear()
+        self.ang_LR.clear()
+        self.ang_RR.clear()
+
+        self.get_logger().info(f'{last_pose}')
+
+
+
 def main(args=None):
     rclpy.init(args=args)
 
     joint_publisher = JointPublisher()
 
-    # joint_publisher.target_checker()
-    # rclpy.spin(joint_publisher)
-    # joint_publisher.pubpub()
-
     rclpy.spin(joint_publisher)
 
     joint_publisher.destroy_node()
     rclpy.shutdown()
+
 
 
 if __name__ == '__main__':
