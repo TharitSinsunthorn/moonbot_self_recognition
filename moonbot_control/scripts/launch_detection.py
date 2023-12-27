@@ -21,6 +21,7 @@ class State_subscriber(Node):
 
         ##### Callbackgroup #####
         self.group = ReentrantCallbackGroup()
+        self.client_group = ReentrantCallbackGroup()
         self.RF_timer_group = MutuallyExclusiveCallbackGroup()
         self.LF_timer_group = MutuallyExclusiveCallbackGroup()
         self.LR_timer_group = MutuallyExclusiveCallbackGroup()
@@ -75,27 +76,27 @@ class State_subscriber(Node):
         ##### Subcriber #####
 
         ##### Service Client #####
-        self.RF_ConnectionClient = self.create_client(SetBool, 'RF_trigger')
+        self.RF_ConnectionClient = self.create_client(SetBool, 'RF_trigger', callback_group=self.client_group)
         while not self.RF_ConnectionClient.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('RF service not available, waiting again...')
         self.RFreq = SetBool.Request()
 
-        self.LF_ConnectionClient = self.create_client(SetBool, 'LF_trigger')
+        self.LF_ConnectionClient = self.create_client(SetBool, 'LF_trigger', callback_group=self.client_group)
         while not self.LF_ConnectionClient.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('LF service not available, waiting again...')
         self.LFreq = SetBool.Request()
 
-        self.LR_ConnectionClient = self.create_client(SetBool, 'LR_trigger')
+        self.LR_ConnectionClient = self.create_client(SetBool, 'LR_trigger', callback_group=self.client_group)
         while not self.LR_ConnectionClient.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('LR service not available, waiting again...')
         self.LRreq = SetBool.Request()
 
-        self.RR_ConnectionClient = self.create_client(SetBool, 'RR_trigger')
+        self.RR_ConnectionClient = self.create_client(SetBool, 'RR_trigger', callback_group=self.client_group)
         while not self.RR_ConnectionClient.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('RR service not available, waiting again...')
         self.RRreq = SetBool.Request()
 
-        self.GR_ConnectionClient = self.create_client(SetBool, 'GR_trigger')
+        self.GR_ConnectionClient = self.create_client(SetBool, 'GR_trigger', callback_group=self.client_group)
         while not self.GR_ConnectionClient.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('GR service not available, waiting again...')
         self.GRreq = SetBool.Request()

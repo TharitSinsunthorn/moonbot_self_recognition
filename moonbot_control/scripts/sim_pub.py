@@ -114,7 +114,7 @@ class JointPublisher(Node):
                        self.LR_pose[-1] - self.zero_pnt[2], 
                        self.RR_pose[-1] - self.zero_pnt[3]]
 
-        goal = -np.array([shift]*4)
+        goal = -np.array([shift]*4) + np.array([[0,start_point[0][1],0], [0,start_point[1][1],0], [0,start_point[2][1],0], [0,start_point[3][1],0]])
 
         for i in range(sample):
             RF_zmp = (goal[0] - start_point[0]) * (i+1)/sample #* np.array([1,1,0])
@@ -281,7 +281,7 @@ class JointPublisher(Node):
 
         self.start_walk = True
 
-        self.plot_debug()
+        # self.plot_debug()
         # self.plot_debug_animation()
 
     

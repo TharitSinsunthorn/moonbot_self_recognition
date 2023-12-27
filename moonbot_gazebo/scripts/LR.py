@@ -42,7 +42,7 @@ class LimbActionClient(Node):
         targ = self.IK.get_joint_angles([0.13, 0.0, h])
 
         # standup seq
-        LR = [targ]
+        LR = [tar]
 
         # Gait
         tar4 = self.IK.get_joint_angles([0.13, 0.0, h])
