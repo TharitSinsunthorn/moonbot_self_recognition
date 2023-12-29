@@ -26,12 +26,12 @@
       <mass
         value="0.84" />
       <inertia
-        ixx="0.0017317"
-        ixy="6.9779E-10"
-        ixz="1.7744E-07"
-        iyy="0.0028336"
-        iyz="-1.1093E-09"
-        izz="0.0017317" />
+        ixx="0.002975"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.0056"
+        iyz="0.0"
+        izz="0.002975" />
     </inertial>
     <visual>
       <origin
@@ -61,17 +61,17 @@
   <link name="c1_rf">
     <inertial>
       <origin
-        xyz="0.029443 -8.2411E-05 0.00010242"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.31" />
       <inertia
-        ixx="5.0396E-05"
+        ixx="9.494E-05"
         ixy="-1.345E-09"
         ixz="1.2541E-11"
-        iyy="5.7752E-05"
+        iyy="9.494E-05"
         iyz="-4.0888E-10"
-        izz="3.5541E-05" />
+        izz="4.813E-04" />
     </inertial>
     <visual>
       <origin
@@ -101,17 +101,17 @@
   <link name="thigh_rf">
     <inertial>
       <origin
-        xyz="0.064436 0.00087709 -3.2006E-16"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.1" />
       <inertia
-        ixx="6.5997E-05"
-        ixy="-5.3873E-21"
-        ixz="-1.0696E-11"
-        iyy="7.8479E-05"
-        iyz="5.2151E-14"
-        izz="5.7513E-05" />
+        ixx="3.92E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="5.547E-04"
+        iyz="0.0"
+        izz="5.547E-04" />
     </inertial>
     <visual>
       <origin
@@ -141,17 +141,17 @@
   <link name="tibia_rf">
     <inertial>
       <origin
-        xyz="0.03718 0.00087779 0.00017544"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.12" />
       <inertia
-        ixx="1.0549E-05"
-        ixy="7.2563E-10"
-        ixz="1.2917E-09"
-        iyy="5.4631E-05"
-        iyz="-8.4221E-10"
-        izz="5.6057E-05" />
+        ixx="2.4E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="9.7344E-04"
+        iyz="0.0"
+        izz="9.7344E-04" />
     </inertial>
     <visual>
       <origin
@@ -233,17 +233,17 @@
   <link name="c1_lf">
     <inertial>
       <origin
-        xyz="0.029443 -0.00058239 -0.00010223"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.31" />
       <inertia
-        ixx="5.0396E-05"
-        ixy="-1.3183E-09"
-        ixz="-1.3254E-11"
-        iyy="5.7752E-05"
-        iyz="-4.1118E-10"
-        izz="3.5541E-05" />
+        ixx="9.494E-05"
+        ixy="-1.345E-09"
+        ixz="1.2541E-11"
+        iyy="9.494E-05"
+        iyz="-4.0888E-10"
+        izz="4.813E-04" />
     </inertial>
     <visual>
       <origin
@@ -273,17 +273,17 @@
   <link name="thigh_lf">
     <inertial>
       <origin
-        xyz="0.064564 0.00037709 -1.8041E-16"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.1" />
       <inertia
-        ixx="6.5997E-05"
-        ixy="4.4533E-19"
-        ixz="-1.0696E-11"
-        iyy="7.8479E-05"
-        iyz="-5.215E-14"
-        izz="5.7513E-05" />
+        ixx="3.92E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="5.547E-04"
+        iyz="0.0"
+        izz="5.547E-04" />
     </inertial>
     <visual>
       <origin
@@ -313,17 +313,17 @@
   <link name="tibia_lf">
     <inertial>
       <origin
-        xyz="0.03718 0.00037641 -0.00017544"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.12" />
       <inertia
-        ixx="1.0549E-05"
-        ixy="-7.2517E-10"
-        ixz="-1.2927E-09"
-        iyy="5.4631E-05"
-        iyz="-8.4226E-10"
-        izz="5.6057E-05" />
+        ixx="2.4E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="9.7344E-04"
+        iyz="0.0"
+        izz="9.7344E-04" />
     </inertial>
     <visual>
       <origin
@@ -405,17 +405,17 @@
   <link name="c1_lr">
     <inertial>
       <origin
-        xyz="0.029443 -8.2383E-05 -0.00010224"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.31" />
       <inertia
-        ixx="5.0396E-05"
-        ixy="-1.3002E-09"
-        ixz="-2.7959E-11"
-        iyy="5.7752E-05"
-        iyz="-4.0478E-10"
-        izz="3.5541E-05" />
+        ixx="9.494E-05"
+        ixy="-1.345E-09"
+        ixz="1.2541E-11"
+        iyy="9.494E-05"
+        iyz="-4.0888E-10"
+        izz="4.813E-04" />
     </inertial>
     <visual>
       <origin
@@ -445,17 +445,17 @@
   <link name="thigh_lr">
     <inertial>
       <origin
-        xyz="0.0645 0.00087709 -4.8572E-16"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.1" />
       <inertia
-        ixx="5.7513E-05"
-        ixy="-5.215E-14"
-        ixz="-1.7957E-19"
-        iyy="7.8479E-05"
-        iyz="-1.1499E-11"
-        izz="6.5997E-05" />
+        ixx="3.92E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="5.547E-04"
+        iyz="0.0"
+        izz="5.547E-04" />
     </inertial>
     <visual>
       <origin
@@ -485,17 +485,17 @@
   <link name="tibia_lr">
     <inertial>
       <origin
-        xyz="0.03718 0.00037753 -0.00017512"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.12" />
       <inertia
-        ixx="1.0549E-05"
-        ixy="7.2471E-10"
-        ixz="-1.3713E-09"
-        iyy="5.4631E-05"
-        iyz="-8.4221E-10"
-        izz="5.6057E-05" />
+        ixx="2.4E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="9.7344E-04"
+        iyz="0.0"
+        izz="9.7344E-04" />
     </inertial>
     <visual>
       <origin
@@ -577,17 +577,17 @@
   <link name="c1_rr">
     <inertial>
       <origin
-        xyz="0.029443 0.00058239 0.00010223"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.31" />
       <inertia
-        ixx="5.0396E-05"
-        ixy="1.3177E-09"
-        ixz="1.1591E-11"
-        iyy="5.7752E-05"
-        iyz="-4.155E-10"
-        izz="3.5541E-05" />
+        ixx="9.494E-05"
+        ixy="-1.345E-09"
+        ixz="1.2541E-11"
+        iyy="9.494E-05"
+        iyz="-4.0888E-10"
+        izz="4.813E-04" />
     </inertial>
     <visual>
       <origin
@@ -617,17 +617,17 @@
   <link name="thigh_rr">
     <inertial>
       <origin
-        xyz="0.0645 0.00087709 -4.8572E-16"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.1" />
       <inertia
-        ixx="6.5997E-05"
-        ixy="1.6164E-20"
-        ixz="9.2026E-10"
-        iyy="7.8479E-05"
-        iyz="6.0862E-19"
-        izz="5.7513E-05" />
+        ixx="3.92E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="5.547E-04"
+        iyz="0.0"
+        izz="5.547E-04" />
     </inertial>
     <visual>
       <origin
@@ -657,17 +657,17 @@
   <link name="tibia_rr">
     <inertial>
       <origin
-        xyz="0.03718 0.00087779 0.00017544"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.12" />
       <inertia
-        ixx="1.0549E-05"
-        ixy="7.2506E-10"
-        ixz="1.2925E-09"
-        iyy="5.4631E-05"
-        iyz="-8.4227E-10"
-        izz="5.6057E-05" />
+        ixx="2.4E-05" 
+        ixy="0.0"
+        ixz="0.0"
+        iyy="9.7344E-04"
+        iyz="0.0"
+        izz="9.7344E-04" />
     </inertial>
     <visual>
       <origin
