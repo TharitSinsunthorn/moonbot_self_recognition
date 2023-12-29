@@ -74,7 +74,6 @@ def generate_launch_description():
     # create and return launch description object
     return LaunchDescription(
         [           
-            # phantom_ns_arg,
             robot_state_publisher_node,
             rviz_node,
             # joint_state_publisher_node

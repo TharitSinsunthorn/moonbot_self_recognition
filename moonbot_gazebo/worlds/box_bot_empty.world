@@ -27,7 +27,7 @@
     <physics name="ode_200iters" type="ode">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
-      <real_time_update_rate>1200.0</real_time_update_rate>
+      <real_time_update_rate>1500.0</real_time_update_rate>
       <ode>
         <solver>
           <type>quick</type>
@@ -40,14 +40,14 @@
       <pose>0 0 0 0 0 0</pose>
       <link name='link'>
         <inertial>
-          <mass>1000</mass>
+          <mass>50</mass>
           <inertia>
-            <ixx>15</ixx>
+            <ixx>0.416</ixx>
             <ixy>0</ixy>
             <ixz>0</ixz>
-            <iyy>15</iyy>
+            <iyy>0.416</iyy>
             <iyz>0</iyz>
-            <izz>15</izz>
+            <izz>0.083</izz>
           </inertia>
           <pose>0 0 0 0 0 0</pose>
         </inertial>
