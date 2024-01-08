@@ -175,6 +175,19 @@
         <mesh
           filename="package://moonbot_description/meshesX/TIBIA.STL" />
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
     </collision>
   </link>
 
@@ -347,6 +360,19 @@
         <mesh
           filename="package://moonbot_description/meshesX/TIBIA.STL" />
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
     </collision>
   </link>
 
@@ -519,6 +545,19 @@
         <mesh
           filename="package://moonbot_description/meshesX/TIBIA.STL" />
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
     </collision>
   </link>
 
@@ -691,6 +730,19 @@
         <mesh
           filename="package://moonbot_description/meshesX/TIBIA.STL" />
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>1</mu2>
+          </ode>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>>
+            </ode>  
+          </contact>
+        </friction>
+      </surface>
     </collision>
   </link>
 
@@ -757,6 +809,8 @@
   </gazebo>
   <gazebo reference="tibia_rf">
     <material>Gazebo/DarkGrey</material>
+    <mu1>100</mu1>
+    <mu2>50</mu2>
   </gazebo>
 
   <gazebo reference="c1_lf">
@@ -767,6 +821,8 @@
   </gazebo>
   <gazebo reference="tibia_lf">
     <material>Gazebo/DarkGrey</material>
+    <mu1>100</mu1>
+    <mu2>50</mu2>
   </gazebo>
 
   <gazebo reference="c1_lr">
@@ -777,6 +833,8 @@
   </gazebo>
   <gazebo reference="tibia_lr">
     <material>Gazebo/DarkGrey</material>
+    <mu1>100</mu1>
+    <mu2>50</mu2>
   </gazebo>
 
   <gazebo reference="c1_rr">
@@ -787,6 +845,8 @@
   </gazebo>
   <gazebo reference="tibia_rr">
     <material>Gazebo/DarkGrey</material>
+    <mu1>100</mu1>
+    <mu2>50</mu2>
   </gazebo>
 
 
