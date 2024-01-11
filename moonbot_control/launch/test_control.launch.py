@@ -5,7 +5,7 @@ import random
 from launch_ros.actions import Node
 from launch import LaunchDescription
 from launch.actions import ExecuteProcess, IncludeLaunchDescription, RegisterEventHandler
-from launch.event_handlers import OnProcessExit
+from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 # this is the function launch  system will look for
@@ -100,21 +100,21 @@ def generate_launch_description():
                 )
             ),
             RegisterEventHandler(
-                event_handler=OnProcessExit(
+                event_handler=OnProcessStart(
                   target_action=RF_robot_controller_spawner,
-                  on_exit=[LF_robot_controller_spawner],
+                  on_start=[LF_robot_controller_spawner],
                 )
             ),
             RegisterEventHandler(
-                event_handler=OnProcessExit(
+                event_handler=OnProcessStart(
                   target_action=LF_robot_controller_spawner,
-                  on_exit=[LR_robot_controller_spawner],
+                  on_start=[LR_robot_controller_spawner],
                 )
             ),
             RegisterEventHandler(
-                event_handler=OnProcessExit(
+                event_handler=OnProcessStart(
                   target_action=LR_robot_controller_spawner,
-                  on_exit=[RR_robot_controller_spawner],
+                  on_start=[RR_robot_controller_spawner],
                 )
             ),
             spawn_robot,

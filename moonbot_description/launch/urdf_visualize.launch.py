@@ -5,32 +5,38 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
 import xacro
 
 # this is the function launch  system will look for
 def generate_launch_description():
 
     ####### DATA INPUT ##########
-    urdf_file = 'moonbotX.urdf'
+    # urdf_file = 'moonbotX.urdf'
     package_description = "moonbot_description"
 
-    ####### DATA INPUT END ##########
-    print("Fetching URDF ==>")
-    robot_desc_path = os.path.join(
-        get_package_share_directory(package_description), 
-        "urdf", 
-        urdf_file
+    use_joint_state_gui = LaunchConfiguration('use_joint_state_gui')
+    urdf_file = LaunchConfiguration('urdf_file')
+    robot_desc_path = LaunchConfiguration('robot_desc_path')
+
+    gui_arg = DeclareLaunchArgument(
+        'use_joint_state_gui',
+        default_value='True'
     )
 
-
-    phantom_ns = LaunchConfiguration('phantom_ns')
-
-    phantom_ns_arg = DeclareLaunchArgument(
-        'phantom_ns',
-        default_value='phantom1'
+    urdf_file_arg = DeclareLaunchArgument(
+        'urdf_file',
+        default_value='moonbotX.urdf'
     )
-        # description='Top-level namespace')
 
+    robot_desc_path_arg = DeclareLaunchArgument(
+        'robot_desc_path',
+        default_value=[os.path.join(get_package_share_directory(package_description), 
+                                    'urdf'),
+                                    '/', 
+                                    urdf_file],
+        description='URDF file'
+    )
 
     # Robot State Publisher
     robot_state_publisher_node = Node(
@@ -40,7 +46,6 @@ def generate_launch_description():
         emulate_tty=True,
         parameters=[{'use_sim_time': True, 'robot_description': Command(['xacro ', robot_desc_path])}],
         # parameters=[robot_description],  ## for xacro
-        # namespace = phantom_ns,
         output="screen"
     )
 
@@ -48,8 +53,8 @@ def generate_launch_description():
     joint_state_publisher_node = Node(
         package='joint_state_publisher_gui',
         executable='joint_state_publisher_gui',
-        # namespace = phantom_ns,
-        output='screen'
+        output='screen',
+        condition=IfCondition(use_joint_state_gui)
     )
 
     # RVIZ Configuration
@@ -59,13 +64,11 @@ def generate_launch_description():
         'urdf_vis.rviz'
     )
 
-
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         output='screen',
         name='rviz_node',
-        # namespace = phantom_ns,
         parameters=[{'use_sim_time': True}],
         arguments=['-d', rviz_config_dir]
     )
@@ -74,8 +77,12 @@ def generate_launch_description():
     # create and return launch description object
     return LaunchDescription(
         [           
+            gui_arg,
+            urdf_file_arg,
+            robot_desc_path_arg,
+
             robot_state_publisher_node,
             rviz_node,
-            # joint_state_publisher_node
+            joint_state_publisher_node
         ]
     )
