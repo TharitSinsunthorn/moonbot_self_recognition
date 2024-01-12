@@ -29,12 +29,13 @@ class State_subscriber(Node):
 
 
         ##### TIMER #####
-        self.timer_period = 1
+        self.timer_period = 0.3
+        self.detection_delay = 4
         self.RF_intualizer = self.create_timer(self.timer_period, self.RF_initualizer_callback, callback_group=self.RF_timer_group)
         self.LF_intualizer = self.create_timer(self.timer_period, self.LF_initualizer_callback, callback_group=self.LF_timer_group)
         self.LR_intualizer = self.create_timer(self.timer_period, self.LR_initualizer_callback, callback_group=self.LR_timer_group)
         self.RR_intualizer = self.create_timer(self.timer_period, self.RR_initualizer_callback, callback_group=self.RR_timer_group)
-        self.status_timer = self.create_timer(2, self.status_callback, callback_group=self.group)
+        self.status_timer = self.create_timer(1, self.status_callback, callback_group=self.group)
         ##### TIMER #####
 
         ##### PUBLISHER #####
@@ -162,7 +163,7 @@ class State_subscriber(Node):
             if self.dxl_is_detected("/dev/moonbot_RF", 4000000, 1):
                 self.RF_send_request(True)
                 self.get_logger().info('RF is detected!')
-                time.sleep(5)
+                time.sleep(self.detection_delay)
                 self.RF_detected = True
                 self.RF_connected = True
             else:
@@ -190,7 +191,7 @@ class State_subscriber(Node):
             if self.dxl_is_detected("/dev/moonbot_LF", 4000000, 1):
                 self.LF_send_request(True)
                 self.get_logger().info('LF is detected!')
-                time.sleep(5)
+                time.sleep(self.detection_delay)
                 self.LF_detected = True
                 self.LF_connected = True
             else:
@@ -218,7 +219,7 @@ class State_subscriber(Node):
             if self.dxl_is_detected("/dev/moonbot_LR", 4000000, 1):
                 self.LR_send_request(True)
                 self.get_logger().info('LR is detected!')
-                time.sleep(5)
+                time.sleep(self.detection_delay)
                 self.LR_detected = True
                 self.LR_connected = True
             else:
@@ -229,7 +230,6 @@ class State_subscriber(Node):
                 LR_state = float(self.LR_state)
 
                 if abs(LR_state) > 3.14:
-                    # time.sleep(1)
                     self.LR_send_request(False)
                     self.get_logger().info(f"LR LOSE!")
                     self.LR_connected = False
@@ -247,14 +247,14 @@ class State_subscriber(Node):
             if self.dxl_is_detected("/dev/moonbot_RR", 4000000, 1):
                 self.RR_send_request(True)
                 self.get_logger().info('RR is detected!')
-                time.sleep(5)
+                time.sleep(self.detection_delay)
                 self.RR_detected = True
                 self.RR_connected = True
 
             elif self.dxl_is_detected("/dev/moonbot_RR", 4000000, 4):
                 self.GR_send_request(True)
                 self.get_logger().info('GR is deteceted')
-                time.sleep(5)
+                time.sleep(self.detection_delay)
                 self.RR_detected = True
                 self.gripper_connected = True
 
@@ -300,16 +300,18 @@ class State_subscriber(Node):
         
         # Open the port
         if port_handler.openPort():
-            self.get_logger().info(f"Port {port_name} opened successfully.")
+            pass
+            # self.get_logger().info(f"Port {port_name} opened successfully.")
         else:
-            self.get_logger().warn(f"Failed to open port {port_name}.")
+            # self.get_logger().warn(f"Failed to open port {port_name}.")
             return False
 
         # Set the baudrate
         if port_handler.setBaudRate(baud_rate):
-            self.get_logger().info(f"Baudrate set to {baud_rate}.")
+            pass
+            # self.get_logger().info(f"Baudrate set to {baud_rate}.")
         else:
-            self.get_logger().warn(f"Failed to set baudrate to {baud_rate}.")
+            # self.get_logger().warn(f"Failed to set baudrate to {baud_rate}.")
             return False
 
         # Ping the Dynamixel motor
@@ -319,7 +321,7 @@ class State_subscriber(Node):
             self.get_logger().info(f"{port_name} is detected.")
             return True
         else:
-            self.get_logger().warn(f"Failed to detect {port_name}.")
+            # self.get_logger().warn(f"Failed to detect {port_name}.")
             return False
 
 

@@ -59,7 +59,7 @@ class JointPublisher(Node):
         ##### SUBSCRIBER #####
 
         ##### TIMER ######
-        self.timer_period = 3  
+        self.timer_period = 2.5
         self.timer = self.create_timer(self.timer_period, self.pub_callback)
         ##### TIMER ######
 
@@ -154,7 +154,7 @@ class JointPublisher(Node):
         self.generate_joints_name(connected_port)
                        
         ##### Single limb parameters #####      
-        f = 0.1
+        f = 0.11
         lift = 0.07
         span = 0.2
         self.repeat = 1
@@ -177,8 +177,8 @@ class JointPublisher(Node):
         for j in range(0,pathrange+10, 2):
             div = (f)/pathrange     
             x = span + f - div*j 
-            z = 1.2*lift* math.sin(math.pi/f * (x - span))
-            traj.append(self.IK.get_joint_angles([x, 0.0, z + ground]))
+            z = 1.5*lift* math.sin(math.pi/f * (x - span))
+            traj.append(self.IK.get_joint_angles([x, 0.0, ground]))
             plot.append([x, 0.0, ground])
         # traj.append(self.IK.get_joint_angles([span, 0.0, ground]))
 
@@ -203,7 +203,7 @@ class JointPublisher(Node):
             self.ang_LR = trajDummy * len(traj)
             self.ang_RR = traj * self.repeat
 
-        self.sec = self.timer_period / len(traj)
+        self.sec = self.timer_period / len(traj) 
 
 
     def DuoPub(self):
@@ -216,9 +216,9 @@ class JointPublisher(Node):
         f = 0.1
         ff = 0.12
         # h = 0.22
-        lift = 0.06
+        lift = 0.08
         span = 0.22
-        self.repeat = 2
+        self.repeat = 1
         ground = 0.08
         pathrange = self.pathrange
         self.intial_point_duration = 0.5
@@ -287,8 +287,8 @@ class JointPublisher(Node):
                 x = span + f - div*j
                 z = 1.2*lift* math.sin(math.pi/f * (x - span))
                 trajDummy.append(ang_dummy)
-                trajL.append(self.IK.get_joint_angles([x, 0.0, z + ground], [0, 0, -math.pi/4]))
-                trajR.append(self.IK.get_joint_angles([x, 0.0, z + ground], [0, 0, math.pi/4]))
+                trajL.append(self.IK.get_joint_angles([x, 0.0,  ground], [0, 0, -math.pi/4]))
+                trajR.append(self.IK.get_joint_angles([x, 0.0,  ground], [0, 0, math.pi/4]))
                 # plot.append([x, 0.0, ground])
 
             trajDummy = trajDummy * self.repeat
@@ -319,7 +319,7 @@ class JointPublisher(Node):
                 self.ang_LR = trajDummy
                 self.ang_RR = trajL
 
-        self.sec = self.timer_period / len(trajDummy)
+        self.sec = self.timer_period / len(trajDummy) 
             
             
     def TriPub(self):
