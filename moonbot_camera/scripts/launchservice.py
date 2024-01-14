@@ -81,6 +81,8 @@ class LaunchServiceAsync(Node):
         self.GR_launch_description = Grieel.generate_launch_description()
         ##### LAUNCHER ######
 
+        self.connection_delay = 3
+
 
     def RF_callback_trigger(self, request, response):
         self.RF_ReqBool = request
@@ -89,12 +91,12 @@ class LaunchServiceAsync(Node):
         
         if self.RF_ReqBool.data == True:
             # self.launch_main(True)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.RF_launcher.start(self.RF_launch_description)
 
         elif self.RF_ReqBool.data == False:
             # self.launch_main(False)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.RF_launcher.shutdown()
 
         response.message = "None"
@@ -108,12 +110,12 @@ class LaunchServiceAsync(Node):
         
         if self.LF_ReqBool.data == True:
             # self.launch_main(True)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.LF_launcher.start(self.LF_launch_description)
 
         elif self.LF_ReqBool.data == False:
             # self.launch_main(False)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.LF_launcher.shutdown()
 
         response.message = "None"
@@ -127,12 +129,12 @@ class LaunchServiceAsync(Node):
         
         if self.LR_ReqBool.data == True:
             # self.launch_main(True)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.LR_launcher.start(self.LR_launch_description)
 
         elif self.LR_ReqBool.data == False:
             # self.launch_main(False)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.LR_launcher.shutdown()
 
         response.message = "None"
@@ -146,12 +148,12 @@ class LaunchServiceAsync(Node):
         
         if self.RR_ReqBool.data == True:
             # self.launch_main(True)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.RR_launcher.start(self.RR_launch_description)
 
         elif self.RR_ReqBool.data == False:
             # self.launch_main(False)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.RR_launcher.shutdown()
 
         response.message = "None"
@@ -165,12 +167,12 @@ class LaunchServiceAsync(Node):
         
         if self.GR_ReqBool.data == True:
             # self.launch_main(True)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.GR_launcher.start(self.GR_launch_description)
 
         elif self.GR_ReqBool.data == False:
             # self.launch_main(False)
-            time.sleep(2)
+            time.sleep(self.connection_delay)
             self.GR_launcher.shutdown()
 
         response.message = "None"
@@ -184,7 +186,7 @@ def main(args=None):
 
     rclpy.spin(service)
 
-    sevice.destroy_node()
+    service.destroy_node()
     rclpy.shutdown()
 
 
