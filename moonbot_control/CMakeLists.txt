@@ -51,8 +51,6 @@ install(
     scripts/IK_node.py
     scripts/cmd_manager_node.py
     scripts/maincmd.py
-    scripts/leg_node.py
-    scripts/gait_node.py
     scripts/real_action.py
     scripts/real_pub.py
     scripts/sim_action.py
@@ -63,6 +61,10 @@ install(
     scripts/singlelimb/LR.py
     scripts/singlelimb/RR.py
     scripts/launch_detection.py
+    connection/RF_con.py
+    connection/LF_con.py
+    connection/LR_con.py
+    connection/RR_con.py
 
   DESTINATION
     lib/${PROJECT_NAME}
