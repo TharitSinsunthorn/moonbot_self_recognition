@@ -24,14 +24,14 @@
         xyz="0.0099766 -0.00010893 0.00095216"
         rpy="0 0 0" />
       <mass
-        value="0.84" />
+        value="2.574" />
       <inertia
-        ixx="0.002975"
+        ixx="9.116E-03"
         ixy="0.0"
         ixz="0.0"
-        iyy="0.0056"
+        iyy="0.01716"
         iyz="0.0"
-        izz="0.002975" />
+        izz="9.116E-03" />
     </inertial>
     <visual>
       <origin
@@ -141,7 +141,7 @@
   <link name="tibia_rf">
     <inertial>
       <origin
-        xyz="0 0 0"
+        xyz="-0.01 0 0"
         rpy="0 0 0" />
       <mass
         value="0.12" />
@@ -183,7 +183,7 @@
           </ode>
           <contact>
             <ode>
-              <min_depth>0.001</min_depth>>
+              <min_depth>0.001</min_depth>
             </ode>  
           </contact>
         </friction>
@@ -326,7 +326,7 @@
   <link name="tibia_lf">
     <inertial>
       <origin
-        xyz="0 0 0"
+        xyz="-0.01 0 0"
         rpy="0 0 0" />
       <mass
         value="0.12" />
@@ -368,7 +368,7 @@
           </ode>
           <contact>
             <ode>
-              <min_depth>0.001</min_depth>>
+              <min_depth>0.001</min_depth>
             </ode>  
           </contact>
         </friction>
@@ -511,7 +511,7 @@
   <link name="tibia_lr">
     <inertial>
       <origin
-        xyz="0 0 0"
+        xyz="-0.01 0 0"
         rpy="0 0 0" />
       <mass
         value="0.12" />
@@ -553,7 +553,7 @@
           </ode>
           <contact>
             <ode>
-              <min_depth>0.001</min_depth>>
+              <min_depth>0.001</min_depth>
             </ode>  
           </contact>
         </friction>
@@ -696,7 +696,7 @@
   <link name="tibia_rr">
     <inertial>
       <origin
-        xyz="0 0 0"
+        xyz="-0.01 0 0"
         rpy="0 0 0" />
       <mass
         value="0.12" />
@@ -738,7 +738,7 @@
           </ode>
           <contact>
             <ode>
-              <min_depth>0.001</min_depth>>
+              <min_depth>0.001</min_depth>
             </ode>  
           </contact>
         </friction>
