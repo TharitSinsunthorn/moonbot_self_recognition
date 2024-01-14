@@ -334,9 +334,6 @@ class JointPublisher(Node):
         self.repeat = 1
         self.intial_point_duration = 0.0
 
-        startconfig = self.IK.get_joint_angles([span, 0.0, 0.1])
-        startconfig2 = self.IK.get_joint_angles([span, 0.0, h])
-
         tar1 = self.IK.get_joint_angles([span-f, -f, h])
         tar2 = self.IK.get_joint_angles([span+f/2, f/2, h-lift])
         tar3 = self.IK.get_joint_angles([span+f, f, h])
