@@ -29,7 +29,7 @@ class State_subscriber(Node):
 
 
         ##### TIMER #####
-        self.timer_period = 0.3
+        self.timer_period = 1
         self.detection_delay = 4
         self.RF_intualizer = self.create_timer(self.timer_period, self.RF_initualizer_callback, callback_group=self.RF_timer_group)
         self.LF_intualizer = self.create_timer(self.timer_period, self.LF_initualizer_callback, callback_group=self.LF_timer_group)
