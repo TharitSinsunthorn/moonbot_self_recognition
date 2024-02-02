@@ -53,6 +53,10 @@ ros2 launch moonbot_gazebo spawn_moonbot.launch.py
 ## terminal 2: For walking demo
 ros2 run moonbot_gazebo sim_pub.py
 ```
+<p align="center">
+  <img src="https://github.com/TharitSinsunthorn/noppakorn-test/blob/develop/moonbot_gazebo.png" alt="Moonbot's Gazebo">
+</p>
+
 
 * Separately connect to the Moonbot's leg
 ```bash
