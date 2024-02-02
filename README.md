@@ -67,20 +67,33 @@ ros2 launch dynamixel_hardware RR.py
 ```
 ```bash
 ## terminal 2
-## For walking demo
-ros2 run moonbot_control real_pub.py
+## For walking demo: CRAWL GAIT (default)
+ros2 run moonbot_control real_pub.py 
 ```
+![](https://github.com/TharitSinsunthorn/noppakorn-test/blob/develop/crawl_gait2.gif)
+```bash
+## terminal 2
+## For walking demo: TROT GAIT
+ros2 run moonbot_control real_pub.py --ros-args -p gait_type:="trot" 
+```
+![](https://github.com/TharitSinsunthorn/noppakorn-test/blob/develop/trot2.gif)
+
 
 * Self-recognition test
 ```bash 
 ## terminal 1: module detection
 ros2 launch moonbot_control modular_detection.launch.py
+```
 
+```bash
 ## terminal 2: modular locomotion
 ros2 run moonbot_control modular.py
 ```
 
 <img src="moonbot_gazebo.png">
+
+## Author
+Tharit Sinsunthorn
 
 ## Contributing
 
