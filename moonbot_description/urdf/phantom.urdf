@@ -185,6 +185,9 @@
   </gazebo>
   <gazebo reference="tibia_rf">
     <material>Gazebo/Grey</material>
+    <mu1>2</mu1>
+    <mu2>2</mu2>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
 
   <link name="c1_rr">
@@ -327,6 +330,9 @@
   </gazebo>
   <gazebo reference="tibia_rr">
     <material>Gazebo/Grey</material>
+    <mu1>2</mu1>
+    <mu2>2</mu2>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
   <link name="c1_lf">
     <inertial>
@@ -467,6 +473,9 @@
   </gazebo>
   <gazebo reference="tibia_lf">
     <material>Gazebo/Grey</material>
+    <mu1>2</mu1>
+    <mu2>2</mu2>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
   
 
@@ -610,6 +619,9 @@
   </gazebo>
   <gazebo reference="tibia_lr">
     <material>Gazebo/Grey</material>
+    <mu1>2</mu1>
+    <mu2>2</mu2>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
 
   <ros2_control name="MyRobotSystem" type="system">
