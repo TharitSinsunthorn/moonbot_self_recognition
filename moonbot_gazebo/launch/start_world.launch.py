@@ -4,6 +4,7 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
+from launch.substitutions import LaunchConfiguration, TextSubstitution
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -45,11 +46,19 @@ def generate_launch_description():
         )
     )    
 
+    world_file_name = LaunchConfiguration('world_file_name')
+
+    world_file_name_launch_arg = DeclareLaunchArgument(
+        'world_file_name',
+        default_value='box_bot_empty.world'
+    )
+
     return LaunchDescription([
+        world_file_name_launch_arg,
         DeclareLaunchArgument(
           'world',
-          default_value=[os.path.join(pkg_moonbot_gazebo, 'worlds', 'box_bot_empty.world'), ''],
-          # default_value=[os.path.join(pkg_gazebo_ros, 'worlds', 'box_bot_empty.world'), ''],
+        #   default_value=[os.path.join(pkg_moonbot_gazebo, 'worlds',  ), ''],
+          default_value=[os.path.join(pkg_moonbot_gazebo, 'worlds'),'/', world_file_name,''],
           description='SDF world file'),
         gazebo
     ])

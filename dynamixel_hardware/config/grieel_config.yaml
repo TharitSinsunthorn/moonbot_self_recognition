@@ -1,5 +1,5 @@
 # Controller manager configuration
-/GR/controller_manager:
+/RR/controller_manager:
   ros__parameters:
     update_rate: 200 # Hz
 
@@ -20,7 +20,7 @@
 #   ros__parameters:
 #     use_local_topics: True
 
-/GR/forward_position_controller:
+/RR/forward_position_controller:
   ros__parameters:
     joints:
       - j_c1_gr
@@ -30,7 +30,7 @@
     interface_name: position
 
 
-/GR/position_trajectory_controller:
+/RR/position_trajectory_controller:
   ros__parameters:
     joints:
       - j_c1_gr

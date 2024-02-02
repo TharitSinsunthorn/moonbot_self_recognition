@@ -18,7 +18,7 @@ sudo apt-get update
 
 rosdep install --from-paths src --ignore-src -r -y
 
-sudo apt-get ros-foxy-xacro
+sudo apt-get install ros-foxy-xacro
 
 sudo apt-get install ros-foxy-ros2-control 
 
@@ -32,7 +32,7 @@ sudo apt-get install ros-$ROS_DISTRO-dynamixel-workbench*
 
 sudo apt-get install joystick jstest
 
-sudo apt-get ros-foxy-joy* ros-foxy-teleop*
+sudo apt-get install ros-foxy-joy* ros-foxy-teleop*
 
 ```
 * Install program
@@ -49,12 +49,12 @@ To connect the moonbot and demonstrate the simple gait motion
 * Simulation in Gazebo
 ```bash
 ## terminal 1
-ros2 launch moonbot_gazebo spawn_robot_ros2.launch.py
+ros2 launch moonbot_gazebo spawn_moonbot.launch.py
 ## terminal 2: For walking demo
-ros2 run moonbot_gazebo limb_joint.py
+ros2 run moonbot_gazebo sim_pub.py
 ```
 
-* Connect to the real Moonbot
+* Separately connect to the Moonbot's leg
 ```bash
 ## terminal 1
 ros2 launch dynamixel_hardware LF.py
@@ -68,10 +68,19 @@ ros2 launch dynamixel_hardware RR.py
 ```bash
 ## terminal 2
 ## For walking demo
-ros2 run moonbot_control real_action.py
+ros2 run moonbot_control real_pub.py
 ```
 
-<img src="moonbot.png">
+* Self-recognition test
+```bash 
+## terminal 1: module detection
+ros2 launch moonbot_control modular_detection.launch.py
+
+## terminal 2: modular locomotion
+ros2 run moonbot_control modular.py
+```
+
+<img src="moonbot_gazebo.png">
 
 ## Contributing
 

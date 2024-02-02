@@ -10,24 +10,14 @@
     <include>
       <uri>model://sun</uri>
     </include>
-    <include>
+    <!-- <include>
       <uri>model://ground_plane</uri>
-    </include>
-
-    <!-- <physics name="ode_70iters" type="ode">
-      <real_time_update_rate>1500</real_time_update_rate>
-      <ode>
-        <solver>
-          <type>quick</type>
-          <iters>70</iters>
-        </solver>
-      </ode>
-    </physics> -->
+    </include> -->
 
     <physics name="ode_200iters" type="ode">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
-      <real_time_update_rate>1200.0</real_time_update_rate>
+      <real_time_update_rate>1000.0</real_time_update_rate>
       <ode>
         <solver>
           <type>quick</type>
@@ -40,14 +30,14 @@
       <pose>0 0 0 0 0 0</pose>
       <link name='link'>
         <inertial>
-          <mass>1000</mass>
+          <mass>50</mass>
           <inertia>
-            <ixx>15</ixx>
+            <ixx>0.416</ixx>
             <ixy>0</ixy>
             <ixz>0</ixz>
-            <iyy>15</iyy>
+            <iyy>0.416</iyy>
             <iyz>0</iyz>
-            <izz>15</izz>
+            <izz>0.083</izz>
           </inertia>
           <pose>0 0 0 0 0 0</pose>
         </inertial>
@@ -88,16 +78,57 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-    </model>
+    </model> 
 
-    <!-- <physics name="ode_500iters" type="ode">
-      <ode>
-        <solver>
-          <type>quick</type>
-          <iters>500</iters>
-        </solver>
-      </ode>
-    </physics> -->
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+                <fdir1>1 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
 
   </world>
 </sdf>

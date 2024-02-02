@@ -9,9 +9,9 @@ Joint nomeclature:
     joint3: Tibia
 '''
 
-L1 = 0.065 # Length between joint1 (Near the base joint) and joint2
-L2 = 0.125 # Length between joint2 and joint3 (Near the Tip Joint)
-L3 = 0.160 # Length between Joint3 and Tip
+L1 = 0.06455 # Length between joint1 (Near the base joint) and joint2
+L2 = 0.129 # Length between joint2 and joint3 (Near the Tip Joint)
+L3 = 0.156 # Length between Joint3 and Tip
 
 D1 = 0.240 # Distance between Origin of base and origin of the joint1
 

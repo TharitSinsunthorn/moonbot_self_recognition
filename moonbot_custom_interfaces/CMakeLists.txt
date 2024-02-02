@@ -21,6 +21,7 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(builtin_interfaces REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -41,8 +42,10 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/SetPosition.msg"
   "msg/DynamixelPosition.msg"
   "msg/Geometry.msg"
+  "msg/JoyCtrlCmds.msg"
   "msg/InferenceResult.msg"
   "msg/Yolov8Inference.msg"
+  "msg/Detection.msg"
   "srv/GetPosition.srv"
   "srv/SetJointAngles.srv"
   "srv/Vect3.srv"

@@ -10,7 +10,7 @@ import xacro
 
 def generate_launch_description():
     robot_name = "limbbot"
-    urdf_file = "singleHWLF.urdf"
+    urdf_file = "grieel.urdf"
     package_description = "moonbot_description"
 
     rviz_config = os.path.join(
@@ -30,22 +30,22 @@ def generate_launch_description():
     controller_config = os.path.join(
         get_package_share_directory("dynamixel_hardware"),
         "config",
-        "LF_config.yaml"
+        "grieel_config.yaml"
     )
 
-    LF_ns = LaunchConfiguration('LF_ns')
+    GR_ns = LaunchConfiguration('GR_ns')
 
-    LF_ns_arg = DeclareLaunchArgument(
-        'LF_ns',
-        default_value='LF'
+    GR_ns_arg = DeclareLaunchArgument(
+        'GR_ns',
+        default_value='GR'
     )
 
     return LaunchDescription([
-        LF_ns_arg,
+        GR_ns_arg,
         Node(
             package="controller_manager",
             executable="ros2_control_node",
-            namespace = '/LF',
+            namespace = '/RR',
             parameters=[
                 {"robot_description": robot_description_config.toxml()}, controller_config],
             output={
@@ -57,9 +57,8 @@ def generate_launch_description():
         Node(
             package="controller_manager",
             executable="spawner.py",
-            # namespace = '/LF',
             arguments=["joint_state_broadcaster",
-                       "--controller-manager", "/LF/controller_manager"],
+                       "--controller-manager", "/RR/controller_manager"],
         ),
 
         # Node(
@@ -72,16 +71,15 @@ def generate_launch_description():
         Node(
             package="controller_manager",
             executable="spawner.py",
-            # namespace = '/LF',
             arguments=["position_trajectory_controller",
-                       "-c", "/LF/controller_manager"],
+                       "-c", "/RR/controller_manager"],
         ),
 
         Node(
             package="robot_state_publisher",
             executable="robot_state_publisher",
             name="robot_state_publisher",
-            namespace = '/LF',
+            namespace = '/RR',
             parameters=[
                 {"robot_description": robot_description_config.toxml()}],
             output="both"),
@@ -100,7 +98,7 @@ def generate_launch_description():
 
         Node(
             package="moonbot_gazebo",
-            executable="LF.py",
+            executable="grieel.py",
             output="screen"
         )
 
