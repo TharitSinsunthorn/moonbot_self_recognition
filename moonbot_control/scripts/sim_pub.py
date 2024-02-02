@@ -25,7 +25,20 @@ from matplotlib.animation import FuncAnimation
 class JointPublisher(Node):
 
     def __init__(self):
-        super().__init__('minimal_subscriber')
+        super().__init__('autoseq_gait_node')
+
+        self.declare_parameters(
+            namespace='',
+            parameters=[
+                ('gait_type', 'crawl'),
+                ('speed', 5),
+                ('use_plot_debug', False)
+            ]
+        )
+
+        self.gait_type = self.get_parameter('gait_type').get_parameter_value().string_value
+        self.speed = self.get_parameter('speed').get_parameter_value().integer_value
+        self.use_plot_debug = self.get_parameter('use_plot_debug').get_parameter_value().bool_value
 
         self.group = ReentrantCallbackGroup()
         self.timer_group = ReentrantCallbackGroup()
@@ -58,7 +71,7 @@ class JointPublisher(Node):
 
 
         ##### TIMER ######
-        self.timer_period = 5
+        self.timer_period = self.speed
         self.RF_timer = self.create_timer(self.timer_period, self.pub_callback)
         ##### TIMER ######
 
@@ -75,7 +88,6 @@ class JointPublisher(Node):
         self.stance_goal = np.array([0.0, -self.step_len, 0.0])
         self.stance_init = np.array([0.0, 0.0, 0.0])
         self.step_height = 0.06
-        self.sample_time = self.timer_period / (4*self.zmp_sample + 4*self.swing_sample)
         ##### Gait Parameter #####
 
         ##### Pose Parameters #####
@@ -248,7 +260,59 @@ class JointPublisher(Node):
             trajRR = np.array(start_point) + np.array([x,y,z])
             self.RR_pose.append(trajRR + self.zero_pnt[3])
 
+
+    def trot_gait(self):
+
+        self.sample_time = self.timer_period / (2*self.swing_sample)
+
+        self.stance_RF(self.stance_goal)
+        self.swing_LF(self.step_goal)
+        self.stance_LR(self.stance_goal)
+        self.swing_RR(self.step_goal)
+
+        self.swing_RF(self.step_goal)
+        self.stance_LF(self.stance_init)
+        self.swing_LR(self.step_goal)
+        self.stance_RR(self.stance_init)
+
+        self.start_walk == True
+
+        # self.plot_debug()
+
+
+
+    def trot_gait2(self):
+
+        self.sample_time = self.timer_period / (4*self.swing_sample)
+
+        self.stance_RF(self.stance_init)
+        self.swing_LF(self.step_goal)
+        self.stance_LR(self.stance_init)
+        self.swing_RR(self.step_goal)
+
+        self.stance_RF(self.stance_goal)
+        self.stance_LF(self.stance_init)
+        self.stance_LR(self.stance_goal)
+        self.stance_RR(self.stance_init)
+
+        self.swing_RF(self.step_goal)
+        self.stance_LF(self.stance_init)
+        self.swing_LR(self.step_goal)
+        self.stance_RR(self.stance_init)
+
+        self.stance_RF(self.stance_init)
+        self.stance_LF(self.stance_goal)
+        self.stance_LR(self.stance_init)
+        self.stance_RR(self.stance_goal) 
+
+        self.start_walk == True
+
+        # self.plot_debug()
+
+
     def crawl_gait(self):
+
+        self.sample_time = self.timer_period / (4*self.zmp_sample + 4*self.swing_sample)
 
         if self.start_walk == True:
             self.loop_shift = [self.stance_goal, -self.stance_goal/3, self.stance_goal/3, np.zeros(3)] 
@@ -287,7 +351,17 @@ class JointPublisher(Node):
     
     def pub_callback(self):
 
-        self.crawl_gait()
+        if self.gait_type == 'crawl' or self.gait_type == 'Crawl':
+            self.crawl_gait()
+        
+        elif self.gait_type == 'trot' or self.gait_type == 'Trot':
+            self.trot_gait()
+
+        elif self.gait_type == 'trot2' or self.gait_type == 'Trot2':
+            self.trot_gait2()
+
+        else:
+            self.get_logger().info(f'The gait is not in service :(')
 
         for i in range(len(self.RF_pose)):
             self.ang_RF.append(self.IK.get_RF_joint_angles(self.RF_pose[i], [0,0,0]))
