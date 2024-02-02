@@ -58,7 +58,9 @@ ros2 run moonbot_gazebo sim_pub.py
 </p>
 
 
-* Separately connect to the Moonbot's leg
+## Connect to real robot
+
+* Separately connect to leg modules
 ```bash
 ## terminal 1
 ros2 launch dynamixel_hardware LF.py
@@ -99,8 +101,6 @@ ros2 launch moonbot_control modular_detection.launch.py
 ## terminal 2: modular locomotion
 ros2 run moonbot_control modular.py
 ```
-
-<img src="moonbot_gazebo.png">
 
 ## Author
 Tharit Sinsunthorn
