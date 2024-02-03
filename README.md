@@ -102,8 +102,59 @@ ros2 launch moonbot_control modular_detection.launch.py
 ros2 run moonbot_control modular.py
 ```
 
+## Packages description 
+### moonbot_description
+- URDF and mesh files for moonbot.
+- RVIZ configuration.
+- Launch file for visualizing the moonbot model in RVIZ
+
+```bash 
+# For default model
+ros2 launch moonbot_description urdf_visualize.launch.py
+
+# For changing robot model
+ros2 launch moonbot_description urdf_visualize urdf_file:=your_robot.urdf
+```
+
+### moonbot_gazebo
+- Model and world files for Gazebo simulation. 
+- Launch file to spawn robot in Gazebo
+
+World files and robot model are also changable by the following commands
+```bash
+# For changing robot model
+ros2 launch moonbot_gazebo spawn_moonbot.launch.py urdf_file:=your_robot.urdf 
+
+# For changing world file (The example for lunar surface map)
+ros2 launch moonbot_gazebo spawn_moonbot.launch.py world_file_name:=moonbot_box.world
+```
+
+### moonbot_custom_interfaces
+- custom **msg** and **srv** for ros2 communication in Moonbot
+
+### moonbot_control
+- Control scripts for moonbot's locomotion 
+- Modular connection scripts
+- Launch files for loading ros2 _control and controllers
+- Config files for ros2 controllers (for simulation)
+
+### moonbot_camera
+- Package for the future work of implementation of depth camera on the Moonbot.
+
+### dynamixel_hardware
+- ros2_control hardware interface for Dynamixels. 
+- Config files for controllers of each leg.
+- Launch files to connect to the real robot
+
+### moonbot_teleop
+- Joy stick conteller configuration
+- Launch file and script setting for Moonbot teleoperation.
+
+
 ## Author
 Tharit Sinsunthorn
+Danish AI
+Pascal Pama
 
 ## Contributing
 
