@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import rclpy
+import time
 from rclpy.node import Node
 
 from rclpy.duration import Duration
@@ -59,7 +60,7 @@ class JointPublisher(Node):
         ##### SUBSCRIBER #####
 
         ##### TIMER ######
-        self.timer_period = 2.5
+        self.timer_period = 2.0
         self.timer = self.create_timer(self.timer_period, self.pub_callback)
         ##### TIMER ######
 
@@ -101,11 +102,13 @@ class JointPublisher(Node):
             self.get_logger().info("Leg is ADDED")
             self.NumCon_prev = self.NumCon
             self.StateChanged = True
+            time.sleep(2)
 
         elif self.NumCon < self.NumCon_prev:
             self.get_logger().info("Leg is LOSE")
             self.NumCon_prev = self.NumCon
             self.StateChanged = True 
+            time.sleep(2)
         else:
             self.StateChanged = False
 
@@ -216,10 +219,10 @@ class JointPublisher(Node):
         f = 0.1
         ff = 0.12
         # h = 0.22
-        lift = 0.08
+        lift = 0.095
         span = 0.22
         self.repeat = 1
-        ground = 0.08
+        ground = 0.07
         pathrange = self.pathrange
         self.intial_point_duration = 0.5
         ##### Single limb parameters ##### 

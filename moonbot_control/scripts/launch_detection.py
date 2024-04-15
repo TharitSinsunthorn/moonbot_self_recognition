@@ -30,12 +30,12 @@ class State_subscriber(Node):
 
         ##### TIMER #####
         self.timer_period = 1
-        self.detection_delay = 4
+        self.detection_delay = 0.5
         self.RF_intualizer = self.create_timer(self.timer_period, self.RF_initualizer_callback, callback_group=self.RF_timer_group)
         self.LF_intualizer = self.create_timer(self.timer_period, self.LF_initualizer_callback, callback_group=self.LF_timer_group)
         self.LR_intualizer = self.create_timer(self.timer_period, self.LR_initualizer_callback, callback_group=self.LR_timer_group)
         self.RR_intualizer = self.create_timer(self.timer_period, self.RR_initualizer_callback, callback_group=self.RR_timer_group)
-        self.status_timer = self.create_timer(1, self.status_callback, callback_group=self.group)
+        self.status_timer = self.create_timer(self.timer_period, self.status_callback, callback_group=self.group)
         ##### TIMER #####
 
         ##### PUBLISHER #####
@@ -321,10 +321,10 @@ class State_subscriber(Node):
             self.get_logger().info(f"{port_name} is detected.")
             return True
         else:
-            # self.get_logger().warn(f"Failed to detect {port_name}.")
+            self.get_logger().warn(f"Failed to detect {port_name}.")
             return False
-
-
+        
+        
 
     def RF_state_callback(self, state):
         self.RF_state = state.position[0]
