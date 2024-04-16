@@ -43,14 +43,14 @@ def generate_launch_description():
 
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["joint_state_broadcaster",
                    "--controller-manager", "/controller_manager"],
     )
 
     robot_controller_spawner = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["position_trajectory_controller", "-c", "/controller_manager"],
     )
 
@@ -62,25 +62,25 @@ def generate_launch_description():
 
     RF_robot_controller_spawner = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["RFposition_trajectory_controller", "-c", "/controller_manager"],
     )
 
     LF_robot_controller_spawner = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["LFposition_trajectory_controller", "-c", "/controller_manager"],
     )
 
     LR_robot_controller_spawner = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["LRposition_trajectory_controller", "-c", "/controller_manager"],
     )
 
     RR_robot_controller_spawner = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["RRposition_trajectory_controller", "-c", "/controller_manager"],
     )
 
