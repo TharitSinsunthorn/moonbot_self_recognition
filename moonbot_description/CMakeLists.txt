@@ -34,7 +34,6 @@ install(
     rviz
     launch
     meshes
-    meshes_phantom
     meshesX
   DESTINATION
     share/${PROJECT_NAME}/
