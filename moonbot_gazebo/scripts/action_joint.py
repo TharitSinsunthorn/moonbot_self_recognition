@@ -28,7 +28,7 @@ class JointPublisher(Node):
         self.declare_parameters(
             namespace='',
             parameters=[
-                ('action_type', None),
+                ('action_type', 'stand up'),
                 ('use_sim', True)
             ]
         )
