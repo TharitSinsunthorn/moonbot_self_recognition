@@ -73,17 +73,17 @@ RFposition_trajectory_controller:
 
     gains:
       j_c1_rf:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
       
       j_thigh_rf:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
       
       j_tibia_rf:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
 
@@ -95,7 +95,7 @@ LFposition_trajectory_controller:
       - j_tibia_lf
 
     command_interfaces:
-      - position
+      - effort
 
     state_interfaces:
       - position
@@ -113,17 +113,17 @@ LFposition_trajectory_controller:
 
     gains:
       j_c1_lf:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
       
       j_thigh_lf:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
       
       j_tibia_lf:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
 
@@ -135,7 +135,7 @@ LRposition_trajectory_controller:
       - j_tibia_lr
 
     command_interfaces:
-      - position
+      - effort
 
     state_interfaces:
       - position
@@ -153,17 +153,17 @@ LRposition_trajectory_controller:
 
     gains:
       j_c1_lr:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
       
       j_thigh_lr:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
       
       j_tibia_lr:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
 
@@ -176,7 +176,7 @@ RRposition_trajectory_controller:
       - j_tibia_rr
 
     command_interfaces:
-      - position
+      - effort
 
     state_interfaces:
       - position
@@ -194,17 +194,17 @@ RRposition_trajectory_controller:
 
     gains:
       j_c1_rr:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
       
       j_thigh_rr:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
       
       j_tibia_rr:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
 
@@ -226,7 +226,7 @@ position_trajectory_controller:
       - j_tibia_rr
 
     command_interfaces:
-      - position
+      - effort
 
     state_interfaces:
       - position
@@ -244,61 +244,61 @@ position_trajectory_controller:
 
     gains:
       j_c1_lf:
-        p: 12.0
+        p: 800.0
         i: 0.01
         d: 100.0
       
       j_c1_rf:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
 
       j_c1_lr:
-        p: 12.0
+        p: 800.0
         i: 0.01
         d: 100.0
       
       j_c1_rr:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
 
       j_thigh_lf:
-        p: 12.0
+        p: 800.0
         i: 0.01
         d: 100.0
       
       j_thigh_rf:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
 
       j_thigh_lr:
-        p: 12.0
+        p: 800.0
         i: 0.01
         d: 100.0
       
       j_thigh_rr:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
 
       j_tibia_lf:
-        p: 12.0
+        p: 800.0
         i: 0.01
         d: 100.0
       
       j_tibia_rf:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
 
       j_tibia_lr:
-        p: 12.0
+        p: 800.0
         i: 0.01
         d: 100.0
       
       j_tibia_rr:
-          p: 12.0
+          p: 800.0
           i: 0.01
           d: 100.0
