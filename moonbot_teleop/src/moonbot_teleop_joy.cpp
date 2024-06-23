@@ -12,7 +12,7 @@
 #include "chrono"
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/joy.hpp"
-#include "trajectory_msgs/msg/joint_trajectory.hpp"
+// #include "trajectory_msgs/msg/joint_trajectory.hpp"e
 
 #include "moonbot_custom_interfaces/msg/joy_ctrl_cmds.hpp"
 

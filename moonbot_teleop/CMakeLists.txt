@@ -43,7 +43,6 @@ install(
   DIRECTORY
     launch
     config
-    include
     src
   DESTINATION
     share/${PROJECT_NAME}/
