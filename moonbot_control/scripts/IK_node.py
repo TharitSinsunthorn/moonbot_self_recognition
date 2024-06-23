@@ -35,25 +35,25 @@ class JointPublisher(Node):
 
         self.RF_joint_publisher = self.create_publisher(
             JointTrajectory,
-            '/RF/position_trajectory_controller/joint_trajectory',
+            '/RFposition_trajectory_controller/joint_trajectory',
             1, 
             callback_group=self.group)
 
         self.LF_joint_publisher = self.create_publisher(
             JointTrajectory,
-            '/LF/position_trajectory_controller/joint_trajectory',
+            '/LFposition_trajectory_controller/joint_trajectory',
             1,
             callback_group=self.group)
 
         self.LR_joint_publisher = self.create_publisher(
             JointTrajectory,
-            '/LR/position_trajectory_controller/joint_trajectory',
+            '/LRposition_trajectory_controller/joint_trajectory',
             1,
             callback_group=self.group)
 
         self.RR_joint_publisher = self.create_publisher(
             JointTrajectory,
-            '/RR/position_trajectory_controller/joint_trajectory',
+            '/RRposition_trajectory_controller/joint_trajectory',
             1,
             callback_group=self.group)
         ##### PUBLISHER #####

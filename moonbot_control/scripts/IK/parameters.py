@@ -18,7 +18,7 @@ D1 = 0.240 # Distance between Origin of base and origin of the joint1
 '''
 limp_pos contains the angle of the orientation of the limb w.r.t. base frame
 '''
-limb_angle = [45, 135, -135, -45]
+limb_angle = (45, 135, -135, -45)
 
 # Robot parameters
 offset_x = D1

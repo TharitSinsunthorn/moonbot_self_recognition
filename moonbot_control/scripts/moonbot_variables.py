@@ -6,14 +6,17 @@ from IK import parameters as params
 
 ####### PRIVATE #######
 class Cmds():
+    '''
+    Class for command variables
+    '''
     class _mode():
-        start = False
-        walk = False
-        side_walk_mode = 0
-        gait_type = 0
+        start = False       # Enable robot motion
+        walk = False        # Enable walk 
+        side_walk_mode = 0  # Enable side walk mode
+        gait_type = 0       # Gait type 0:Nothing , 1:TrotGait , 2:CrawlGait , 3:FastTrot
     # -----------------
     class _body():
-        height = 0.14
+        height = 0.22
         roll = 0
         pitch = 0
         yaw = 0
@@ -21,6 +24,9 @@ class Cmds():
    
     # -----------------
     class _leg():
+        '''
+        Array for position of foot tip (w.r.t. leg origin frame)
+        '''
         foot_zero_pnt = np.zeros([4,3]) # [FR,FL,BR,BL][x,y,z]
     # ------------------
     class _gait():

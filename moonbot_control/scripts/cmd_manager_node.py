@@ -49,17 +49,23 @@ class CmdManager_ROS():
         self.stop = True
         
         # Robot cmds
-        self.cmd = set_msgs
-        self.pub_msgs = send_msgs
+        self.cmd = set_msgs         # cmd_manager
+        self.pub_msgs = send_msgs   # [leg, body]
         
         
     def _createNode(self):
+        '''
+        Create node for command manager
+        '''
         rclpy.init(args=None)
         self.node = rclpy.create_node(self.node_name)
         # self.node.get_logger().info('{} node was created!'.format(self.node_name))
         
 
     def create_sub1(self):
+        '''
+        Subscriber for receiving joy stick command
+        '''
         self.sub1 = self.node.create_subscription(
                         self.sub1_interface, 
                         self.sub1_name, 
@@ -68,6 +74,9 @@ class CmdManager_ROS():
         # self.node.get_logger().info('{} subscriber was created!'.format(self.sub1_name))
     
     def create_sub2(self):
+        '''
+        Subscriber for Twist topic (Not yet implemented well)
+        '''
         self.sub2 = self.node.create_subscription(
                         self.sub2_interface, 
                         self.sub2_name, 
@@ -76,6 +85,9 @@ class CmdManager_ROS():
         # self.node.get_logger().info('{} subscriber was created!'.format(self.sub2_name))
     
     def create_pub(self):
+        '''
+        Publisher for desired foot positio for each leg
+        '''
         self.pub = self.node.create_publisher(
                             self.pub_interface,
                             self.pub_name,
@@ -107,22 +119,28 @@ class CmdManager_ROS():
             self.cmd.gait.swing_step_h = msg.gait_step.z
 
     def _sub2_callback(self, msg):
-        self.cmd.gait.cycle_time = msg.linear.x
-        self.cmd.gait.swing_time = msg.angular.x
-    
+        self.cmd.gait.step_len[1] = msg.linear.y / self.cmd.gait.cycle_time / 2
+        self.cmd.gait.step_len[0] = msg.linear.x / self.cmd.gait.cycle_time / 2
 
     def _pub_callback(self):
         msg = Geometry()
         
+        # Right Front Leg
         msg.rf.x= self.pub_msgs[0].RF.pose.cur_coord[0]
         msg.rf.y= self.pub_msgs[0].RF.pose.cur_coord[1]
         msg.rf.z= self.pub_msgs[0].RF.pose.cur_coord[2]
-        msg.lf.z= self.pub_msgs[0].LF.pose.cur_coord[2]
+        
+        # Left Front Leg
         msg.lf.x= self.pub_msgs[0].LF.pose.cur_coord[0]
         msg.lf.y= self.pub_msgs[0].LF.pose.cur_coord[1]
+        msg.lf.z= self.pub_msgs[0].LF.pose.cur_coord[2]
+        
+        # Left Rare Leg
         msg.lr.x= self.pub_msgs[0].LR.pose.cur_coord[0]
         msg.lr.y= self.pub_msgs[0].LR.pose.cur_coord[1]
         msg.lr.z= self.pub_msgs[0].LR.pose.cur_coord[2]
+        
+        # Right Rare Leg
         msg.rr.x= self.pub_msgs[0].RR.pose.cur_coord[0]
         msg.rr.y= self.pub_msgs[0].RR.pose.cur_coord[1]
         msg.rr.z= self.pub_msgs[0].RR.pose.cur_coord[2]
@@ -134,7 +152,6 @@ class CmdManager_ROS():
         self.pub.publish(msg)
         
         # self.node.get_logger().info('Publishing message')
-            
     
     def get_numOf_threads(self):
         return threading.active_count()
@@ -146,20 +163,14 @@ class CmdManager_ROS():
         self.create_sub2()
         self.create_pub()
         rclpy.spin(self.node)
+        
+        # Destroy the node explicity
         self.node.destroy_node()
         rclpy.shutdown()
         self.stop = False
         
-        
-
     def stop(self):
         self.stop = True
-
-    def run(self):
-        pass
-        
-
-
 
 # def main(args=None):
 #     print('starting')
