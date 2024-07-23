@@ -369,7 +369,7 @@ return_type DynamixelHardware::set_control_mode(const ControlMode & mode, const 
     for (uint i = 0; i < joint_ids_.size(); ++i) {
       if (!dynamixel_workbench_.setPositionControlMode(joint_ids_[i], &log)) {
         RCLCPP_FATAL(rclcpp::get_logger(kDynamixelHardware), "%s", log);
-        return CallbackReturn::ERROR;
+        return return_type::ERROR;
       }
     }
     RCLCPP_INFO(rclcpp::get_logger(kDynamixelHardware), "Position control");
@@ -381,13 +381,13 @@ return_type DynamixelHardware::set_control_mode(const ControlMode & mode, const 
   } else if (control_mode_ != ControlMode::Velocity && control_mode_ != ControlMode::Position) {
     RCLCPP_FATAL(
       rclcpp::get_logger(kDynamixelHardware), "Only position/velocity control are implemented");
-    return CallbackReturn::ERROR;
+    return return_type::ERROR;
   }
 
-  return CallbackReturn::OK;
+  return return_type::OK;
 }
 
-CallbackReturn DynamixelHardware::reset_command()
+return_type DynamixelHardware::reset_command()
 {
   for (uint i = 0; i < joints_.size(); i++) {
     joints_[i].command.position = joints_[i].state.position;
@@ -395,7 +395,7 @@ CallbackReturn DynamixelHardware::reset_command()
     joints_[i].command.effort = 0.0;
   }
 
-  return CallbackReturn::OK;
+  return return_type::OK;
 }
 
 }  // namespace dynamixel_hardware
