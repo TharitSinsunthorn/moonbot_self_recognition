@@ -67,6 +67,8 @@ ros2 run moonbot_control modular.py
 
 <p align="center">
   <img src="https://github.com/TharitSinsunthorn/noppakorn-test/blob/develop/selfrecog.gif" alt="Moonbot's self-recognition">
+
+  <img src="https://github.com/TharitSinsunthorn/noppakorn-test/blob/develop/selfrecog2.gif" alt="Moonbot's self-recognition2">
 </p>
 
 
@@ -98,7 +100,6 @@ ros2 run moonbot_control real_pub.py --ros-args -p gait_type:="trot"
 <p align="center">
   <img src="https://github.com/TharitSinsunthorn/noppakorn-test/blob/develop/trot2.gif" alt="Moonbot's trot gait">
 </p>
-
 
 
 
