@@ -50,7 +50,25 @@ ros2 run moonbot_gazebo sim_pub.py
 </p>
 
 
+
 ## Connect to real robot
+
+
+* Self-recognition test
+```bash 
+## terminal 1: module detection
+ros2 launch moonbot_control modular_detection.launch.py
+```
+
+```bash
+## terminal 2: modular locomotion
+ros2 run moonbot_control modular.py
+```
+
+<p align="center">
+  <img src="https://github.com/TharitSinsunthorn/noppakorn-test/blob/develop/selfrecog.gif" alt="Moonbot's self-recognition">
+</p>
+
 
 * Separately connect to leg modules
 ```bash
@@ -83,16 +101,6 @@ ros2 run moonbot_control real_pub.py --ros-args -p gait_type:="trot"
 
 
 
-* Self-recognition test
-```bash 
-## terminal 1: module detection
-ros2 launch moonbot_control modular_detection.launch.py
-```
-
-```bash
-## terminal 2: modular locomotion
-ros2 run moonbot_control modular.py
-```
 
 ## Packages description 
 ### moonbot_description
