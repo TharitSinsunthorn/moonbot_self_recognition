@@ -155,9 +155,9 @@ ros2 launch moonbot_gazebo spawn_moonbot.launch.py world_file_name:=moonbot_box.
 
 
 ## Author
-Tharit Sinsunthorn
-Danish AI
-Pascal Pama
+Tharit Sinsunthorn \
+Danish AI \
+Pascal Pama 
 
 ## Contributing
 
