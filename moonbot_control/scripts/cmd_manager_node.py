@@ -7,16 +7,8 @@ import numpy as np
 from moonbot_custom_interfaces.msg import JoyCtrlCmds
 from moonbot_custom_interfaces.msg import Geometry
 from geometry_msgs.msg import Twist
-from IK import limb_kinematics
-from moonbot_variables import Body, Leg, Cmds
 
-from std_msgs.msg import String
 import threading
-from threading import Thread
-import logging
-import time
-
-
 
 class CmdManager_ROS():
     def __init__(self, set_msgs, send_msgs, node_name = 'cmd_manager_node'):

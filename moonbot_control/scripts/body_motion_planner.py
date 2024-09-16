@@ -21,8 +21,8 @@ class BodyMotionPlanner():
         self.cmd.leg.foot_zero_pnt[:,2] = np.array(self.cmd.body.height) 
             
         for i in range(4):
-            self.cmd.leg.foot_zero_pnt[i,0] = 0.13 * np.cos((2*i+1)*math.pi/4) #+ self.cmd.body.slant[0]
-            self.cmd.leg.foot_zero_pnt[i,1] = 0.13 * np.sin((2*i+1)*math.pi/4) #+ self.cmd.body.slant[1]
+            self.cmd.leg.foot_zero_pnt[i,0] = 0.18 * np.cos((2*i+1)*math.pi/4) #+ self.cmd.body.slant[0]
+            self.cmd.leg.foot_zero_pnt[i,1] = 0.18 * np.sin((2*i+1)*math.pi/4) #+ self.cmd.body.slant[1]
             
         self.body.roll = self.cmd.body.roll
         self.body.pitch = self.cmd.body.pitch
@@ -36,16 +36,16 @@ class BodyMotionPlanner():
             
             # Define the legs and their respective trajectory attributes
             legs = ['RF', 'LF', 'LR', 'RR']
-            trajectories = [self.gait.RF_traj, self.gait.LF_traj, self.gait.LR_traj, self.gait.RR_traj]
+            # trajectories = [self.gait.RF_traj, self.gait.LF_traj, self.gait.LR_traj, self.gait.RR_traj]
+            trajectories = self.gait.traj
 
             # Iterate over each leg and assign the values
             for i, leg in enumerate(legs):
                 cur_coord = np.array(self.cmd.leg.foot_zero_pnt[i, :]) \
-                                    + trajectories[i] \
+                                    + trajectories[leg] \
                                     + self.body.ZMP_handler[i, :] * np.array([1, 1, 0]) \
                                     + self.cmd.body.slant * np.array([1, 1, 0])
                                     
                 getattr(self.leg, leg).pose.cur_coord[:] = cur_coord
 
-            
             time.sleep(0.0002)
