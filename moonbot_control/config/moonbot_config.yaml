@@ -55,7 +55,7 @@ RFposition_trajectory_controller:
       - j_tibia_rf
 
     command_interfaces:
-      - position
+      - effort
 
     state_interfaces:
       - position
@@ -65,7 +65,7 @@ RFposition_trajectory_controller:
     action_monitor_rate: 20.0 # Hz, Defaults to 20
 
     allow_partial_joints_goal: false # Defaults to false
-    open_loop_control: true
+    open_loop_control: false
     allow_integration_in_goal_trajectories: true
     constraints:
       stopped_velocity_tolerance: 0.01 # Defaults to 0.01
@@ -73,19 +73,19 @@ RFposition_trajectory_controller:
 
     gains:
       j_c1_rf:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
       
       j_thigh_rf:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
       
       j_tibia_rf:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
 
 LFposition_trajectory_controller:
   ros__parameters:
@@ -105,7 +105,7 @@ LFposition_trajectory_controller:
     action_monitor_rate: 20.0 # Hz, Defaults to 20
 
     allow_partial_joints_goal: false # Defaults to false
-    open_loop_control: true
+    open_loop_control: false
     allow_integration_in_goal_trajectories: true
     constraints:
       stopped_velocity_tolerance: 0.01 # Defaults to 0.01
@@ -113,19 +113,19 @@ LFposition_trajectory_controller:
 
     gains:
       j_c1_lf:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
       
       j_thigh_lf:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
       
       j_tibia_lf:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
 
 LRposition_trajectory_controller:
   ros__parameters:
@@ -145,7 +145,7 @@ LRposition_trajectory_controller:
     action_monitor_rate: 20.0 # Hz, Defaults to 20
 
     allow_partial_joints_goal: false # Defaults to false
-    open_loop_control: true
+    open_loop_control: false
     allow_integration_in_goal_trajectories: true
     constraints:
       stopped_velocity_tolerance: 0.01 # Defaults to 0.01
@@ -153,19 +153,19 @@ LRposition_trajectory_controller:
 
     gains:
       j_c1_lr:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
       
       j_thigh_lr:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
       
       j_tibia_lr:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
 
 
 RRposition_trajectory_controller:
@@ -186,7 +186,7 @@ RRposition_trajectory_controller:
     action_monitor_rate: 20.0 # Hz, Defaults to 20
 
     allow_partial_joints_goal: false # Defaults to false
-    open_loop_control: true
+    open_loop_control: false
     allow_integration_in_goal_trajectories: true
     constraints:
       stopped_velocity_tolerance: 0.01 # Defaults to 0.01
@@ -194,19 +194,19 @@ RRposition_trajectory_controller:
 
     gains:
       j_c1_rr:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
       
       j_thigh_rr:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
       
       j_tibia_rr:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
 
 
 position_trajectory_controller:
@@ -236,7 +236,7 @@ position_trajectory_controller:
     action_monitor_rate: 20.0 # Hz, Defaults to 20
 
     allow_partial_joints_goal: false # Defaults to false
-    open_loop_control: true
+    open_loop_control: false
     allow_integration_in_goal_trajectories: true
     constraints:
       stopped_velocity_tolerance: 0.01 # Defaults to 0.01
@@ -244,61 +244,61 @@ position_trajectory_controller:
 
     gains:
       j_c1_lf:
-        p: 800.0
-        i: 0.01
-        d: 100.0
+        p: 2700.0
+        i: 12.0
+        d: 3.0
       
       j_c1_rf:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
 
       j_c1_lr:
-        p: 800.0
-        i: 0.01
-        d: 100.0
+        p: 2700.0
+        i: 12.0
+        d: 3.0
       
       j_c1_rr:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
 
       j_thigh_lf:
-        p: 800.0
-        i: 0.01
-        d: 100.0
+        p: 2700.0
+        i: 12.0
+        d: 3.0
       
       j_thigh_rf:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
 
       j_thigh_lr:
-        p: 800.0
-        i: 0.01
-        d: 100.0
+        p: 2700.0
+        i: 12.0
+        d: 3.0
       
       j_thigh_rr:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
 
       j_tibia_lf:
-        p: 800.0
-        i: 0.01
-        d: 100.0
+        p: 2700.0
+        i: 12.0
+        d: 3.0
       
       j_tibia_rf:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
 
       j_tibia_lr:
-        p: 800.0
-        i: 0.01
-        d: 100.0
+        p: 2700.0
+        i: 12.0
+        d: 3.0
       
       j_tibia_rr:
-          p: 800.0
-          i: 0.01
-          d: 100.0
+          p: 2700.0
+          i: 12.0
+          d: 3.0
