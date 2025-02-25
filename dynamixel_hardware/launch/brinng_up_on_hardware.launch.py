@@ -6,8 +6,8 @@ import xacro
 
 
 def generate_launch_description():
-    robot_name = "limbbot"
-    urdf_file = "singleHW.urdf"
+    robot_name = "moonbot"
+    urdf_file = "single.urdf"
     package_description = "moonbot_description"
 
     rviz_config = os.path.join(
@@ -45,7 +45,7 @@ def generate_launch_description():
 
         Node(
             package="controller_manager",
-            executable="spawner.py",
+            executable="spawner",
             # namespace="moonbot",
             arguments=["joint_state_broadcaster",
                        "--controller-manager", "/controller_manager"],
@@ -60,7 +60,7 @@ def generate_launch_description():
 
         Node(
             package="controller_manager",
-            executable="spawner.py",
+            executable="spawner",
             # namespace="moonbot",
             arguments=["position_trajectory_controller",
                        "-c", "/controller_manager"],
